@@ -1,4 +1,4 @@
-Datum laatste update: 21-12-2023
+Datum laatste update: 22-12-2023
 
 <a target="_blank" href="https://github.com/Aphelion-im/FOUNDFAVE-backend-eindopdracht-java">Github Repository FOUNDFAVE API</a>
 
@@ -10,7 +10,7 @@ Datum laatste update: 21-12-2023
 - [Benodigdheden](#benodigdheden)
 - [Postman Collectie JSON Bestand](#postman-collectie-json-bestand)
 - [Opstarten Webserver en Database](#opstarten-webserver-en-database)
-- [Live demo FOUNDFAVE App](#live-demo-foundfave-app)
+- [Live demo React FOUNDFAVE App](#live-demo-react-foundfave-app)
 - [Contact](#contact)
 
 
@@ -23,7 +23,7 @@ De uitgebreide installatiehandleiding (PDF) kun je hier downloaden:
 
 De volgende software heb je nodig om de FOUNDFAVE API te kunnen runnen:
 
-* [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) of een andere vergelijkbare editor of IDE
+* [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) of een andere vergelijkbare editor of IDE.
 * [PostgreSQL](https://www.postgresql.org/download/)
 * [pgAdmin](https://www.postgresql.org/download/)
 * [Postman](https://www.postman.com)
@@ -32,23 +32,21 @@ De volgende software heb je nodig om de FOUNDFAVE API te kunnen runnen:
 ## Postman Collectie JSON Bestand
 Het JSON collectie bestand om te importeren in Postman kun je hier downloaden:
 
-[Download Postman collectie JSON bestand](./assets/)
+[Download Postman collectie JSON bestand](./assets/postman-collection/)
 
 
 ## Opstarten Webserver en Database
-* De webserver draait op poort 8080
-* PostgreSQL/pgAdmin server draait op poort 5432
+* De webserver draait op poort 8080.
+* PostgreSQL/pgAdmin server draait op poort 5432.
 
-Een overzicht van alle beschikbare API endpoints:
-
-Binnen Postman:
-[Endpoints informatie](localhost/auth)
-
-HTML document:
-[Endpoints Overzicht](http://localhost:8080) - __Let op!__ Deze in je browser opvragen.
+__Een overzicht van alle beschikbare API endpoints__:
+- Binnen Postman:
+`localhost/info`
+- HTML document:
+`http://localhost:8080` - __Let op!__ Deze in je browser opvragen na het opstarten van de server en na inloggen.
 
 
-## Live demo FOUNDFAVE App
+## Live demo React FOUNDFAVE App
 
 Een live demo van de front-end van deze app is te vinden op:
 
