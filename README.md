@@ -16,7 +16,8 @@ Datum laatste update: 22-12-2023
 
 ## Uitgebreide Handleiding
 De uitgebreide installatiehandleiding (PDF) kun je hier downloaden:
-[Installatiehandleiding FOUNDFAVE API]()
+
+[Installatiehandleiding FOUNDFAVE API](./assets/documentation/)
 
 
 ## Benodigdheden
