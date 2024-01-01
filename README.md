@@ -1,4 +1,4 @@
-Datum laatste update: 25-12-2023
+Datum laatste update: 1-1-2024
 
 <a target="_blank" href="https://github.com/Aphelion-im/FOUNDFAVE-backend-eindopdracht-java">Github Repository FOUNDFAVE API</a>
 
