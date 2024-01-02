@@ -1,4 +1,3 @@
-// Van Novi
 package online.foundfave.foundfaveapi.config;
 
 import org.springframework.context.annotation.Bean;

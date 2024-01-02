@@ -1,4 +1,3 @@
-// N
 package online.foundfave.foundfaveapi.dtos;
 
 public class AuthenticationRequest {

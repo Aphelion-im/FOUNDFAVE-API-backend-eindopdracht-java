@@ -1,4 +1,3 @@
-// Van Novi
 package online.foundfave.foundfaveapi.models;
 
 import java.io.Serializable;

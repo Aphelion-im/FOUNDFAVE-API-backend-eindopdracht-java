@@ -1,4 +1,3 @@
-// Van Novi
 package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.UserDto;
@@ -23,9 +22,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userService = userService;
     }
 
-//    @Autowired
-//    private AuthorityService authorityService;
-
     @Override
     public UserDetails loadUserByUsername(String username) {
         UserDto userDto = userService.getUser(username);
@@ -35,7 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         Set<Authority> authorities = userDto.getAuthorities();
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        for (Authority authority: authorities) {
+        for (Authority authority : authorities) {
             grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
         }
 

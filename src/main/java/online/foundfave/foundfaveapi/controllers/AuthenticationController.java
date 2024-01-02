@@ -1,4 +1,3 @@
-// Novi
 package online.foundfave.foundfaveapi.controllers;
 
 import online.foundfave.foundfaveapi.dtos.AuthenticationRequest;
@@ -31,18 +30,11 @@ public class AuthenticationController {
         this.jwtUtl = jwtUtl;
     }
 
-
-    /*
-        Deze methode geeft de principal (basis user gegevens) terug van de ingelogde gebruiker
-    */
     @GetMapping(value = "/authenticated")
     public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {
         return ResponseEntity.ok().body(principal);
     }
 
-    /*
-    Deze methode geeft het JWT token terug wanneer de gebruiker de juiste inloggegevens op geeft.
-     */
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
@@ -53,8 +45,7 @@ public class AuthenticationController {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password)
             );
-        }
-        catch (BadCredentialsException ex) {
+        } catch (BadCredentialsException ex) {
             throw new Exception("Incorrect username or password", ex);
         }
 
@@ -65,5 +56,4 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
-
 }

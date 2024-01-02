@@ -1,7 +1,7 @@
-// Van Novi
 package online.foundfave.foundfaveapi.models;
 
 import jakarta.persistence.*;
+
 import java.io.Serializable;
 
 @Entity

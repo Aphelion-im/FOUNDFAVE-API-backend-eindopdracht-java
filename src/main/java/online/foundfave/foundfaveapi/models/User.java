@@ -1,7 +1,7 @@
-// Van Novi
 package online.foundfave.foundfaveapi.models;
 
 import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 

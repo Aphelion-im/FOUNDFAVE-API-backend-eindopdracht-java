@@ -33,7 +33,7 @@ De volgende software heb je nodig om de FOUNDFAVE API te kunnen runnen:
 ## Postman Collectie JSON-Bestand
 Het JSON-bestand om te importeren in Postman kun je hier downloaden:
 
-[Download Postman collectie JSON bestand](./assets/postman-collection/)
+[Download Postman collectie JSON bestand](./assets/postman/)
 
 
 ## Opstarten Webserver en Database
@@ -43,9 +43,6 @@ Het JSON-bestand om te importeren in Postman kun je hier downloaden:
 __Een overzicht van alle beschikbare API endpoints__:
 - Binnen Postman:
 `localhost/info`
-- HTML document:
-`http://localhost:8080` - __Let op!__ Deze in je browser opvragen na het opstarten van de server en na inloggen.
-
 
 ## Live demo React FOUNDFAVE App
 

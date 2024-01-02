@@ -1,4 +1,3 @@
-// Van Novi
 package online.foundfave.foundfaveapi.utils;
 
 import io.jsonwebtoken.Claims;
@@ -18,9 +17,7 @@ import java.util.function.Function;
 @Service
 public class JwtUtil {
 
-    // TODO: Secret key veranderen en passwords veranderen: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-    // De secret key moet minimaal 256 bits lang zijn, of grofweg 45 characters
-    private final static String SECRET_KEY = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    private final static String SECRET_KEY = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
 
     private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
@@ -59,7 +56,7 @@ public class JwtUtil {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 10))
-                .signWith(getSigningKey() ,SignatureAlgorithm.HS256)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 

@@ -1,26 +1,27 @@
-// Van Novi
 package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.UserDto;
+import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.RecordNotFoundException;
 import online.foundfave.foundfaveapi.models.Authority;
 import online.foundfave.foundfaveapi.models.User;
 import online.foundfave.foundfaveapi.repositories.UserRepository;
 import online.foundfave.foundfaveapi.utils.RandomStringGenerator;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserService {
-    private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -36,9 +37,9 @@ public class UserService {
     public UserDto getUser(String username) {
         UserDto dto = new UserDto();
         Optional<User> user = userRepository.findById(username);
-        if (user.isPresent()){
+        if (user.isPresent()) {
             dto = fromUser(user.get());
-        }else {
+        } else {
             throw new UsernameNotFoundException(username);
         }
         return dto;
@@ -51,20 +52,32 @@ public class UserService {
     public String createUser(UserDto userDto) {
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
+
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         User newUser = userRepository.save(toUser(userDto));
         return newUser.getUsername();
     }
 
-    public void deleteUser(String username) {
+    public void deleteUser(String username) throws RecordNotFoundException, BadRequestException {
+        if (Objects.equals(username, "admin")) {
+            throw new BadRequestException("You are not allowed to delete admin account");
+        }
+        if (!userRepository.existsById(username)) {
+            throw new RecordNotFoundException("User with id: " + "'" + username + "'" + " not found");
+        }
         userRepository.deleteById(username);
     }
 
-    public void updateUser(String username, UserDto newUser) {
+
+    // TODO: isPresentCheck()
+    public void updateUserPassword(String username, UserDto newUser) {
         if (!userRepository.existsById(username)) throw new RecordNotFoundException();
         User user = userRepository.findById(username).get();
-        user.setPassword(newUser.getPassword());
+
+        user.setPassword(passwordEncoder.encode(newUser.getPassword()));
         userRepository.save(user);
     }
+
 
     public Set<Authority> getAuthorities(String username) {
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
@@ -89,7 +102,8 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public static UserDto fromUser(User user){
+    // Mappers
+    public static UserDto fromUser(User user) {
 
         var dto = new UserDto();
 

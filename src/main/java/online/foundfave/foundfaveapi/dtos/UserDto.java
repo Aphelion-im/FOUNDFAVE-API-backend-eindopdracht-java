@@ -1,4 +1,3 @@
-// Van Novi
 package online.foundfave.foundfaveapi.dtos;
 
 import online.foundfave.foundfaveapi.models.Authority;
