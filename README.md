@@ -1,4 +1,4 @@
-Datum laatste update: 2-1-2024
+Datum laatste update: 3-1-2024
 
 <a target="_blank" href="https://github.com/Aphelion-im/FOUNDFAVE-backend-eindopdracht-java">Github Repository FOUNDFAVE API</a>
 
@@ -33,7 +33,7 @@ De volgende software heb je nodig om de FOUNDFAVE API te kunnen runnen:
 ## Postman Collectie JSON-Bestand
 Het JSON-bestand om te importeren in Postman kun je hier downloaden:
 
-[Download Postman collectie JSON bestand](./assets/postman/)
+[Download Postman collectie JSON bestand](./assets/postman/FOUNDFAVE-API.postman_collection.json)
 
 
 ## Opstarten Webserver en Database
@@ -42,7 +42,7 @@ Het JSON-bestand om te importeren in Postman kun je hier downloaden:
 
 __Een overzicht van alle beschikbare API endpoints__:
 - Binnen Postman:
-`localhost/info`
+`localhost:8080/info`
 
 ## Live demo React FOUNDFAVE App
 

@@ -49,7 +49,7 @@ public class SpringSecurityConfig {
                 .cors().and()
                 .authorizeHttpRequests()
                 // .requestMatchers("/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                .requestMatchers(HttpMethod.POST, "/users").permitAll() // TODO: Netter indelen
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN") // TODO: Kan dit meer DRY?
                 .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")

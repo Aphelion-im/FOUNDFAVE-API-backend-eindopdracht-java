@@ -35,6 +35,7 @@ public class AuthenticationController {
         return ResponseEntity.ok().body(principal);
     }
 
+    // TODO: SignIn
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
