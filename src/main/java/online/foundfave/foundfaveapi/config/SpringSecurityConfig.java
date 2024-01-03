@@ -57,6 +57,7 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "/users/**").hasRole("ADMIN")
                 .requestMatchers("/authenticated").authenticated()
                 .requestMatchers("/authenticate").permitAll()
+
                 .anyRequest().denyAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
