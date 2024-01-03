@@ -43,18 +43,16 @@ public class UserController {
         return ResponseEntity.ok().body(optionalUser);
     }
 
-    // TODO: User already exists error
-    // TODO: Meer user feedback geven na creatie user
+    // TODO: User already exists error: kan dubbele usernames aanmaken
     @PostMapping(value = "")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto dto) {
+    public ResponseEntity<Object> createUser(@RequestBody UserDto dto) {
 
         String newUsername = userService.createUser(dto);
         userService.addAuthority(newUsername, "ROLE_USER");
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
-                .buildAndExpand(newUsername).toUri();
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newUsername).toUriString());
 
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(uri).body("User " + "'" + newUsername + "'" + " has been created");
     }
 
     // TODO: InputDto en FieldErrorHandling
@@ -68,7 +66,6 @@ public class UserController {
         return ResponseEntity.noContent().build(); // 204. TODO: Is er een ResponseEntity die wat specifieker is?
     }
 
-    // TODO: user feedback ipv via terminal
     @DeleteMapping(value = "/{username}")
     public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) throws RecordNotFoundException, BadRequestException {
         userService.deleteUser(username);
@@ -94,14 +91,12 @@ public class UserController {
         }
     }
 
-    // TODO: Alleen ROLE_ADMIN verwijderen?
+    // Strip both ROLE_ADMIN or ROLE_USER from a user
     @DeleteMapping(value = "/{username}/authorities/{authority}")
     public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
         userService.removeAuthority(username, authority);
         return ResponseEntity.noContent().build();
     }
-
-
 
 
 }
