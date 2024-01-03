@@ -24,34 +24,25 @@ public class UserController {
         this.userService = userService;
     }
 
-    // TODO: Return number of results
     @GetMapping(value = "")
     public ResponseEntity<List<UserDto>> getUsers() {
-
         List<UserDto> userDtos = userService.getUsers();
-
         return ResponseEntity.ok().body(userDtos);
     }
 
-    // TODO: Geeft password terug!
-    // TODO: Optional van maken
+    // TODO: Geeft password terug! Misschien ook API key verwijderen en andere privé zaken
     @GetMapping(value = "/{username}")
     public ResponseEntity<UserDto> getUser(@PathVariable("username") String username) {
-
         UserDto optionalUser = userService.getUser(username);
-
         return ResponseEntity.ok().body(optionalUser);
     }
 
     // TODO: User already exists error: kan dubbele usernames aanmaken
     @PostMapping(value = "")
     public ResponseEntity<Object> createUser(@RequestBody UserDto dto) {
-
         String newUsername = userService.createUser(dto);
         userService.addAuthority(newUsername, "ROLE_USER");
-
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newUsername).toUriString());
-
         return ResponseEntity.created(uri).body("User " + "'" + newUsername + "'" + " has been created");
     }
 
@@ -60,9 +51,7 @@ public class UserController {
     // TODO: Kan iedereen zomaar een password wijzigen? Dit beveiligen?
     @PutMapping(value = "/{username}")
     public ResponseEntity<UserDto> updateUserPassword(@PathVariable("username") String username, @RequestBody UserDto dto) {
-
         userService.updateUserPassword(username, dto);
-
         return ResponseEntity.noContent().build(); // 204. TODO: Is er een ResponseEntity die wat specifieker is?
     }
 
@@ -72,13 +61,13 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(username);
     }
 
-
     // TODO: Hoe kan deze worden verbeterd?
     @GetMapping(value = "/{username}/authorities")
     public ResponseEntity<Object> getUserAuthorities(@PathVariable("username") String username) {
         return ResponseEntity.ok().body(userService.getAuthorities(username));
     }
 
+    // TODO: Geeft geen feedback na promotie van een user
     // Promote to Admin role to user
     @PostMapping(value = "/{username}/authorities")
     public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
@@ -91,11 +80,17 @@ public class UserController {
         }
     }
 
+    // TODO: Geeft geen feedback na degraderen van een user
     // Strip both ROLE_ADMIN or ROLE_USER from a user
     @DeleteMapping(value = "/{username}/authorities/{authority}")
     public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
         userService.removeAuthority(username, authority);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/exists/{username}")
+    public ResponseEntity<Object> doesUserExist(@PathVariable("username") String username) {
+        return ResponseEntity.ok().body("User " + "'" + username + "'" + " exists: " + userService.userExists(username));
     }
 
 

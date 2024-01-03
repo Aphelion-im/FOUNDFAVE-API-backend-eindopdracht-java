@@ -2,8 +2,6 @@ package online.foundfave.foundfaveapi.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -44,9 +42,4 @@ public class User {
     public void removeAuthority(Authority authority) {
         this.authorities.remove(authority);
     }
-
-
-
-
-
 }

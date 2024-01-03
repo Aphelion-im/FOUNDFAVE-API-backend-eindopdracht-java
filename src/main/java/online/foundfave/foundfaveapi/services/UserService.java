@@ -24,7 +24,6 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     public List<UserDto> getUsers() {
         List<UserDto> collection = new ArrayList<>();
         List<User> list = userRepository.findAll();
@@ -35,12 +34,12 @@ public class UserService {
     }
 
     public UserDto getUser(String username) {
-        UserDto dto = new UserDto();
+        UserDto dto;
         Optional<User> user = userRepository.findById(username);
         if (user.isPresent()) {
             dto = fromUser(user.get());
         } else {
-            throw new UsernameNotFoundException(username);
+            throw new RecordNotFoundException("Username " + "'" + username + "'" + " not found");
         }
         return dto;
     }
@@ -68,7 +67,6 @@ public class UserService {
         userRepository.deleteById(username);
     }
 
-
     // TODO: isPresentCheck()
     public void updateUserPassword(String username, UserDto newUser) {
         if (!userRepository.existsById(username)) throw new RecordNotFoundException();
@@ -77,7 +75,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(newUser.getPassword()));
         userRepository.save(user);
     }
-
 
     public Set<Authority> getAuthorities(String username) {
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
@@ -102,6 +99,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    // TODO: Herschrijven
     // Mappers
     public static UserDto fromUser(User user) {
 

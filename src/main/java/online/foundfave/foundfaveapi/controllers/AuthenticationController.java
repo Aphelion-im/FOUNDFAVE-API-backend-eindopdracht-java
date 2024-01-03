@@ -35,26 +35,41 @@ public class AuthenticationController {
         return ResponseEntity.ok().body(principal);
     }
 
-    // TODO: SignIn
-    @PostMapping(value = "/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-
+    @PostMapping(value = "/login")
+    public ResponseEntity<?> logIn(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();
-
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password)
             );
-        } catch (BadCredentialsException ex) {
-            throw new Exception("Incorrect username or password", ex);
+        } catch (BadCredentialsException bce) {
+            throw new Exception("Incorrect username or password", bce);
         }
-
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(username);
-
         final String jwt = jwtUtl.generateToken(userDetails);
-
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
+
+    @GetMapping("/info")
+    public ResponseEntity<String> info() {
+        String info = """
+                FOUNDFAVE API Endpoints
+                                
+                ***** Info *****
+                localhost:8080/info
+
+                ***** Authentication *****
+                localhost:8080/login
+                localhost:8080/authenticated
+                    
+                ***** Users *****
+                localhost:8080/users
+                """;
+
+        return ResponseEntity.ok().body(info);
+    }
+
+
 }
