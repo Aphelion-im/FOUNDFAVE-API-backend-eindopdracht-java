@@ -52,6 +52,13 @@ public class AuthenticationController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
+    // Check to see if the FOUNDFAVE API is up and running
+    @GetMapping("/test")
+    public String test() {
+        return "The FOUNDFAVE API can be reached.";
+    }
+
+    // Show all available FOUNDFAVE API endpoints
     @GetMapping("/info")
     public ResponseEntity<String> info() {
         String info = """

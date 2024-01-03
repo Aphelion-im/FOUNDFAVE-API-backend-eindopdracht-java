@@ -43,7 +43,7 @@ public class UserController {
         String newUsername = userService.createUser(dto);
         userService.addAuthority(newUsername, "ROLE_USER");
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newUsername).toUriString());
-        return ResponseEntity.created(uri).body("User " + "'" + newUsername + "'" + " has been created");
+        return ResponseEntity.created(uri).body("User " + "'" + newUsername + "'" + " registered successfully!");
     }
 
     // TODO: InputDto en FieldErrorHandling
