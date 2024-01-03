@@ -65,14 +65,27 @@ public class AuthenticationController {
                 FOUNDFAVE API Endpoints
                                 
                 ***** Info *****
-                localhost:8080/info
+                localhost:8080/ (GET, Public)
+                localhost:8080/test (GET, Public)
 
                 ***** Authentication *****
-                localhost:8080/login
-                localhost:8080/authenticated
+                localhost:8080/login (POST, Public)
+                localhost:8080/authenticated (GET, ?)
                     
                 ***** Users *****
-                localhost:8080/users
+                localhost:8080/users (GET, Admin)
+                localhost:8080/users/{username} (GET, Admin)
+                localhost:8080/users (POST, Public)
+                localhost:8080/users/{username} (POST, ?)
+                localhost:8080/users/{username} (DELETE, ?)
+                localhost:8080/users/{username}/authorities (GET, ?)
+                localhost:8080/users/{username}/authorities (POST, ?)
+                localhost:8080/users/{username}/authorities/{authority} (DELETE, ?)
+                localhost:8080/users/exists/{username} (GET, ?)
+                
+                
+                
+                
                 """;
 
         return ResponseEntity.ok().body(info);
