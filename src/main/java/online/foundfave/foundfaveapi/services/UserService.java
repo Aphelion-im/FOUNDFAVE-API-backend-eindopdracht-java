@@ -62,7 +62,6 @@ public class UserService {
         return userInputDto;
     }
 
-    // Klaar
     public String createUser(UserInputDto userInputDto) {
         Optional<User> user = userRepository.findById(userInputDto.username);
         if (user.isPresent()) {
@@ -86,15 +85,26 @@ public class UserService {
         }
         userRepository.deleteById(username);
     }
-
-    // TODO: isPresent()
-    public void updateUserPassword(String username, UserDto newUser) {
-        if (!userRepository.existsById(username)) throw new RecordNotFoundException();
-        User user = userRepository.findById(username).get();
-
-        user.setPassword(passwordEncoder.encode(newUser.getPassword()));
+    
+    public void updateUserPassword(String username, UserInputDto userInputDto) {
+        if (!userRepository.existsById(username))
+            throw new RecordNotFoundException("User with id: " + "'" + username + "'" + " not found!");
+        User user = userRepository.findById(username).orElse(null);
+        assert user != null;
+        user.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
         userRepository.save(user);
     }
+
+
+//    UserDto dto = new UserDto();
+//    Optional<User> user = userRepository.findById(username);
+//        if (user.isPresent()) {
+//        dto = fromUser(user.get());
+//    } else {
+//        throw new UsernameNotFoundException(username);
+//    }
+//        return dto;
+
 
     // TODO: Herschrijven met isPresent()
 //    public Set<Authority> getAuthorities(String username) {

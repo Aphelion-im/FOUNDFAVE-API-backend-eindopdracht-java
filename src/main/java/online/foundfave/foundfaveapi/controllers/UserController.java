@@ -4,11 +4,8 @@ import jakarta.validation.Valid;
 import online.foundfave.foundfaveapi.dtos.UserDto;
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
-import online.foundfave.foundfaveapi.exceptions.BadRequestException;
-import online.foundfave.foundfaveapi.exceptions.RecordNotFoundException;
 import online.foundfave.foundfaveapi.services.UserService;
 import online.foundfave.foundfaveapi.utils.FieldErrorHandling;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +13,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -63,7 +59,11 @@ public class UserController {
 //    }
 
 
-
+    @PutMapping(value = "/{username}")
+    public ResponseEntity<Object> updateUserPassword(@PathVariable("username") String username, @RequestBody UserInputDto userInputDto) {
+        userService.updateUserPassword(username, userInputDto);
+        return ResponseEntity.ok().body("User " + "'" + username + "'" + " password updated!");
+    }
 
 
 
