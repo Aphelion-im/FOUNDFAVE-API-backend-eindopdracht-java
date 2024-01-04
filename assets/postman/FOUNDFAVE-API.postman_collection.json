@@ -7,13 +7,73 @@
 	},
 	"item": [
 		{
-			"name": "signIn",
+			"name": "Test (Public)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/test",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Info (Public)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/info",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queries (Public)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/queries",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"queries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login (Public)",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password\"\r\n}",
+					"raw": "{\r\n    \"username\" : \"admin2\",\r\n    \"password\" : \"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,13 +81,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/authenticate",
+					"raw": "localhost:8080/login",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"authenticate"
+						"login"
 					]
 				}
 			},
@@ -56,6 +116,36 @@
 					"port": "8080",
 					"path": [
 						"authenticated"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "doesUserExist",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/exists/andre",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"exists",
+						"andre"
 					]
 				}
 			},
@@ -132,14 +222,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre2",
+					"raw": "localhost:8080/users/andre",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre2"
+						"andre"
 					]
 				}
 			},
@@ -170,14 +260,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/users/andre2",
+					"raw": "localhost:8080/users/andre",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre2"
+						"andre"
 					]
 				}
 			},
@@ -199,14 +289,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/user",
+					"raw": "localhost:8080/users/andre2",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"user"
+						"andre2"
 					]
 				}
 			},
@@ -297,16 +387,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre2/authorities/ROLE_USER",
+					"raw": "localhost:8080/users/andre/authorities/ROLE_ADMIN",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre2",
+						"andre",
 						"authorities",
-						"ROLE_USER"
+						"ROLE_ADMIN"
 					]
 				}
 			},
