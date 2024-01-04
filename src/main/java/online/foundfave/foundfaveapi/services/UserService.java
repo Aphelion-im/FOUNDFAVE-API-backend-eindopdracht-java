@@ -8,6 +8,7 @@ import online.foundfave.foundfaveapi.exceptions.RecordNotFoundException;
 import online.foundfave.foundfaveapi.models.Authority;
 import online.foundfave.foundfaveapi.models.User;
 import online.foundfave.foundfaveapi.repositories.UserRepository;
+import online.foundfave.foundfaveapi.utils.RandomStringGenerator;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -59,26 +60,24 @@ public class UserService {
         return userInputDto;
     }
 
-
-
-
-
-
-
+    // Klaar
+    public String createUser(UserInputDto userInputDto) {
+        Optional<User> user = userRepository.findById(userInputDto.username);
+        if (user.isPresent()) {
+            throw new RecordNotFoundException("Username: " + "'" + userInputDto.username + "'" + " already exists!");
+        }
+        String randomString = RandomStringGenerator.generateAlphaNumeric(20);
+        userInputDto.setApikey(randomString);
+        userInputDto.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
+        User newUser = userRepository.save(TransformUserInputDtoToUser(userInputDto));
+        return newUser.getUsername();
+    }
 
 
     public boolean userExists(String username) {
         return userRepository.existsById(username);
     }
 
-//    public String createUser(UserDto userDto) {
-//        String randomString = RandomStringGenerator.generateAlphaNumeric(20);
-//        userDto.setApikey(randomString);
-//
-//        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-//        User newUser = userRepository.save(toUser(userDto));
-//        return newUser.getUsername();
-//    }
 
     public void deleteUser(String username) throws RecordNotFoundException, BadRequestException {
         if (Objects.equals(username, "admin")) {
@@ -163,50 +162,34 @@ public class UserService {
 
     // Mappers advanced
     public static UserOutputDto TransformUserToOutputDto(User user) {
-
         var userOutputDto = new UserOutputDto();
-
         userOutputDto.username = user.getUsername();
         userOutputDto.enabled = user.isEnabled();
         userOutputDto.email = user.getEmail();
         userOutputDto.authorities = user.getAuthorities();
-
         return userOutputDto;
     }
 
-    // From UserInputDto to User
-//    public User toUser(UserInputDto userInputDto) {
-//
-//        var user = new User();
-//
-//        user.setUsername(userInputDto.getUsername());
-//        user.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
-//        user.setEnabled(userInputDto.getEnabled());
-//        user.setApikey(userInputDto.getApikey());
-//        user.setEmail(userInputDto.getEmail());
-//
-//        return user;
-//    }
 
-
-
+    public User TransformUserInputDtoToUser(UserInputDto userInputDto) {
+        var user = new User();
+        user.setUsername(userInputDto.getUsername());
+        user.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
+        user.setApikey(userInputDto.getApikey());
+        user.setEmail(userInputDto.getEmail());
+        return user;
+    }
 
     // From User to InputDto
     public static UserInputDto TransformUserToInputDto(User user) {
-
         var userInputDto = new UserInputDto();
-
         userInputDto.username = user.getUsername();
         userInputDto.password = user.getPassword();
-        userInputDto.enabled = user.isEnabled();
         userInputDto.apikey = user.getApikey();
         userInputDto.email = user.getEmail();
         userInputDto.authorities = user.getAuthorities();
-
         return userInputDto;
     }
-
-
 
 
 }

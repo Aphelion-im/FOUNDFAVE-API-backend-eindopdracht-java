@@ -5,10 +5,9 @@ import org.springframework.validation.FieldError;
 
 public class FieldErrorHandling {
 
-    public static String getErrorToStringHandling (BindingResult bindingResult){
+    public static String showFieldErrors(BindingResult bindingResult) {
         StringBuilder sb = new StringBuilder();
-        for (FieldError fe : bindingResult.getFieldErrors()){
-            sb.append("Field error: " + fe.getField() + ": ");
+        for (FieldError fe : bindingResult.getFieldErrors()) {
             sb.append(fe.getDefaultMessage());
             sb.append("\n");
         }

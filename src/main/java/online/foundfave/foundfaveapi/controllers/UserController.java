@@ -1,12 +1,16 @@
 package online.foundfave.foundfaveapi.controllers;
 
+import jakarta.validation.Valid;
 import online.foundfave.foundfaveapi.dtos.UserDto;
+import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.RecordNotFoundException;
 import online.foundfave.foundfaveapi.services.UserService;
+import online.foundfave.foundfaveapi.utils.FieldErrorHandling;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -39,24 +43,19 @@ public class UserController {
         return ResponseEntity.ok().body(optionalUser);
     }
 
+    @PostMapping(value = "")
+    public ResponseEntity<Object> createUser(@Valid @RequestBody UserInputDto userInputDto, BindingResult br) {
+        if (br.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(br));
+        }
 
 
+        String newUsername = userService.createUser(userInputDto);
+        userService.addAuthority(newUsername, "ROLE_USER");
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newUsername).toUriString());
+        return ResponseEntity.created(uri).body("User " + "'" + newUsername + "'" + " registered successfully!");
+    }
 
-
-
-
-
-
-
-
-//    // TODO: User already exists error: kan dubbele usernames aanmaken
-//    @PostMapping(value = "")
-//    public ResponseEntity<Object> createUser(@RequestBody UserDto dto) {
-//        String newUsername = userService.createUser(dto);
-//        userService.addAuthority(newUsername, "ROLE_USER");
-//        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newUsername).toUriString());
-//        return ResponseEntity.created(uri).body("User " + "'" + newUsername + "'" + " registered successfully!");
-//    }
 
 //    // TODO: InputDto en FieldErrorHandling
 //    // TODO: Je kan verkeerde username invoeren (bijvoorbeeld admin ipv andre) en het geeft geen waarschuwing
