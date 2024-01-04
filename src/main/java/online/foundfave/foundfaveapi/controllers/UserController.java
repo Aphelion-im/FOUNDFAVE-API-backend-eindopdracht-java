@@ -1,11 +1,13 @@
 package online.foundfave.foundfaveapi.controllers;
 
 import jakarta.validation.Valid;
-import online.foundfave.foundfaveapi.dtos.UserDto;
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
+import online.foundfave.foundfaveapi.exceptions.BadRequestException;
+import online.foundfave.foundfaveapi.exceptions.RecordNotFoundException;
 import online.foundfave.foundfaveapi.services.UserService;
 import online.foundfave.foundfaveapi.utils.FieldErrorHandling;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -48,39 +50,27 @@ public class UserController {
         return ResponseEntity.created(uri).body("User " + "'" + newUsername + "'" + " registered successfully!");
     }
 
-
-//    // TODO: InputDto en FieldErrorHandling
-//    // TODO: Je kan verkeerde username invoeren (bijvoorbeeld admin ipv andre) en het geeft geen waarschuwing
-//    // TODO: Kan iedereen zomaar een password wijzigen? Dit beveiligen?
-//    @PutMapping(value = "/{username}")
-//    public ResponseEntity<UserDto> updateUserPassword(@PathVariable("username") String username, @RequestBody UserDto dto) {
-//        userService.updateUserPassword(username, dto);
-//        return ResponseEntity.noContent().build(); // 204. TODO: Is er een ResponseEntity die wat specifieker is?
-//    }
-
-
     @PutMapping(value = "/{username}")
     public ResponseEntity<Object> updateUserPassword(@PathVariable("username") String username, @RequestBody UserInputDto userInputDto) {
         userService.updateUserPassword(username, userInputDto);
         return ResponseEntity.ok().body("User " + "'" + username + "'" + " password updated!");
     }
 
+    @DeleteMapping(value = "/{username}")
+    public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
+        userService.deleteUser(username);
+        return ResponseEntity.status(HttpStatus.OK).body("Username: " +  "'" + username + "'" + " deleted!");
+    }
+
+    @GetMapping(value = "/{username}/authorities")
+    public ResponseEntity<Object> getUserAuthorities(@PathVariable("username") String username) {
+        return ResponseEntity.ok().body(userService.getAuthorities(username));
+    }
 
 
 
 
 
-//    @DeleteMapping(value = "/{username}")
-//    public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) throws RecordNotFoundException, BadRequestException {
-//        userService.deleteUser(username);
-//        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(username);
-//    }
-
-//    // TODO: Hoe kan deze worden verbeterd?
-//    @GetMapping(value = "/{username}/authorities")
-//    public ResponseEntity<Object> getUserAuthorities(@PathVariable("username") String username) {
-//        return ResponseEntity.ok().body(userService.getAuthorities(username));
-//    }
 
 //    // TODO: Geeft geen feedback na promotie van een user
 //    // Promote to Admin role to user

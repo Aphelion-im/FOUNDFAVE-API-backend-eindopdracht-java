@@ -35,6 +35,7 @@ public class AuthenticationController {
         return ResponseEntity.ok().body(principal);
     }
 
+    // TODO: feedback to user not sufficient
     @PostMapping(value = "/login")
     public ResponseEntity<?> logIn(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         String username = authenticationRequest.getUsername();
@@ -77,12 +78,12 @@ public class AuthenticationController {
                 localhost:8080/users (GET, Admin)
                 localhost:8080/users/{username} (GET, Admin)
                 localhost:8080/users (POST, Public)
-                localhost:8080/users/{username} (POST, ?)
-                localhost:8080/users/{username} (DELETE, ?)
-                localhost:8080/users/{username}/authorities (GET, ?)
-                localhost:8080/users/{username}/authorities (POST, ?)
-                localhost:8080/users/{username}/authorities/{authority} (DELETE, ?)
-                localhost:8080/users/exists/{username} (GET, ?)
+                localhost:8080/users/{username} (POST, Admin)
+                localhost:8080/users/{username} (DELETE, Admin)
+                localhost:8080/users/{username}/authorities (GET, Admin)
+                localhost:8080/users/{username}/authorities (POST, Admin)
+                localhost:8080/users/{username}/authorities/{authority} (DELETE, Admin)
+                localhost:8080/users/exists/{username} (GET, Admin)
                 localhost:8080/users/search?email={email} (GET, Admin)
                 
                 

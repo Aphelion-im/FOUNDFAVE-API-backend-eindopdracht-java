@@ -1,5 +1,6 @@
 package online.foundfave.foundfaveapi.services;
 
+import jakarta.validation.constraints.NotNull;
 import online.foundfave.foundfaveapi.dtos.UserDto;
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
@@ -14,10 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -74,9 +72,7 @@ public class UserService {
         return newUser.getUsername();
     }
 
-
-    // TODO
-    public void deleteUser(String username) throws RecordNotFoundException, BadRequestException {
+    public void deleteUser(String username) {
         if (Objects.equals(username, "admin")) {
             throw new BadRequestException("You are not allowed to delete the 'admin' account!");
         }
@@ -85,7 +81,7 @@ public class UserService {
         }
         userRepository.deleteById(username);
     }
-    
+
     public void updateUserPassword(String username, UserInputDto userInputDto) {
         if (!userRepository.existsById(username))
             throw new RecordNotFoundException("User with id: " + "'" + username + "'" + " not found!");
@@ -95,24 +91,14 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public Set<Authority> getAuthorities(String username) {
+        if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
+        User user = userRepository.findById(username).orElse(null);
+        assert user != null;
+        UserOutputDto outputDto = TransformUserToOutputDto(user);
+        return outputDto.getAuthorities();
+    }
 
-//    UserDto dto = new UserDto();
-//    Optional<User> user = userRepository.findById(username);
-//        if (user.isPresent()) {
-//        dto = fromUser(user.get());
-//    } else {
-//        throw new UsernameNotFoundException(username);
-//    }
-//        return dto;
-
-
-    // TODO: Herschrijven met isPresent()
-//    public Set<Authority> getAuthorities(String username) {
-//        if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
-//        User user = userRepository.findById(username).get();
-//        UserDto userDto = fromUser(user);
-//        return userDto.getAuthorities();
-//    }
 
     // TODO: Herschrijven met isPresent()
     public void addAuthority(String username, String authority) {
