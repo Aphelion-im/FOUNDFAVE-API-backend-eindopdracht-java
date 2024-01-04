@@ -3,12 +3,18 @@ package online.foundfave.foundfaveapi.dtos.input;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import online.foundfave.foundfaveapi.models.Authority;
 
 import java.util.Set;
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class UserInputDto {
 
     @NotBlank(message = "Username is mandatory.")
@@ -28,7 +34,7 @@ public class UserInputDto {
     public String email;
 
 
-    // Laten staan?
+    // TODO: Laten staan?
     public Set<Authority> authorities;
 
 

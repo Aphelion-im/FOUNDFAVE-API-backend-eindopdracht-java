@@ -1,6 +1,7 @@
 package online.foundfave.foundfaveapi.controllers;
 
 import online.foundfave.foundfaveapi.dtos.UserDto;
+import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.RecordNotFoundException;
 import online.foundfave.foundfaveapi.services.UserService;
@@ -93,6 +94,9 @@ public class UserController {
         return ResponseEntity.ok().body("User " + "'" + username + "'" + " exists: " + userService.userExists(username));
     }
 
-
+    @GetMapping(value = "/search")
+    public ResponseEntity<UserOutputDto> getUserByEmail(@RequestParam("email") String email) {
+        return ResponseEntity.ok(userService.getUserByEmail(email));
+    }
 
 }

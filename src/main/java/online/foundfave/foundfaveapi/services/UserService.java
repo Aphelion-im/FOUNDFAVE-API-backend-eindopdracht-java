@@ -1,12 +1,14 @@
 package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.UserDto;
+import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.RecordNotFoundException;
 import online.foundfave.foundfaveapi.models.Authority;
 import online.foundfave.foundfaveapi.models.User;
 import online.foundfave.foundfaveapi.repositories.UserRepository;
 import online.foundfave.foundfaveapi.utils.RandomStringGenerator;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -67,7 +69,7 @@ public class UserService {
         userRepository.deleteById(username);
     }
 
-    // TODO: isPresentCheck()
+    // TODO: isPresent()
     public void updateUserPassword(String username, UserDto newUser) {
         if (!userRepository.existsById(username)) throw new RecordNotFoundException();
         User user = userRepository.findById(username).get();
@@ -76,6 +78,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    // TODO: Herschrijven met isPresent()
     public Set<Authority> getAuthorities(String username) {
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
         User user = userRepository.findById(username).get();
@@ -83,6 +86,7 @@ public class UserService {
         return userDto.getAuthorities();
     }
 
+    // TODO: Herschrijven met isPresent()
     public void addAuthority(String username, String authority) {
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
         User user = userRepository.findById(username).get();
@@ -90,6 +94,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    // TODO: Herschrijven met isPresent()
     public void removeAuthority(String username, String authority) {
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
         User user = userRepository.findById(username).get();
@@ -97,6 +102,13 @@ public class UserService {
         user.removeAuthority(authorityToRemove);
         userRepository.save(user);
     }
+
+    public UserOutputDto getUserByEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RecordNotFoundException("User not found with e-mail: " + "'" + email + "'."));
+        return transferToOutputDto(user);
+    }
+
 
     // TODO: Herschrijven
     // Mappers
@@ -126,5 +138,19 @@ public class UserService {
 
         return user;
     }
+
+
+    // Mappers advanced
+    public UserOutputDto transferToOutputDto(User user) {
+        UserOutputDto userOutputDto = new UserOutputDto();
+        userOutputDto.username = user.getUsername();
+        userOutputDto.enabled = user.isEnabled();
+        userOutputDto.apikey = user.getApikey();
+        userOutputDto.email = user.getEmail();
+        userOutputDto.authorities = user.getAuthorities();
+        return userOutputDto;
+    }
+
+
 
 }
