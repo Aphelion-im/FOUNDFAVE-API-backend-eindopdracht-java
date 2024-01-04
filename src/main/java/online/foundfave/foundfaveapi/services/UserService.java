@@ -5,6 +5,7 @@ import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.RecordNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.UserAlreadyExistsException;
 import online.foundfave.foundfaveapi.models.Authority;
 import online.foundfave.foundfaveapi.models.User;
 import online.foundfave.foundfaveapi.repositories.UserRepository;
@@ -13,7 +14,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -26,7 +30,6 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // Klaar
     public List<UserOutputDto> getUsers() {
         List<UserOutputDto> collection = new ArrayList<>();
         List<User> list = userRepository.findAll();
@@ -36,7 +39,6 @@ public class UserService {
         return collection;
     }
 
-    // Klaar
     public UserOutputDto getUser(String username) {
         UserOutputDto outputDto;
         Optional<User> user = userRepository.findById(username);
@@ -64,7 +66,7 @@ public class UserService {
     public String createUser(UserInputDto userInputDto) {
         Optional<User> user = userRepository.findById(userInputDto.username);
         if (user.isPresent()) {
-            throw new RecordNotFoundException("Username: " + "'" + userInputDto.username + "'" + " already exists!");
+            throw new UserAlreadyExistsException("Username: " + "'" + userInputDto.username + "'" + " already exists!");
         }
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userInputDto.setApikey(randomString);
@@ -74,11 +76,7 @@ public class UserService {
     }
 
 
-    public boolean userExists(String username) {
-        return userRepository.existsById(username);
-    }
-
-
+    // TODO
     public void deleteUser(String username) throws RecordNotFoundException, BadRequestException {
         if (Objects.equals(username, "admin")) {
             throw new BadRequestException("You are not allowed to delete the 'admin' account!");
@@ -123,6 +121,12 @@ public class UserService {
         userRepository.save(user);
     }
 
+    // Klaar
+    public boolean userExists(String username) {
+        return userRepository.existsById(username);
+    }
+
+    // Klaar
     public UserOutputDto getUserByEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RecordNotFoundException("User not found with e-mail: " + "'" + email + "'."));

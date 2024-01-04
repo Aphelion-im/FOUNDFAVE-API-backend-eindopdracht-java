@@ -2,6 +2,7 @@ package online.foundfave.foundfaveapi.controllers;
 
 import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.RecordNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.UserAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,4 +25,15 @@ public class ExceptionController {
     public ResponseEntity<String> exception(BadRequestException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(value = UserAlreadyExistsException.class)
+    public ResponseEntity<String> exception(UserAlreadyExistsException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+
+
+
+
+
 }

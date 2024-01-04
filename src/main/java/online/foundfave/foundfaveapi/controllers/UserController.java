@@ -29,14 +29,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Klaar
     @GetMapping(value = "")
     public ResponseEntity<List<UserOutputDto>> getUsers() {
         List<UserOutputDto> userOutputDtosCollection = userService.getUsers();
         return ResponseEntity.ok().body(userOutputDtosCollection);
     }
 
-    // Klaar
     @GetMapping(value = "/{username}")
     public ResponseEntity<UserOutputDto> getUser(@PathVariable("username") String username) {
         UserOutputDto optionalUser = userService.getUser(username);
@@ -48,8 +46,6 @@ public class UserController {
         if (br.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(br));
         }
-
-
         String newUsername = userService.createUser(userInputDto);
         userService.addAuthority(newUsername, "ROLE_USER");
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newUsername).toUriString());
@@ -65,6 +61,14 @@ public class UserController {
 //        userService.updateUserPassword(username, dto);
 //        return ResponseEntity.noContent().build(); // 204. TODO: Is er een ResponseEntity die wat specifieker is?
 //    }
+
+
+
+
+
+
+
+
 
 //    @DeleteMapping(value = "/{username}")
 //    public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) throws RecordNotFoundException, BadRequestException {
@@ -99,11 +103,13 @@ public class UserController {
 //        return ResponseEntity.noContent().build();
 //    }
 
-//    @GetMapping(value = "/exists/{username}")
-//    public ResponseEntity<Object> doesUserExist(@PathVariable("username") String username) {
-//        return ResponseEntity.ok().body("User " + "'" + username + "'" + " exists: " + userService.userExists(username));
-//    }
+    // Klaar
+    @GetMapping(value = "/exists/{username}")
+    public ResponseEntity<Object> doesUserExist(@PathVariable("username") String username) {
+        return ResponseEntity.ok().body("User " + "'" + username + "'" + " exists: " + userService.userExists(username));
+    }
 
+    // Klaar
     @GetMapping(value = "/search")
     public ResponseEntity<UserOutputDto> getUserByEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(userService.getUserByEmail(email));
