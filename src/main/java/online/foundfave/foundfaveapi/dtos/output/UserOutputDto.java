@@ -16,7 +16,6 @@ public class UserOutputDto {
 
     public String username;
     public Boolean enabled;
-    public String apikey;
     public String email;
 
     // TODO: Laten staan?
