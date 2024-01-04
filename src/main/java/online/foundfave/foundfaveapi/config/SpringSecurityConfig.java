@@ -59,6 +59,7 @@ public class SpringSecurityConfig {
                 .requestMatchers("/login").permitAll()
                 .requestMatchers(HttpMethod.GET,"/info").permitAll()
                 .requestMatchers(HttpMethod.GET,"/test").permitAll()
+                .requestMatchers(HttpMethod.GET,"/queries").permitAll()
 
                 .anyRequest().denyAll()
                 .and()

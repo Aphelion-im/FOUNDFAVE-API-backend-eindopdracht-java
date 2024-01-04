@@ -81,7 +81,7 @@ public class UserController {
     }
 
     // TODO: Geeft geen feedback na degraderen van een user
-    // Strip both ROLE_ADMIN or ROLE_USER from a user
+    // Strip both ROLE_ADMIN and/or ROLE_USER from a user
     @DeleteMapping(value = "/{username}/authorities/{authority}")
     public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
         userService.removeAuthority(username, authority);

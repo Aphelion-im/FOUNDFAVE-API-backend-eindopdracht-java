@@ -39,7 +39,7 @@ public class UserService {
         if (user.isPresent()) {
             dto = fromUser(user.get());
         } else {
-            throw new RecordNotFoundException("Username " + "'" + username + "'" + " not found");
+            throw new RecordNotFoundException("Username " + "'" + username + "'" + " not found!");
         }
         return dto;
     }
@@ -59,10 +59,10 @@ public class UserService {
 
     public void deleteUser(String username) throws RecordNotFoundException, BadRequestException {
         if (Objects.equals(username, "admin")) {
-            throw new BadRequestException("You are not allowed to delete admin account");
+            throw new BadRequestException("You are not allowed to delete the 'admin' account!");
         }
         if (!userRepository.existsById(username)) {
-            throw new RecordNotFoundException("User with id: " + "'" + username + "'" + " not found");
+            throw new RecordNotFoundException("User with id: " + "'" + username + "'" + " not found!");
         }
         userRepository.deleteById(username);
     }

@@ -67,6 +67,7 @@ public class AuthenticationController {
                 ***** Info *****
                 localhost:8080/ (GET, Public)
                 localhost:8080/test (GET, Public)
+                localhost:8080/queries (GET, Public)
 
                 ***** Authentication *****
                 localhost:8080/login (POST, Public)
@@ -82,6 +83,28 @@ public class AuthenticationController {
                 localhost:8080/users/{username}/authorities (POST, ?)
                 localhost:8080/users/{username}/authorities/{authority} (DELETE, ?)
                 localhost:8080/users/exists/{username} (GET, ?)
+                
+                
+                
+                
+                """;
+
+        return ResponseEntity.ok().body(info);
+    }
+
+    // Show all available FOUNDFAVE API characters & movies
+    @GetMapping("/queries")
+    public ResponseEntity<String> queries() {
+        String info = """
+                FOUNDFAVE API Queries
+                
+                The following characters and movies are currently in the database:
+                                
+                ***** Characters *****
+              
+
+                ***** Movies *****
+          
                 
                 
                 
