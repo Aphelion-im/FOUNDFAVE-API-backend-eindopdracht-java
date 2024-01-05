@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.BadRequestException;
-import online.foundfave.foundfaveapi.exceptions.RecordNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
 import online.foundfave.foundfaveapi.services.UserService;
 import online.foundfave.foundfaveapi.utils.FieldErrorHandling;
 import org.springframework.http.HttpStatus;
@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -59,7 +60,7 @@ public class UserController {
     @DeleteMapping(value = "/{username}")
     public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
         userService.deleteUser(username);
-        return ResponseEntity.status(HttpStatus.OK).body("Username: " +  "'" + username + "'" + " deleted!");
+        return ResponseEntity.status(HttpStatus.OK).body("Username: " + "'" + username + "'" + " deleted!");
     }
 
     @GetMapping(value = "/{username}/authorities")
@@ -67,31 +68,24 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getAuthorities(username));
     }
 
+    // Promote user to Admin role
+    @PostMapping(value = "/{username}/authorities")
+    public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
+        try {
+            String authorityName = (String) fields.get("authority");
+            userService.addAuthority(username, authorityName);
+            return ResponseEntity.ok().body("User: " + "'" + username + "'" + " has been promoted!");
+        } catch (Exception ex) {
+            throw new UsernameNotFoundException("User with id: " + "'" + username + "'" + " not found!");
+        }
+    }
 
-
-
-
-
-//    // TODO: Geeft geen feedback na promotie van een user
-//    // Promote to Admin role to user
-//    @PostMapping(value = "/{username}/authorities")
-//    public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
-//        try {
-//            String authorityName = (String) fields.get("authority");
-//            userService.addAuthority(username, authorityName);
-//            return ResponseEntity.noContent().build(); // 204. TODO: Is er een ResponseEntity die wat specifieker is?
-//        } catch (Exception ex) {
-//            throw new BadRequestException();
-//        }
-//    }
-
-//    // TODO: Geeft geen feedback na degraderen van een user
-//    // Strip both ROLE_ADMIN and/or ROLE_USER from a user
-//    @DeleteMapping(value = "/{username}/authorities/{authority}")
-//    public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
-//        userService.removeAuthority(username, authority);
-//        return ResponseEntity.noContent().build();
-//    }
+    // Strip both ROLE_ADMIN and/or ROLE_USER from a user
+    @DeleteMapping(value = "/{username}/authorities/{authority}")
+    public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
+        userService.removeAuthority(username, authority);
+        return ResponseEntity.ok().body("User: " + "'" + username + "'" + " has been demoted!");
+    }
 
     // Klaar
     @GetMapping(value = "/exists/{username}")
