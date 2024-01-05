@@ -42,7 +42,6 @@ public class SpringSecurityConfig {
 
     @Bean
     protected SecurityFilterChain filter(HttpSecurity http) throws Exception {
-
         http
                 .csrf().disable()
                 .httpBasic().disable()
@@ -57,9 +56,9 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "/users/**").hasRole("ADMIN")
                 .requestMatchers("/authenticated").authenticated()
                 .requestMatchers("/login").permitAll()
-                .requestMatchers(HttpMethod.GET,"/info").permitAll()
-                .requestMatchers(HttpMethod.GET,"/test").permitAll()
-                .requestMatchers(HttpMethod.GET,"/queries").permitAll()
+                .requestMatchers(HttpMethod.GET, "/info").permitAll()
+                .requestMatchers(HttpMethod.GET, "/test").permitAll()
+                .requestMatchers(HttpMethod.GET, "/queries").permitAll()
 
                 .anyRequest().denyAll()
                 .and()

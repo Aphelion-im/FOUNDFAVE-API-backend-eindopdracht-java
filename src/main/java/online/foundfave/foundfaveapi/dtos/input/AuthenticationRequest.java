@@ -1,4 +1,4 @@
-package online.foundfave.foundfaveapi.dtos;
+package online.foundfave.foundfaveapi.dtos.input;
 
 import lombok.*;
 

@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Test (Public)",
+			"name": "checkIfApiOnline (Public)",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -25,7 +25,7 @@
 			"response": []
 		},
 		{
-			"name": "Info (Public)",
+			"name": "showApiInfo (Public)",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -46,7 +46,7 @@
 			"response": []
 		},
 		{
-			"name": "queries (Public)",
+			"name": "showAvailableQueries (Public)",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -73,7 +73,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\" : \"admin2\",\r\n    \"password\" : \"password\"\r\n}",
+					"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -186,7 +186,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"andre2\",\r\n    \"password\": \"password\",\r\n    \"email\": \"andre2@novi.nl\",\r\n    \"enabled\": \"true\"\r\n}",
+					"raw": "{\r\n    \"username\": \"andre2\",\r\n    \"password\": \"bananen\",\r\n    \"email\": \"andre2@novi.nl\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -222,14 +222,49 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre",
+					"raw": "localhost:8080/users/andre2",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre"
+						"andre2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserByEmail",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/search?email=admin@foundfave.online",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "admin@foundfave.online"
+						}
 					]
 				}
 			},
@@ -252,7 +287,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"password\" : \"appeltaartje43344oooooooooooos\"\r\n}",
+					"raw": "{\r\n    \"password\" : \"bananen\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -289,14 +324,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre2",
+					"raw": "localhost:8080/users/andregfgfg",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre2"
+						"andregfgfg"
 					]
 				}
 			},
@@ -318,14 +353,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre/authorities",
+					"raw": "localhost:8080/users/andre2/authorities",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre",
+						"andre2",
 						"authorities"
 					]
 				}
@@ -372,7 +407,7 @@
 			"response": []
 		},
 		{
-			"name": "deleteUserAuthority",
+			"name": "removeAuthority",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -387,14 +422,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre/authorities/ROLE_ADMIN",
+					"raw": "localhost:8080/users/andre2/authorities/ROLE_ADMIN",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre",
+						"andre2",
 						"authorities",
 						"ROLE_ADMIN"
 					]

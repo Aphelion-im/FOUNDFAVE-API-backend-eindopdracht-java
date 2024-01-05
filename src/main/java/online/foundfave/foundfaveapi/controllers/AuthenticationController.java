@@ -1,14 +1,13 @@
 package online.foundfave.foundfaveapi.controllers;
 
-import online.foundfave.foundfaveapi.dtos.AuthenticationRequest;
-import online.foundfave.foundfaveapi.dtos.AuthenticationResponse;
+import online.foundfave.foundfaveapi.dtos.input.AuthenticationRequest;
+import online.foundfave.foundfaveapi.dtos.output.AuthenticationResponse;
 import online.foundfave.foundfaveapi.services.CustomUserDetailsService;
 import online.foundfave.foundfaveapi.utils.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,11 +30,10 @@ public class AuthenticationController {
     }
 
     @GetMapping(value = "/authenticated")
-    public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {
+    public ResponseEntity<Object> authenticated(Principal principal) {
         return ResponseEntity.ok().body(principal);
     }
 
-    // TODO: feedback to user not sufficient
     @PostMapping(value = "/login")
     public ResponseEntity<?> logIn(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         String username = authenticationRequest.getUsername();
@@ -45,23 +43,20 @@ public class AuthenticationController {
                     new UsernamePasswordAuthenticationToken(username, password)
             );
         } catch (BadCredentialsException bce) {
-            throw new Exception("Incorrect username or password", bce);
+            throw new Exception("Username: " + "'" + username + "'" + " not found!", bce);
         }
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(username);
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         final String jwt = jwtUtl.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        return ResponseEntity.ok(new AuthenticationResponse(userDetails.getUsername(), jwt));
     }
 
-    // Check to see if the FOUNDFAVE API is up and running
     @GetMapping("/test")
-    public String test() {
-        return "The FOUNDFAVE API can be reached.";
+    public String checkIfApiOnline() {
+        return "The FOUNDFAVE API is online.";
     }
 
-    // Show all available FOUNDFAVE API endpoints
     @GetMapping("/info")
-    public ResponseEntity<String> info() {
+    public ResponseEntity<String> showApiInfo() {
         String info = """
                 FOUNDFAVE API Endpoints
                                 
@@ -72,7 +67,7 @@ public class AuthenticationController {
 
                 ***** Authentication *****
                 localhost:8080/login (POST, Public)
-                localhost:8080/authenticated (GET, ?)
+                localhost:8080/authenticated (GET, Admin, User)
                     
                 ***** Users *****
                 localhost:8080/users (GET, Admin)
@@ -85,10 +80,10 @@ public class AuthenticationController {
                 localhost:8080/users/{username}/authorities/{authority} (DELETE, Admin)
                 localhost:8080/users/exists/{username} (GET, Admin)
                 localhost:8080/users/search?email={email} (GET, Admin)
-                
-                
-                
-                
+                                
+                                
+                                
+                                
                 """;
 
         return ResponseEntity.ok().body(info);
@@ -96,21 +91,21 @@ public class AuthenticationController {
 
     // Show all available FOUNDFAVE API characters & movies
     @GetMapping("/queries")
-    public ResponseEntity<String> queries() {
+    public ResponseEntity<String> showAvailableQueries() {
         String info = """
                 FOUNDFAVE API Queries
-                
+                                
                 The following characters and movies are currently in the database:
                                 
                 ***** Characters *****
-              
+                              
 
                 ***** Movies *****
-          
-                
-                
-                
-                
+                          
+                                
+                                
+                                
+                                
                 """;
 
         return ResponseEntity.ok().body(info);

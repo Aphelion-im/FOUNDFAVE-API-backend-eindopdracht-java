@@ -51,6 +51,7 @@ public class UserController {
         return ResponseEntity.created(uri).body("User " + "'" + newUsername + "'" + " registered successfully!");
     }
 
+    // TODO: User kan eigen password niet aanpassen
     @PutMapping(value = "/{username}")
     public ResponseEntity<Object> updateUserPassword(@PathVariable("username") String username, @RequestBody UserInputDto userInputDto) {
         userService.updateUserPassword(username, userInputDto);

@@ -30,7 +30,7 @@ public class UserService {
         List<UserOutputDto> collection = new ArrayList<>();
         List<User> list = userRepository.findAll();
         for (User user : list) {
-            collection.add(TransformUserToOutputDto(user));
+            collection.add(TransformUserToUserOutputDto(user));
         }
         return collection;
     }
@@ -39,7 +39,7 @@ public class UserService {
         UserOutputDto outputDto;
         Optional<User> user = userRepository.findById(username);
         if (user.isPresent()) {
-            outputDto = TransformUserToOutputDto(user.get());
+            outputDto = TransformUserToUserOutputDto(user.get());
         } else {
             throw new RecordNotFoundException("Username: " + "'" + username + "'" + " not found!");
         }
@@ -51,7 +51,7 @@ public class UserService {
         UserInputDto userInputDto;
         Optional<User> user = userRepository.findById(username);
         if (user.isPresent()) {
-            userInputDto = TransformUserToInputDto(user.get());
+            userInputDto = TransformUserToUserInputDto(user.get());
         } else {
             throw new RecordNotFoundException("Username: " + "'" + username + "'" + " not found!");
         }
@@ -94,7 +94,7 @@ public class UserService {
             throw new UsernameNotFoundException("User with id: " + "'" + username + "'" + " not found!");
         User user = userRepository.findById(username).orElse(null);
         assert user != null;
-        UserOutputDto outputDto = TransformUserToOutputDto(user);
+        UserOutputDto outputDto = TransformUserToUserOutputDto(user);
         return outputDto.getAuthorities();
     }
 
@@ -110,7 +110,7 @@ public class UserService {
             throw new UsernameNotFoundException("User with id: " + "'" + username + "'" + " not found!");
         User user = userRepository.findById(username).orElse(null);
         assert user != null;
-        Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().get();
+        Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().orElse(null);
         user.removeAuthority(authorityToRemove);
         userRepository.save(user);
     }
@@ -122,11 +122,11 @@ public class UserService {
     public UserOutputDto getUserByEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RecordNotFoundException("User not found with e-mail: " + "'" + email + "'."));
-        return TransformUserToOutputDto(user);
+        return TransformUserToUserOutputDto(user);
     }
 
-    // Mappers advanced
-    public static UserOutputDto TransformUserToOutputDto(User user) {
+    // User to UserOutputDto
+    public static UserOutputDto TransformUserToUserOutputDto(User user) {
         var userOutputDto = new UserOutputDto();
         userOutputDto.username = user.getUsername();
         userOutputDto.enabled = user.isEnabled();
@@ -135,7 +135,7 @@ public class UserService {
         return userOutputDto;
     }
 
-
+    // From UserInputDto to User
     public User TransformUserInputDtoToUser(UserInputDto userInputDto) {
         var user = new User();
         user.setUsername(userInputDto.getUsername());
@@ -145,8 +145,8 @@ public class UserService {
         return user;
     }
 
-    // From User to InputDto
-    public static UserInputDto TransformUserToInputDto(User user) {
+    // From User to UserInputDto
+    public static UserInputDto TransformUserToUserInputDto(User user) {
         var userInputDto = new UserInputDto();
         userInputDto.username = user.getUsername();
         userInputDto.password = user.getPassword();
