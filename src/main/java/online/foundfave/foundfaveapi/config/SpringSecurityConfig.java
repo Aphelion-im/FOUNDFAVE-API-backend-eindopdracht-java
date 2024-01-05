@@ -53,7 +53,8 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN") // TODO: Kan dit meer DRY?
                 .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/users/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/users/admin/{username}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/users/user/{username}").hasRole("USER")
                 .requestMatchers("/authenticated").authenticated()
                 .requestMatchers("/login").permitAll()
                 .requestMatchers(HttpMethod.GET, "/info").permitAll()

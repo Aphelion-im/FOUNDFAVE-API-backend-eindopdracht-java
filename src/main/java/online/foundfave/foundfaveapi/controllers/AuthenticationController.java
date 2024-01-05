@@ -56,6 +56,7 @@ public class AuthenticationController {
         return "The FOUNDFAVE API is online.";
     }
 
+    // TODO: Controleren of de lijst wel klopt
     @GetMapping("/info")
     public ResponseEntity<String> showApiInfo() {
         String info = """
@@ -76,6 +77,8 @@ public class AuthenticationController {
                 localhost:8080/users (POST, Public)
                 localhost:8080/users/{username} (POST, Admin)
                 localhost:8080/users/{username} (DELETE, Admin)
+                localhost:8080/users/admin/{username} (PUT, Admin)
+                localhost:8080/users/user/{username} (PUT, User)
                 localhost:8080/users/{username}/authorities (GET, Admin)
                 localhost:8080/users/{username}/authorities (POST, Admin)
                 localhost:8080/users/{username}/authorities/{authority} (DELETE, Admin)

@@ -8,6 +8,7 @@ import online.foundfave.foundfaveapi.services.UserService;
 import online.foundfave.foundfaveapi.utils.FieldErrorHandling;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -47,15 +48,22 @@ public class UserController {
         String newUsername = userService.createUser(userInputDto);
         userService.addAuthority(newUsername, "ROLE_USER");
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newUsername).toUriString());
-        return ResponseEntity.created(uri).body("User " + "'" + newUsername + "'" + " registered successfully!");
+        return ResponseEntity.created(uri).body("Username: " + "'" + newUsername + "'" + " registered successfully!");
     }
 
     // TODO: User kan eigen password niet aanpassen
-    // Admin only
-    @PutMapping(value = "/{username}")
+    // Admin only. Admin is allowed to overwrite passwords from other users.
+    @PutMapping(value = "/admin/{username}")
     public ResponseEntity<Object> updateUserPassword(@PathVariable("username") String username, @RequestBody UserInputDto userInputDto) {
         userService.updateUserPassword(username, userInputDto);
-        return ResponseEntity.ok().body("User " + "'" + username + "'" + " password updated!");
+        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " password updated!");
+    }
+
+    // User is not allowed to overwrite passwords from other users.
+    @PutMapping(value = "/user/{username}")
+    @PreAuthorize("#username == authentication.principal.username")
+    public ResponseEntity<String> updateUser(@PathVariable("username") String username, @RequestBody UserInputDto userInputDto) {
+        return ResponseEntity.ok(userService.updateUser(username, userInputDto));
     }
 
     @DeleteMapping(value = "/{username}")
@@ -69,15 +77,14 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getAuthorities(username));
     }
 
-    // TODO: Waarom staat username EN de authority in de JSON?
     @PostMapping(value = "/{username}/authorities")
     public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
         try {
             String authorityName = (String) fields.get("authority");
             userService.addAuthority(username, authorityName);
-            return ResponseEntity.ok().body("User: " + "'" + username + "'" + " has been promoted!");
+            return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " has been promoted!");
         } catch (Exception ex) {
-            throw new UsernameNotFoundException("User with id: " + "'" + username + "'" + " not found!");
+            throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
         }
     }
 
@@ -85,12 +92,12 @@ public class UserController {
     @DeleteMapping(value = "/{username}/authorities/{authority}")
     public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
         userService.removeAuthority(username, authority);
-        return ResponseEntity.ok().body("User: " + "'" + username + "'" + " has been demoted!");
+        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " has been demoted!");
     }
 
     @GetMapping(value = "/exists/{username}")
     public ResponseEntity<Object> doesUserExist(@PathVariable("username") String username) {
-        return ResponseEntity.ok().body("User " + "'" + username + "'" + " exists: " + userService.userExists(username));
+        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " exists: " + userService.userExists(username));
     }
 
     @GetMapping(value = "/search")

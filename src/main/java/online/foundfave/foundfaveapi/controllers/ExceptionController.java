@@ -19,9 +19,14 @@ public class ExceptionController {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = RecordNotFoundException.class)
-    public ResponseEntity<Object> exception(RecordNotFoundException exception) {
+    @ExceptionHandler(value = EmailNotFoundException.class)
+    public ResponseEntity<String> exception(EmailNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = InvalidPasswordException.class)
+    public ResponseEntity<String> exception(InvalidPasswordException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
     }
 
     @ExceptionHandler(value = UserAlreadyExistsException.class)

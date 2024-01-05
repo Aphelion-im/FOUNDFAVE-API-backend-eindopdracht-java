@@ -2,10 +2,7 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
-import online.foundfave.foundfaveapi.exceptions.BadRequestException;
-import online.foundfave.foundfaveapi.exceptions.RecordNotFoundException;
-import online.foundfave.foundfaveapi.exceptions.UserAlreadyExistsException;
-import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.*;
 import online.foundfave.foundfaveapi.models.Authority;
 import online.foundfave.foundfaveapi.models.User;
 import online.foundfave.foundfaveapi.repositories.UserRepository;
@@ -41,7 +38,7 @@ public class UserService {
         if (user.isPresent()) {
             outputDto = TransformUserToUserOutputDto(user.get());
         } else {
-            throw new RecordNotFoundException("Username: " + "'" + username + "'" + " not found!");
+            throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
         }
         return outputDto;
     }
@@ -53,7 +50,7 @@ public class UserService {
         if (user.isPresent()) {
             userInputDto = TransformUserToUserInputDto(user.get());
         } else {
-            throw new RecordNotFoundException("Username: " + "'" + username + "'" + " not found!");
+            throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
         }
         return userInputDto;
     }
@@ -74,41 +71,42 @@ public class UserService {
             throw new BadRequestException("You are not allowed to delete the 'admin' account!");
         }
         if (!userRepository.existsById(username)) {
-            throw new RecordNotFoundException("User with id: " + "'" + username + "'" + " not found!");
+            throw new UsernameNotFoundException("User with id: " + "'" + username + "'" + " not found!");
         }
         userRepository.deleteById(username);
     }
 
     public void updateUserPassword(String username, UserInputDto userInputDto) {
-        if (!userRepository.existsById(username))
-            throw new RecordNotFoundException("User with id: " + "'" + username + "'" + " not found!");
-        User user = userRepository.findById(username).orElse(null);
-        assert user != null;
-        user.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
-        userRepository.save(user);
+        User principalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        principalUser.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
+        userRepository.save(principalUser);
+    }
+
+    // TODO: Geeft nog steeds een positief bericht na zogenaamd overschrijven ander account
+    public String updateUser(String username, UserInputDto userInputDto) {
+        User principalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        String encodedPassword = passwordEncoder.encode(userInputDto.getPassword());
+        principalUser.setPassword(encodedPassword);
+        principalUser.setEmail(userInputDto.getEmail());
+        userRepository.save(principalUser);
+
+        return "User updated successfully!";
     }
 
     public Set<Authority> getAuthorities(String username) {
-        if (!userRepository.existsById(username))
-            throw new UsernameNotFoundException("User with id: " + "'" + username + "'" + " not found!");
-        User user = userRepository.findById(username).orElse(null);
-        assert user != null;
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         UserOutputDto outputDto = TransformUserToUserOutputDto(user);
         return outputDto.getAuthorities();
     }
 
     public void addAuthority(String username, String authority) {
-        User user = userRepository.findById(username).orElse(null);
-        assert user != null;
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         user.addAuthority(new Authority(username, authority));
         userRepository.save(user);
     }
 
     public void removeAuthority(String username, String authority) {
-        if (!userRepository.existsById(username))
-            throw new UsernameNotFoundException("User with id: " + "'" + username + "'" + " not found!");
-        User user = userRepository.findById(username).orElse(null);
-        assert user != null;
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().orElse(null);
         user.removeAuthority(authorityToRemove);
         userRepository.save(user);
@@ -119,8 +117,7 @@ public class UserService {
     }
 
     public UserOutputDto getUserByEmail(String email) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RecordNotFoundException("User not found with e-mail: " + "'" + email + "'."));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new EmailNotFoundException("User not found with e-mail: " + "'" + email + "'."));
         return TransformUserToUserOutputDto(user);
     }
 

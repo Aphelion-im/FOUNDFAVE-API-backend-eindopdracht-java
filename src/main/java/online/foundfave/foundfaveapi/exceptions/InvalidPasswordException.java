@@ -2,16 +2,15 @@ package online.foundfave.foundfaveapi.exceptions;
 
 import java.io.Serial;
 
-public class RecordNotFoundException extends RuntimeException {
+public class InvalidPasswordException extends RuntimeException {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public RecordNotFoundException() {
+    public InvalidPasswordException() {
         super();
     }
 
-    public RecordNotFoundException(String message) {
+    public InvalidPasswordException(String message) {
         super(message);
     }
-
 }
