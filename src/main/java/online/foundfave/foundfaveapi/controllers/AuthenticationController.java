@@ -45,9 +45,10 @@ public class AuthenticationController {
         } catch (BadCredentialsException bce) {
             throw new Exception("Username: " + "'" + username + "'" + " not found!", bce);
         }
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        final UserDetails userDetails = userDetailsService
+                .loadUserByUsername(username);
         final String jwt = jwtUtl.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthenticationResponse(userDetails.getUsername(), jwt));
+        return ResponseEntity.ok(new AuthenticationResponse(username, userDetails.getAuthorities().toString(), jwt));
     }
 
     @GetMapping("/test")

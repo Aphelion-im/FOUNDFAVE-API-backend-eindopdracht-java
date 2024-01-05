@@ -65,7 +65,6 @@ public class UserService {
         }
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userInputDto.setApikey(randomString);
-        userInputDto.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
         User newUser = userRepository.save(TransformUserInputDtoToUser(userInputDto));
         return newUser.getUsername();
     }
@@ -155,6 +154,4 @@ public class UserService {
         userInputDto.authorities = user.getAuthorities();
         return userInputDto;
     }
-
-
 }

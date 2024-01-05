@@ -18,8 +18,5 @@ public class UserOutputDto {
     public Boolean enabled;
     public String email;
 
-    // TODO: Laten staan?
     public Set<Authority> authorities;
-
-
 }

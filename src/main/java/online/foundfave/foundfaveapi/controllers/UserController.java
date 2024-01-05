@@ -3,7 +3,6 @@ package online.foundfave.foundfaveapi.controllers;
 import jakarta.validation.Valid;
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
-import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
 import online.foundfave.foundfaveapi.services.UserService;
 import online.foundfave.foundfaveapi.utils.FieldErrorHandling;
@@ -52,6 +51,7 @@ public class UserController {
     }
 
     // TODO: User kan eigen password niet aanpassen
+    // Admin only
     @PutMapping(value = "/{username}")
     public ResponseEntity<Object> updateUserPassword(@PathVariable("username") String username, @RequestBody UserInputDto userInputDto) {
         userService.updateUserPassword(username, userInputDto);
@@ -69,7 +69,7 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getAuthorities(username));
     }
 
-    // Promote user to Admin role
+    // TODO: Waarom staat username EN de authority in de JSON?
     @PostMapping(value = "/{username}/authorities")
     public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
         try {
@@ -88,16 +88,13 @@ public class UserController {
         return ResponseEntity.ok().body("User: " + "'" + username + "'" + " has been demoted!");
     }
 
-    // Klaar
     @GetMapping(value = "/exists/{username}")
     public ResponseEntity<Object> doesUserExist(@PathVariable("username") String username) {
         return ResponseEntity.ok().body("User " + "'" + username + "'" + " exists: " + userService.userExists(username));
     }
 
-    // Klaar
     @GetMapping(value = "/search")
     public ResponseEntity<UserOutputDto> getUserByEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
-
 }
