@@ -77,20 +77,19 @@ public class UserService {
     }
 
     public void updateUserPassword(String username, UserInputDto userInputDto) {
-        User principalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
-        principalUser.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
-        userRepository.save(principalUser);
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        user.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
+        userRepository.save(user);
     }
 
-    // TODO: Geeft nog steeds een positief bericht na zogenaamd overschrijven ander account
+    // TODO: Geeft nog steeds een positief bericht na --zogenaamd-- overschrijven ander account
     public String updateUser(String username, UserInputDto userInputDto) {
-        User principalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
-        String encodedPassword = passwordEncoder.encode(userInputDto.getPassword());
-        principalUser.setPassword(encodedPassword);
-        principalUser.setEmail(userInputDto.getEmail());
-        userRepository.save(principalUser);
-
-        return "User updated successfully!";
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        if (userInputDto.password != null) user.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
+        if (userInputDto.apikey != null) user.setApikey(userInputDto.getApikey());
+        if (userInputDto.email != null) user.setEmail(userInputDto.getEmail());
+        userRepository.save(user);
+        return "User: " + "'" + username + "'" + " updated successfully!";
     }
 
     public Set<Authority> getAuthorities(String username) {
@@ -106,6 +105,9 @@ public class UserService {
     }
 
     public void removeAuthority(String username, String authority) {
+        if (!Objects.equals(authority, "ROLE_USER") & !Objects.equals(authority, "ROLE_ADMIN")) {
+            throw new BadRequestException("Please, fill in one of these roles: ROLE_ADMIN or ROLE_USER!");
+        }
         User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().orElse(null);
         user.removeAuthority(authorityToRemove);

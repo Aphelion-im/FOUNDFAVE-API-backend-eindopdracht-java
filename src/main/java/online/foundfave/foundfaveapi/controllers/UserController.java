@@ -59,6 +59,8 @@ public class UserController {
         return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " password updated!");
     }
 
+    // TODO: Validatie mogelijk op een put request?
+    // TODO: Betere manier vinden om andere gebruikers te beschermen tegen het aanpassen van hun gegevens door een gebruiker
     // User is not allowed to overwrite passwords from other users.
     @PutMapping(value = "/user/{username}")
     @PreAuthorize("#username == authentication.principal.username")
