@@ -24,11 +24,6 @@ public class ExceptionController {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = InvalidPasswordException.class)
-    public ResponseEntity<String> exception(InvalidPasswordException exception) {
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-    }
-
     @ExceptionHandler(value = UserAlreadyExistsException.class)
     public ResponseEntity<String> exception(UserAlreadyExistsException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);

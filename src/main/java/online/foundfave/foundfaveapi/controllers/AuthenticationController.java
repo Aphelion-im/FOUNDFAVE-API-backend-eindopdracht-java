@@ -57,6 +57,7 @@ public class AuthenticationController {
     }
 
     // TODO: Controleren of de lijst wel klopt
+    // TODO: Alle endpoints invoeren
     @GetMapping("/info")
     public ResponseEntity<String> showApiInfo() {
         String info = """
