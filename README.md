@@ -17,7 +17,7 @@ Datum laatste update: 6-1-2024
 ## Uitgebreide Handleiding
 De uitgebreide installatiehandleiding (PDF) kun je hier downloaden:
 
-[Installatiehandleiding FOUNDFAVE API](./assets/documentation/)
+[Installatiehandleiding FOUNDFAVE API](./assets/documentation/Eindopdracht-Installatiehandleiding-v1.0.0.pdf)
 
 
 ## Benodigdheden
@@ -41,8 +41,17 @@ Het JSON-bestand om te importeren in Postman kun je hier downloaden:
 * PostgreSQL/pgAdmin server draait op poort 5432.
 
 __Een overzicht van alle beschikbare API endpoints__:
-- Binnen Postman:
-`localhost:8080/info`
+- Binnen Postman: `localhost:8080/info`
+
+
+__Een overzicht van alle beschikbare Marvel karakters en Marvel films die je momenteel kunt opvragen__:
+- Binnen Postman: `localhost:8080/queries`
+
+__Inloggen op de FOUNDFAVE API__:
+- Binnen Postman: `localhost:8080/login`
+
+__Opvragen of de FOUNDFAVE API online is__:
+- Binnen Postman: `localhost:8080/test`
 
 ## Live demo React FOUNDFAVE App
 

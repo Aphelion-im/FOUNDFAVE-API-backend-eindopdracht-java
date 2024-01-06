@@ -73,7 +73,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password\"\r\n}",
+					"raw": "{\r\n    \"username\": \"andre4\",\r\n    \"password\": \"bananen\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -186,7 +186,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"andre2\",\r\n    \"password\": \"bananen\",\r\n    \"email\": \"andre2@novi.nl\"\r\n}",
+					"raw": "{\r\n    \"username\": \"andre4\",\r\n    \"password\": \"password\",\r\n    \"email\": \"andre4@novi.nl\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -222,14 +222,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre2",
+					"raw": "localhost:8080/users/andre4",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre2"
+						"andre4"
 					]
 				}
 			},
@@ -271,7 +271,7 @@
 			"response": []
 		},
 		{
-			"name": "updateUserPassword",
+			"name": "updateUserPassword (Admin only)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -295,14 +295,54 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/users/andre",
+					"raw": "localhost:8080/users/admin/andre4",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre"
+						"admin",
+						"andre4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateUser (User only)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"bananen\",\r\n    \"apikey\" : null,\r\n    \"email\": \"andre44@novi.nl\"\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/user/andre4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"user",
+						"andre4"
 					]
 				}
 			},
@@ -353,14 +393,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre2/authorities",
+					"raw": "localhost:8080/users/andre4/authorities",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre2",
+						"andre4",
 						"authorities"
 					]
 				}
@@ -384,7 +424,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"andre2\",\r\n    \"authority\": \"ROLE_ADMIN\"\r\n}",
+					"raw": "{\r\n    \"authority\": \"ROLE_ADMIN\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -392,14 +432,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/users/andre2/authorities",
+					"raw": "localhost:8080/users/andre4/authorities",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre2",
+						"andre4",
 						"authorities"
 					]
 				}
@@ -422,16 +462,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre2/authorities/ROLE_ADMIN",
+					"raw": "localhost:8080/users/andre4/authorities/ROLE_USER",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre2",
+						"andre4",
 						"authorities",
-						"ROLE_ADMIN"
+						"ROLE_USER"
 					]
 				}
 			},
