@@ -48,18 +48,27 @@ public class SpringSecurityConfig {
                 .cors().and()
                 .authorizeHttpRequests()
                 // .requestMatchers("/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/users").permitAll() // TODO: Netter indelen
+
+                /* Users */
+                .requestMatchers(HttpMethod.POST, "/users").permitAll()
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN") // TODO: Kan dit meer DRY?
+                .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/users/admin/{username}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/users/user/{username}").hasRole("USER")
                 .requestMatchers("/authenticated").authenticated()
+
+
+                /* ContactForm */
+
+
+                /* Public */
                 .requestMatchers("/login").permitAll()
                 .requestMatchers(HttpMethod.GET, "/info").permitAll()
                 .requestMatchers(HttpMethod.GET, "/test").permitAll()
                 .requestMatchers(HttpMethod.GET, "/queries").permitAll()
+
 
                 .anyRequest().denyAll()
                 .and()

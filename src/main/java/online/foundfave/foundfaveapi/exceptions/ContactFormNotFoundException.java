@@ -2,16 +2,16 @@ package online.foundfave.foundfaveapi.exceptions;
 
 import java.io.Serial;
 
-public class BadCredentialsException extends RuntimeException {
+public class ContactFormNotFoundException extends RuntimeException {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public BadCredentialsException() {
+    public ContactFormNotFoundException() {
         super();
     }
 
-    public BadCredentialsException(String message) {
+    public ContactFormNotFoundException(String message) {
         super(message);
     }
 }
