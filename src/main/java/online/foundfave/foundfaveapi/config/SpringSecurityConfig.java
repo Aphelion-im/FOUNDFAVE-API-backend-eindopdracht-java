@@ -61,7 +61,7 @@ public class SpringSecurityConfig {
 
 
                 /* ContactForm */
-
+                .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
 
                 /* Public */
                 .requestMatchers("/login").permitAll()

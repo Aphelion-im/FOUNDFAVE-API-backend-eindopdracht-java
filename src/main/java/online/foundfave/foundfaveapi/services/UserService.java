@@ -123,6 +123,8 @@ public class UserService {
         return TransformUserToUserOutputDto(user);
     }
 
+
+    // Transformers
     // User to UserOutputDto
     public static UserOutputDto TransformUserToUserOutputDto(User user) {
         var userOutputDto = new UserOutputDto();

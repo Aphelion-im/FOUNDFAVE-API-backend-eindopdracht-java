@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Time;
+import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,9 +24,9 @@ public class ContactForm {
     private String name;
     private String email;
     private String comments;
+    private Date submissionDate;
+    private Time submissionTime;
 
-// TODO: Nog Date toevoegen
-// TODO: Nog Time toevoegen
 
     // Relations
     @ManyToOne

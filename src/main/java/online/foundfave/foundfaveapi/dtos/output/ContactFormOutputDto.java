@@ -5,16 +5,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Time;
+import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class ContactFormOutputDto {
 
-    private String name;
-    private String email;
-    private String comments;
-
-    // TODO: Nog Date toevoegen
-    // TODO: Nog Time toevoegen
+    public Long id;
+    public String name;
+    public String email;
+    public String comments;
+    public Date submissionDate;
+    public Time submissionTime;
 }
