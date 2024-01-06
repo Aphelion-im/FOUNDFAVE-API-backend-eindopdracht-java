@@ -1,5 +1,6 @@
 package online.foundfave.foundfaveapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -33,6 +35,7 @@ public class User {
     @Column
     private String email;
 
+    // Relations
     @OneToMany(
             targetEntity = Authority.class,
             mappedBy = "username",
@@ -40,6 +43,10 @@ public class User {
             orphanRemoval = true,
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<ContactForm> contactForms;
 
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
