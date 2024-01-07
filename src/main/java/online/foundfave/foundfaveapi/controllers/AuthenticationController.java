@@ -35,7 +35,7 @@ public class AuthenticationController {
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity<?> logIn(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+    public ResponseEntity<?> logIn(@RequestBody AuthenticationRequest authenticationRequest) {
         String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();
         try {
@@ -43,7 +43,7 @@ public class AuthenticationController {
                     new UsernamePasswordAuthenticationToken(username, password)
             );
         } catch (BadCredentialsException bce) {
-            throw new Exception("Username: " + "'" + username + "'" + " not found!", bce);
+            throw new BadCredentialsException("Username: " + "'" + username + "'" + " not found!", bce);
         }
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(username);

@@ -1,10 +1,13 @@
 package online.foundfave.foundfaveapi.controllers;
 
+import jakarta.validation.Valid;
 import online.foundfave.foundfaveapi.dtos.input.ContactFormInputDto;
 import online.foundfave.foundfaveapi.dtos.output.ContactFormOutputDto;
 import online.foundfave.foundfaveapi.services.ContactFormService;
+import online.foundfave.foundfaveapi.utils.FieldErrorHandling;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,9 +36,12 @@ public class ContactFormController {
         return ResponseEntity.ok(contactFormOutputDto);
     }
 
-    // TODO: Refactor, BindingResult
+    // TODO: Refactor
     @PostMapping("/post")
-    public ResponseEntity<ContactFormOutputDto> postContactForm(@RequestBody ContactFormInputDto contactFormInputDto) {
+    public ResponseEntity<Object> postContactForm(@Valid @RequestBody ContactFormInputDto contactFormInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
         ContactFormOutputDto createdContactForm = contactFormService.postContactFormSubmission(contactFormInputDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdContactForm);
     }

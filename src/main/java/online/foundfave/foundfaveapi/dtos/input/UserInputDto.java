@@ -17,18 +17,18 @@ import java.util.Set;
 @Setter
 public class UserInputDto {
 
-    @NotBlank(message = "Username is mandatory.")
+    @NotBlank(message = "Username is required.")
     @Size(min = 2, max = 30, message = "Username must be at least 2 characters and have a maximum of 30 characters.")
     public String username;
 
-    @NotBlank(message = "Password is mandatory.")
+    @NotBlank(message = "Password is required.")
     @Size(min = 6, max = 30, message = "Password must be at least 6 characters and have a maximum of 30 characters.")
     public String password;
 
-    // For demo purposes, the apiKey will be filled with a random string, and therefore not a mandatory field.
+    // For demo purposes, the apiKey will be filled with a random string, and therefore not a required field.
     public String apikey;
 
-    @NotBlank(message = "E-mail is mandatory.")
+    @NotBlank(message = "E-mail is required.")
     @Email(message = "E-mail address is not valid.")
     public String email;
 

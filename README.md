@@ -13,6 +13,8 @@ Datum laatste update: 7-1-2024
 - [Live demo React FOUNDFAVE App](#live-demo-react-foundfave-app)
 - [Contact](#contact)
 
+## FOUNDFAVE API Klassendiagram
+![FOUNDFAVE API klassendiagram](./assets/class-diagram/foundfave-api-class-diagram.png)
 
 ## Uitgebreide Handleiding
 De uitgebreide installatiehandleiding (PDF) kun je hier downloaden:

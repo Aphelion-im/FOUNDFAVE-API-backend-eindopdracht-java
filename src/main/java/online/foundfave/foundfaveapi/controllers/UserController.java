@@ -41,9 +41,9 @@ public class UserController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<Object> createUser(@Valid @RequestBody UserInputDto userInputDto, BindingResult br) {
-        if (br.hasFieldErrors()) {
-            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(br));
+    public ResponseEntity<Object> createUser(@Valid @RequestBody UserInputDto userInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
         String newUsername = userService.createUser(userInputDto);
         userService.addAuthority(newUsername, "ROLE_USER");

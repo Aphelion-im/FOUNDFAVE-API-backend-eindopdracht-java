@@ -29,8 +29,8 @@ public class ContactFormService {
         return collection;
     }
 
-    public ContactFormOutputDto getContactFormSubmission(Long id) {
-        ContactForm contactForm = contactFormRepository.findById(id).orElseThrow(() -> new ContactFormNotFoundException("Contact Form with id: " + id + " not found!"));
+    public ContactFormOutputDto getContactFormSubmission(Long contactFormId) {
+        ContactForm contactForm = contactFormRepository.findById(contactFormId).orElseThrow(() -> new ContactFormNotFoundException("Contact Form with id: " + contactFormId + " not found!"));
         return transformContactFormToContactFormOutputDto(contactForm);
     }
 
@@ -40,11 +40,11 @@ public class ContactFormService {
         return transformContactFormToContactFormOutputDto(createdContactForm);
     }
 
-    public void deleteContactFormSubmission(Long id) {
-        if (!contactFormRepository.existsById(id)) {
-            throw new ContactFormNotFoundException("Contact Form with id: " + id + " not found!");
+    public void deleteContactFormSubmission(Long contactFormId) {
+        if (!contactFormRepository.existsById(contactFormId)) {
+            throw new ContactFormNotFoundException("Contact Form with id: " + contactFormId + " not found!");
         }
-        contactFormRepository.deleteById(id);
+        contactFormRepository.deleteById(contactFormId);
     }
 
     // TODO: if Null check?
