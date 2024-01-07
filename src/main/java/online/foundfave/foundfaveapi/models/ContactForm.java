@@ -1,5 +1,6 @@
 package online.foundfave.foundfaveapi.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,8 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,8 +24,10 @@ public class ContactForm {
     private String name;
     private String email;
     private String comments;
-    private Date submissionDate;
-    private Time submissionTime;
+
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
+    public LocalDateTime timeStamp;
+
 
 
     // Relations

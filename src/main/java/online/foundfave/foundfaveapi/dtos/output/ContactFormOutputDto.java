@@ -1,12 +1,12 @@
 package online.foundfave.foundfaveapi.dtos.output;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +18,8 @@ public class ContactFormOutputDto {
     public String name;
     public String email;
     public String comments;
-    public Date submissionDate;
-    public Time submissionTime;
+
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
+    public LocalDateTime timeStamp;
+
 }

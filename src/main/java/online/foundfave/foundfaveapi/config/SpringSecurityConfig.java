@@ -49,6 +49,7 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests()
                 // .requestMatchers("/**").permitAll()
 
+                // TODO: Beter optimaliseren en verdelen
                 /* Users */
                 .requestMatchers(HttpMethod.POST, "/users").permitAll()
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
@@ -62,6 +63,9 @@ public class SpringSecurityConfig {
 
                 /* ContactForm */
                 .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/contactforms/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/contactforms/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/contactforms/**").hasRole("ADMIN") // TODO: Ook User
 
                 /* Public */
                 .requestMatchers("/login").permitAll()
