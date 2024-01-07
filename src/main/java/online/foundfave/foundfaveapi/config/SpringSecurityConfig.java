@@ -63,8 +63,8 @@ public class SpringSecurityConfig {
 
                 /* ContactForm */
                 .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/contactforms/{id}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/contactforms/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/contactforms/{contactFormId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/contactforms/**").hasRole("ADMIN") // TODO: Ook User
 
                 /* Public */

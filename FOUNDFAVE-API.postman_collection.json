@@ -73,7 +73,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"andre4\",\r\n    \"password\": \"bananen\"\r\n}",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -472,6 +472,151 @@
 						"andre4",
 						"authorities",
 						"ROLE_USER"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllContactForms",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/contactforms",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contactforms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postContactForm",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"André test 12345678\",\r\n    \"email\": \"test@novi.nl\",\r\n    \"comments\": \"Dit is commentaar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/contactforms/post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contactforms",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getContactForm",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/contactforms/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contactforms",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteContactForm",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/contactforms/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contactforms",
+						"1"
 					]
 				}
 			},

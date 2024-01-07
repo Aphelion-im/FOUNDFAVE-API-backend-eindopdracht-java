@@ -47,12 +47,12 @@ public class ContactFormService {
         contactFormRepository.deleteById(id);
     }
 
-
+    // TODO: if Null check?
     // Transformers
     // ContactForm to ContactFormOutputDto
     public static ContactFormOutputDto transformContactFormToContactFormOutputDto(ContactForm contactForm) {
         var contactFormOutputDto = new ContactFormOutputDto();
-        contactFormOutputDto.id = contactForm.getId();
+        contactFormOutputDto.contactFormId = contactForm.getContactFormId();
         contactFormOutputDto.name = contactForm.getName();
         contactFormOutputDto.email = contactForm.getEmail();
         contactFormOutputDto.comments = contactForm.getComments();
@@ -60,6 +60,7 @@ public class ContactFormService {
         return contactFormOutputDto;
     }
 
+    // ContactFormInputDto to ContactForm
     private ContactForm transformContactFormInputDtoToContactForm(ContactFormInputDto contactFormInputDto) {
         ContactForm contactForm = new ContactForm();
         contactForm.setName(contactFormInputDto.getName());

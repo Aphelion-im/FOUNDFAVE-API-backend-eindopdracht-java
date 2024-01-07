@@ -43,18 +43,6 @@ public class UserService {
         return outputDto;
     }
 
-    // This method is used for the CustomUserDetailsService class
-    public UserInputDto getUserWithPassword(String username) {
-        UserInputDto userInputDto;
-        Optional<User> user = userRepository.findById(username);
-        if (user.isPresent()) {
-            userInputDto = TransformUserToUserInputDto(user.get());
-        } else {
-            throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
-        }
-        return userInputDto;
-    }
-
     public String createUser(UserInputDto userInputDto) {
         Optional<User> user = userRepository.findById(userInputDto.username);
         if (user.isPresent()) {
@@ -123,6 +111,17 @@ public class UserService {
         return TransformUserToUserOutputDto(user);
     }
 
+    // This method is used for the CustomUserDetailsService class
+    public UserInputDto getUserByUsername(String username) {
+        UserInputDto userInputDto;
+        Optional<User> user = userRepository.findById(username);
+        if (user.isPresent()) {
+            userInputDto = TransformUserToUserInputDto(user.get());
+        } else {
+            throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
+        }
+        return userInputDto;
+    }
 
     // Transformers
     // User to UserOutputDto

@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        UserInputDto userInputDto = userService.getUserWithPassword(username);
+        UserInputDto userInputDto = userService.getUserByUsername(username);
         String password = userInputDto.getPassword();
         Set<Authority> authorities = userInputDto.getAuthorities();
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
@@ -32,9 +32,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         return new org.springframework.security.core.userdetails.User(username, password, grantedAuthorities);
     }
-
-
-
 
 
 

@@ -10,7 +10,7 @@ VALUES ('user', 'ROLE_USER'),
        ('andre', 'ROLE_USER'),
        ('andre', 'ROLE_ADMIN');
 
-INSERT INTO contact_forms (id, name, email, comments, time_stamp)
+INSERT INTO contact_forms (contact_form_id, name, email, comments, time_stamp)
 VALUES (1000, 'André de Groot', 'andre.de.groot@novi.nl', 'Leuke site!', '2024-01-01 14:20:16.203216'),
        (1001, 'Michael de Boer', 'michael.de.boer@novi.nl', 'Ik zou graag meer willen zien van Fantastic four', '2024-01-02 22:26:05.483236'),
        (1002, 'Irene de Visser', 'irene.de.visser@novi.nl', 'Wolverine graag!', '2024-01-03 20:30:45.404232'),

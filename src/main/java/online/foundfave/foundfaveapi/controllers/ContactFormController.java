@@ -27,13 +27,13 @@ public class ContactFormController {
     }
 
     // TODO: Refactor
-    @GetMapping("/{id}")
-    public ResponseEntity<ContactFormOutputDto> getContactForm(@PathVariable Long id) {
-        ContactFormOutputDto contactFormOutputDto = contactFormService.getContactFormSubmission(id);
+    @GetMapping("/{contactFormId}")
+    public ResponseEntity<ContactFormOutputDto> getContactForm(@PathVariable Long contactFormId) {
+        ContactFormOutputDto contactFormOutputDto = contactFormService.getContactFormSubmission(contactFormId);
         return ResponseEntity.ok(contactFormOutputDto);
     }
 
-    // TODO: Refactor
+    // TODO: Refactor, BindingResult
     @PostMapping("/post")
     public ResponseEntity<ContactFormOutputDto> postContactForm(@RequestBody ContactFormInputDto contactFormInputDto) {
         ContactFormOutputDto createdContactForm = contactFormService.postContactFormSubmission(contactFormInputDto);
@@ -41,9 +41,9 @@ public class ContactFormController {
     }
 
     // TODO: Refactor
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteContactForm(@PathVariable Long id) {
-        contactFormService.deleteContactFormSubmission(id);
-        return ResponseEntity.ok().body("Contact Form with id: " + id + " was successfully deleted!");
+    @DeleteMapping("/{contactFormId}")
+    public ResponseEntity<String> deleteContactForm(@PathVariable Long contactFormId) {
+        contactFormService.deleteContactFormSubmission(contactFormId);
+        return ResponseEntity.ok().body("Contact Form with id: " + contactFormId + " was successfully deleted!");
     }
 }

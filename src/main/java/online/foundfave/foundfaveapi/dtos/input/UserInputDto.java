@@ -25,6 +25,7 @@ public class UserInputDto {
     @Size(min = 6, max = 30, message = "Password must be at least 6 characters and have a maximum of 30 characters.")
     public String password;
 
+    // For demo purposes, the apiKey will be filled with a random string, and therefore not a mandatory field.
     public String apikey;
 
     @NotBlank(message = "E-mail is mandatory.")

@@ -20,15 +20,13 @@ public class ContactForm {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long contactFormId;
     private String name;
     private String email;
     private String comments;
 
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     public LocalDateTime timeStamp;
-
-
 
     // Relations
     @ManyToOne

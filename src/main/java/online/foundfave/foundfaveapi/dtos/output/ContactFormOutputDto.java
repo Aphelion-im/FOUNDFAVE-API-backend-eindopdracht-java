@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 public class ContactFormOutputDto {
 
-    public Long id;
+    public Long contactFormId;
     public String name;
     public String email;
     public String comments;
