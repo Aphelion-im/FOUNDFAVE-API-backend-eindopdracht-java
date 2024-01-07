@@ -6,6 +6,7 @@ Datum laatste update: 7-1-2024
 
 ## Inhoud
 
+- [FOUNDFAVE API Klassendiagram](#foundfave-api-klassendiagram)
 - [Uitgebreide Handleiding](#uitgebreide-handleiding)
 - [Benodigdheden](#benodigdheden)
 - [Postman Collectie JSON Bestand](#postman-collectie-json-bestand)
