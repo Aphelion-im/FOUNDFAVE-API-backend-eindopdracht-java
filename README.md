@@ -1,4 +1,4 @@
-Datum laatste update: 7-1-2024
+Datum laatste update: 8-1-2024
 
 <a target="_blank" href="https://github.com/Aphelion-im/FOUNDFAVE-backend-eindopdracht-java">Github Repository FOUNDFAVE API</a>
 
@@ -7,7 +7,7 @@ Datum laatste update: 7-1-2024
 ## Inhoud
 
 - [FOUNDFAVE API Klassendiagram](#foundfave-api-klassendiagram)
-- [Uitgebreide Handleiding](#uitgebreide-handleiding)
+- [Uitgebreide Installatiehandleiding](#uitgebreide-installatiehandleiding)
 - [Benodigdheden](#benodigdheden)
 - [Postman Collectie JSON Bestand](#postman-collectie-json-bestand)
 - [Opstarten Webserver en Database](#opstarten-webserver-en-database)
@@ -17,11 +17,10 @@ Datum laatste update: 7-1-2024
 ## FOUNDFAVE API Klassendiagram
 ![FOUNDFAVE API klassendiagram](./assets/class-diagram/foundfave-api-class-diagram.png)
 
-## Uitgebreide Handleiding
+## Uitgebreide Installatiehandleiding
 De uitgebreide installatiehandleiding (PDF) kun je hier downloaden:
 
 [Installatiehandleiding FOUNDFAVE API](./assets/documentation/Eindopdracht-Installatiehandleiding-v1.0.0.pdf)
-
 
 ## Benodigdheden
 
@@ -32,12 +31,10 @@ De volgende software heb je nodig om de FOUNDFAVE API te kunnen runnen:
 * [pgAdmin](https://www.postgresql.org/download/)
 * [Postman](https://www.postman.com)
 
-
 ## Postman Collectie JSON-Bestand
 Het JSON-bestand om te importeren in Postman kun je hier downloaden:
 
 [Download Postman collectie JSON bestand](./assets/postman/FOUNDFAVE-API.postman_collection.json)
-
 
 ## Opstarten Webserver en Database
 * De webserver draait op poort 8080.
@@ -45,7 +42,6 @@ Het JSON-bestand om te importeren in Postman kun je hier downloaden:
 
 __Een overzicht van alle beschikbare API endpoints__:
 - Binnen Postman: `localhost:8080/info`
-
 
 __Een overzicht van alle beschikbare Marvel karakters en Marvel films die je momenteel kunt opvragen__:
 - Binnen Postman: `localhost:8080/queries`
