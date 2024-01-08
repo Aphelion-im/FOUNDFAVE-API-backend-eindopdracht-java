@@ -52,4 +52,9 @@ public class ContactFormController {
         contactFormService.deleteContactFormSubmission(contactFormId);
         return ResponseEntity.ok().body("Contact Form with id: " + contactFormId + " was successfully deleted!");
     }
+
+    // TODO: OneToMany relatie method toevoegen
+
+
+
 }
