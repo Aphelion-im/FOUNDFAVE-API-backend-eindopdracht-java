@@ -67,6 +67,12 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/contactforms/**").hasRole("ADMIN") // TODO: Ook User
 
+                /* Characters */
+                .requestMatchers(HttpMethod.GET, "/characters").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/characters/{characterId}").hasRole("ADMIN")
+
+
+
                 /* Public */
                 .requestMatchers("/login").permitAll()
                 .requestMatchers(HttpMethod.GET, "/info").permitAll()

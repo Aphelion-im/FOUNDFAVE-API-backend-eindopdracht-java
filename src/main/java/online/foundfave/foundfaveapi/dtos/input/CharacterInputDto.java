@@ -13,26 +13,26 @@ import lombok.Setter;
 public class CharacterInputDto {
 
     @NotNull(message = "Character alias name is required.")
-    private String characterAliasName;
+    public String characterAliasName;
 
     @NotNull(message = "Character real name is required.")
-    private String characterRealName;
+    public String characterRealName;
 
     @NotNull(message = "Character actor name is required.")
-    private String characterActorName;
+    public String characterActorName;
 
     @NotNull(message = "Character title is required.")
-    private String characterTitle;
+    public String characterTitle;
 
     @NotNull(message = "Character gender is required.")
-    private String characterGender;
+    public String characterGender;
 
     @NotNull(message = "Character summary is required.")
-    private String characterSummary;
+    public String characterSummary;
 
     @NotNull(message = "Character description is required.")
-    private String characterDescription;
+    public String characterDescription;
 
     @NotNull(message = "Character image url is required.")
-    private String characterImageUrl;
+    public String characterImageUrl;
 }

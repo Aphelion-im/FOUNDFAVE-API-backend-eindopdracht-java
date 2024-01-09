@@ -11,12 +11,13 @@ import lombok.Setter;
 @Setter
 public class CharacterOutputDto {
 
-    private String characterAliasName;
-    private String characterRealName;
-    private String characterActorName;
-    private String characterTitle;
-    private String characterGender;
-    private String characterSummary;
-    private String characterDescription;
-    private String characterImageUrl;
+    public Long characterId;
+    public String characterAliasName;
+    public String characterRealName;
+    public String characterActorName;
+    public String characterTitle;
+    public String characterGender;
+    public String characterSummary;
+    public String characterDescription;
+    public String characterImageUrl;
 }

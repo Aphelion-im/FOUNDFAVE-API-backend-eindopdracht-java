@@ -15,13 +15,13 @@ import lombok.Setter;
 public class ContactFormInputDto {
 
     @NotNull(message = "Name is required.")
-    private String name;
+    public String name;
 
     @NotNull(message = "E-mail is required.")
     @Email(message = "E-mail address is not valid.")
-    private String email;
+    public String email;
 
     @NotNull(message = "Comments is required.")
     @Size(min=2, max=500, message="Message must be between 2 and 500 characters.")
-    private String comments;
+    public String comments;
 }

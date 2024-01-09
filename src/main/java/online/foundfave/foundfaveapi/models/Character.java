@@ -1,9 +1,6 @@
 package online.foundfave.foundfaveapi.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,4 +27,9 @@ public class Character {
     private String characterSummary;
     private String characterDescription;
     private String characterImageUrl;
+
+    // Relations
+    @ManyToOne
+    @JoinColumn(name = "users_username")
+    User user;
 }
