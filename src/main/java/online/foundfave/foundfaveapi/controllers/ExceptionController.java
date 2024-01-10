@@ -34,6 +34,11 @@ public class ExceptionController {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(value = ProfileNotFoundException.class)
+    public ResponseEntity<String> exception(ProfileNotFoundException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(value = UserAlreadyExistsException.class)
     public ResponseEntity<String> exception(UserAlreadyExistsException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);

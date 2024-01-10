@@ -40,6 +40,7 @@ public class UserController {
         return ResponseEntity.ok().body(optionalUser);
     }
 
+    // TODO: Everytime a user is created, create a corresponding profile with the same id
     @PostMapping(value = "")
     public ResponseEntity<Object> createUser(@Valid @RequestBody UserInputDto userInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
@@ -106,6 +107,9 @@ public class UserController {
     public ResponseEntity<UserOutputDto> getUserByEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
+
+
+
 
     // Add character to Favorites list
 //    @PutMapping("/televisions/{id}/{ciModuleId}")
