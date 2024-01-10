@@ -33,3 +33,8 @@ VALUES (1000, 'Hulk', 'Robert Bruce Banner', 'Mark Ruffalo', 'The incredible Hul
     (1012, 'Captain Marvel', 'Carol Susan Jane Danvers', 'Brie Larson', 'Captain Marvel', 'Female', 'Carol Danvers becomes one of the universe''s most powerful heroes when Earth is caught in the middle of a galactic war between two alien races.', 'Rediscovering her human identity and past, Carol Danvers learned to channel her powers for good, becoming the Super Hero Captain Marvel. Now an ally to Earth''s mightiest heroes, the Avengers, she travels across the stars to give aid to those in need.', 'captain-marvel'),
     (1013, 'Nick Fury', 'Nicholas Joseph Fury', 'Samuel L. Jackson', 'Nick Fury', 'Male', 'A veteran S.H.I.E.L.D. operative, Nick Fury continues the legacy as one of the greatest super spies in the world.', 'Nick Fury leads S.H.I.E.L.D. through hell and high water to combat the forces that threaten Earth from within and without.', 'nick-fury.jpg'),
     (1014, 'Vision', 'Vision', 'Paul Bettany', 'Vision', 'Male', 'The android called Vision defies physics and fights as an Avenger with the power of density manipulation and his flawless computer brain.', 'Upon gaining sentience, Vision offered to help fight Ultron. Since then, he has been doing his best to understand and control the Mind Stone in his forehead and prove himself as an Avenger, all while learning what it means to be human.', 'vision.jpg');
+
+INSERT INTO profiles (profile_id, first_name, last_name, gender, date_of_birth, profile_image_url)
+VALUES (1000, 'André', 'de Groot', 'Male', '28-07-2000', 'Image url'),
+       (1001, 'Michael', 'de Boer', 'Male', '28-01-1999', 'Image url'),
+       (1002, 'André', 'de Groot', 'Male', '21-01-2000', 'Image url');
