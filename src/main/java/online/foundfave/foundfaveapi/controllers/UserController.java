@@ -106,4 +106,37 @@ public class UserController {
     public ResponseEntity<UserOutputDto> getUserByEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
+
+    // Add character to Favorites list
+//    @PutMapping("/televisions/{id}/{ciModuleId}")
+//    public ResponseEntity<Object> assignCIModuleToTelevision(@PathVariable("id") Long id, @PathVariable("ciModuleId") Long ciModuleId) {
+//        televisionService.assignCIModuleToTelevision(id, ciModuleId);
+//        return ResponseEntity.noContent().build();
+//    }
+
+//    @PutMapping("/users/{username}/{characterId}")
+//    public ResponseEntity<Object> addCharacterToFavorites(@PathVariable("username") String username, @PathVariable("characterId") Long characterId) {
+//        userService.addCharacterToFavorites(username, characterId);
+//        return ResponseEntity.noContent().build();
+//    }
+
+
+
+
+    // Deze methode is om alle wallbrackets op te halen die aan een bepaalde television gekoppeld zijn.
+    // Deze methode maakt gebruik van de televisionWallBracketService.
+//    @GetMapping("/televisions/wallBrackets/{televisionId}")
+//    public ResponseEntity<Collection<WallBracketDto>> getWallBracketsByTelevisionId(@PathVariable("televisionId") Long televisionId) {
+//        return ResponseEntity.ok(televisionWallBracketService.getWallBracketsByTelevisionId(televisionId));
+//    }
+
+
+
+
+
+
+
+
+
+
 }

@@ -1,12 +1,12 @@
 package online.foundfave.foundfaveapi.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -25,12 +25,12 @@ public class ContactForm {
     private String email;
     private String comments;
 
-    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     public LocalDateTime timeStamp;
 
     // Relations
     @ManyToOne
-    @JoinColumn(name = "user_username")
+    @JoinColumn(name = "user_username") // TODO: user_username of users_username?
     @JsonIgnore
     private User user;
 
