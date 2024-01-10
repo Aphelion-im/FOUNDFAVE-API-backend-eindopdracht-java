@@ -2,9 +2,14 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
-import online.foundfave.foundfaveapi.exceptions.*;
+import online.foundfave.foundfaveapi.exceptions.BadRequestException;
+import online.foundfave.foundfaveapi.exceptions.EmailNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.UserAlreadyExistsException;
+import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
 import online.foundfave.foundfaveapi.models.Authority;
+import online.foundfave.foundfaveapi.models.Character;
 import online.foundfave.foundfaveapi.models.User;
+import online.foundfave.foundfaveapi.repositories.CharacterRepository;
 import online.foundfave.foundfaveapi.repositories.UserRepository;
 import online.foundfave.foundfaveapi.utils.RandomStringGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,10 +21,12 @@ import java.util.*;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final CharacterRepository characterRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, CharacterRepository characterRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.characterRepository = characterRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -122,6 +129,48 @@ public class UserService {
         }
         return userInputDto;
     }
+
+//    public void assignCIModuleToTelevision(Long id, Long ciModuleId) {
+//        Optional<Television> optionalTelevision = televisionRepository.findById(id);
+//        Optional<CIModule> optionalCIModule = ciModuleRepository.findById(ciModuleId);
+//
+//        if (optionalTelevision.isPresent() && optionalCIModule.isPresent()) {
+//            var television = optionalTelevision.get();
+//            var ciModule = optionalCIModule.get();
+//            television.setCiModule(ciModule);
+//            televisionRepository.save(television);
+//        }
+//        if (optionalTelevision.isEmpty()) {
+//            throw new RecordNotFoundException("Television with id: " + id + " not found!");
+//        }
+//        if (optionalCIModule.isEmpty()) {
+//            throw new RecordNotFoundException("CIModule with id: " + ciModuleId + " not found!");
+//        }
+//    }
+
+
+    // Add character to favorites
+//    public void addCharacterToFavorites(String username, Long characterId) {
+//        Optional<User> optionalUser = userRepository.findById(username);
+//        Optional<Character> optionalCharacter = characterRepository.findById(characterId);
+//
+//        if (optionalUser.isPresent() && optionalCharacter.isPresent()) {
+//            var user = optionalUser.get();
+//            var character = optionalCharacter.get();
+//            user.setCharacter(character);
+//            userRepository.save(user);
+//        }
+//        if (optionalTelevision.isEmpty()) {
+//            throw new RecordNotFoundException("Television with id: " + username + " not found!");
+//        }
+//        if (optionalCIModule.isEmpty()) {
+//            throw new RecordNotFoundException("CIModule with id: " + characterId + " not found!");
+//        }
+//    }
+
+
+
+
 
     // Transformers
     // User to UserOutputDto

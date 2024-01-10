@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import online.foundfave.foundfaveapi.models.Gender;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +17,7 @@ public class CharacterOutputDto {
     public String characterRealName;
     public String characterActorName;
     public String characterTitle;
-    public String characterGender;
+    public Gender characterGender;
     public String characterSummary;
     public String characterDescription;
     public String characterImageUrl;

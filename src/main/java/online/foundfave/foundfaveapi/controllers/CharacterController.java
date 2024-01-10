@@ -1,7 +1,6 @@
 package online.foundfave.foundfaveapi.controllers;
 
 import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
-import online.foundfave.foundfaveapi.dtos.output.ContactFormOutputDto;
 import online.foundfave.foundfaveapi.services.CharacterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,5 +34,9 @@ public class CharacterController {
         return ResponseEntity.ok(characterOutputDto);
     }
 
+// TODO: Add character. Let ook op Gender Enum invoeren
+
+
+// TODO: Delete character
 
 }

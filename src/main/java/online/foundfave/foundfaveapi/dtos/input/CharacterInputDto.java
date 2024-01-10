@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import online.foundfave.foundfaveapi.models.Gender;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,7 +26,7 @@ public class CharacterInputDto {
     public String characterTitle;
 
     @NotNull(message = "Character gender is required.")
-    public String characterGender;
+    public Gender characterGender;
 
     @NotNull(message = "Character summary is required.")
     public String characterSummary;
