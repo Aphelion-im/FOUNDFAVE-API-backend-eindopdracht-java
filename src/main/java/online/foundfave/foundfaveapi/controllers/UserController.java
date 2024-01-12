@@ -64,7 +64,6 @@ public class UserController {
     // TODO: Betere manier vinden om andere gebruikers te beschermen tegen het aanpassen van hun gegevens door een gebruiker
     // User is not allowed to overwrite passwords from other users.
     @PutMapping(value = "/user/{username}")
-    @PreAuthorize("#username == authentication.principal.username")
     public ResponseEntity<String> updateUser(@PathVariable("username") String username, @RequestBody UserInputDto userInputDto) {
         return ResponseEntity.ok(userService.updateUser(username, userInputDto));
     }
@@ -107,40 +106,4 @@ public class UserController {
     public ResponseEntity<UserOutputDto> getUserByEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
-
-
-
-
-    // Add character to Favorites list
-//    @PutMapping("/televisions/{id}/{ciModuleId}")
-//    public ResponseEntity<Object> assignCIModuleToTelevision(@PathVariable("id") Long id, @PathVariable("ciModuleId") Long ciModuleId) {
-//        televisionService.assignCIModuleToTelevision(id, ciModuleId);
-//        return ResponseEntity.noContent().build();
-//    }
-
-//    @PutMapping("/users/{username}/{characterId}")
-//    public ResponseEntity<Object> addCharacterToFavorites(@PathVariable("username") String username, @PathVariable("characterId") Long characterId) {
-//        userService.addCharacterToFavorites(username, characterId);
-//        return ResponseEntity.noContent().build();
-//    }
-
-
-
-
-    // Deze methode is om alle wallbrackets op te halen die aan een bepaalde television gekoppeld zijn.
-    // Deze methode maakt gebruik van de televisionWallBracketService.
-//    @GetMapping("/televisions/wallBrackets/{televisionId}")
-//    public ResponseEntity<Collection<WallBracketDto>> getWallBracketsByTelevisionId(@PathVariable("televisionId") Long televisionId) {
-//        return ResponseEntity.ok(televisionWallBracketService.getWallBracketsByTelevisionId(televisionId));
-//    }
-
-
-
-
-
-
-
-
-
-
 }

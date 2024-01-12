@@ -4,6 +4,7 @@ import online.foundfave.foundfaveapi.dtos.input.AuthenticationRequest;
 import online.foundfave.foundfaveapi.dtos.output.AuthenticationResponse;
 import online.foundfave.foundfaveapi.services.CustomUserDetailsService;
 import online.foundfave.foundfaveapi.utils.JwtUtil;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -48,7 +49,7 @@ public class AuthenticationController {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(username);
         final String jwt = jwtUtl.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthenticationResponse(username, userDetails.getAuthorities().toString(), jwt));
+        return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt).body(new AuthenticationResponse(username, userDetails.getAuthorities().toString(), jwt));
     }
 
     @GetMapping("/test")

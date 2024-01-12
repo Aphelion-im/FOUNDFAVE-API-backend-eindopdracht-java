@@ -16,7 +16,7 @@ import lombok.Setter;
 public class Character {
 
     @Id
-    @Column(nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long characterId;
 
     // TODO: Hier nog andere annotaties op de velden?

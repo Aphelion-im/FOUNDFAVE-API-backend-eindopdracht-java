@@ -37,4 +37,7 @@ public class CharacterController {
 
 // TODO: Delete character
 
+
+// TODO: Add character to movie. Add movie to character
+
 }

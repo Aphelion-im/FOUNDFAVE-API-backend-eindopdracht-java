@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class ContactForm {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long contactFormId;
     private String name;
     private String email;

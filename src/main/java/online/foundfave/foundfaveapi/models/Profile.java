@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class Profile {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long profileId;
     private String firstName;
     private String lastName;
@@ -25,6 +25,6 @@ public class Profile {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    private String profileImageUrl;
     private LocalDate dateOfBirth;
+    private String profileImageUrl;
 }

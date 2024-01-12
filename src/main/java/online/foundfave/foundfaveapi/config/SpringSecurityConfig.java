@@ -50,27 +50,33 @@ public class SpringSecurityConfig {
                 // .requestMatchers("/**").permitAll()
 
                 // TODO: Beter optimaliseren en verdelen
-                /* Users */
-                .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/users/admin/{username}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/users/user/{username}").hasRole("USER")
+
+                /* Authentication */
+                .requestMatchers("/login").permitAll()
                 .requestMatchers("/authenticated").authenticated()
 
+                /* Users */
+                .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/users/admin/{username}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/users/user/{username}").hasRole("USER")
+
+
+                .requestMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
 
                 /* ContactForm */
                 .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/contactforms/{contactFormId}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/contactforms/**").hasRole("ADMIN") // TODO: Ook User
+                .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasRole("ADMIN")
 
                 /* Characters */
                 .requestMatchers(HttpMethod.GET, "/characters").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/characters/{characterId}").hasRole("ADMIN")
 
+                /* Movies */
 
                 /* Profiles */
                 .requestMatchers(HttpMethod.GET, "/profiles").hasRole("ADMIN")
@@ -78,7 +84,6 @@ public class SpringSecurityConfig {
 
 
                 /* Public */
-                .requestMatchers("/login").permitAll()
                 .requestMatchers(HttpMethod.GET, "/info").permitAll()
                 .requestMatchers(HttpMethod.GET, "/test").permitAll()
                 .requestMatchers(HttpMethod.GET, "/queries").permitAll()
