@@ -1,4 +1,4 @@
-package online.foundfave.foundfaveapi.utils;
+package online.foundfave.foundfaveapi.utilities;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

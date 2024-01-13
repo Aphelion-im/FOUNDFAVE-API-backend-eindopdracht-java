@@ -1,4 +1,4 @@
-package online.foundfave.foundfaveapi.models;
+package online.foundfave.foundfaveapi.enums;
 
 public enum Gender {
     Male,

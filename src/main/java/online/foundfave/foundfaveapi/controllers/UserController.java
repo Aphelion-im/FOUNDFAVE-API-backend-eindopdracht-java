@@ -5,7 +5,7 @@ import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
 import online.foundfave.foundfaveapi.services.UserService;
-import online.foundfave.foundfaveapi.utils.FieldErrorHandling;
+import online.foundfave.foundfaveapi.utilities.FieldErrorHandling;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

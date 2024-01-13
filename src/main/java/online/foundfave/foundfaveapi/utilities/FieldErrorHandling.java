@@ -1,4 +1,4 @@
-package online.foundfave.foundfaveapi.utils;
+package online.foundfave.foundfaveapi.utilities;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

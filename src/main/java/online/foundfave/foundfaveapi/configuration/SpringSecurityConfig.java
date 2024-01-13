@@ -1,6 +1,6 @@
-package online.foundfave.foundfaveapi.config;
+package online.foundfave.foundfaveapi.configuration;
 
-import online.foundfave.foundfaveapi.filter.JwtRequestFilter;
+import online.foundfave.foundfaveapi.filters.JwtRequestFilter;
 import online.foundfave.foundfaveapi.services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

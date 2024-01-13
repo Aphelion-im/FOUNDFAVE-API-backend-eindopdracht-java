@@ -3,7 +3,7 @@ package online.foundfave.foundfaveapi.controllers;
 import online.foundfave.foundfaveapi.dtos.input.AuthenticationRequest;
 import online.foundfave.foundfaveapi.dtos.output.AuthenticationResponse;
 import online.foundfave.foundfaveapi.services.CustomUserDetailsService;
-import online.foundfave.foundfaveapi.utils.JwtUtil;
+import online.foundfave.foundfaveapi.utilities.JwtUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -9,7 +9,7 @@ import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
 import online.foundfave.foundfaveapi.models.Authority;
 import online.foundfave.foundfaveapi.models.User;
 import online.foundfave.foundfaveapi.repositories.UserRepository;
-import online.foundfave.foundfaveapi.utils.RandomStringGenerator;
+import online.foundfave.foundfaveapi.utilities.RandomStringGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

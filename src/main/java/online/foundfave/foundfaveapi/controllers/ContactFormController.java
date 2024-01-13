@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import online.foundfave.foundfaveapi.dtos.input.ContactFormInputDto;
 import online.foundfave.foundfaveapi.dtos.output.ContactFormOutputDto;
 import online.foundfave.foundfaveapi.services.ContactFormService;
-import online.foundfave.foundfaveapi.utils.FieldErrorHandling;
+import online.foundfave.foundfaveapi.utilities.FieldErrorHandling;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
