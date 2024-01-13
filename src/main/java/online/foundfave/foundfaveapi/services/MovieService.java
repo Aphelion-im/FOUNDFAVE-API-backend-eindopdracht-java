@@ -1,7 +1,7 @@
 package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.output.MovieOutputDto;
-import online.foundfave.foundfaveapi.exceptions.NoMoviesFoundException;
+import online.foundfave.foundfaveapi.exceptions.MovieNotFoundException;
 import online.foundfave.foundfaveapi.models.Movie;
 import online.foundfave.foundfaveapi.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class MovieService {
             collection.add(transformMovieToMovieOutputDto(movie));
         }
         if (collection.isEmpty()) {
-            throw new NoMoviesFoundException("0 results. No movies were found!");
+            throw new MovieNotFoundException("0 results. No movies were found!");
         }
         return collection;
     }

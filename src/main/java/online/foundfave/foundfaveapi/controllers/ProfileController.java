@@ -20,6 +20,11 @@ public class ProfileController {
 
     // TODO: Get mapping
 
+    // TODO: Get certain profile with id
+
+    // TODO: Update profile
+
+
 
     // Repository methods
 
@@ -30,6 +35,7 @@ public class ProfileController {
 
 
     // Image methods
+    // TODO: Upload profilePic
 
 
 

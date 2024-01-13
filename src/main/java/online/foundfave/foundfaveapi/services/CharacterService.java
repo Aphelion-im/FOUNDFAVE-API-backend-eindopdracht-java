@@ -2,7 +2,6 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
 import online.foundfave.foundfaveapi.exceptions.CharacterNotFoundException;
-import online.foundfave.foundfaveapi.exceptions.NoCharactersFoundException;
 import online.foundfave.foundfaveapi.models.Character;
 import online.foundfave.foundfaveapi.repositories.CharacterRepository;
 import org.springframework.stereotype.Service;
@@ -29,21 +28,21 @@ public class CharacterService {
         return collection;
     }
 
-    public CharacterOutputDto getCharacter(Long characterId) {
+    public CharacterOutputDto getCharacterById(Long characterId) {
         Character character = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character with id: " + characterId + " not found!"));
         return transformCharacterToCharacterOutputDto(character);
     }
 
 
     // Repository methods
-    public List<CharacterOutputDto> getAllCharactersByName(String name) {
+    public List<CharacterOutputDto> getCharacterByName(String name) {
         List<CharacterOutputDto> collection = new ArrayList<>();
         List<Character> list = characterRepository.findByCharacterAliasNameStartingWithIgnoreCase(name);
         for (Character character : list) {
             collection.add(transformCharacterToCharacterOutputDto(character));
         }
         if (collection.isEmpty()) {
-            throw new NoCharactersFoundException("0 results. No characters were found!");
+            throw new CharacterNotFoundException("0 results. No characters were found!");
         }
         return collection;
     }

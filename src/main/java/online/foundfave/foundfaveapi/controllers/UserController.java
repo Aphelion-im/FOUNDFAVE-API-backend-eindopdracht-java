@@ -44,7 +44,8 @@ public class UserController {
         return ResponseEntity.ok().body(optionalUser);
     }
 
-    // TODO: Everytime a user is created, create a corresponding profile with the same id
+    // TODO: Everytime a user is created, create a corresponding profile with the same id. Geef standaardwaarden mee zoals John doe, johndoe@email.com, etc.
+    // TODO: createAccountWithProfile, withoutProfile
     @PostMapping(value = "")
     public ResponseEntity<Object> createUser(@Valid @RequestBody UserInputDto userInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
@@ -115,9 +116,9 @@ public class UserController {
 
 
     // Relational methods
-
-
-
+// TODO: Add character to Favorites
+// TODO: Get all favorites from username
+// TODO: Delete favorite
 
     // Image methods
 }

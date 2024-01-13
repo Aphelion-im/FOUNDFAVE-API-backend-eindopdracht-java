@@ -1,14 +1,38 @@
 INSERT INTO users (username, password, email, enabled)
 VALUES ('user', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'user@foundfave.online', TRUE),
        ('admin', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'admin@foundfave.online', TRUE),
-       ('andre', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'andre@foundfave.online', TRUE);
+       ('andre', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'andre@foundfave.online', TRUE),
+       ('adam', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'adam@hotmail.com', TRUE),
+       ('bruce', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'bruce@avengershq.com', TRUE),
+       ('priscilla', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'priscilla@protonmail.com', TRUE),
+       ('caroline', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'caroline@protonmail.com', TRUE),
+       ('sandy', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'sandy@hotmail.live', TRUE),
+       ('peter', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'depeters@depeters.nl', TRUE),
+       ('pieter', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'pieter@uwv.nl', TRUE),
+       ('ellen1970', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'ellen@uwv.nl', TRUE),
+       ('mike', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'mike@tiscali.nl', TRUE),
+       ('michael', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'michael@zonnet.nl', TRUE),
+       ('kim', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'kim@xs4all.nl', TRUE),
+       ('kees', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'kees@xs4all.nl', TRUE);
 
 INSERT INTO authorities (username, authority)
 VALUES ('user', 'ROLE_USER'),
        ('admin', 'ROLE_USER'),
        ('admin', 'ROLE_ADMIN'),
        ('andre', 'ROLE_USER'),
-       ('andre', 'ROLE_ADMIN');
+       ('andre', 'ROLE_ADMIN'),
+       ('adam', 'ROLE_USER'),
+       ('bruce', 'ROLE_USER'),
+       ('priscilla', 'ROLE_USER'),
+       ('caroline', 'ROLE_USER'),
+       ('sandy', 'ROLE_USER'),
+       ('peter', 'ROLE_USER'),
+       ('pieter', 'ROLE_USER'),
+       ('ellen1970', 'ROLE_USER'),
+       ('mike', 'ROLE_USER'),
+       ('michael', 'ROLE_USER'),
+       ('kim', 'ROLE_USER'),
+       ('kees', 'ROLE_USER');
 
 INSERT INTO contact_forms (contact_form_id, name, email, comments, time_stamp)
 VALUES (1000, 'André de Groot', 'andre.de.groot@novi.nl', 'Leuke site!', '2024-01-01 14:20:16.203216'),

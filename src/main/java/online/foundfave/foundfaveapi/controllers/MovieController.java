@@ -21,6 +21,10 @@ public class MovieController {
     }
 
     // Basic CRUD methods
+// TODO: Get all movies
+
+    // TODO: find movie by id
+
 
 
     // Repository methods
@@ -30,11 +34,17 @@ public class MovieController {
         return ResponseEntity.ok(movies);
     }
 
+    // TODO: Add movie
+
+    // TODO: Update movie
+
+    // TODO: Delete movie
+
     // TODO: findByAgeOrderByLastnameDesc
 
 
     // Relational methods
-
+    // TODO: FindMovieSortedASC/Desc
 
 
 

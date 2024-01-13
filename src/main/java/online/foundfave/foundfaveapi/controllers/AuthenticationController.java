@@ -64,7 +64,7 @@ public class AuthenticationController {
         String info = """
                 FOUNDFAVE API Endpoints
                                 
-                ***** Info *****
+                ***** Public *****
                 localhost:8080/ (GET, Public)
                 localhost:8080/test (GET, Public)
                 localhost:8080/queries (GET, Public)
@@ -72,6 +72,19 @@ public class AuthenticationController {
                 ***** Authentication *****
                 localhost:8080/login (POST, Public)
                 localhost:8080/authenticated (GET, Admin, User)
+                
+                ***** Characters *****
+                
+                
+                ***** ContactForms *****
+                
+                
+                ***** Movies *****
+                
+                
+                
+                ***** Profiles *****
+                
                     
                 ***** Users *****
                 localhost:8080/users (GET, Admin)

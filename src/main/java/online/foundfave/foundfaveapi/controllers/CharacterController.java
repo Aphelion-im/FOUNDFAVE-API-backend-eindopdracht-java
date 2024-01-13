@@ -30,16 +30,16 @@ public class CharacterController {
 
     // TODO: Refactor
     @GetMapping("/{characterId}")
-    public ResponseEntity<CharacterOutputDto> getCharacter(@PathVariable Long characterId) {
-        CharacterOutputDto characterOutputDto = characterService.getCharacter(characterId);
+    public ResponseEntity<CharacterOutputDto> getCharacterById(@PathVariable Long characterId) {
+        CharacterOutputDto characterOutputDto = characterService.getCharacterById(characterId);
         return ResponseEntity.ok(characterOutputDto);
     }
 
 
     // Repository methods
     @GetMapping("/search")
-    public ResponseEntity<List<CharacterOutputDto>> getAllCharactersByName(@RequestParam("name") String name) {
-        List<CharacterOutputDto> characters = characterService.getAllCharactersByName(name);
+    public ResponseEntity<List<CharacterOutputDto>> getCharacterByName(@RequestParam("name") String name) {
+        List<CharacterOutputDto> characters = characterService.getCharacterByName(name);
         return ResponseEntity.ok(characters);
     }
 
@@ -47,13 +47,16 @@ public class CharacterController {
 // TODO: Add character. Let ook op Gender Enum invoeren
 
 
+    // TODO: Update character
+
 // TODO: Delete character
 
 
 // TODO: Add character to movie. Add movie to character
 
 
-// TODO: findByAgeOrderByLastnameDesc
+// TODO: findByNameOrderByNameDesc
+// TODO: findByNameOrderByNameASC
 
     // Relational methods
 
@@ -61,6 +64,7 @@ public class CharacterController {
 
 
     // Image methods
+    // TODO: Upload character photo
 
 
 }

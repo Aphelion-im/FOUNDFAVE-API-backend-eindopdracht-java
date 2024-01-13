@@ -50,10 +50,34 @@ public class SpringSecurityConfig {
                 // .requestMatchers("/**").permitAll()
 
                 // TODO: Beter optimaliseren en verdelen
+                /* Public */
+                .requestMatchers(HttpMethod.GET, "/info").permitAll()
+                .requestMatchers(HttpMethod.GET, "/test").permitAll()
+                .requestMatchers(HttpMethod.GET, "/queries").permitAll()
 
                 /* Authentication */
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/authenticated").authenticated()
+
+                /* Characters */
+                .requestMatchers(HttpMethod.GET, "/characters").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/characters/{characterId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/characters/search").hasRole("ADMIN")
+
+                /* ContactForms */
+                .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/contactforms/{contactFormId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/contactforms/**").hasRole("ADMIN") // TODO: Ook User
+                .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasRole("ADMIN")
+
+                /* Movies */
+                .requestMatchers(HttpMethod.GET, "/movies").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/movies/{movieId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/movies/search").hasRole("ADMIN")
+
+                /* Profiles */
+                .requestMatchers(HttpMethod.GET, "/profiles").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/profiles/{profileId}").hasRole("ADMIN")
 
                 /* Users */
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
@@ -66,31 +90,14 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
 
-                /* ContactForm */
-                .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/contactforms/{contactFormId}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/contactforms/**").hasRole("ADMIN") // TODO: Ook User
-                .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasRole("ADMIN")
-
-                /* Characters */
-                .requestMatchers(HttpMethod.GET, "/characters").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/characters/{characterId}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/characters/search").hasRole("ADMIN")
-
-                /* Movies */
-                .requestMatchers(HttpMethod.GET, "/movies").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/movies/{movieId}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/movies/search").hasRole("ADMIN")
-
-                /* Profiles */
-                .requestMatchers(HttpMethod.GET, "/profiles").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/profiles/{profileId}").hasRole("ADMIN")
 
 
-                /* Public */
-                .requestMatchers(HttpMethod.GET, "/info").permitAll()
-                .requestMatchers(HttpMethod.GET, "/test").permitAll()
-                .requestMatchers(HttpMethod.GET, "/queries").permitAll()
+
+
+
+
+
+
 
 
                 .anyRequest().denyAll()

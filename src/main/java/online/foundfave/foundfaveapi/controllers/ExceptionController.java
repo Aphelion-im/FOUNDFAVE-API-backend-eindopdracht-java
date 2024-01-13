@@ -39,16 +39,6 @@ public class ExceptionController {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = NoCharactersFoundException.class)
-    public ResponseEntity<String> exception(NoCharactersFoundException exception) {
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(value =NoMoviesFoundException.class)
-    public ResponseEntity<String> exception(NoMoviesFoundException exception) {
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
-    }
-
     @ExceptionHandler(value = ProfileNotFoundException.class)
     public ResponseEntity<String> exception(ProfileNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
@@ -62,10 +52,5 @@ public class ExceptionController {
     @ExceptionHandler(value = UsernameNotFoundException.class)
     public ResponseEntity<String> exception(UsernameNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(value = IndexOutOfBoundsException.class)
-    public ResponseEntity<Object> exception(IndexOutOfBoundsException exception) {
-        return new ResponseEntity<>("This ID is not in de the database!", HttpStatus.NOT_FOUND);
     }
 }
