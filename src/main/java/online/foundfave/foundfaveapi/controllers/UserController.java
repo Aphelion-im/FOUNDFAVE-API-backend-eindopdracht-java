@@ -8,7 +8,6 @@ import online.foundfave.foundfaveapi.services.UserService;
 import online.foundfave.foundfaveapi.utils.FieldErrorHandling;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -28,6 +27,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    // Basic CRUD methods
+
+
+    // TODO: Invoeren in SpringSecurityConfig
+    // TODO: Basic CRUD methods
     @GetMapping(value = "")
     public ResponseEntity<List<UserOutputDto>> getUsers() {
         List<UserOutputDto> userOutputDtosCollection = userService.getUsers();
@@ -106,4 +110,14 @@ public class UserController {
     public ResponseEntity<UserOutputDto> getUserByEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
+
+    // Repository methods
+
+
+    // Relational methods
+
+
+
+
+    // Image methods
 }

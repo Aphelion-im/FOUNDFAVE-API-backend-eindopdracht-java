@@ -44,13 +44,13 @@ public class User {
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private List<ContactForm> contactForms;
-
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private List<Character> favoritesList;
+//    @OneToMany(mappedBy = "user")
+//    @JsonIgnore
+//    private List<ContactForm> contactForms;
+//
+//    @OneToMany(mappedBy = "user")
+//    @JsonIgnore
+//    private List<Character> favoritesList;
 
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);

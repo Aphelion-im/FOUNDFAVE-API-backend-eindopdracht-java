@@ -18,6 +18,9 @@ public class CharacterController {
         this.characterService = characterService;
     }
 
+    // Basic CRUD methods
+
+
     // TODO: Refactor
     @GetMapping("")
     public ResponseEntity<List<CharacterOutputDto>> getAllCharacters() {
@@ -32,6 +35,15 @@ public class CharacterController {
         return ResponseEntity.ok(characterOutputDto);
     }
 
+
+    // Repository methods
+    @GetMapping("/search")
+    public ResponseEntity<List<CharacterOutputDto>> getAllCharactersByName(@RequestParam("name") String name) {
+        List<CharacterOutputDto> characters = characterService.getAllCharactersByName(name);
+        return ResponseEntity.ok(characters);
+    }
+
+
 // TODO: Add character. Let ook op Gender Enum invoeren
 
 
@@ -39,5 +51,16 @@ public class CharacterController {
 
 
 // TODO: Add character to movie. Add movie to character
+
+
+// TODO: findByAgeOrderByLastnameDesc
+
+    // Relational methods
+
+
+
+
+    // Image methods
+
 
 }

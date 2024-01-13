@@ -21,6 +21,7 @@ public class ContactForm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long contactFormId;
+
     private String name;
     private String email;
     private String comments;
@@ -29,9 +30,9 @@ public class ContactForm {
     public LocalDateTime timeStamp;
 
     // Relations
-    @ManyToOne
-    @JoinColumn(name = "user_username") // TODO: user_username of users_username?
-    @JsonIgnore
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_username") // TODO: user_username of users_username?
+//    @JsonIgnore
+//    private User user;
 
 }

@@ -38,3 +38,44 @@ INSERT INTO profiles (profile_id, first_name, last_name, gender, date_of_birth, 
 VALUES (1000, 'André', 'de Groot', 'Male', '28-07-2000', 'Image url'),
        (1001, 'Michael', 'de Boer', 'Male', '28-01-1999', 'Image url'),
        (1002, 'André', 'de Groot', 'Male', '21-01-2000', 'Image url');
+
+INSERT INTO movies (movie_id, movie_title)
+VALUES (1001, 'The Incredible Hulk'),
+       (1002, 'The Avengers'),
+       (1003, 'Avengers: Age of Ultron'),
+       (1004, 'Thor: Ragnarok'),
+       (1005, 'Avengers: Infinity War'),
+       (1006, 'Avengers: Endgame'),
+       (1007, 'Thor'),
+       (1008, 'Thor: The Dark World'),
+       (1009, 'Thor: Love and Thunder'),
+       (1010, 'Iron Man'),
+       (1011, 'Iron Man 2'),
+       (1012, 'Iron Man 3'),
+       (1013, 'Captain America: Civil War'),
+       (1014, 'Spider-Man: Homecoming'),
+       (1015, 'Spider-Man: Far From Home'),
+       (1016, 'Spider-Man: No Way Home'),
+       (1017, 'Spider-Man 4'),
+       (1018, 'Captain America: The first avenger'),
+       (1019, 'Captain America: The Winter Soldier'),
+       (1020, 'Ant-Man'),
+       (1021, 'Captain America: Brave New World'),
+       (1022, 'Doctor Strange in the Multiverse of Madness'),
+       (1023, 'Black Panther'),
+       (1024, 'Black Panther: Wakanda Forever'),
+       (1025, 'Black Widow'),
+       (1026, 'Ant-Man and the Wasp'),
+       (1027, 'Ant-Man and the Wasp: Quantumania'),
+       (1028, 'Thunderbolts'),
+       (1029, 'Doctor Strange'),
+       (1030, 'Captain Marvel'),
+       (1031, 'The Marvels');
+
+
+
+
+
+
+
+

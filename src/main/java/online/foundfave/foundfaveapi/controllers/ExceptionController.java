@@ -34,6 +34,21 @@ public class ExceptionController {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(value = MovieNotFoundException.class)
+    public ResponseEntity<String> exception(MovieNotFoundException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = NoCharactersFoundException.class)
+    public ResponseEntity<String> exception(NoCharactersFoundException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value =NoMoviesFoundException.class)
+    public ResponseEntity<String> exception(NoMoviesFoundException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(value = ProfileNotFoundException.class)
     public ResponseEntity<String> exception(ProfileNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
