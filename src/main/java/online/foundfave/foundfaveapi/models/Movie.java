@@ -19,6 +19,7 @@ public class Movie {
     private Long movieId;
 
     private String movieTitle;
-
-    // TODO: Andere velden toevoegen
+    private String movieSummary;
+    private int movieYearOfRelease;
+    private String movieImageUrl;
 }

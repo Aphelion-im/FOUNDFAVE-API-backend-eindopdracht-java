@@ -8,6 +8,9 @@ import java.util.List;
 
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Long> {
-    List<Character> findByCharacterAliasNameStartingWithIgnoreCase(String title);
+
+    List<Character> findByCharacterAliasNameStartingWithIgnoreCase(String name);
+    List<Character> findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameAsc(String name);
+    List<Character> findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameDesc(String name);
 }
 

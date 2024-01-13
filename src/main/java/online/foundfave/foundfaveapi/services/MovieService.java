@@ -19,10 +19,15 @@ public class MovieService {
     }
 
     // Basic CRUD methods
-    // Repository methods
-    // Relational methods
-    // Image methods
 
+
+
+
+
+
+
+
+    // Repository methods
     public List<MovieOutputDto> findMoviesByTitle(String title) {
         List<MovieOutputDto> collection = new ArrayList<>();
         List<Movie> list = movieRepository.findByMovieTitleStartingWithIgnoreCase(title);
@@ -35,6 +40,36 @@ public class MovieService {
         return collection;
     }
 
+    public List<MovieOutputDto> findMovieByTitleSortedDesc(String title) {
+        List<MovieOutputDto> collection = new ArrayList<>();
+        List<Movie> list = movieRepository.findByMovieTitleStartingWithIgnoreCaseOrderByMovieTitleDesc(title);
+        for (Movie movie : list) {
+            collection.add(transformMovieToMovieOutputDto(movie));
+        }
+        if (collection.isEmpty()) {
+            throw new MovieNotFoundException("0 results. No movies were found!");
+        }
+        return collection;
+    }
+
+    public List<MovieOutputDto> findMovieByTitleSortedAsc(String title) {
+        List<MovieOutputDto> collection = new ArrayList<>();
+        List<Movie> list = movieRepository.findByMovieTitleStartingWithIgnoreCaseOrderByMovieTitleAsc(title);
+        for (Movie movie : list) {
+            collection.add(transformMovieToMovieOutputDto(movie));
+        }
+        if (collection.isEmpty()) {
+            throw new MovieNotFoundException("0 results. No movies were found!");
+        }
+        return collection;
+    }
+
+    // Relational methods
+
+
+    // Image methods
+
+
 
     // Transformers
     // Movie to MovieOutputDto
@@ -42,6 +77,9 @@ public class MovieService {
         var movieOutputDto = new MovieOutputDto();
         movieOutputDto.movieId = movie.getMovieId();
         movieOutputDto.movieTitle = movie.getMovieTitle();
+        movieOutputDto.movieSummary = movie.getMovieSummary();
+        movieOutputDto.movieYearOfRelease = movie.getMovieYearOfRelease();
+        movieOutputDto.movieImageUrl = movie.getMovieImageUrl();
         return movieOutputDto;
     }
 

@@ -34,10 +34,40 @@ public class CharacterService {
     }
 
 
+
+
+
+
+
+
     // Repository methods
-    public List<CharacterOutputDto> getCharacterByName(String name) {
+    public List<CharacterOutputDto> findCharacterByName(String name) {
         List<CharacterOutputDto> collection = new ArrayList<>();
         List<Character> list = characterRepository.findByCharacterAliasNameStartingWithIgnoreCase(name);
+        for (Character character : list) {
+            collection.add(transformCharacterToCharacterOutputDto(character));
+        }
+        if (collection.isEmpty()) {
+            throw new CharacterNotFoundException("0 results. No characters were found!");
+        }
+        return collection;
+    }
+
+    public List<CharacterOutputDto> findCharacterByNameSortedAsc(String name) {
+        List<CharacterOutputDto> collection = new ArrayList<>();
+        List<Character> list = characterRepository.findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameAsc(name);
+        for (Character character : list) {
+            collection.add(transformCharacterToCharacterOutputDto(character));
+        }
+        if (collection.isEmpty()) {
+            throw new CharacterNotFoundException("0 results. No characters were found!");
+        }
+        return collection;
+    }
+
+    public List<CharacterOutputDto> findCharacterByNameSortedDesc(String name) {
+        List<CharacterOutputDto> collection = new ArrayList<>();
+        List<Character> list = characterRepository.findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameDesc(name);
         for (Character character : list) {
             collection.add(transformCharacterToCharacterOutputDto(character));
         }

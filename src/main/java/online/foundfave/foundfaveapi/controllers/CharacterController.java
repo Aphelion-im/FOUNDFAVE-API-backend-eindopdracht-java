@@ -19,16 +19,12 @@ public class CharacterController {
     }
 
     // Basic CRUD methods
-
-
-    // TODO: Refactor
     @GetMapping("")
     public ResponseEntity<List<CharacterOutputDto>> getAllCharacters() {
         List<CharacterOutputDto> characters = characterService.getCharacters();
         return ResponseEntity.ok(characters);
     }
 
-    // TODO: Refactor
     @GetMapping("/{characterId}")
     public ResponseEntity<CharacterOutputDto> getCharacterById(@PathVariable Long characterId) {
         CharacterOutputDto characterOutputDto = characterService.getCharacterById(characterId);
@@ -36,15 +32,7 @@ public class CharacterController {
     }
 
 
-    // Repository methods
-    @GetMapping("/search")
-    public ResponseEntity<List<CharacterOutputDto>> getCharacterByName(@RequestParam("name") String name) {
-        List<CharacterOutputDto> characters = characterService.getCharacterByName(name);
-        return ResponseEntity.ok(characters);
-    }
-
-
-// TODO: Add character. Let ook op Gender Enum invoeren
+    // TODO: Add character. Let ook op Gender Enum invoeren
 
 
     // TODO: Update character
@@ -52,15 +40,30 @@ public class CharacterController {
 // TODO: Delete character
 
 
-// TODO: Add character to movie. Add movie to character
+    // Repository methods
+    @GetMapping("/search")
+    public ResponseEntity<List<CharacterOutputDto>> findCharacterByName(@RequestParam("name") String name) {
+        List<CharacterOutputDto> characters = characterService.findCharacterByName(name);
+        return ResponseEntity.ok(characters);
+    }
+
+    @GetMapping("/search/asc")
+    public ResponseEntity<List<CharacterOutputDto>> findCharacterByNameSortedAsc(@RequestParam("name") String name) {
+        List<CharacterOutputDto> characters = characterService.findCharacterByNameSortedAsc(name);
+        return ResponseEntity.ok(characters);
+    }
+
+    @GetMapping("/search/desc")
+    public ResponseEntity<List<CharacterOutputDto>> findCharacterByNameSortedDesc(@RequestParam("name") String name) {
+        List<CharacterOutputDto> characters = characterService.findCharacterByNameSortedDesc(name);
+        return ResponseEntity.ok(characters);
+    }
 
 
-// TODO: findByNameOrderByNameDesc
-// TODO: findByNameOrderByNameASC
+
 
     // Relational methods
-
-
+// TODO: Add character to movie. Add movie to character
 
 
     // Image methods

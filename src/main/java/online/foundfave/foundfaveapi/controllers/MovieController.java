@@ -25,6 +25,11 @@ public class MovieController {
 
     // TODO: find movie by id
 
+    // TODO: Add movie
+
+    // TODO: Update movie
+
+    // TODO: Delete movie
 
 
     // Repository methods
@@ -34,20 +39,26 @@ public class MovieController {
         return ResponseEntity.ok(movies);
     }
 
-    // TODO: Add movie
+    @GetMapping("/search/asc")
+    public ResponseEntity<List<MovieOutputDto>> findMovieByTitleSortedAsc(@RequestParam("title") String title) {
+        List<MovieOutputDto> movies = movieService.findMovieByTitleSortedAsc(title);
+        return ResponseEntity.ok(movies);
+    }
 
-    // TODO: Update movie
-
-    // TODO: Delete movie
-
-    // TODO: findByAgeOrderByLastnameDesc
+    @GetMapping("/search/desc")
+    public ResponseEntity<List<MovieOutputDto>> findMovieByTitleSortedDesc(@RequestParam("title") String title) {
+        List<MovieOutputDto> movies = movieService.findMovieByTitleSortedDesc(title);
+        return ResponseEntity.ok(movies);
+    }
 
 
     // Relational methods
-    // TODO: FindMovieSortedASC/Desc
-
+// TODO: Add movie to character or vice versa
 
 
     // Image methods
+    // TODO: Add image to movie
+    // TODO: Delete image from movie
+    // TODO:
 
 }

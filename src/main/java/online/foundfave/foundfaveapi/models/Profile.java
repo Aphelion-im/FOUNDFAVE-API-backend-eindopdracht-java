@@ -26,6 +26,6 @@ public class Profile {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-        private LocalDate dateOfBirth;
+    private LocalDate dateOfBirth;
     private String profileImageUrl;
 }
