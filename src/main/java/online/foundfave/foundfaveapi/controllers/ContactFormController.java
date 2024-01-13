@@ -22,6 +22,8 @@ public class ContactFormController {
         this.contactFormService = contactFormService;
     }
 
+    // Basic CRUD methods
+
     // TODO: Refactor
     @GetMapping("")
     public ResponseEntity<List<ContactFormOutputDto>> getAllContactForms() {
@@ -58,5 +60,13 @@ public class ContactFormController {
 
 
     // TODO: Add form to user
+
+    // Repository methods
+
+
+    // Relational methods
+
+
+
 
 }

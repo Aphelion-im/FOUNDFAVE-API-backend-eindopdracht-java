@@ -16,5 +16,21 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
+    // Basic CRUD methods
+
     // TODO: Get mapping
+
+
+    // Repository methods
+
+
+
+
+    // Relational methods
+
+
+    // Image methods
+
+
+
 }

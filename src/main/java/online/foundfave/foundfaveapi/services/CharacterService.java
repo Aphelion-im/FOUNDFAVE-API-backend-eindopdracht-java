@@ -1,11 +1,9 @@
 package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
-import online.foundfave.foundfaveapi.dtos.output.ContactFormOutputDto;
 import online.foundfave.foundfaveapi.exceptions.CharacterNotFoundException;
-import online.foundfave.foundfaveapi.exceptions.ContactFormNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.NoCharactersFoundException;
 import online.foundfave.foundfaveapi.models.Character;
-import online.foundfave.foundfaveapi.models.ContactForm;
 import online.foundfave.foundfaveapi.repositories.CharacterRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +19,7 @@ public class CharacterService {
         this.characterRepository = characterRepository;
     }
 
+    // Basic CRUD methods
     public List<CharacterOutputDto> getCharacters() {
         List<CharacterOutputDto> collection = new ArrayList<>();
         List<Character> list = characterRepository.findAll();
@@ -34,6 +33,27 @@ public class CharacterService {
         Character character = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character with id: " + characterId + " not found!"));
         return transformCharacterToCharacterOutputDto(character);
     }
+
+
+    // Repository methods
+    public List<CharacterOutputDto> getAllCharactersByName(String name) {
+        List<CharacterOutputDto> collection = new ArrayList<>();
+        List<Character> list = characterRepository.findByCharacterAliasNameStartingWithIgnoreCase(name);
+        for (Character character : list) {
+            collection.add(transformCharacterToCharacterOutputDto(character));
+        }
+        if (collection.isEmpty()) {
+            throw new NoCharactersFoundException("0 results. No characters were found!");
+        }
+        return collection;
+    }
+
+    // Relational methods
+
+
+
+    // Image methods
+
 
 
     // Transformers

@@ -96,6 +96,8 @@ public class AuthenticationController {
     }
 
     // Show all available FOUNDFAVE API characters & movies
+    // TODO: Invoeren Characters
+    // TODO: Invoeren Movies
     @GetMapping("/queries")
     public ResponseEntity<String> showAvailableQueries() {
         String info = """
@@ -104,7 +106,7 @@ public class AuthenticationController {
                 The following characters and movies are currently in the database:
                                 
                 ***** Characters *****
-                              
+                                
 
                 ***** Movies *****
                           

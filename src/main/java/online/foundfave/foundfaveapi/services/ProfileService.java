@@ -11,4 +11,11 @@ public class ProfileService {
     public ProfileService(ProfileRepository profileRepository) {
         this.profileRepository = profileRepository;
     }
+
+    // Basic CRUD methods
+    // Repository methods
+    // Relational methods
+    // Image methods
+
+
 }

@@ -20,6 +20,10 @@ public class ContactFormService {
         this.contactFormRepository = contactFormRepository;
     }
 
+    // Basic CRUD methods
+    // Repository methods
+
+
     public List<ContactFormOutputDto> getContactFormSubmissions() {
         List<ContactFormOutputDto> collection = new ArrayList<>();
         List<ContactForm> list = contactFormRepository.findAll();
@@ -47,7 +51,16 @@ public class ContactFormService {
         contactFormRepository.deleteById(contactFormId);
     }
 
+    // Relational methods
+
+
+
+    // Image methods
+
+
+
     // TODO: if Null check?
+    // TODO: Relational conversie
     // Transformers
     // ContactForm to ContactFormOutputDto
     public static ContactFormOutputDto transformContactFormToContactFormOutputDto(ContactForm contactForm) {
