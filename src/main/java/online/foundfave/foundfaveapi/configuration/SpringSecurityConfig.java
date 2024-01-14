@@ -66,6 +66,7 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/characters/search/contains").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/characters/search/sorted-asc").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/characters/search/sorted-desc").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/characters").hasRole("ADMIN")
 
                 /* ContactForms */
                 .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
@@ -87,14 +88,17 @@ public class SpringSecurityConfig {
 
                 /* Users */
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users/search").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users/search/contains").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users/{username}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users/exists/{username}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "users/{username}/authorities").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/users/admin/{username}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/users/user/{username}").hasRole("USER")
-
-
-                .requestMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "users/{username}/authorities").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/users/{username}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/users/{username}/authorities/{authority}").hasRole("ADMIN")
 
 
                 .anyRequest().denyAll()

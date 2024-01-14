@@ -1,13 +1,16 @@
 package online.foundfave.foundfaveapi.services;
 
+import online.foundfave.foundfaveapi.dtos.input.CharacterInputDto;
 import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
 import online.foundfave.foundfaveapi.exceptions.CharacterNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.UserAlreadyExistsException;
 import online.foundfave.foundfaveapi.models.Character;
 import online.foundfave.foundfaveapi.repositories.CharacterRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CharacterService {
@@ -33,11 +36,14 @@ public class CharacterService {
         return transformCharacterToCharacterOutputDto(character);
     }
 
-
-
-
-
-
+    public String createCharacter(CharacterInputDto characterInputDto) {
+        Optional<Character> character = characterRepository.findByCharacterAliasNameIgnoreCase(characterInputDto.characterAliasName);
+        if (character.isPresent()) {
+            throw new UserAlreadyExistsException("Username: " + "'" + characterInputDto.characterAliasName + "'" + " already exists!");
+        }
+        Character newCharacter = characterRepository.save(transformCharacterInputDtoToCharacter(characterInputDto));
+        return newCharacter.getCharacterAliasName();
+    }
 
 
     // Repository methods
@@ -92,9 +98,7 @@ public class CharacterService {
     // Relational methods
 
 
-
     // Image methods
-
 
 
     // Transformers
@@ -113,5 +117,18 @@ public class CharacterService {
         return characterOutputDto;
     }
 
+    // From CharacterInputDto to Character
+    public Character transformCharacterInputDtoToCharacter(CharacterInputDto characterInputDto) {
+        var character = new Character();
+        character.setCharacterAliasName(characterInputDto.getCharacterAliasName());
+        character.setCharacterRealName(characterInputDto.getCharacterRealName());
+        character.setCharacterActorName(characterInputDto.getCharacterActorName());
+        character.setCharacterTitle(characterInputDto.getCharacterTitle());
+        character.setCharacterGender(characterInputDto.getCharacterGender());
+        character.setCharacterSummary(characterInputDto.getCharacterSummary());
+        character.setCharacterDescription(characterInputDto.getCharacterDescription());
+        character.setCharacterImageUrl(characterInputDto.getCharacterImageUrl());
+        return character;
+    }
 
 }

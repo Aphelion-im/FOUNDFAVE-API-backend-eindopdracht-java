@@ -1,10 +1,17 @@
 package online.foundfave.foundfaveapi.controllers;
 
+import jakarta.validation.Valid;
+import online.foundfave.foundfaveapi.dtos.input.CharacterInputDto;
+import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
 import online.foundfave.foundfaveapi.services.CharacterService;
+import online.foundfave.foundfaveapi.utilities.FieldErrorHandling;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @CrossOrigin
@@ -31,6 +38,15 @@ public class CharacterController {
         return ResponseEntity.ok(characterOutputDto);
     }
 
+    @PostMapping(value = "")
+    public ResponseEntity<Object> createCharacter(@Valid @RequestBody CharacterInputDto characterInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        String newCharacter = characterService.createCharacter(characterInputDto);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newCharacter).toUriString());
+        return ResponseEntity.created(uri).body("Character: " + "'" + newCharacter + "'" + " created successfully!");
+    }
 
     // TODO: Add character. Let ook op Gender Enum invoeren
 
