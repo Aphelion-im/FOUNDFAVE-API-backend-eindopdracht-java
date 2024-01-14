@@ -103,10 +103,14 @@ public class UserController {
         return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " exists: " + userService.userExists(username));
     }
 
-    // Exact search e-mail
     @GetMapping(value = "/search")
     public ResponseEntity<UserOutputDto> findUserByEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(userService.findUserByEmail(email));
+    }
+
+    @GetMapping("/active")
+    public List<UserOutputDto> getActiveUsers() {
+        return userService.getActiveUsers();
     }
 
     // Repository methods

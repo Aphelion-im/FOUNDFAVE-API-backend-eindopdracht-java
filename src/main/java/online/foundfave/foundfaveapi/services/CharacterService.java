@@ -2,7 +2,6 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.CharacterInputDto;
 import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
-import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.CharacterNotFoundException;
 import online.foundfave.foundfaveapi.exceptions.UserAlreadyExistsException;
 import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -174,5 +172,4 @@ public class CharacterService {
         character.setCharacterImageUrl(characterInputDto.getCharacterImageUrl());
         return character;
     }
-
 }

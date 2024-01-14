@@ -91,6 +91,7 @@ public class SpringSecurityConfig {
 
                 /* Users */
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users/active").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/search").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/search/contains").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/{username}").hasRole("ADMIN")

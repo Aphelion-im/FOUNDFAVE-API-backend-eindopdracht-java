@@ -129,6 +129,14 @@ public class UserService {
         return collection;
     }
 
+    public List<UserOutputDto> getActiveUsers() {
+        List<User> activeUsersList = userRepository.findByEnabled(true);
+        List<UserOutputDto> activeUsersOutputDtoList = new ArrayList<>();
+        for (User user : activeUsersList) {
+            activeUsersOutputDtoList.add(transformUserToUserOutputDto(user));
+        }
+        return activeUsersOutputDtoList;
+    }
 
     // This method is used for the CustomUserDetailsService class
     public UserInputDto getUserByUsername(String username) {
