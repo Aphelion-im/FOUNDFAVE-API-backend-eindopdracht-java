@@ -73,8 +73,10 @@ public class SpringSecurityConfig {
 
                 /* ContactForms */
                 .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/contactforms/search/name").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/contactforms/search/email").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/contactforms/{contactFormId}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/contactforms/**").hasRole("ADMIN") // TODO: Ook User
+                .requestMatchers(HttpMethod.POST, "/contactforms/post").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasRole("ADMIN")
 
                 /* Movies */

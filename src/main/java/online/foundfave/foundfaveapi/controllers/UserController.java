@@ -2,7 +2,6 @@ package online.foundfave.foundfaveapi.controllers;
 
 import jakarta.validation.Valid;
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
-import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
 import online.foundfave.foundfaveapi.services.UserService;

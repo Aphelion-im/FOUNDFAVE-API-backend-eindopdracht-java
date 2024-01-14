@@ -2,6 +2,7 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.ContactFormInputDto;
 import online.foundfave.foundfaveapi.dtos.output.ContactFormOutputDto;
+import online.foundfave.foundfaveapi.exceptions.CharacterNotFoundException;
 import online.foundfave.foundfaveapi.exceptions.ContactFormNotFoundException;
 import online.foundfave.foundfaveapi.models.ContactForm;
 import online.foundfave.foundfaveapi.repositories.ContactFormRepository;
@@ -21,9 +22,6 @@ public class ContactFormService {
     }
 
     // Basic CRUD methods
-    // Repository methods
-
-
     public List<ContactFormOutputDto> getContactFormSubmissions() {
         List<ContactFormOutputDto> collection = new ArrayList<>();
         List<ContactForm> list = contactFormRepository.findAll();
@@ -51,12 +49,39 @@ public class ContactFormService {
         contactFormRepository.deleteById(contactFormId);
     }
 
+    // Repository methods
+    public List<ContactFormOutputDto> findContactFormsByNameContains(String name) {
+        List<ContactFormOutputDto> collection = new ArrayList<>();
+        List<ContactForm> list = contactFormRepository.findByNameContainsIgnoreCase(name);
+        for (ContactForm contactForm : list) {
+            collection.add(transformContactFormToContactFormOutputDto(contactForm));
+        }
+        if (collection.isEmpty()) {
+            throw new CharacterNotFoundException("0 results. No contact forms were found!");
+        }
+        return collection;
+    }
+
+    public List<ContactFormOutputDto> findContactFormsByEmailContains(String email) {
+        List<ContactFormOutputDto> collection = new ArrayList<>();
+        List<ContactForm> list = contactFormRepository.findByEmailContainsIgnoreCase(email);
+        for (ContactForm contactForm : list) {
+            collection.add(transformContactFormToContactFormOutputDto(contactForm));
+        }
+        if (collection.isEmpty()) {
+            throw new CharacterNotFoundException("0 results. No contact forms were found!");
+        }
+        return collection;
+    }
+
+
+
+
+
     // Relational methods
 
 
-
     // Image methods
-
 
 
     // TODO: if Null check?

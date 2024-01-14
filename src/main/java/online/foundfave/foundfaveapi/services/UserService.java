@@ -24,10 +24,6 @@ public class UserService {
     }
 
     // Basic CRUD methods
-    // Repository methods
-    // Relational methods
-    // Image methods
-
     public List<UserOutputDto> getUsers() {
         List<UserOutputDto> collection = new ArrayList<>();
         List<User> list = userRepository.findAll();
@@ -112,6 +108,7 @@ public class UserService {
         return userRepository.existsById(username);
     }
 
+    // Repository methods
     public UserOutputDto findUserByEmail(String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new EmailNotFoundException("User not found with e-mail: " + "'" + email + "'."));
         return transformUserToUserOutputDto(user);
@@ -137,6 +134,10 @@ public class UserService {
         }
         return activeUsersOutputDtoList;
     }
+
+    // Relational methods
+
+    // Image methods
 
     // This method is used for the CustomUserDetailsService class
     public UserInputDto getUserByUsername(String username) {

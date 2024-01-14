@@ -108,11 +108,8 @@ public class AuthenticationController {
         return ResponseEntity.ok().body(info);
     }
 
-    // Show all available FOUNDFAVE API characters & movies
-    // TODO: Invoeren Characters
-    // TODO: Invoeren Movies
     @GetMapping("/queries")
-    public ResponseEntity<String> showAvailableQueries() {
+    public ResponseEntity<String> showAllAvailableQueries() {
         String info = """
                 FOUNDFAVE API Queries
                                 

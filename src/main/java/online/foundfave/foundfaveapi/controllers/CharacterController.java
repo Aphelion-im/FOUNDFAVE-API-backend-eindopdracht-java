@@ -90,9 +90,9 @@ public class CharacterController {
         List<CharacterOutputDto> characters = characterService.findCharactersByActorNameContains(name);
         return ResponseEntity.ok(characters);
     }
-    
+
     // Relational methods
-// TODO: Add movie to character. Add character to movie.
+    // TODO: Add movie to character. Add character to movie.
 
 
     // Image methods
