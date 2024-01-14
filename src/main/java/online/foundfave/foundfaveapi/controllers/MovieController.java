@@ -33,19 +33,25 @@ public class MovieController {
 
 
     // Repository methods
-    @GetMapping(value = "/search")
-    public ResponseEntity<List<MovieOutputDto>> findMovieByTitle(@RequestParam("title") String title) {
-        List<MovieOutputDto> movies = movieService.findMoviesByTitle(title);
+    @GetMapping(value = "/search/starting-with")
+    public ResponseEntity<List<MovieOutputDto>> findMovieByTitleStartingWith(@RequestParam("title") String title) {
+        List<MovieOutputDto> movies = movieService.findMoviesByTitleStartingWith(title);
         return ResponseEntity.ok(movies);
     }
 
-    @GetMapping("/search/asc")
+    @GetMapping(value = "/search/contains")
+    public ResponseEntity<List<MovieOutputDto>> findMovieByTitleContains(@RequestParam("title") String title) {
+        List<MovieOutputDto> movies = movieService.findMoviesByTitleContains(title);
+        return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping("/search/sorted-asc")
     public ResponseEntity<List<MovieOutputDto>> findMovieByTitleSortedAsc(@RequestParam("title") String title) {
         List<MovieOutputDto> movies = movieService.findMovieByTitleSortedAsc(title);
         return ResponseEntity.ok(movies);
     }
 
-    @GetMapping("/search/desc")
+    @GetMapping("/search/sorted-desc")
     public ResponseEntity<List<MovieOutputDto>> findMovieByTitleSortedDesc(@RequestParam("title") String title) {
         List<MovieOutputDto> movies = movieService.findMovieByTitleSortedDesc(title);
         return ResponseEntity.ok(movies);

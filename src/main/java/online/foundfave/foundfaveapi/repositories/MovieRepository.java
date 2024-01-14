@@ -10,6 +10,7 @@ import java.util.List;
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     List<Movie> findByMovieTitleStartingWithIgnoreCase(String title);
+    List<Movie> findByMovieTitleContainsIgnoreCase(String title);
     List<Movie> findByMovieTitleStartingWithIgnoreCaseOrderByMovieTitleAsc(String title);
     List<Movie> findByMovieTitleStartingWithIgnoreCaseOrderByMovieTitleDesc(String title);
 }

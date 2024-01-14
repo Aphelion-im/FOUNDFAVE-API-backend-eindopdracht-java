@@ -21,16 +21,22 @@ public class MovieService {
     // Basic CRUD methods
 
 
-
-
-
-
-
-
     // Repository methods
-    public List<MovieOutputDto> findMoviesByTitle(String title) {
+    public List<MovieOutputDto> findMoviesByTitleStartingWith(String title) {
         List<MovieOutputDto> collection = new ArrayList<>();
         List<Movie> list = movieRepository.findByMovieTitleStartingWithIgnoreCase(title);
+        for (Movie movie : list) {
+            collection.add(transformMovieToMovieOutputDto(movie));
+        }
+        if (collection.isEmpty()) {
+            throw new MovieNotFoundException("0 results. No movies were found!");
+        }
+        return collection;
+    }
+
+    public List<MovieOutputDto> findMoviesByTitleContains(String title) {
+        List<MovieOutputDto> collection = new ArrayList<>();
+        List<Movie> list = movieRepository.findByMovieTitleContainsIgnoreCase(title);
         for (Movie movie : list) {
             collection.add(transformMovieToMovieOutputDto(movie));
         }
@@ -68,7 +74,6 @@ public class MovieService {
 
 
     // Image methods
-
 
 
     // Transformers

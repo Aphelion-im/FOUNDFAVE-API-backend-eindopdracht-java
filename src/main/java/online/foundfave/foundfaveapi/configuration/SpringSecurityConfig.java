@@ -62,9 +62,10 @@ public class SpringSecurityConfig {
                 /* Characters */
                 .requestMatchers(HttpMethod.GET, "/characters").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/characters/{characterId}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/characters/search").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/characters/search/asc").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/characters/search/desc").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/characters/search/starting-with").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/characters/search/contains").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/characters/search/sorted-asc").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/characters/search/sorted-desc").hasRole("ADMIN")
 
                 /* ContactForms */
                 .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
@@ -75,9 +76,10 @@ public class SpringSecurityConfig {
                 /* Movies */
                 .requestMatchers(HttpMethod.GET, "/movies").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/movies/{movieId}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/movies/search").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/movies/search/asc").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/movies/search/desc").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/movies/search/starting-with").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/movies/search/contains").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/movies/search/sorted-asc").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/movies/search/sorted-desc").hasRole("ADMIN")
 
                 /* Profiles */
                 .requestMatchers(HttpMethod.GET, "/profiles").hasRole("ADMIN")

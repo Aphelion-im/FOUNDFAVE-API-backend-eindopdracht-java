@@ -41,21 +41,27 @@ public class CharacterController {
 
 
     // Repository methods
-    @GetMapping("/search")
-    public ResponseEntity<List<CharacterOutputDto>> findCharacterByName(@RequestParam("name") String name) {
-        List<CharacterOutputDto> characters = characterService.findCharacterByName(name);
+    @GetMapping("/search/starting-with")
+    public ResponseEntity<List<CharacterOutputDto>> findCharactersByNameStartingWith(@RequestParam("name") String name) {
+        List<CharacterOutputDto> characters = characterService.findCharactersByNameStartingWith(name);
         return ResponseEntity.ok(characters);
     }
 
-    @GetMapping("/search/asc")
-    public ResponseEntity<List<CharacterOutputDto>> findCharacterByNameSortedAsc(@RequestParam("name") String name) {
-        List<CharacterOutputDto> characters = characterService.findCharacterByNameSortedAsc(name);
+    @GetMapping("/search/contains")
+    public ResponseEntity<List<CharacterOutputDto>> findCharactersByNameContains(@RequestParam("name") String name) {
+        List<CharacterOutputDto> characters = characterService.findCharactersByNameContains(name);
         return ResponseEntity.ok(characters);
     }
 
-    @GetMapping("/search/desc")
-    public ResponseEntity<List<CharacterOutputDto>> findCharacterByNameSortedDesc(@RequestParam("name") String name) {
-        List<CharacterOutputDto> characters = characterService.findCharacterByNameSortedDesc(name);
+    @GetMapping("/search/sorted-asc")
+    public ResponseEntity<List<CharacterOutputDto>> findCharactersByNameSortedAsc(@RequestParam("name") String name) {
+        List<CharacterOutputDto> characters = characterService.findCharactersByNameSortedAsc(name);
+        return ResponseEntity.ok(characters);
+    }
+
+    @GetMapping("/search/sorted-desc")
+    public ResponseEntity<List<CharacterOutputDto>> findCharactersByNameSortedDesc(@RequestParam("name") String name) {
+        List<CharacterOutputDto> characters = characterService.findCharactersByNameSortedDesc(name);
         return ResponseEntity.ok(characters);
     }
 
