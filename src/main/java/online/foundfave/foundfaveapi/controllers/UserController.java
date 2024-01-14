@@ -2,6 +2,7 @@ package online.foundfave.foundfaveapi.controllers;
 
 import jakarta.validation.Valid;
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
+import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
 import online.foundfave.foundfaveapi.services.UserService;
@@ -28,10 +29,6 @@ public class UserController {
     }
 
     // Basic CRUD methods
-
-
-    // TODO: Invoeren in SpringSecurityConfig
-    // TODO: Basic CRUD methods
     @GetMapping(value = "")
     public ResponseEntity<List<UserOutputDto>> getUsers() {
         List<UserOutputDto> userOutputDtosCollection = userService.getUsers();
@@ -95,7 +92,6 @@ public class UserController {
         }
     }
 
-    // Strip both ROLE_ADMIN and/or ROLE_USER from a user
     @DeleteMapping(value = "/{username}/authorities/{authority}")
     public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
         userService.removeAuthority(username, authority);
@@ -109,12 +105,19 @@ public class UserController {
 
     // Exact search e-mail
     @GetMapping(value = "/search")
-    public ResponseEntity<UserOutputDto> getUserByEmail(@RequestParam("email") String email) {
-        return ResponseEntity.ok(userService.getUserByEmail(email));
+    public ResponseEntity<UserOutputDto> findUserByEmail(@RequestParam("email") String email) {
+        return ResponseEntity.ok(userService.findUserByEmail(email));
     }
 
     // Repository methods
 // TODO: broad search e-mail
+    @GetMapping("/search/contains")
+    public ResponseEntity<List<UserOutputDto>> findUserByEmailContains(@RequestParam("email") String email) {
+        List<UserOutputDto> users = userService.findUserByEmailContains(email);
+        return ResponseEntity.ok(users);
+    }
+
+
 
 
 
