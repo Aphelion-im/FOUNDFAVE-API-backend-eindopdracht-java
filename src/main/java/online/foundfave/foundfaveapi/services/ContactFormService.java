@@ -74,9 +74,17 @@ public class ContactFormService {
         return collection;
     }
 
-
-
-
+    public List<ContactFormOutputDto> findContactFormsByCommentsContains(String comments) {
+        List<ContactFormOutputDto> collection = new ArrayList<>();
+        List<ContactForm> list = contactFormRepository.findByCommentsContainsIgnoreCase(comments);
+        for (ContactForm contactForm : list) {
+            collection.add(transformContactFormToContactFormOutputDto(contactForm));
+        }
+        if (collection.isEmpty()) {
+            throw new CharacterNotFoundException("0 results. No contact forms were found!");
+        }
+        return collection;
+    }
 
     // Relational methods
 

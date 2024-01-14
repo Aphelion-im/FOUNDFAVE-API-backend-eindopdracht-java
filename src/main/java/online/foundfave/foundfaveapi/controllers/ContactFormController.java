@@ -65,6 +65,13 @@ public class ContactFormController {
         return ResponseEntity.ok(contactFormOutputDtos);
     }
 
+    @GetMapping("/search/comments")
+    public ResponseEntity<List<ContactFormOutputDto>> findContactFormsByCommentsContains(@RequestParam("comments") String comments) {
+        List<ContactFormOutputDto> contactFormOutputDtos = contactFormService.findContactFormsByCommentsContains(comments);
+        return ResponseEntity.ok(contactFormOutputDtos);
+    }
+
+
 
     // Relational methods
     // TODO: Add form to user, Add user to form

@@ -11,4 +11,5 @@ public interface ContactFormRepository extends JpaRepository<ContactForm, Long> 
 
     List<ContactForm> findByNameContainsIgnoreCase(String name);
     List<ContactForm> findByEmailContainsIgnoreCase(String email);
+    List<ContactForm> findByCommentsContainsIgnoreCase(String comments);
 }
