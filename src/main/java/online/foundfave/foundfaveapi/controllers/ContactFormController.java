@@ -23,22 +23,18 @@ public class ContactFormController {
     }
 
     // Basic CRUD methods
-
-    // TODO: Refactor
     @GetMapping("")
     public ResponseEntity<List<ContactFormOutputDto>> getAllContactForms() {
         List<ContactFormOutputDto> contactForms = contactFormService.getContactFormSubmissions();
         return ResponseEntity.ok(contactForms);
     }
 
-    // TODO: Refactor
     @GetMapping("/{contactFormId}")
     public ResponseEntity<ContactFormOutputDto> getContactForm(@PathVariable Long contactFormId) {
         ContactFormOutputDto contactFormOutputDto = contactFormService.getContactFormSubmission(contactFormId);
         return ResponseEntity.ok(contactFormOutputDto);
     }
 
-    // TODO: Refactor
     @PostMapping("/post")
     public ResponseEntity<Object> postContactForm(@Valid @RequestBody ContactFormInputDto contactFormInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
@@ -48,25 +44,30 @@ public class ContactFormController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdContactForm);
     }
 
-    // TODO: Refactor
     @DeleteMapping("/{contactFormId}")
     public ResponseEntity<String> deleteContactForm(@PathVariable Long contactFormId) {
         contactFormService.deleteContactFormSubmission(contactFormId);
         return ResponseEntity.ok().body("Contact Form with id: " + contactFormId + " was successfully deleted!");
     }
 
-    // TODO: OneToMany relatie method toevoegen
 
 
 
-    // TODO: Add form to user
+
 
     // Repository methods
+// TODO: Search forms by name (Contains)
+// TODO: Search forms by email (Contains)
+// TODO: Search forms by comments (Contains)
+
+
 
 
     // Relational methods
+    // TODO: Add form to user, Add user to form
 
 
 
+    // Image methods
 
 }

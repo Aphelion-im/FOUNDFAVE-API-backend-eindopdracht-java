@@ -116,17 +116,57 @@ public class AuthenticationController {
         String info = """
                 FOUNDFAVE API Queries
                                 
-                The following characters and movies are currently in the database:
+                The following characters and movies are currently in the FOUNDFAVE API database:
                                 
                 ***** Characters *****
-                                
+                Ant-Man
+                Black Panther
+                Black Widow
+                Captain America
+                Captain Marvel
+                Doctor Strange
+                Hawkeye
+                Hulk
+                Iron Man
+                Nick Fury
+                Scarlet Witch
+                Spider-Man
+                Thor
+                Vision
+                Winter Soldier
 
                 ***** Movies *****
-                          
-                                
-                                
-                                
-                                
+                Ant-Man
+                Ant-Man and the Wasp
+                Ant-Man and the Wasp: Quantumania
+                Avengers: Age of Ultron
+                Avengers: Endgame
+                Avengers: Infinity War
+                Black Panther
+                Black Panther: Wakanda Forever
+                Black Widow
+                Captain America: Brave New World
+                Captain America: Civil War
+                Captain America: The first avenger
+                Captain America: The Winter Soldier
+                Captain Marvel
+                Doctor Strange
+                Doctor Strange in the Multiverse of Madness
+                Iron Man
+                Iron Man 2
+                Iron Man 3
+                Spider-Man 4
+                Spider-Man: Far From Home
+                Spider-Man: Homecoming
+                Spider-Man: No Way Home
+                The Avengers
+                The Incredible Hulk
+                The Marvels
+                Thor
+                Thor: Love and Thunder
+                Thor: Ragnarok
+                Thor: The Dark World
+                Thunderbolts
                 """;
 
         return ResponseEntity.ok().body(info);

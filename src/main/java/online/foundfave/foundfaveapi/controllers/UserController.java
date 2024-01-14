@@ -107,12 +107,15 @@ public class UserController {
         return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " exists: " + userService.userExists(username));
     }
 
+    // Exact search e-mail
     @GetMapping(value = "/search")
     public ResponseEntity<UserOutputDto> getUserByEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
     // Repository methods
+// TODO: broad search e-mail
+
 
 
     // Relational methods

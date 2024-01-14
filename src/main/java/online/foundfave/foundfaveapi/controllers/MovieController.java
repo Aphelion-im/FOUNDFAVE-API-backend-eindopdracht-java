@@ -51,6 +51,8 @@ public class MovieController {
         return ResponseEntity.ok(movies);
     }
 
+    // TODO: Search by movieYearOfRelease
+
 
     // Relational methods
 // TODO: Add movie to character or vice versa
@@ -59,6 +61,6 @@ public class MovieController {
     // Image methods
     // TODO: Add image to movie
     // TODO: Delete image from movie
-    // TODO:
+
 
 }

@@ -17,18 +17,20 @@ public class ProfileController {
     }
 
     // Basic CRUD methods
+// TODO: Get all profiles
 
-    // TODO: Get mapping
+    // TODO: find profile by id
 
-    // TODO: Get certain profile with id
+    // TODO: Add profile
 
     // TODO: Update profile
 
+    // TODO: Delete profile
 
 
     // Repository methods
-
-
+// TODO: Search by first name (Contains)
+// TODO: Search by last name (Contains)
 
 
     // Relational methods
@@ -36,7 +38,6 @@ public class ProfileController {
 
     // Image methods
     // TODO: Upload profilePic
-
 
 
 }

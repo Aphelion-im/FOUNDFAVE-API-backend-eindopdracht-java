@@ -59,11 +59,14 @@ public class CharacterController {
         return ResponseEntity.ok(characters);
     }
 
+// TODO: Search by characterActorName (Contains)
+// TODO: Search by characterRealName (Contains)
+
 
 
 
     // Relational methods
-// TODO: Add character to movie. Add movie to character
+// TODO: Add movie to character. Add character to movie.
 
 
     // Image methods
