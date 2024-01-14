@@ -60,16 +60,6 @@ public class UserService {
         return newUser.getUsername();
     }
 
-    public void deleteUser(String username) {
-        if (Objects.equals(username, "admin")) {
-            throw new BadRequestException("You are not allowed to delete the 'admin' account!");
-        }
-        if (!userRepository.existsById(username)) {
-            throw new UsernameNotFoundException("User with id: " + "'" + username + "'" + " not found!");
-        }
-        userRepository.deleteById(username);
-    }
-
     public void updateUserPassword(String username, UserInputDto userInputDto) {
         User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         user.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
@@ -84,6 +74,16 @@ public class UserService {
         if (userInputDto.email != null) user.setEmail(userInputDto.getEmail());
         userRepository.save(user);
         return "User: " + "'" + username + "'" + " updated successfully!";
+    }
+
+    public void deleteUser(String username) {
+        if (Objects.equals(username, "admin")) {
+            throw new BadRequestException("You are not allowed to delete the 'admin' account!");
+        }
+        if (!userRepository.existsById(username)) {
+            throw new UsernameNotFoundException("User with id: " + "'" + username + "'" + " not found!");
+        }
+        userRepository.deleteById(username);
     }
 
     public Set<Authority> getAuthorities(String username) {

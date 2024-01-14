@@ -13,6 +13,7 @@ public interface CharacterRepository extends JpaRepository<Character, Long> {
     Optional<Character> findByCharacterAliasNameIgnoreCase (String name);
     List<Character> findByCharacterAliasNameStartingWithIgnoreCase(String name);
     List<Character> findByCharacterAliasNameContainsIgnoreCase(String name);
+    List<Character> findByCharacterActorNameContainsIgnoreCase(String name);
     List<Character> findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameAsc(String name);
     List<Character> findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameDesc(String name);
 }

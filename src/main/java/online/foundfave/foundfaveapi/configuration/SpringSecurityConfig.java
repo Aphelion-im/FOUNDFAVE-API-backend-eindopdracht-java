@@ -66,7 +66,10 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/characters/search/contains").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/characters/search/sorted-asc").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/characters/search/sorted-desc").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/characters/search/actor-name").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/characters/character/{characterId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/characters").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/characters/{characterId}").hasRole("ADMIN")
 
                 /* ContactForms */
                 .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")

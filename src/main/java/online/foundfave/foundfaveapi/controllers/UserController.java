@@ -110,15 +110,11 @@ public class UserController {
     }
 
     // Repository methods
-// TODO: broad search e-mail
     @GetMapping("/search/contains")
     public ResponseEntity<List<UserOutputDto>> findUserByEmailContains(@RequestParam("email") String email) {
         List<UserOutputDto> users = userService.findUserByEmailContains(email);
         return ResponseEntity.ok(users);
     }
-
-
-
 
 
     // Relational methods

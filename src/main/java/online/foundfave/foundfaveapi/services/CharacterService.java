@@ -2,14 +2,17 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.CharacterInputDto;
 import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
+import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.CharacterNotFoundException;
 import online.foundfave.foundfaveapi.exceptions.UserAlreadyExistsException;
+import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
 import online.foundfave.foundfaveapi.models.Character;
 import online.foundfave.foundfaveapi.repositories.CharacterRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -45,6 +48,34 @@ public class CharacterService {
         return newCharacter.getCharacterAliasName();
     }
 
+    public String updateCharacter(Long characterId, CharacterInputDto characterInputDto) {
+        Character character = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
+        if (characterInputDto.characterAliasName != null)
+            character.setCharacterAliasName(characterInputDto.getCharacterAliasName());
+        if (characterInputDto.characterRealName != null)
+            character.setCharacterRealName(characterInputDto.getCharacterRealName());
+        if (characterInputDto.characterActorName != null)
+            character.setCharacterActorName(characterInputDto.getCharacterActorName());
+        if (characterInputDto.characterTitle != null)
+            character.setCharacterTitle(characterInputDto.getCharacterTitle());
+        if (characterInputDto.characterGender != null)
+            character.setCharacterGender(characterInputDto.getCharacterGender());
+        if (characterInputDto.characterSummary != null)
+            character.setCharacterSummary(characterInputDto.getCharacterSummary());
+        if (characterInputDto.characterDescription != null)
+            character.setCharacterDescription(characterInputDto.getCharacterDescription());
+        if (characterInputDto.characterImageUrl != null)
+            character.setCharacterImageUrl(characterInputDto.getCharacterImageUrl());
+        characterRepository.save(character);
+        return "Character with id: " + character.getCharacterId() + " updated successfully!";
+    }
+
+    public void deleteCharacter(Long characterId) {
+        if (!characterRepository.existsById(characterId)) {
+            throw new UsernameNotFoundException("User with id: " + characterId + " not found!");
+        }
+        characterRepository.deleteById(characterId);
+    }
 
     // Repository methods
     public List<CharacterOutputDto> findCharactersByNameStartingWith(String name) {
@@ -94,6 +125,19 @@ public class CharacterService {
         }
         return collection;
     }
+
+    public List<CharacterOutputDto> findCharactersByActorNameContains(String name) {
+        List<CharacterOutputDto> collection = new ArrayList<>();
+        List<Character> list = characterRepository.findByCharacterActorNameContainsIgnoreCase(name);
+        for (Character character : list) {
+            collection.add(transformCharacterToCharacterOutputDto(character));
+        }
+        if (collection.isEmpty()) {
+            throw new CharacterNotFoundException("0 results. No actors were found!");
+        }
+        return collection;
+    }
+
 
     // Relational methods
 
