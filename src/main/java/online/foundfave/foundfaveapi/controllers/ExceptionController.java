@@ -19,6 +19,11 @@ public class ExceptionController {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(value = CharacterAlreadyExistsException.class)
+    public ResponseEntity<String> exception(CharacterAlreadyExistsException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(value = CharacterNotFoundException.class)
     public ResponseEntity<String> exception(CharacterNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
@@ -32,6 +37,11 @@ public class ExceptionController {
     @ExceptionHandler(value = EmailNotFoundException.class)
     public ResponseEntity<String> exception(EmailNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = MovieAlreadyExistsException.class)
+    public ResponseEntity<String> exception(MovieAlreadyExistsException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = MovieNotFoundException.class)

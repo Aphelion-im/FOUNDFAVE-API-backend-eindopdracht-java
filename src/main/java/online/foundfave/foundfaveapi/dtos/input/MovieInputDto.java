@@ -19,8 +19,8 @@ public class MovieInputDto {
     @NotNull(message = "Movie summary is required.")
     public String movieSummary;
 
-    @Size(min=4, max=4, message="You must enter 4 digits.")
-    public int movieYearOfRelease;
+    @Size(min=4, max=4, message="You must enter 4 digits for movie year of release. E.g. 2019.")
+    public String movieYearOfRelease;
 
     @NotNull(message = "Movie image url is required.")
     public String movieImageUrl;

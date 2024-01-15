@@ -71,8 +71,6 @@ public class ContactFormController {
         return ResponseEntity.ok(contactFormOutputDtos);
     }
 
-
-
     // Relational methods
     // TODO: Add form to user, Add user to form
 

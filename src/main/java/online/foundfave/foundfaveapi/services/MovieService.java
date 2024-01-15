@@ -1,6 +1,8 @@
 package online.foundfave.foundfaveapi.services;
 
+import online.foundfave.foundfaveapi.dtos.input.MovieInputDto;
 import online.foundfave.foundfaveapi.dtos.output.MovieOutputDto;
+import online.foundfave.foundfaveapi.exceptions.MovieAlreadyExistsException;
 import online.foundfave.foundfaveapi.exceptions.MovieNotFoundException;
 import online.foundfave.foundfaveapi.models.Movie;
 import online.foundfave.foundfaveapi.repositories.MovieRepository;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -19,6 +22,34 @@ public class MovieService {
     }
 
     // Basic CRUD methods
+    public List<MovieOutputDto> getMovies() {
+        List<MovieOutputDto> collection = new ArrayList<>();
+        List<Movie> list = movieRepository.findAll();
+        for (Movie movie : list) {
+            collection.add(transformMovieToMovieOutputDto(movie));
+        }
+        return collection;
+    }
+
+    public MovieOutputDto getMovie(Long movieId) {
+        MovieOutputDto movieOutputDto;
+        Optional<Movie> movie = movieRepository.findById(movieId);
+        if (movie.isPresent()) {
+            movieOutputDto = transformMovieToMovieOutputDto(movie.get());
+        } else {
+            throw new MovieNotFoundException("Movie with id: " + movieId + " not found!");
+        }
+        return movieOutputDto;
+    }
+
+    public String createMovie(MovieInputDto movieInputDto) {
+        Optional<Movie> movie = movieRepository.findByMovieTitleIgnoreCase(movieInputDto.movieTitle);
+        if (movie.isPresent()) {
+            throw new MovieAlreadyExistsException("Movie: " + "'" + movieInputDto.movieTitle + "'" + " already exists!");
+        }
+        Movie newMovie = movieRepository.save(transformMovieInputDtoToMovie(movieInputDto));
+        return newMovie.getMovieTitle();
+    }
 
 
     // Repository methods
@@ -88,5 +119,13 @@ public class MovieService {
         return movieOutputDto;
     }
 
-
+    // From MovieInputDto to MovieUser
+    public Movie transformMovieInputDtoToMovie(MovieInputDto movieInputDto) {
+        var movie = new Movie();
+        movie.setMovieTitle(movieInputDto.getMovieTitle());
+        movie.setMovieSummary(movieInputDto.getMovieSummary());
+        movie.setMovieYearOfRelease(movieInputDto.getMovieYearOfRelease());
+        movie.setMovieImageUrl(movieInputDto.getMovieImageUrl());
+        return movie;
+    }
 }

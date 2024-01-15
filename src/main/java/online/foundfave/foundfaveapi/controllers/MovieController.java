@@ -1,13 +1,16 @@
 package online.foundfave.foundfaveapi.controllers;
 
+import jakarta.validation.Valid;
+import online.foundfave.foundfaveapi.dtos.input.MovieInputDto;
 import online.foundfave.foundfaveapi.dtos.output.MovieOutputDto;
 import online.foundfave.foundfaveapi.services.MovieService;
+import online.foundfave.foundfaveapi.utilities.FieldErrorHandling;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -21,13 +24,33 @@ public class MovieController {
     }
 
     // Basic CRUD methods
-// TODO: Get all movies
+    @GetMapping(value = "")
+    public ResponseEntity<List<MovieOutputDto>> getMovies() {
+        List<MovieOutputDto> movieOutputDtosCollection = movieService.getMovies();
+        return ResponseEntity.ok().body(movieOutputDtosCollection);
+    }
 
-    // TODO: find movie by id
+    @GetMapping(value = "/{movieId}")
+    public ResponseEntity<MovieOutputDto> getMovie(@PathVariable("movieId") Long movieId) {
+        MovieOutputDto optionalMovie = movieService.getMovie(movieId);
+        return ResponseEntity.ok().body(optionalMovie);
+    }
 
-    // TODO: Add movie
+    @PostMapping(value = "")
+    public ResponseEntity<Object> createMovie(@Valid @RequestBody MovieInputDto movieInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        String newMovie = movieService.createMovie(movieInputDto);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newMovie).toUriString());
+        return ResponseEntity.created(uri).body("Movie: " + "'" + newMovie + "'" + " registered successfully!");
+    }
 
     // TODO: Update movie
+
+
+
+
 
     // TODO: Delete movie
 

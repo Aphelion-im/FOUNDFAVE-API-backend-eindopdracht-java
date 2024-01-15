@@ -2,9 +2,8 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.CharacterInputDto;
 import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
+import online.foundfave.foundfaveapi.exceptions.CharacterAlreadyExistsException;
 import online.foundfave.foundfaveapi.exceptions.CharacterNotFoundException;
-import online.foundfave.foundfaveapi.exceptions.UserAlreadyExistsException;
-import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
 import online.foundfave.foundfaveapi.models.Character;
 import online.foundfave.foundfaveapi.repositories.CharacterRepository;
 import org.springframework.stereotype.Service;
@@ -40,7 +39,7 @@ public class CharacterService {
     public String createCharacter(CharacterInputDto characterInputDto) {
         Optional<Character> character = characterRepository.findByCharacterAliasNameIgnoreCase(characterInputDto.characterAliasName);
         if (character.isPresent()) {
-            throw new UserAlreadyExistsException("Username: " + "'" + characterInputDto.characterAliasName + "'" + " already exists!");
+            throw new CharacterAlreadyExistsException("Username: " + "'" + characterInputDto.characterAliasName + "'" + " already exists!");
         }
         Character newCharacter = characterRepository.save(transformCharacterInputDtoToCharacter(characterInputDto));
         return newCharacter.getCharacterAliasName();
@@ -70,7 +69,7 @@ public class CharacterService {
 
     public void deleteCharacter(Long characterId) {
         if (!characterRepository.existsById(characterId)) {
-            throw new UsernameNotFoundException("User with id: " + characterId + " not found!");
+            throw new CharacterNotFoundException("Character with id: " + characterId + " not found!");
         }
         characterRepository.deleteById(characterId);
     }

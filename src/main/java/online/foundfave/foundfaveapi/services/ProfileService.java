@@ -13,8 +13,18 @@ public class ProfileService {
     }
 
     // Basic CRUD methods
+
+
+
     // Repository methods
+
+
+
     // Relational methods
+
+
+
+
     // Image methods
 
 

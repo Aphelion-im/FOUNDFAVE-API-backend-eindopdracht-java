@@ -92,8 +92,6 @@ public class ContactFormService {
     // Image methods
 
 
-    // TODO: if Null check?
-    // TODO: Relational conversie
     // Transformers
     // ContactForm to ContactFormOutputDto
     public static ContactFormOutputDto transformContactFormToContactFormOutputDto(ContactForm contactForm) {
