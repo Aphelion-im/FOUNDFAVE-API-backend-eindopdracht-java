@@ -37,11 +37,11 @@ public class ContactFormController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<Object> postContactForm(@Valid @RequestBody ContactFormInputDto contactFormInputDto, BindingResult bindingResult) {
+    public ResponseEntity<Object> createContactForm(@Valid @RequestBody ContactFormInputDto contactFormInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
-        ContactFormOutputDto createdContactForm = contactFormService.postContactFormSubmission(contactFormInputDto);
+        ContactFormOutputDto createdContactForm = contactFormService.createContactForm(contactFormInputDto);
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + createdContactForm.contactFormId).toUriString());
         return ResponseEntity.created(uri).body(createdContactForm);
     }

@@ -1,15 +1,20 @@
 package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.MovieInputDto;
+import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.MovieOutputDto;
+import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.MovieAlreadyExistsException;
 import online.foundfave.foundfaveapi.exceptions.MovieNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
 import online.foundfave.foundfaveapi.models.Movie;
+import online.foundfave.foundfaveapi.models.User;
 import online.foundfave.foundfaveapi.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -51,6 +56,23 @@ public class MovieService {
         return newMovie.getMovieTitle();
     }
 
+    public String updateMovie(long movieId, MovieInputDto movieInputDto) {
+        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
+        if (movieInputDto.movieTitle != null) movie.setMovieTitle(movieInputDto.getMovieTitle());
+        if (movieInputDto.movieSummary != null) movie.setMovieSummary(movieInputDto.getMovieSummary());
+        if (movieInputDto.movieYearOfRelease != null)
+            movie.setMovieYearOfRelease(movieInputDto.getMovieYearOfRelease());
+        if (movieInputDto.movieSummary != null) movie.setMovieImageUrl(movieInputDto.getMovieImageUrl());
+        movieRepository.save(movie);
+        return "Movie with id: " + movieId + " updated successfully!";
+    }
+
+    public void deleteMovie(Long movieId) {
+        if (!movieRepository.existsById(movieId)) {
+            throw new MovieNotFoundException("Movie with id: " + movieId + " not found!");
+        }
+        movieRepository.deleteById(movieId);
+    }
 
     // Repository methods
     public List<MovieOutputDto> findMoviesByTitleStartingWith(String title) {
@@ -100,6 +122,19 @@ public class MovieService {
         }
         return collection;
     }
+
+    public List<MovieOutputDto> findMovieByYearOfRelease(String year) {
+        List<MovieOutputDto> collection = new ArrayList<>();
+        List<Movie> list = movieRepository.findByMovieYearOfRelease(year);
+        for (Movie movie : list) {
+            collection.add(transformMovieToMovieOutputDto(movie));
+        }
+        if (collection.isEmpty()) {
+            throw new MovieNotFoundException("0 results. No movies were found!");
+        }
+        return collection;
+    }
+
 
     // Relational methods
 

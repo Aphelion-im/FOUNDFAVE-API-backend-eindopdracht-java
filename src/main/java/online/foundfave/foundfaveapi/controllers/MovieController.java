@@ -5,6 +5,7 @@ import online.foundfave.foundfaveapi.dtos.input.MovieInputDto;
 import online.foundfave.foundfaveapi.dtos.output.MovieOutputDto;
 import online.foundfave.foundfaveapi.services.MovieService;
 import online.foundfave.foundfaveapi.utilities.FieldErrorHandling;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -46,14 +47,16 @@ public class MovieController {
         return ResponseEntity.created(uri).body("Movie: " + "'" + newMovie + "'" + " registered successfully!");
     }
 
-    // TODO: Update movie
+    @PutMapping(value = "/movie/{movieId}")
+    public ResponseEntity<String> updateMovie(@PathVariable("movieId") Long movieId, @RequestBody MovieInputDto movieInputDto) {
+        return ResponseEntity.ok(movieService.updateMovie(movieId, movieInputDto));
+    }
 
-
-
-
-
-    // TODO: Delete movie
-
+    @DeleteMapping(value = "/{movieId}")
+    public ResponseEntity<Object> deleteMovie(@PathVariable("movieId") Long movieId) {
+        movieService.deleteMovie(movieId);
+        return ResponseEntity.status(HttpStatus.OK).body("Movie with id: " + movieId + " deleted!");
+    }
 
     // Repository methods
     @GetMapping(value = "/search/starting-with")
@@ -81,7 +84,11 @@ public class MovieController {
     }
 
     // TODO: Search by movieYearOfRelease
-
+    @GetMapping("/search/year")
+    public ResponseEntity<List<MovieOutputDto>> findMovieByYearOfRelease(@RequestParam("year") String year) {
+        List<MovieOutputDto> movies = movieService.findMovieByYearOfRelease(year);
+        return ResponseEntity.ok(movies);
+    }
 
     // Relational methods
 // TODO: Add movie to character or vice versa

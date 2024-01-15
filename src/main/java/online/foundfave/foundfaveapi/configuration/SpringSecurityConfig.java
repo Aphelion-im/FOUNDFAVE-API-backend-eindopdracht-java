@@ -87,7 +87,10 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/movies/search/contains").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/movies/search/sorted-asc").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/movies/search/sorted-desc").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/movies/search/year").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/movies/movie/{movieId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/movies").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/movies/{movieId}").hasRole("ADMIN")
 
                 /* Profiles */
                 .requestMatchers(HttpMethod.GET, "/profiles").hasRole("ADMIN")

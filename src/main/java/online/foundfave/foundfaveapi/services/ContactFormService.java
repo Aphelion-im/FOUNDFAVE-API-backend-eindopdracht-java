@@ -2,7 +2,6 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.ContactFormInputDto;
 import online.foundfave.foundfaveapi.dtos.output.ContactFormOutputDto;
-import online.foundfave.foundfaveapi.exceptions.CharacterNotFoundException;
 import online.foundfave.foundfaveapi.exceptions.ContactFormNotFoundException;
 import online.foundfave.foundfaveapi.models.ContactForm;
 import online.foundfave.foundfaveapi.repositories.ContactFormRepository;
@@ -36,7 +35,7 @@ public class ContactFormService {
         return transformContactFormToContactFormOutputDto(contactForm);
     }
 
-    public ContactFormOutputDto postContactFormSubmission(ContactFormInputDto contactFormInputDto) {
+    public ContactFormOutputDto createContactForm(ContactFormInputDto contactFormInputDto) {
         ContactForm contactForm = transformContactFormInputDtoToContactForm(contactFormInputDto);
         ContactForm createdContactForm = contactFormRepository.save(contactForm);
         return transformContactFormToContactFormOutputDto(createdContactForm);
@@ -57,7 +56,7 @@ public class ContactFormService {
             collection.add(transformContactFormToContactFormOutputDto(contactForm));
         }
         if (collection.isEmpty()) {
-            throw new CharacterNotFoundException("0 results. No contact forms were found!");
+            throw new ContactFormNotFoundException("0 results. No contact forms were found!");
         }
         return collection;
     }
@@ -69,7 +68,7 @@ public class ContactFormService {
             collection.add(transformContactFormToContactFormOutputDto(contactForm));
         }
         if (collection.isEmpty()) {
-            throw new CharacterNotFoundException("0 results. No contact forms were found!");
+            throw new ContactFormNotFoundException("0 results. No contact forms were found!");
         }
         return collection;
     }
@@ -81,7 +80,7 @@ public class ContactFormService {
             collection.add(transformContactFormToContactFormOutputDto(contactForm));
         }
         if (collection.isEmpty()) {
-            throw new CharacterNotFoundException("0 results. No contact forms were found!");
+            throw new ContactFormNotFoundException("0 results. No contact forms were found!");
         }
         return collection;
     }
