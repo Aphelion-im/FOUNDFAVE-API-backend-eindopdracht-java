@@ -102,23 +102,28 @@ public class UserController {
         return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " exists: " + userService.userExists(username));
     }
 
-    @GetMapping(value = "/search")
-    public ResponseEntity<UserOutputDto> findUserByEmail(@RequestParam("email") String email) {
-        return ResponseEntity.ok(userService.findUserByEmail(email));
+   // Repository methods
+   @GetMapping(value = "/search")
+   public ResponseEntity<UserOutputDto> findUserByEmail(@RequestParam("email") String email) {
+       return ResponseEntity.ok(userService.findUserByEmail(email));
+   }
+
+    @GetMapping("/search/email")
+    public ResponseEntity<List<UserOutputDto>> findUserByEmailContains(@RequestParam("email") String email) {
+        List<UserOutputDto> users = userService.findUserByEmailContains(email);
+        return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/search/username")
+    public ResponseEntity<List<UserOutputDto>> findUserByUsernameContains(@RequestParam("username") String username) {
+        List<UserOutputDto> users = userService.findUserByUsernameContains(username);
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/active")
     public List<UserOutputDto> getActiveUsers() {
         return userService.getActiveUsers();
     }
-
-    // Repository methods
-    @GetMapping("/search/contains")
-    public ResponseEntity<List<UserOutputDto>> findUserByEmailContains(@RequestParam("email") String email) {
-        List<UserOutputDto> users = userService.findUserByEmailContains(email);
-        return ResponseEntity.ok(users);
-    }
-
 
     // Relational methods
 // TODO: Add character to Favorites

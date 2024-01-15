@@ -83,7 +83,6 @@ public class MovieController {
         return ResponseEntity.ok(movies);
     }
 
-    // TODO: Search by movieYearOfRelease
     @GetMapping("/search/year")
     public ResponseEntity<List<MovieOutputDto>> findMovieByYearOfRelease(@RequestParam("year") String year) {
         List<MovieOutputDto> movies = movieService.findMovieByYearOfRelease(year);

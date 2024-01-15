@@ -126,6 +126,18 @@ public class UserService {
         return collection;
     }
 
+    public List<UserOutputDto> findUserByUsernameContains(String username) {
+        List<UserOutputDto> collection = new ArrayList<>();
+        List<User> list = userRepository.findByUsernameContainsIgnoreCase(username);
+        for (User user : list) {
+            collection.add(transformUserToUserOutputDto(user));
+        }
+        if (collection.isEmpty()) {
+            throw new UsernameNotFoundException("0 results. No users were found!");
+        }
+        return collection;
+    }
+
     public List<UserOutputDto> getActiveUsers() {
         List<User> activeUsersList = userRepository.findByEnabled(true);
         List<UserOutputDto> activeUsersOutputDtoList = new ArrayList<>();

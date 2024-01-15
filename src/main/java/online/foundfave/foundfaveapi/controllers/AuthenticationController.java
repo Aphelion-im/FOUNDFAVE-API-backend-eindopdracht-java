@@ -87,18 +87,7 @@ public class AuthenticationController {
                 
                     
                 ***** Users *****
-                localhost:8080/users (GET, Admin)
-                localhost:8080/users/{username} (GET, Admin)
-                localhost:8080/users (POST, Public)
-                localhost:8080/users/{username} (POST, Admin)
-                localhost:8080/users/{username} (DELETE, Admin)
-                localhost:8080/users/admin/{username} (PUT, Admin)
-                localhost:8080/users/user/{username} (PUT, User)
-                localhost:8080/users/{username}/authorities (GET, Admin)
-                localhost:8080/users/{username}/authorities (POST, Admin)
-                localhost:8080/users/{username}/authorities/{authority} (DELETE, Admin)
-                localhost:8080/users/exists/{username} (GET, Admin)
-                localhost:8080/users/search?email={email} (GET, Admin)
+            
                                 
                                 
                                 

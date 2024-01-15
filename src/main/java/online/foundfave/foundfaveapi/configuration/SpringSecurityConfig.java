@@ -95,12 +95,17 @@ public class SpringSecurityConfig {
                 /* Profiles */
                 .requestMatchers(HttpMethod.GET, "/profiles").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/profiles/{profileId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/profiles/search/firstname").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/profiles/search/lastname").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/profiles/profile/{profileId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/profiles").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/profiles/{profileId}").hasRole("ADMIN")
 
                 /* Users */
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/active").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/users/search").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/users/search/contains").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users/search/email").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users/search/username").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/{username}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/exists/{username}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "users/{username}/authorities").hasRole("ADMIN")

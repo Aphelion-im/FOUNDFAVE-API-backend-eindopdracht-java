@@ -15,13 +15,13 @@ import java.time.LocalDate;
 @Setter
 public class ProfileOutputDto {
 
-    private Long profileId;
-    private String firstName;
-    private String lastName;
-    private Gender gender;
+    public Long profileId;
+    public String firstName;
+    public String lastName;
+    public Gender gender;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private LocalDate dateOfBirth;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "nl_NL", timezone = "Netherlands/Amsterdam")
+    public LocalDate dateOfBirth;
 
-    private String profileImageUrl;
+    public String profileImageUrl;
 }

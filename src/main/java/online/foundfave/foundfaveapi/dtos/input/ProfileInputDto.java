@@ -1,5 +1,6 @@
 package online.foundfave.foundfaveapi.dtos.input;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
@@ -9,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import online.foundfave.foundfaveapi.enums.Gender;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -31,7 +31,7 @@ public class ProfileInputDto {
 
     @NotNull(message = "Date is required.")
     @Past(message = "Date needs to be in the past.")
-    @DateTimeFormat(pattern = "DD-MM-YYYY")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "nl_NL", timezone = "Netherlands/Amsterdam")
     public LocalDate dateOfBirth;
 
     public String profileImageUrl;
