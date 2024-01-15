@@ -121,7 +121,7 @@ public class UserService {
             collection.add(transformUserToUserOutputDto(user));
         }
         if (collection.isEmpty()) {
-            throw new CharacterNotFoundException("0 results. No emails were found!");
+            throw new UsernameNotFoundException("0 results. No users were found!");
         }
         return collection;
     }
