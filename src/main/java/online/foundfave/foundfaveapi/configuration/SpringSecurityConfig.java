@@ -78,6 +78,7 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/contactforms/search/comments").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/contactforms/{contactFormId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/contactforms/post").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/contactforms").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasRole("ADMIN")
 
                 /* Movies */

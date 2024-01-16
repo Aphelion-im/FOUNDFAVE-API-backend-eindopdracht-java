@@ -2,8 +2,8 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.ProfileInputDto;
 import online.foundfave.foundfaveapi.dtos.output.ProfileOutputDto;
+import online.foundfave.foundfaveapi.exceptions.ProfileAlreadyExistsException;
 import online.foundfave.foundfaveapi.exceptions.ProfileNotFoundException;
-import online.foundfave.foundfaveapi.exceptions.UserAlreadyExistsException;
 import online.foundfave.foundfaveapi.models.Profile;
 import online.foundfave.foundfaveapi.repositories.ProfileRepository;
 import org.springframework.stereotype.Service;
@@ -45,7 +45,7 @@ public class ProfileService {
     public String createProfile(ProfileInputDto profileInputDto) {
         Optional<Profile> user = profileRepository.findByFirstNameAndLastName(profileInputDto.firstName, profileInputDto.lastName);
         if (user.isPresent()) {
-            throw new UserAlreadyExistsException("Profile: " + "'" + profileInputDto.firstName + " " + profileInputDto.lastName + "'" + " already exists!");
+            throw new ProfileAlreadyExistsException("Profile: " + "'" + profileInputDto.firstName + " " + profileInputDto.lastName + "'" + " already exists!");
         }
         Profile newProfile = profileRepository.save(transformProfileInputDtoToProfile(profileInputDto));
         return newProfile.getFirstName() + " " + newProfile.getLastName();

@@ -52,6 +52,12 @@ public class ContactFormController {
         return ResponseEntity.ok().body("Contact Form with id: " + contactFormId + " was successfully deleted!");
     }
 
+    @DeleteMapping("")
+    public ResponseEntity<String> deleteAllContactForms() {
+        contactFormService.deleteAllContactForms();
+        return ResponseEntity.ok().body("All contact forms successfully deleted!");
+    }
+
     // Repository methods
     @GetMapping("/search/name")
     public ResponseEntity<List<ContactFormOutputDto>> findContactFormsByNameContains(@RequestParam("name") String name) {

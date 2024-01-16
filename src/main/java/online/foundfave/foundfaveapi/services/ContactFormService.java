@@ -48,6 +48,10 @@ public class ContactFormService {
         contactFormRepository.deleteById(contactFormId);
     }
 
+    public void deleteAllContactForms() {
+        contactFormRepository.deleteAll();
+    }
+
     // Repository methods
     public List<ContactFormOutputDto> findContactFormsByNameContains(String name) {
         List<ContactFormOutputDto> collection = new ArrayList<>();
