@@ -20,6 +20,6 @@ public class Movie {
 
     private String movieTitle;
     private String movieSummary;
-    private String movieYearOfRelease;
+    private Integer movieYearOfRelease;
     private String movieImageUrl;
 }
