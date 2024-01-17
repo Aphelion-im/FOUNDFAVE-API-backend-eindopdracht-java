@@ -43,9 +43,9 @@ public class CharacterController {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
-        String newCharacter = characterService.createCharacter(characterInputDto);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newCharacter).toUriString());
-        return ResponseEntity.created(uri).body("Character: " + "'" + newCharacter + "'" + " created successfully!");
+        Long newCharacterId = characterService.createCharacter(characterInputDto);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newCharacterId).toUriString());
+        return ResponseEntity.created(uri).body("New character added with id: " + newCharacterId + ".");
     }
 
     // TODO: Er is geen goede feedback als velden verkeerd worden ingevuld, bijvoorbeeld de enum: Malez ipv Male

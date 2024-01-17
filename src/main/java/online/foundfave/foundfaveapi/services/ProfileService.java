@@ -2,6 +2,7 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.ProfileInputDto;
 import online.foundfave.foundfaveapi.dtos.output.ProfileOutputDto;
+import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.ProfileAlreadyExistsException;
 import online.foundfave.foundfaveapi.exceptions.ProfileNotFoundException;
 import online.foundfave.foundfaveapi.models.Profile;
@@ -42,13 +43,13 @@ public class ProfileService {
         return outputDto;
     }
 
-    public String createProfile(ProfileInputDto profileInputDto) {
+    public Long createProfile(ProfileInputDto profileInputDto) {
         Optional<Profile> user = profileRepository.findByFirstNameAndLastName(profileInputDto.firstName, profileInputDto.lastName);
         if (user.isPresent()) {
             throw new ProfileAlreadyExistsException("Profile: " + "'" + profileInputDto.firstName + " " + profileInputDto.lastName + "'" + " already exists!");
         }
         Profile newProfile = profileRepository.save(transformProfileInputDtoToProfile(profileInputDto));
-        return newProfile.getFirstName() + " " + newProfile.getLastName();
+        return newProfile.getProfileId();
     }
 
     public void updateProfile(Long profileId, ProfileInputDto profileInputDto) {
@@ -61,11 +62,16 @@ public class ProfileService {
         profileRepository.save(profile);
     }
 
+    // Currently, profiles coupled with users, are not allowed to be deleted.
     public void deleteProfile(Long profileId) {
         if (!profileRepository.existsById(profileId)) {
             throw new ProfileNotFoundException("Profile with id: " + profileId + " not found!");
         }
-        profileRepository.deleteById(profileId);
+        try {
+            profileRepository.deleteById(profileId);
+        } catch (Exception e) {
+            throw new BadRequestException("You are not allowed to delete this profile!");
+        }
     }
 
     // Repository methods

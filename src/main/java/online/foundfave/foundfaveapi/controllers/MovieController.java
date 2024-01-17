@@ -42,9 +42,9 @@ public class MovieController {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
-        String newMovie = movieService.createMovie(movieInputDto);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newMovie).toUriString());
-        return ResponseEntity.created(uri).body("Movie: " + "'" + newMovie + "'" + " registered successfully!");
+        Long newMovieId = movieService.createMovie(movieInputDto);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newMovieId).toUriString());
+        return ResponseEntity.created(uri).body("New movie added with id: " + newMovieId + ".");
     }
 
     @PutMapping(value = "/movie/{movieId}")

@@ -47,13 +47,13 @@ public class MovieService {
         return movieOutputDto;
     }
 
-    public String createMovie(MovieInputDto movieInputDto) {
+    public Long createMovie(MovieInputDto movieInputDto) {
         Optional<Movie> movie = movieRepository.findByMovieTitleIgnoreCase(movieInputDto.movieTitle);
         if (movie.isPresent()) {
             throw new MovieAlreadyExistsException("Movie: " + "'" + movieInputDto.movieTitle + "'" + " already exists!");
         }
         Movie newMovie = movieRepository.save(transformMovieInputDtoToMovie(movieInputDto));
-        return newMovie.getMovieTitle();
+        return newMovie.getMovieId();
     }
 
     public String updateMovie(long movieId, MovieInputDto movieInputDto) {

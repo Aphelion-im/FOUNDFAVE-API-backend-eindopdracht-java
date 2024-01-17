@@ -43,9 +43,9 @@ public class ProfileController {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
-        String newProfile = profileService.createProfile(profileInputDto);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newProfile).toUriString());
-        return ResponseEntity.created(uri).body("Profile: " + "'" + newProfile + "'" + " registered successfully!");
+        Long newProfileId = profileService.createProfile(profileInputDto);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newProfileId).toUriString());
+        return ResponseEntity.created(uri).body("New profile created with id: " + newProfileId + ".");
     }
 
     // TODO: Ook hier geen terugkoppeling als je foutieve info invoert
@@ -75,9 +75,12 @@ public class ProfileController {
     }
 
     // Relational methods
+
+
     // TODO: Add/assign profile to user
     // TODO: Of nieuw profiel aanmaken met een nieuw account
     // TODO: Testen: aanmaken nieuw account
+    // TODO: getProfileByUsername
 
 
 
