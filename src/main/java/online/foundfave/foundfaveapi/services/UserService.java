@@ -152,17 +152,30 @@ public class UserService {
 
     // Relational methods
     public void assignProfileToUser(String username, Long profileId) {
+        var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        var optionalProfile = profileRepository.findById(profileId).orElseThrow(() -> new ProfileNotFoundException("Profile not found with id: " + profileId + "!"));
+        if (optionalUser.getProfile() != null) {
+            throw new BadRequestException("This user is already assigned to a profile.");
+        }
+        optionalUser.setProfile(optionalProfile);
+        userRepository.save(optionalUser);
+    }
+
+    public void detachProfileFromToUser(String username) {
         var optionalUser = userRepository.findById(username);
-        var optionalProfile = profileRepository.findById(profileId);
-        if (optionalUser.isPresent() && optionalProfile.isPresent()) {
+        if (optionalUser.isPresent()) {
             var user = optionalUser.get();
-            var profile = optionalProfile.get();
-            user.setProfile(profile);
-            userRepository.save(user);
+            if (user.getProfile() == null) {
+                throw new BadRequestException("This profile has already been detached from its user!");
+            } else {
+                user.setProfile(null);
+                userRepository.save(user);
+            }
         } else {
-            throw new ProfileNotFoundException("Profile not found!");
+            throw new UsernameNotFoundException("User not found!");
         }
     }
+
 
     // Image methods
 

@@ -70,7 +70,7 @@ public class ProfileService {
         profileRepository.save(profile);
     }
 
-    // Currently, profiles coupled with users, are not allowed to be deleted.
+    // Currently, profiles assigned to users, are not allowed to be deleted. First use the detachProfileFromUser method.
     public void deleteProfile(Long profileId) {
         if (!profileRepository.existsById(profileId)) {
             throw new ProfileNotFoundException("Profile with id: " + profileId + " not found!");

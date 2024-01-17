@@ -127,15 +127,17 @@ public class UserController {
     }
 
     // Relational methods
-    @PutMapping("/{username}/profile")
+    @PutMapping("/assign/profile/{username}")
     public ResponseEntity<Object> assignProfileToUser(@PathVariable("username") String username, @Valid @RequestBody IdInputDto idInputDto) {
         userService.assignProfileToUser(username, idInputDto.id);
-        return ResponseEntity.ok().body("User with username: " + "'" + username + "'" + " now coupled with profile with id: " + idInputDto.id + ".");
+        return ResponseEntity.ok().body("User with username: " + "'" + username + "'" + " now assigned to profile with id: " + idInputDto.id + ".");
     }
 
-
-
-
+    @PutMapping("/detach/profile/{username}")
+    public ResponseEntity<Object> detachProfileFromToUser(@PathVariable("username") String username) {
+        userService.detachProfileFromToUser(username);
+        return ResponseEntity.ok().body("User with username: " + "'" + username + "'" + " now detached from its profile!");
+    }
 
 
 // TODO: Add character to Favorites
