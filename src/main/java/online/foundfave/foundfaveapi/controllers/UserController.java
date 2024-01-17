@@ -19,7 +19,7 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -29,13 +29,13 @@ public class UserController {
     }
 
     // Basic CRUD methods
-    @GetMapping(value = "")
+    @GetMapping("")
     public ResponseEntity<List<UserOutputDto>> getUsers() {
         List<UserOutputDto> userOutputDtosCollection = userService.getUsers();
         return ResponseEntity.ok().body(userOutputDtosCollection);
     }
 
-    @GetMapping(value = "/{username}")
+    @GetMapping("/{username}")
     public ResponseEntity<UserOutputDto> getUser(@PathVariable("username") String username) {
         UserOutputDto optionalUser = userService.getUser(username);
         return ResponseEntity.ok().body(optionalUser);
@@ -43,7 +43,7 @@ public class UserController {
 
     // TODO: Everytime a user is created, create a corresponding profile with the same id. Geef standaardwaarden mee zoals John doe, johndoe@email.com, etc.
     // TODO: createAccountWithProfile, withoutProfile
-    @PostMapping(value = "")
+    @PostMapping("")
     public ResponseEntity<Object> createUser(@Valid @RequestBody UserInputDto userInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
@@ -56,7 +56,7 @@ public class UserController {
 
     // TODO: User kan eigen password niet aanpassen
     // Admin only. Admin is allowed to overwrite passwords from other users.
-    @PutMapping(value = "/admin/{username}")
+    @PutMapping("/admin/{username}")
     public ResponseEntity<Object> updateUserPassword(@PathVariable("username") String username, @RequestBody UserInputDto userInputDto) {
         userService.updateUserPassword(username, userInputDto);
         return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " password updated!");
@@ -65,23 +65,23 @@ public class UserController {
     // TODO: Validatie mogelijk op een put request?
     // TODO: Betere manier vinden om andere gebruikers te beschermen tegen het aanpassen van hun gegevens door een gebruiker
     // User is not allowed to overwrite passwords from other users.
-    @PutMapping(value = "/user/{username}")
+    @PutMapping("/user/{username}")
     public ResponseEntity<String> updateUser(@PathVariable("username") String username, @RequestBody UserInputDto userInputDto) {
         return ResponseEntity.ok(userService.updateUser(username, userInputDto));
     }
 
-    @DeleteMapping(value = "/{username}")
+    @DeleteMapping("/{username}")
     public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
         userService.deleteUser(username);
         return ResponseEntity.status(HttpStatus.OK).body("Username: " + "'" + username + "'" + " deleted!");
     }
 
-    @GetMapping(value = "/{username}/authorities")
+    @GetMapping("/{username}/authorities")
     public ResponseEntity<Object> getUserAuthorities(@PathVariable("username") String username) {
         return ResponseEntity.ok().body(userService.getAuthorities(username));
     }
 
-    @PostMapping(value = "/{username}/authorities")
+    @PostMapping("/{username}/authorities")
     public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
         try {
             String authorityName = (String) fields.get("authority");
@@ -92,19 +92,19 @@ public class UserController {
         }
     }
 
-    @DeleteMapping(value = "/{username}/authorities/{authority}")
+    @DeleteMapping("/{username}/authorities/{authority}")
     public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
         userService.removeAuthority(username, authority);
         return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " has been demoted!");
     }
 
-    @GetMapping(value = "/exists/{username}")
+    @GetMapping("/exists/{username}")
     public ResponseEntity<Object> doesUserExist(@PathVariable("username") String username) {
         return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " exists: " + userService.userExists(username));
     }
 
     // Repository methods
-    @GetMapping(value = "/search")
+    @GetMapping("/search")
     public ResponseEntity<UserOutputDto> findUserByEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(userService.findUserByEmail(email));
     }
@@ -132,6 +132,10 @@ public class UserController {
         userService.assignProfileToUser(username, idInputDto.id);
         return ResponseEntity.ok().body("User with username: " + "'" + username + "'" + " now coupled with profile with id: " + idInputDto.id + ".");
     }
+
+
+
+
 
 
 // TODO: Add character to Favorites

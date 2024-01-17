@@ -2,24 +2,32 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.ProfileInputDto;
 import online.foundfave.foundfaveapi.dtos.output.ProfileOutputDto;
+import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.ProfileAlreadyExistsException;
 import online.foundfave.foundfaveapi.exceptions.ProfileNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
 import online.foundfave.foundfaveapi.models.Profile;
+import online.foundfave.foundfaveapi.models.User;
 import online.foundfave.foundfaveapi.repositories.ProfileRepository;
+import online.foundfave.foundfaveapi.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static online.foundfave.foundfaveapi.services.UserService.transformUserToUserOutputDto;
+
 @Service
 public class ProfileService {
 
     private final ProfileRepository profileRepository;
+    private final UserRepository userRepository;
 
-    public ProfileService(ProfileRepository profileRepository) {
+    public ProfileService(ProfileRepository profileRepository, UserRepository userRepository) {
         this.profileRepository = profileRepository;
+        this.userRepository = userRepository;
     }
 
     // Basic CRUD methods
@@ -100,6 +108,19 @@ public class ProfileService {
     }
 
     // Relational methods
+    public ProfileOutputDto getProfileByUsername(String username) {
+        UserOutputDto userOutputDto;
+        Optional<User> user = userRepository.findById(username);
+        if (user.isPresent()) {
+            userOutputDto = transformUserToUserOutputDto(user.get());
+        } else {
+            throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
+        }
+        if (userOutputDto.getProfile() == null) {
+            throw new BadRequestException("This user has no profile!");
+        }
+        return transformProfileToProfileOutputDto(userOutputDto.getProfile());
+    }
 
 
     // Image methods

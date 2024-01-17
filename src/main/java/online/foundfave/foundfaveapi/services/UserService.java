@@ -37,14 +37,14 @@ public class UserService {
     }
 
     public UserOutputDto getUser(String username) {
-        UserOutputDto outputDto;
+        UserOutputDto userOutputDto;
         Optional<User> user = userRepository.findById(username);
         if (user.isPresent()) {
-            outputDto = transformUserToUserOutputDto(user.get());
+            userOutputDto = transformUserToUserOutputDto(user.get());
         } else {
             throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
         }
-        return outputDto;
+        return userOutputDto;
     }
 
     // TODO: Everytime a user is created, create a corresponding profile with the same id
@@ -163,7 +163,6 @@ public class UserService {
             throw new ProfileNotFoundException("Profile not found!");
         }
     }
-
 
     // Image methods
 

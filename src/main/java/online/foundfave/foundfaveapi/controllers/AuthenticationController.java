@@ -30,12 +30,12 @@ public class AuthenticationController {
         this.jwtUtl = jwtUtl;
     }
 
-    @GetMapping(value = "/authenticated")
+    @GetMapping("/authenticated")
     public ResponseEntity<Object> authenticated(Principal principal) {
         return ResponseEntity.ok().body(principal);
     }
 
-    @PostMapping(value = "/login")
+    @PostMapping("/login")
     public ResponseEntity<?> logIn(@RequestBody AuthenticationRequest authenticationRequest) {
         String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();

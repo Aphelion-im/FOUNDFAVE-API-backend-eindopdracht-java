@@ -38,7 +38,7 @@ public class CharacterController {
         return ResponseEntity.ok(characterOutputDto);
     }
 
-    @PostMapping(value = "")
+    @PostMapping("")
     public ResponseEntity<Object> createCharacter(@Valid @RequestBody CharacterInputDto characterInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
@@ -49,12 +49,12 @@ public class CharacterController {
     }
 
     // TODO: Er is geen goede feedback als velden verkeerd worden ingevuld, bijvoorbeeld de enum: Malez ipv Male
-    @PutMapping(value = "/character/{characterId}")
+    @PutMapping("/character/{characterId}")
     public ResponseEntity<String> updateCharacter(@PathVariable("characterId") Long characterId, @RequestBody CharacterInputDto characterInputDto) {
         return ResponseEntity.ok(characterService.updateCharacter(characterId, characterInputDto));
     }
 
-    @DeleteMapping(value = "/{characterId}")
+    @DeleteMapping("/{characterId}")
     public ResponseEntity<Object> deleteCharacter(@PathVariable("characterId") Long characterId) {
         characterService.deleteCharacter(characterId);
         return ResponseEntity.status(HttpStatus.OK).body("Character with id: " + characterId + " deleted!");

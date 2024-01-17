@@ -25,19 +25,19 @@ public class MovieController {
     }
 
     // Basic CRUD methods
-    @GetMapping(value = "")
+    @GetMapping("")
     public ResponseEntity<List<MovieOutputDto>> getMovies() {
         List<MovieOutputDto> movieOutputDtosCollection = movieService.getMovies();
         return ResponseEntity.ok().body(movieOutputDtosCollection);
     }
 
-    @GetMapping(value = "/{movieId}")
+    @GetMapping("/{movieId}")
     public ResponseEntity<MovieOutputDto> getMovie(@PathVariable("movieId") Long movieId) {
         MovieOutputDto optionalMovie = movieService.getMovie(movieId);
         return ResponseEntity.ok().body(optionalMovie);
     }
 
-    @PostMapping(value = "")
+    @PostMapping("")
     public ResponseEntity<Object> createMovie(@Valid @RequestBody MovieInputDto movieInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
@@ -47,25 +47,25 @@ public class MovieController {
         return ResponseEntity.created(uri).body("New movie added with id: " + newMovieId + ".");
     }
 
-    @PutMapping(value = "/movie/{movieId}")
+    @PutMapping("/movie/{movieId}")
     public ResponseEntity<String> updateMovie(@PathVariable("movieId") Long movieId, @RequestBody MovieInputDto movieInputDto) {
         return ResponseEntity.ok(movieService.updateMovie(movieId, movieInputDto));
     }
 
-    @DeleteMapping(value = "/{movieId}")
+    @DeleteMapping("/{movieId}")
     public ResponseEntity<Object> deleteMovie(@PathVariable("movieId") Long movieId) {
         movieService.deleteMovie(movieId);
         return ResponseEntity.status(HttpStatus.OK).body("Movie with id: " + movieId + " deleted!");
     }
 
     // Repository methods
-    @GetMapping(value = "/search/starting-with")
+    @GetMapping("/search/starting-with")
     public ResponseEntity<List<MovieOutputDto>> findMovieByTitleStartingWith(@RequestParam("title") String title) {
         List<MovieOutputDto> movies = movieService.findMoviesByTitleStartingWith(title);
         return ResponseEntity.ok(movies);
     }
 
-    @GetMapping(value = "/search/contains")
+    @GetMapping("/search/contains")
     public ResponseEntity<List<MovieOutputDto>> findMovieByTitleContains(@RequestParam("title") String title) {
         List<MovieOutputDto> movies = movieService.findMoviesByTitleContains(title);
         return ResponseEntity.ok(movies);

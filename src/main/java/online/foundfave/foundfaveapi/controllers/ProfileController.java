@@ -26,19 +26,19 @@ public class ProfileController {
     }
 
     // Basic CRUD methods
-    @GetMapping(value = "")
+    @GetMapping("")
     public ResponseEntity<List<ProfileOutputDto>> getProfiles() {
         List<ProfileOutputDto> profileOutputDtosCollection = profileService.getProfiles();
         return ResponseEntity.ok().body(profileOutputDtosCollection);
     }
 
-    @GetMapping(value = "/{profileId}")
+    @GetMapping("/{profileId}")
     public ResponseEntity<ProfileOutputDto> getProfile(@PathVariable("profileId") Long profileId) {
         ProfileOutputDto optionalProfile = profileService.getProfile(profileId);
         return ResponseEntity.ok().body(optionalProfile);
     }
 
-    @PostMapping(value = "")
+    @PostMapping("")
     public ResponseEntity<Object> createProfile(@Valid @RequestBody ProfileInputDto profileInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
@@ -49,13 +49,13 @@ public class ProfileController {
     }
 
     // TODO: Ook hier geen terugkoppeling als je foutieve info invoert
-    @PutMapping(value = "/profile/{profileId}")
+    @PutMapping("/profile/{profileId}")
     public ResponseEntity<Object> updateProfile(@Valid @PathVariable("profileId") Long profileId, @RequestBody ProfileInputDto profileInputDto) {
         profileService.updateProfile(profileId, profileInputDto);
         return ResponseEntity.ok().body("Profile with id: " + profileId + " updated!");
     }
 
-    @DeleteMapping(value = "/{profileId}")
+    @DeleteMapping("/{profileId}")
     public ResponseEntity<Object> deleteProfile(@PathVariable("profileId") Long profileId) {
         profileService.deleteProfile(profileId);
         return ResponseEntity.status(HttpStatus.OK).body("Profile with id: " + profileId + " successfully deleted!");
@@ -75,22 +75,12 @@ public class ProfileController {
     }
 
     // Relational methods
-
-
-    // TODO: Add/assign profile to user
-    // TODO: Of nieuw profiel aanmaken met een nieuw account
-    // TODO: Testen: aanmaken nieuw account + koppelen profiel
-    // TODO: getProfileByUsername
-
-
-
-
-
-
-
+    @GetMapping("profile/{username}")
+    public ResponseEntity<ProfileOutputDto> getProfileByUsername(@PathVariable("username") String username) {
+        ProfileOutputDto profileOutputDto = profileService.getProfileByUsername(username);
+        return ResponseEntity.ok().body(profileOutputDto);
+    }
 
     // Image methods
     // TODO: Upload profilePic
-
-
 }
