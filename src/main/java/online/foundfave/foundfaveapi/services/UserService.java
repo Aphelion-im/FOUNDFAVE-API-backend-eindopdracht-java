@@ -151,21 +151,6 @@ public class UserService {
     }
 
     // Relational methods
-//    public void assignRemoteControllerToTelevision(Long id, Long remoteControllerId) {
-//        var optionalTelevision = televisionRepository.findById(id);
-//        var optionalRemoteController = remoteControllerRepository.findById(remoteControllerId);
-//
-//        if(optionalTelevision.isPresent() && optionalRemoteController.isPresent()) {
-//            var television = optionalTelevision.get();
-//            var remoteController = optionalRemoteController.get();
-//
-//            television.setRemoteController(remoteController);
-//            televisionRepository.save(television);
-//        } else {
-//            throw new RecordNotFoundException();
-//        }
-//    }
-
     public void assignProfileToUser(String username, Long profileId) {
         var optionalUser = userRepository.findById(username);
         var optionalProfile = profileRepository.findById(profileId);
