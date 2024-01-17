@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import online.foundfave.foundfaveapi.models.Authority;
+import online.foundfave.foundfaveapi.models.Profile;
 
 import java.util.Set;
 
@@ -17,6 +18,7 @@ public class UserOutputDto {
     public String username;
     public Boolean enabled;
     public String email;
+    public Profile profile;
 
     public Set<Authority> authorities;
 }

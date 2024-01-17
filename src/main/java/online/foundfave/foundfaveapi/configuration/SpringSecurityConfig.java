@@ -49,7 +49,6 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests()
                 // .requestMatchers("/**").permitAll()
 
-                // TODO: Beter optimaliseren en verdelen
                 /* Public */
                 .requestMatchers(HttpMethod.GET, "/info").permitAll()
                 .requestMatchers(HttpMethod.GET, "/test").permitAll()

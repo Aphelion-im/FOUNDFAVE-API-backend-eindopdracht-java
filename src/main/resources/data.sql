@@ -2,11 +2,11 @@ INSERT INTO users (username, password, email, enabled)
 VALUES ('user', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'user@foundfave.online', TRUE),
        ('admin', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'admin@foundfave.online', TRUE),
        ('andre', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'andre@foundfave.online', TRUE),
-       ('adam', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'adam@hotmail.com', TRUE),
-       ('bruce', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'bruce@avengershq.com', TRUE),
-       ('priscilla', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'priscilla@protonmail.com', TRUE),
-       ('caroline', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'caroline@protonmail.com', TRUE),
-       ('sandy', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'sandy@hotmail.live', TRUE),
+       ('adam78', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'adam@hotmail.com', TRUE),
+       ('bruce1980', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'bruce@avengershq.com', TRUE),
+       ('priscilla123', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'priscilla@protonmail.com', TRUE),
+       ('caroline22', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'caroline@protonmail.com', TRUE),
+       ('sandy86', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'sandy@hotmail.live', TRUE),
        ('peter', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'depeters@depeters.nl', TRUE),
        ('pieter', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'pieter@uwv.nl', TRUE),
        ('ellen1970', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'ellen@uwv.nl', TRUE),
@@ -15,17 +15,50 @@ VALUES ('user', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 
        ('kim', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'kim@xs4all.nl', TRUE),
        ('kees', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'kees@xs4all.nl', TRUE);
 
+INSERT INTO profiles (profile_id, first_name, last_name, gender, date_of_birth, profile_image_url)
+VALUES (1000, 'User', 'de Groot', 'Male', '28-07-2000', 'Image url'),
+       (1001, 'Admin', 'de Boer', 'Male', '28-01-1999', 'Image url'),
+       (1002, 'André', 'de Vries', 'Male', '21-01-1974', 'Image url'),
+       (1003, 'Adam', 'Li', 'Male', '16-01-2014', 'Image url'),
+       (1004, 'Bruce', 'Groothoek', 'Male', '07-01-1984', 'Image url'),
+       (1005, 'Priscilla', 'de Groot', 'Female', '21-01-1999', 'Image url'),
+       (1006, 'Caroline', 'Kemp', 'Female', '22-01-2011', 'Image url'),
+       (1007, 'Sandy', 'van Doorn', 'Female', '31-01-2002', 'Image url'),
+       (1008, 'Peter', 'Groot', 'Male', '14-01-1987', 'Image url'),
+       (1009, 'Pieter', 'Koning', 'Male', '01-01-1983', 'Image url'),
+       (1010, 'Ellen', 'Koning', 'Female', '01-01-1983', 'Image url'),
+       (1011, 'Mike', 'Grootfaam', 'Male', '01-01-1983', 'Image url'),
+       (1012, 'Michael', 'de Vries', 'Male', '01-01-1983', 'Image url'),
+       (1013, 'Kim', 'Poort', 'Female', '01-01-1983', 'Image url'),
+       (1014, 'Kees', 'van Haga', 'Male', '01-01-1983', 'Image url');
+
+UPDATE users SET profile_profile_id = 1000 WHERE username = 'user';
+UPDATE users SET profile_profile_id = 1001 WHERE username = 'admin';
+UPDATE users SET profile_profile_id = 1002 WHERE username = 'andre';
+UPDATE users SET profile_profile_id = 1003 WHERE username = 'adam78';
+UPDATE users SET profile_profile_id = 1004 WHERE username = 'bruce1980';
+UPDATE users SET profile_profile_id = 1005 WHERE username = 'priscilla123';
+UPDATE users SET profile_profile_id = 1006 WHERE username = 'caroline22';
+UPDATE users SET profile_profile_id = 1007 WHERE username = 'sandy86';
+UPDATE users SET profile_profile_id = 1008 WHERE username = 'peter';
+UPDATE users SET profile_profile_id = 1009 WHERE username = 'pieter';
+UPDATE users SET profile_profile_id = 1010 WHERE username = 'ellen1970';
+UPDATE users SET profile_profile_id = 1011 WHERE username = 'mike';
+UPDATE users SET profile_profile_id = 1012 WHERE username = 'michael';
+UPDATE users SET profile_profile_id = 1013 WHERE username = 'kim';
+UPDATE users SET profile_profile_id = 1014 WHERE username = 'kees';
+
 INSERT INTO authorities (username, authority)
 VALUES ('user', 'ROLE_USER'),
        ('admin', 'ROLE_USER'),
        ('admin', 'ROLE_ADMIN'),
        ('andre', 'ROLE_USER'),
        ('andre', 'ROLE_ADMIN'),
-       ('adam', 'ROLE_USER'),
-       ('bruce', 'ROLE_USER'),
-       ('priscilla', 'ROLE_USER'),
-       ('caroline', 'ROLE_USER'),
-       ('sandy', 'ROLE_USER'),
+       ('adam78', 'ROLE_USER'),
+       ('bruce1980', 'ROLE_USER'),
+       ('priscilla123', 'ROLE_USER'),
+       ('caroline22', 'ROLE_USER'),
+       ('sandy86', 'ROLE_USER'),
        ('peter', 'ROLE_USER'),
        ('pieter', 'ROLE_USER'),
        ('ellen1970', 'ROLE_USER'),
@@ -38,7 +71,7 @@ INSERT INTO contact_forms (contact_form_id, name, email, comments, time_stamp)
 VALUES (1000, 'André de Groot', 'andre.de.groot@novi.nl', 'Leuke site!', '2024-01-01 14:20:16.203216'),
        (1001, 'Michael de Boer', 'michael.de.boer@novi.nl', 'Ik zou graag meer willen zien van Fantastic four', '2024-01-02 22:26:05.483236'),
        (1002, 'Irene de Visser', 'irene.de.visser@novi.nl', 'Wolverine graag!', '2024-01-03 20:30:45.404232'),
-       (1003, 'Gerard de Vries', 'gerard_devries@protonmail.com', 'Vinden jullie Phase 4 ook wat minder?', '2024-01-03 21:22:02.201236'),
+       (1003, 'Gerard de Vries', 'gerard_devries@protonmail.com', 'Vinden jullie Phase 4 ook wat minder leuk?', '2024-01-03 21:22:02.201236'),
        (1004, 'Anton', 'anton@hotmail.nl', 'Krijgen jullie ook QuickSilver en X-men binnenkort?', '2024-01-06 22:26:05.403236');
 
 INSERT INTO characters (character_id, character_alias_name, character_real_name, character_actor_name, character_title, character_gender, character_summary, character_description, character_image_url)
@@ -57,22 +90,6 @@ VALUES (1000, 'Hulk', 'Robert Bruce Banner', 'Mark Ruffalo', 'The incredible Hul
     (1012, 'Captain Marvel', 'Carol Susan Jane Danvers', 'Brie Larson', 'Captain Marvel', 'Female', 'Carol Danvers becomes one of the universe''s most powerful heroes when Earth is caught in the middle of a galactic war between two alien races.', 'Rediscovering her human identity and past, Carol Danvers learned to channel her powers for good, becoming the Super Hero Captain Marvel. Now an ally to Earth''s mightiest heroes, the Avengers, she travels across the stars to give aid to those in need.', 'captain-marvel'),
     (1013, 'Nick Fury', 'Nicholas Joseph Fury', 'Samuel L. Jackson', 'Nick Fury', 'Male', 'A veteran S.H.I.E.L.D. operative, Nick Fury continues the legacy as one of the greatest super spies in the world.', 'Nick Fury leads S.H.I.E.L.D. through hell and high water to combat the forces that threaten Earth from within and without.', 'nick-fury.jpg'),
     (1014, 'Vision', 'Vision', 'Paul Bettany', 'Vision', 'Male', 'The android called Vision defies physics and fights as an Avenger with the power of density manipulation and his flawless computer brain.', 'Upon gaining sentience, Vision offered to help fight Ultron. Since then, he has been doing his best to understand and control the Mind Stone in his forehead and prove himself as an Avenger, all while learning what it means to be human.', 'vision.jpg');
-
-INSERT INTO profiles (profile_id, first_name, last_name, gender, date_of_birth, profile_image_url)
-VALUES (1000, 'André', 'de Groot', 'Male', '28-07-2000', 'Image url'),
-       (1001, 'Michael', 'de Boer', 'Male', '28-01-1999', 'Image url'),
-       (1002, 'Adam', 'de Vries', 'Male', '21-01-1974', 'Image url'),
-       (1003, 'Bruce', 'Li', 'Male', '16-01-2014', 'Image url'),
-       (1004, 'Priscilla', 'Groothoek', 'Female', '07-01-1984', 'Image url'),
-       (1005, 'Caroline', 'de Groot', 'Female', '21-01-1999', 'Image url'),
-       (1006, 'Sandy', 'Kemp', 'Female', '22-01-2011', 'Image url'),
-       (1007, 'Peter', 'de Groot', 'Male', '31-01-2002', 'Image url'),
-       (1008, 'Pieter', 'Groot', 'Male', '14-01-1987', 'Image url'),
-       (1009, 'Ellen', 'Koning', 'Female', '01-01-1983', 'Image url'),
-       (1010, 'Mike', 'de Groot', 'Male', '01-01-1983', 'Image url'),
-       (1011, 'Michael', 'Grootfaam', 'Male', '01-01-1983', 'Image url'),
-       (1012, 'Kim', 'de Vries', 'Female', '01-01-1983', 'Image url'),
-       (1013, 'Kees', 'Poort', 'Male', '01-01-1983', 'Image url');
 
 INSERT INTO movies (movie_id, movie_title, movie_summary, movie_year_of_release, movie_image_url)
 VALUES (1000, 'The Incredible Hulk', 'Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.', 2008, 'image-url-hulk'),
@@ -106,6 +123,7 @@ VALUES (1000, 'The Incredible Hulk', 'Bruce Banner, a scientist on the run from 
        (1028, 'Doctor Strange', 'While on a journey of physical and spiritual healing, a brilliant neurosurgeon is drawn into the world of the mystic arts.', 2016, 'image-url-doctor-strange'),
        (1029, 'Captain Marvel', 'Carol Danvers becomes one of the universe''s most powerful heroes when Earth is caught in the middle of a galactic war between two alien races.', 2019, 'image-url-captain-marvel'),
        (1030, 'The Marvels', 'Carol Danvers gets her powers entangled with those of Kamala Khan and Monica Rambeau, forcing them to work together to save the universe.', 2023, 'image-url-the-marvels');
+
 
 
 

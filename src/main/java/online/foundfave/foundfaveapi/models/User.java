@@ -1,5 +1,6 @@
 package online.foundfave.foundfaveapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,6 +35,10 @@ public class User {
     private String email;
 
     // Relations
+    @OneToOne
+    @JsonIgnore
+    private Profile profile;
+
     @OneToMany(
             targetEntity = Authority.class,
             mappedBy = "username",
@@ -41,6 +46,12 @@ public class User {
             orphanRemoval = true,
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
+
+
+
+
+
+
 
 //    @OneToMany(mappedBy = "user")
 //    @JsonIgnore

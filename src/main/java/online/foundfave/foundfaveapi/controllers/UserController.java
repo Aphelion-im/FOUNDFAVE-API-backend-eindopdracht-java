@@ -126,6 +126,12 @@ public class UserController {
     }
 
     // Relational methods
+
+
+
+
+
+
 // TODO: Add character to Favorites
 // TODO: Get all favorites from username
 // TODO: Delete favorite

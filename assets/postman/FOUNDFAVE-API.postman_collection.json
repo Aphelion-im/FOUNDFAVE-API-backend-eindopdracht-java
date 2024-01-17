@@ -46,7 +46,7 @@
 			"response": []
 		},
 		{
-			"name": "showAvailableQueries (Public)",
+			"name": "showAllAvailableQueries (Public)",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -236,7 +236,36 @@
 			"response": []
 		},
 		{
-			"name": "getUserByEmail",
+			"name": "getActiveUsers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/active",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"active"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findUserByEmail",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -271,6 +300,78 @@
 			"response": []
 		},
 		{
+			"name": "findUserByEmailContains",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/search/email?email=admin",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"search",
+						"email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findUserByUsernameContains",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/search/username?username=admin",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"search",
+						"username"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "updateUserPassword (Admin only)",
 			"request": {
 				"auth": {
@@ -287,7 +388,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"password\" : \"bananen\"\r\n}",
+					"raw": "{\r\n    \"password\": \"bananen\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -295,7 +396,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/users/admin/andre4",
+					"raw": "localhost:8080/users/admin/andre",
 					"host": [
 						"localhost"
 					],
@@ -303,7 +404,7 @@
 					"path": [
 						"users",
 						"admin",
-						"andre4"
+						"andre"
 					]
 				}
 			},
@@ -326,7 +427,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"password\": \"bananen\",\r\n    \"apikey\" : null,\r\n    \"email\": \"andre44@novi.nl\"\r\n\r\n\r\n}",
+					"raw": "{\r\n    \"password\": \"bananen\",\r\n    \"apikey\": null,\r\n    \"email\": \"andre444444@novi.nl\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -334,7 +435,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/users/user/andre4",
+					"raw": "localhost:8080/users/user/andre",
 					"host": [
 						"localhost"
 					],
@@ -342,7 +443,7 @@
 					"path": [
 						"users",
 						"user",
-						"andre4"
+						"andre"
 					]
 				}
 			},
@@ -364,14 +465,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andregfgfg",
+					"raw": "localhost:8080/users/andre4",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andregfgfg"
+						"andre4"
 					]
 				}
 			},
@@ -506,7 +607,7 @@
 			"response": []
 		},
 		{
-			"name": "postContactForm",
+			"name": "createContactForm",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -585,6 +686,150 @@
 			"response": []
 		},
 		{
+			"name": "findContactFormsByNameContains",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/contactforms/search/name?name=an",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contactforms",
+						"search",
+						"name"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "an"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findContactFormsByEmailContains",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/contactforms/search/email?email=novi",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contactforms",
+						"search",
+						"email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "novi"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findContactFormsByCommentsContains",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/contactforms/search/comments?comments=jul",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contactforms",
+						"search",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "comments",
+							"value": "jul"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "deleteContactForm",
 			"request": {
 				"auth": {
@@ -617,6 +862,1096 @@
 					"path": [
 						"contactforms",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteAllContactForms",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/contactforms",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contactforms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllCharacters",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCharacterById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMovies",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/movies",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMovie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/movies/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMovie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"movieTitle\": \"The Incredible Hulk 54\",\r\n    \"movieSummary\": \"Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.\",\r\n    \"movieYearOfRelease\": 2016,\r\n    \"movieImageUrl\": \"image-url-hulk\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateMovie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"movieTitle\": \"The Incredible Hulkster\",\r\n    \"movieSummary\": \"Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.\",\r\n    \"movieYearOfRelease\": \"2008\",\r\n    \"movieImageUrl\": \"image-url-hulk\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies/movie/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"movie",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMovie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/movies/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findMoviesByTitleStartingWith",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies/search/starting-with?title=cap",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"search",
+						"starting-with"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "cap"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findMoviesByTitleContains",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies/search/contains?title=amer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"search",
+						"contains"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "amer"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findMoviesByTitleSortedAsc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies/search/sorted-asc?title=avengers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"search",
+						"sorted-asc"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "avengers"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findMoviesByTitleSortedDesc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies/search/sorted-desc?title=Avengers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"search",
+						"sorted-desc"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Avengers"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findMovieByYearOfRelease",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movies/search/year?year=2008",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"search",
+						"year"
+					],
+					"query": [
+						{
+							"key": "year",
+							"value": "2008"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findCharactersByNameStartingWith",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/search/starting-with?name=vision",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"search",
+						"starting-with"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "vision"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findCharactersByNameContains",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/search/contains?name=vision",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"search",
+						"contains"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "vision"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findCharactersByNameSortedDesc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/search/sorted-desc?name=vision",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"search",
+						"sorted-desc"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "vision"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findCharactersByNameSortedAsc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/search/sorted-asc?name=vision",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"search",
+						"sorted-asc"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "vision"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findCharactersByActorNameContains",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/search/actor-name?name=robert",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"search",
+						"actor-name"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "robert"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createCharacter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"characterAliasName\": \"Andre\",\r\n    \"characterRealName\": \"Andreus\",\r\n    \"characterActorName\": \"andre d g\",\r\n    \"characterTitle\": \"this is a title\",\r\n    \"characterGender\": \"Male\",\r\n    \"characterSummary\": \"This is a summary\",\r\n    \"characterDescription\": \"characterDescription\",\r\n    \"characterImageUrl\": \"image\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCharacter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"characterAliasName\": \"Hulkie\",\r\n    \"characterRealName\": \"Robert Bruce Bannerz\",\r\n    \"characterActorName\": \"Mark Ruffaloz\",\r\n    \"characterTitle\": \"The incredible Hulkz\",\r\n    \"characterGender\": \"Male\",\r\n    \"characterSummary\": \"Exposed to heavy doses of gamma radiation, scientist Bruce Banner transforms into the mean, green rage machine called the Hulkz.\",\r\n    \"characterDescription\": \"Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green monster powered by his rage.z\",\r\n    \"characterImageUrl\": \"hulk.jpgz\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/character/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"character",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCharacter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/characters/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProfiles",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/profiles",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/profiles/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findProfileByFirstnameContains",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/profiles/search/firstname?firstname=p",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles",
+						"search",
+						"firstname"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "p"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findProfileByLastNameContains",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/profiles/search/lastname?lastname=groot",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles",
+						"search",
+						"lastname"
+					],
+					"query": [
+						{
+							"key": "lastname",
+							"value": "groot"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"André\",\r\n    \"lastName\": \"de Grootzz\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2000\",\r\n    \"profileImageUrl\": \"Image url\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/profiles",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"André 2\",\r\n    \"lastName\": \"de Groot 2\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2020\",\r\n    \"profileImageUrl\": \"Image url\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/profiles/profile/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles",
+						"profile",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/profiles/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles",
+						"1000"
 					]
 				}
 			},

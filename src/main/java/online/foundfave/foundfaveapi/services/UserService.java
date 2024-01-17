@@ -171,6 +171,7 @@ public class UserService {
         userOutputDto.enabled = user.isEnabled();
         userOutputDto.email = user.getEmail();
         userOutputDto.authorities = user.getAuthorities();
+        userOutputDto.profile = user.getProfile();
         return userOutputDto;
     }
 

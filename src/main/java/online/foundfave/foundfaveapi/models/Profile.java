@@ -1,5 +1,6 @@
 package online.foundfave.foundfaveapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,4 +29,9 @@ public class Profile {
 
     private LocalDate dateOfBirth;
     private String profileImageUrl;
+
+    // Relations
+    @OneToOne(mappedBy = "profile")
+    @JsonIgnore
+    private User user;
 }

@@ -122,5 +122,4 @@ public class ProfileService {
         profile.setProfileImageUrl(profileInputDto.getProfileImageUrl());
         return profile;
     }
-
 }

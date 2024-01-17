@@ -75,6 +75,15 @@ public class ProfileController {
     }
 
     // Relational methods
+    // TODO: Add/assign profile to user
+    // TODO: Of nieuw profiel aanmaken met een nieuw account
+    // TODO: Testen: aanmaken nieuw account
+
+
+
+
+
+
 
 
     // Image methods
