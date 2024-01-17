@@ -5,6 +5,7 @@ import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.*;
 import online.foundfave.foundfaveapi.models.Authority;
 import online.foundfave.foundfaveapi.models.User;
+import online.foundfave.foundfaveapi.repositories.ProfileRepository;
 import online.foundfave.foundfaveapi.repositories.UserRepository;
 import online.foundfave.foundfaveapi.utilities.RandomStringGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,10 +17,12 @@ import java.util.*;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, ProfileRepository profileRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.profileRepository = profileRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -148,6 +151,34 @@ public class UserService {
     }
 
     // Relational methods
+//    public void assignRemoteControllerToTelevision(Long id, Long remoteControllerId) {
+//        var optionalTelevision = televisionRepository.findById(id);
+//        var optionalRemoteController = remoteControllerRepository.findById(remoteControllerId);
+//
+//        if(optionalTelevision.isPresent() && optionalRemoteController.isPresent()) {
+//            var television = optionalTelevision.get();
+//            var remoteController = optionalRemoteController.get();
+//
+//            television.setRemoteController(remoteController);
+//            televisionRepository.save(television);
+//        } else {
+//            throw new RecordNotFoundException();
+//        }
+//    }
+
+    public void assignProfileToUser(String username, Long profileId) {
+        var optionalUser = userRepository.findById(username);
+        var optionalProfile = profileRepository.findById(profileId);
+        if (optionalUser.isPresent() && optionalProfile.isPresent()) {
+            var user = optionalUser.get();
+            var profile = optionalProfile.get();
+            user.setProfile(profile);
+            userRepository.save(user);
+        } else {
+            throw new ProfileNotFoundException("Profile not found!");
+        }
+    }
+
 
     // Image methods
 

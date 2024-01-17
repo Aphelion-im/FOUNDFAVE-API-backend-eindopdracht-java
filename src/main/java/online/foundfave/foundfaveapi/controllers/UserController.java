@@ -1,6 +1,7 @@
 package online.foundfave.foundfaveapi.controllers;
 
 import jakarta.validation.Valid;
+import online.foundfave.foundfaveapi.dtos.input.IdInputDto;
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
@@ -102,11 +103,11 @@ public class UserController {
         return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " exists: " + userService.userExists(username));
     }
 
-   // Repository methods
-   @GetMapping(value = "/search")
-   public ResponseEntity<UserOutputDto> findUserByEmail(@RequestParam("email") String email) {
-       return ResponseEntity.ok(userService.findUserByEmail(email));
-   }
+    // Repository methods
+    @GetMapping(value = "/search")
+    public ResponseEntity<UserOutputDto> findUserByEmail(@RequestParam("email") String email) {
+        return ResponseEntity.ok(userService.findUserByEmail(email));
+    }
 
     @GetMapping("/search/email")
     public ResponseEntity<List<UserOutputDto>> findUserByEmailContains(@RequestParam("email") String email) {
@@ -126,10 +127,11 @@ public class UserController {
     }
 
     // Relational methods
-
-
-
-
+    @PutMapping("/{username}/profile")
+    public ResponseEntity<Object> assignProfileToUser(@PathVariable("username") String username, @Valid @RequestBody IdInputDto idInputDto) {
+        userService.assignProfileToUser(username, idInputDto.id);
+        return ResponseEntity.ok().body("User with username: " + "'" + username + "'" + " now coupled with profile with id: " + idInputDto.id + ".");
+    }
 
 
 // TODO: Add character to Favorites

@@ -70,7 +70,7 @@ public class ProfileService {
         try {
             profileRepository.deleteById(profileId);
         } catch (Exception e) {
-            throw new BadRequestException("You are not allowed to delete this profile!");
+            throw new BadRequestException("You are not allowed to delete this profile as it belongs to a user!");
         }
     }
 

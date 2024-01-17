@@ -50,7 +50,7 @@ public class ProfileController {
 
     // TODO: Ook hier geen terugkoppeling als je foutieve info invoert
     @PutMapping(value = "/profile/{profileId}")
-    public ResponseEntity<Object> updateProfile(@PathVariable("profileId") Long profileId, @RequestBody ProfileInputDto profileInputDto) {
+    public ResponseEntity<Object> updateProfile(@Valid @PathVariable("profileId") Long profileId, @RequestBody ProfileInputDto profileInputDto) {
         profileService.updateProfile(profileId, profileInputDto);
         return ResponseEntity.ok().body("Profile with id: " + profileId + " updated!");
     }
@@ -79,7 +79,7 @@ public class ProfileController {
 
     // TODO: Add/assign profile to user
     // TODO: Of nieuw profiel aanmaken met een nieuw account
-    // TODO: Testen: aanmaken nieuw account
+    // TODO: Testen: aanmaken nieuw account + koppelen profiel
     // TODO: getProfileByUsername
 
 
