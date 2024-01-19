@@ -14,6 +14,6 @@ public class MovieOutputDto {
     public Long movieId;
     public String movieTitle;
     public String movieSummary;
-    public Integer movieYearOfRelease;
+    public String movieYearOfRelease;
     public String movieImageUrl;
 }

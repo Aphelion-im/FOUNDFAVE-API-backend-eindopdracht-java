@@ -39,7 +39,7 @@ public class CharacterService {
     public Long createCharacter(CharacterInputDto characterInputDto) {
         Optional<Character> character = characterRepository.findByCharacterAliasNameIgnoreCase(characterInputDto.characterAliasName);
         if (character.isPresent()) {
-            throw new CharacterAlreadyExistsException("Username: " + "'" + characterInputDto.characterAliasName + "'" + " already exists!");
+            throw new CharacterAlreadyExistsException("Character: " + "'" + characterInputDto.characterAliasName + "'" + " already exists!");
         }
         Character newCharacter = characterRepository.save(transformCharacterInputDtoToCharacter(characterInputDto));
         return newCharacter.getCharacterId();

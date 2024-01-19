@@ -1,7 +1,6 @@
 package online.foundfave.foundfaveapi.dtos.input;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,16 +12,19 @@ import lombok.Setter;
 @Setter
 public class MovieInputDto {
 
-    @NotNull(message = "Movie title is required.")
+    @NotNull(message = "Movie title is required and may not be null.")
+    @Size(min = 2, max = 100, message = "Movie title requires between 2 and 100 characters.")
     public String movieTitle;
 
-    @NotNull(message = "Movie summary is required.")
+    @NotNull(message = "Movie summary is required and may not be null.")
+    @Size(min = 2, max = 255, message = "Summary requires between 2 and 255 characters.")
     public String movieSummary;
 
     @NotNull(message = "You must enter 4 digits for movie year of release. E.g. 2019. Or fill in 0000 if you do not know.")
-    @Positive
-    public Integer movieYearOfRelease;
+    @Pattern(regexp="\\d{4}", message = "You must enter 4 digits for movie year of release. E.g. 2019. Or fill in 0000 if you do not know.")
+    public String movieYearOfRelease;
 
-    @NotNull(message = "Movie image url is required.")
+    @NotNull(message = "Movie image url is required and may not be null.")
+    @NotBlank(message = "Character image url is required and must not be null.")
     public String movieImageUrl;
 }
