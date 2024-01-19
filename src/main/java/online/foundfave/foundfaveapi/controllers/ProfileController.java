@@ -28,14 +28,14 @@ public class ProfileController {
     // Basic CRUD methods
     @GetMapping("")
     public ResponseEntity<List<ProfileOutputDto>> getProfiles() {
-        List<ProfileOutputDto> profileOutputDtosCollection = profileService.getProfiles();
-        return ResponseEntity.ok().body(profileOutputDtosCollection);
+        List<ProfileOutputDto> profileOutputDtoList = profileService.getProfiles();
+        return ResponseEntity.ok().body(profileOutputDtoList);
     }
 
     @GetMapping("/{profileId}")
     public ResponseEntity<ProfileOutputDto> getProfile(@PathVariable("profileId") Long profileId) {
-        ProfileOutputDto optionalProfile = profileService.getProfile(profileId);
-        return ResponseEntity.ok().body(optionalProfile);
+        ProfileOutputDto profileOutputDto = profileService.getProfile(profileId);
+        return ResponseEntity.ok().body(profileOutputDto);
     }
 
     @PostMapping("")
@@ -48,9 +48,11 @@ public class ProfileController {
         return ResponseEntity.created(uri).body("New profile created with id: " + newProfileId + ".");
     }
 
-    // TODO: Ook hier geen terugkoppeling als je foutieve info invoert
     @PutMapping("/profile/{profileId}")
-    public ResponseEntity<Object> updateProfile(@Valid @PathVariable("profileId") Long profileId, @RequestBody ProfileInputDto profileInputDto) {
+    public ResponseEntity<Object> updateProfile(@Valid @PathVariable("profileId") Long profileId, @Valid @RequestBody ProfileInputDto profileInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
         profileService.updateProfile(profileId, profileInputDto);
         return ResponseEntity.ok().body("Profile with id: " + profileId + " updated!");
     }
@@ -64,14 +66,14 @@ public class ProfileController {
     // Repository methods
     @GetMapping("/search/firstname")
     public ResponseEntity<List<ProfileOutputDto>> findProfileByFirstNameContains(@RequestParam("firstname") String firstname) {
-        List<ProfileOutputDto> profiles = profileService.findProfileByFirstNameContains(firstname);
-        return ResponseEntity.ok(profiles);
+        List<ProfileOutputDto> profileOutputDtoList = profileService.findProfileByFirstNameContains(firstname);
+        return ResponseEntity.ok(profileOutputDtoList);
     }
 
     @GetMapping("/search/lastname")
     public ResponseEntity<List<ProfileOutputDto>> findProfileByLastNameContains(@RequestParam("lastname") String lastname) {
-        List<ProfileOutputDto> profiles = profileService.findProfileByLastNameContains(lastname);
-        return ResponseEntity.ok(profiles);
+        List<ProfileOutputDto> profileOutputDtoList = profileService.findProfileByLastNameContains(lastname);
+        return ResponseEntity.ok(profileOutputDtoList);
     }
 
     // Relational methods

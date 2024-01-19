@@ -2,7 +2,6 @@ package online.foundfave.foundfaveapi.dtos.input;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -46,6 +45,6 @@ public class CharacterInputDto {
     public String characterDescription;
 
     @NotNull(message = "Character image url is required and may not be null.")
-    @NotBlank(message = "Character image url is required and may not be blank.")
+    @Size(min = 2, max = 255, message = "Character images URL requires between 2 and 255 characters.")
     public String characterImageUrl;
 }

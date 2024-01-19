@@ -28,8 +28,8 @@ public class CharacterController {
     // Basic CRUD methods
     @GetMapping("")
     public ResponseEntity<List<CharacterOutputDto>> getAllCharacters() {
-        List<CharacterOutputDto> characters = characterService.getCharacters();
-        return ResponseEntity.ok(characters);
+        List<CharacterOutputDto> characterOutputDtoList = characterService.getAllCharacters();
+        return ResponseEntity.ok(characterOutputDtoList);
     }
 
     @GetMapping("/{characterId}")
@@ -48,7 +48,6 @@ public class CharacterController {
         return ResponseEntity.created(uri).body("New character added with id: " + newCharacterId + ".");
     }
 
-    // TODO: Er is geen goede feedback als velden verkeerd worden ingevuld, bijvoorbeeld de enum: Malez ipv Male
     @PutMapping("/character/{characterId}")
     public ResponseEntity<String> updateCharacter(@PathVariable("characterId") Long characterId, @Valid @RequestBody CharacterInputDto characterInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
@@ -66,32 +65,32 @@ public class CharacterController {
     // Repository methods
     @GetMapping("/search/starting-with")
     public ResponseEntity<List<CharacterOutputDto>> findCharactersByNameStartingWith(@RequestParam("name") String name) {
-        List<CharacterOutputDto> characters = characterService.findCharactersByNameStartingWith(name);
-        return ResponseEntity.ok(characters);
+        List<CharacterOutputDto> characterOutputDtoList = characterService.findCharactersByNameStartingWith(name);
+        return ResponseEntity.ok(characterOutputDtoList);
     }
 
     @GetMapping("/search/contains")
     public ResponseEntity<List<CharacterOutputDto>> findCharactersByNameContains(@RequestParam("name") String name) {
-        List<CharacterOutputDto> characters = characterService.findCharactersByNameContains(name);
-        return ResponseEntity.ok(characters);
+        List<CharacterOutputDto> characterOutputDtoList = characterService.findCharactersByNameContains(name);
+        return ResponseEntity.ok(characterOutputDtoList);
     }
 
     @GetMapping("/search/sorted-asc")
     public ResponseEntity<List<CharacterOutputDto>> findCharactersByNameSortedAsc(@RequestParam("name") String name) {
-        List<CharacterOutputDto> characters = characterService.findCharactersByNameSortedAsc(name);
-        return ResponseEntity.ok(characters);
+        List<CharacterOutputDto> characterOutputDtoList = characterService.findCharactersByNameSortedAsc(name);
+        return ResponseEntity.ok(characterOutputDtoList);
     }
 
     @GetMapping("/search/sorted-desc")
     public ResponseEntity<List<CharacterOutputDto>> findCharactersByNameSortedDesc(@RequestParam("name") String name) {
-        List<CharacterOutputDto> characters = characterService.findCharactersByNameSortedDesc(name);
-        return ResponseEntity.ok(characters);
+        List<CharacterOutputDto> characterOutputDtoList = characterService.findCharactersByNameSortedDesc(name);
+        return ResponseEntity.ok(characterOutputDtoList);
     }
 
     @GetMapping("/search/actor-name")
     public ResponseEntity<List<CharacterOutputDto>> findCharactersByActorNameContains(@RequestParam("name") String name) {
-        List<CharacterOutputDto> characters = characterService.findCharactersByActorNameContains(name);
-        return ResponseEntity.ok(characters);
+        List<CharacterOutputDto> characterOutputDtoList = characterService.findCharactersByActorNameContains(name);
+        return ResponseEntity.ok(characterOutputDtoList);
     }
 
     // Relational methods

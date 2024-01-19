@@ -27,14 +27,14 @@ public class MovieController {
     // Basic CRUD methods
     @GetMapping("")
     public ResponseEntity<List<MovieOutputDto>> getMovies() {
-        List<MovieOutputDto> movieOutputDtosCollection = movieService.getMovies();
-        return ResponseEntity.ok().body(movieOutputDtosCollection);
+        List<MovieOutputDto> movieOutputDtoList = movieService.getMovies();
+        return ResponseEntity.ok().body(movieOutputDtoList);
     }
 
     @GetMapping("/{movieId}")
     public ResponseEntity<MovieOutputDto> getMovie(@PathVariable("movieId") Long movieId) {
-        MovieOutputDto optionalMovie = movieService.getMovie(movieId);
-        return ResponseEntity.ok().body(optionalMovie);
+        MovieOutputDto movieOutputDto = movieService.getMovie(movieId);
+        return ResponseEntity.ok().body(movieOutputDto);
     }
 
     @PostMapping("")
@@ -48,7 +48,10 @@ public class MovieController {
     }
 
     @PutMapping("/movie/{movieId}")
-    public ResponseEntity<String> updateMovie(@PathVariable("movieId") Long movieId, @RequestBody MovieInputDto movieInputDto) {
+    public ResponseEntity<String> updateMovie(@PathVariable("movieId") Long movieId, @Valid @RequestBody MovieInputDto movieInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
         return ResponseEntity.ok(movieService.updateMovie(movieId, movieInputDto));
     }
 
@@ -61,41 +64,39 @@ public class MovieController {
     // Repository methods
     @GetMapping("/search/starting-with")
     public ResponseEntity<List<MovieOutputDto>> findMovieByTitleStartingWith(@RequestParam("title") String title) {
-        List<MovieOutputDto> movies = movieService.findMoviesByTitleStartingWith(title);
-        return ResponseEntity.ok(movies);
+        List<MovieOutputDto> movieOutputDtoList = movieService.findMoviesByTitleStartingWith(title);
+        return ResponseEntity.ok(movieOutputDtoList);
     }
 
     @GetMapping("/search/contains")
     public ResponseEntity<List<MovieOutputDto>> findMovieByTitleContains(@RequestParam("title") String title) {
-        List<MovieOutputDto> movies = movieService.findMoviesByTitleContains(title);
-        return ResponseEntity.ok(movies);
+        List<MovieOutputDto> movieOutputDtoList = movieService.findMoviesByTitleContains(title);
+        return ResponseEntity.ok(movieOutputDtoList);
     }
 
     @GetMapping("/search/sorted-asc")
     public ResponseEntity<List<MovieOutputDto>> findMovieByTitleSortedAsc(@RequestParam("title") String title) {
-        List<MovieOutputDto> movies = movieService.findMovieByTitleSortedAsc(title);
-        return ResponseEntity.ok(movies);
+        List<MovieOutputDto> movieOutputDtoList = movieService.findMovieByTitleSortedAsc(title);
+        return ResponseEntity.ok(movieOutputDtoList);
     }
 
     @GetMapping("/search/sorted-desc")
     public ResponseEntity<List<MovieOutputDto>> findMovieByTitleSortedDesc(@RequestParam("title") String title) {
-        List<MovieOutputDto> movies = movieService.findMovieByTitleSortedDesc(title);
-        return ResponseEntity.ok(movies);
+        List<MovieOutputDto> movieOutputDtoList = movieService.findMovieByTitleSortedDesc(title);
+        return ResponseEntity.ok(movieOutputDtoList);
     }
 
     @GetMapping("/search/year")
     public ResponseEntity<List<MovieOutputDto>> findMovieByYearOfRelease(@RequestParam("year") String year) {
-        List<MovieOutputDto> movies = movieService.findMovieByYearOfRelease(year);
-        return ResponseEntity.ok(movies);
+        List<MovieOutputDto> movieOutputDtoList = movieService.findMovieByYearOfRelease(year);
+        return ResponseEntity.ok(movieOutputDtoList);
     }
 
     // Relational methods
-// TODO: Add movie to character or vice versa
+    // TODO: Add movie to character or vice versa
 
 
     // Image methods
     // TODO: Add image to movie
     // TODO: Delete image from movie
-
-
 }

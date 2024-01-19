@@ -1,20 +1,15 @@
 package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.MovieInputDto;
-import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.MovieOutputDto;
-import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.MovieAlreadyExistsException;
 import online.foundfave.foundfaveapi.exceptions.MovieNotFoundException;
-import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
 import online.foundfave.foundfaveapi.models.Movie;
-import online.foundfave.foundfaveapi.models.User;
 import online.foundfave.foundfaveapi.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -29,8 +24,8 @@ public class MovieService {
     // Basic CRUD methods
     public List<MovieOutputDto> getMovies() {
         List<MovieOutputDto> collection = new ArrayList<>();
-        List<Movie> list = movieRepository.findAll();
-        for (Movie movie : list) {
+        List<Movie> movieList = movieRepository.findAll();
+        for (Movie movie : movieList) {
             collection.add(transformMovieToMovieOutputDto(movie));
         }
         return collection;
@@ -38,9 +33,9 @@ public class MovieService {
 
     public MovieOutputDto getMovie(Long movieId) {
         MovieOutputDto movieOutputDto;
-        Optional<Movie> movie = movieRepository.findById(movieId);
-        if (movie.isPresent()) {
-            movieOutputDto = transformMovieToMovieOutputDto(movie.get());
+        Optional<Movie> optionalMovie = movieRepository.findById(movieId);
+        if (optionalMovie.isPresent()) {
+            movieOutputDto = transformMovieToMovieOutputDto(optionalMovie.get());
         } else {
             throw new MovieNotFoundException("Movie with id: " + movieId + " not found!");
         }
@@ -48,8 +43,8 @@ public class MovieService {
     }
 
     public Long createMovie(MovieInputDto movieInputDto) {
-        Optional<Movie> movie = movieRepository.findByMovieTitleIgnoreCase(movieInputDto.movieTitle);
-        if (movie.isPresent()) {
+        Optional<Movie> optionalMovie = movieRepository.findByMovieTitleIgnoreCase(movieInputDto.movieTitle);
+        if (optionalMovie.isPresent()) {
             throw new MovieAlreadyExistsException("Movie: " + "'" + movieInputDto.movieTitle + "'" + " already exists!");
         }
         Movie newMovie = movieRepository.save(transformMovieInputDtoToMovie(movieInputDto));
@@ -76,63 +71,63 @@ public class MovieService {
 
     // Repository methods
     public List<MovieOutputDto> findMoviesByTitleStartingWith(String title) {
-        List<MovieOutputDto> collection = new ArrayList<>();
-        List<Movie> list = movieRepository.findByMovieTitleStartingWithIgnoreCase(title);
-        for (Movie movie : list) {
-            collection.add(transformMovieToMovieOutputDto(movie));
+        List<MovieOutputDto> movieOutputDtoList = new ArrayList<>();
+        List<Movie> movieList = movieRepository.findByMovieTitleStartingWithIgnoreCase(title);
+        for (Movie movie : movieList) {
+            movieOutputDtoList.add(transformMovieToMovieOutputDto(movie));
         }
-        if (collection.isEmpty()) {
+        if (movieOutputDtoList.isEmpty()) {
             throw new MovieNotFoundException("0 results. No movies were found!");
         }
-        return collection;
+        return movieOutputDtoList;
     }
 
     public List<MovieOutputDto> findMoviesByTitleContains(String title) {
-        List<MovieOutputDto> collection = new ArrayList<>();
-        List<Movie> list = movieRepository.findByMovieTitleContainsIgnoreCase(title);
-        for (Movie movie : list) {
-            collection.add(transformMovieToMovieOutputDto(movie));
+        List<MovieOutputDto> movieOutputDtoList = new ArrayList<>();
+        List<Movie> movieList = movieRepository.findByMovieTitleContainsIgnoreCase(title);
+        for (Movie movie : movieList) {
+            movieOutputDtoList.add(transformMovieToMovieOutputDto(movie));
         }
-        if (collection.isEmpty()) {
+        if (movieOutputDtoList.isEmpty()) {
             throw new MovieNotFoundException("0 results. No movies were found!");
         }
-        return collection;
+        return movieOutputDtoList;
     }
 
     public List<MovieOutputDto> findMovieByTitleSortedDesc(String title) {
-        List<MovieOutputDto> collection = new ArrayList<>();
-        List<Movie> list = movieRepository.findByMovieTitleStartingWithIgnoreCaseOrderByMovieTitleDesc(title);
-        for (Movie movie : list) {
-            collection.add(transformMovieToMovieOutputDto(movie));
+        List<MovieOutputDto> movieOutputDtoList = new ArrayList<>();
+        List<Movie> movieList = movieRepository.findByMovieTitleStartingWithIgnoreCaseOrderByMovieTitleDesc(title);
+        for (Movie movie : movieList) {
+            movieOutputDtoList.add(transformMovieToMovieOutputDto(movie));
         }
-        if (collection.isEmpty()) {
+        if (movieOutputDtoList.isEmpty()) {
             throw new MovieNotFoundException("0 results. No movies were found!");
         }
-        return collection;
+        return movieOutputDtoList;
     }
 
     public List<MovieOutputDto> findMovieByTitleSortedAsc(String title) {
-        List<MovieOutputDto> collection = new ArrayList<>();
-        List<Movie> list = movieRepository.findByMovieTitleStartingWithIgnoreCaseOrderByMovieTitleAsc(title);
-        for (Movie movie : list) {
-            collection.add(transformMovieToMovieOutputDto(movie));
+        List<MovieOutputDto> movieOutputDtoList = new ArrayList<>();
+        List<Movie> movieList = movieRepository.findByMovieTitleStartingWithIgnoreCaseOrderByMovieTitleAsc(title);
+        for (Movie movie : movieList) {
+            movieOutputDtoList.add(transformMovieToMovieOutputDto(movie));
         }
-        if (collection.isEmpty()) {
+        if (movieOutputDtoList.isEmpty()) {
             throw new MovieNotFoundException("0 results. No movies were found!");
         }
-        return collection;
+        return movieOutputDtoList;
     }
 
     public List<MovieOutputDto> findMovieByYearOfRelease(String year) {
-        List<MovieOutputDto> collection = new ArrayList<>();
-        List<Movie> list = movieRepository.findByMovieYearOfRelease(year);
-        for (Movie movie : list) {
-            collection.add(transformMovieToMovieOutputDto(movie));
+        List<MovieOutputDto> movieOutputDtoList = new ArrayList<>();
+        List<Movie> movieList = movieRepository.findByMovieYearOfRelease(year);
+        for (Movie movie : movieList) {
+            movieOutputDtoList.add(transformMovieToMovieOutputDto(movie));
         }
-        if (collection.isEmpty()) {
+        if (movieOutputDtoList.isEmpty()) {
             throw new MovieNotFoundException("0 results. No movies were found!");
         }
-        return collection;
+        return movieOutputDtoList;
     }
 
 

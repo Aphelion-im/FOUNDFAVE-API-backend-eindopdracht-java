@@ -22,12 +22,12 @@ public class ContactFormService {
 
     // Basic CRUD methods
     public List<ContactFormOutputDto> getContactFormSubmissions() {
-        List<ContactFormOutputDto> collection = new ArrayList<>();
+        List<ContactFormOutputDto> contactFormOutputDtoList = new ArrayList<>();
         List<ContactForm> list = contactFormRepository.findAll();
         for (ContactForm contactForm : list) {
-            collection.add(transformContactFormToContactFormOutputDto(contactForm));
+            contactFormOutputDtoList.add(transformContactFormToContactFormOutputDto(contactForm));
         }
-        return collection;
+        return contactFormOutputDtoList;
     }
 
     public ContactFormOutputDto getContactFormSubmission(Long contactFormId) {
@@ -54,39 +54,39 @@ public class ContactFormService {
 
     // Repository methods
     public List<ContactFormOutputDto> findContactFormsByNameContains(String name) {
-        List<ContactFormOutputDto> collection = new ArrayList<>();
+        List<ContactFormOutputDto> contactFormOutputDtoList = new ArrayList<>();
         List<ContactForm> list = contactFormRepository.findByNameContainsIgnoreCase(name);
         for (ContactForm contactForm : list) {
-            collection.add(transformContactFormToContactFormOutputDto(contactForm));
+            contactFormOutputDtoList.add(transformContactFormToContactFormOutputDto(contactForm));
         }
-        if (collection.isEmpty()) {
+        if (contactFormOutputDtoList.isEmpty()) {
             throw new ContactFormNotFoundException("0 results. No contact forms were found!");
         }
-        return collection;
+        return contactFormOutputDtoList;
     }
 
     public List<ContactFormOutputDto> findContactFormsByEmailContains(String email) {
-        List<ContactFormOutputDto> collection = new ArrayList<>();
+        List<ContactFormOutputDto> contactFormOutputDtoList = new ArrayList<>();
         List<ContactForm> list = contactFormRepository.findByEmailContainsIgnoreCase(email);
         for (ContactForm contactForm : list) {
-            collection.add(transformContactFormToContactFormOutputDto(contactForm));
+            contactFormOutputDtoList.add(transformContactFormToContactFormOutputDto(contactForm));
         }
-        if (collection.isEmpty()) {
+        if (contactFormOutputDtoList.isEmpty()) {
             throw new ContactFormNotFoundException("0 results. No contact forms were found!");
         }
-        return collection;
+        return contactFormOutputDtoList;
     }
 
     public List<ContactFormOutputDto> findContactFormsByCommentsContains(String comments) {
-        List<ContactFormOutputDto> collection = new ArrayList<>();
+        List<ContactFormOutputDto> contactFormOutputDtoList = new ArrayList<>();
         List<ContactForm> list = contactFormRepository.findByCommentsContainsIgnoreCase(comments);
         for (ContactForm contactForm : list) {
-            collection.add(transformContactFormToContactFormOutputDto(contactForm));
+            contactFormOutputDtoList.add(transformContactFormToContactFormOutputDto(contactForm));
         }
-        if (collection.isEmpty()) {
+        if (contactFormOutputDtoList.isEmpty()) {
             throw new ContactFormNotFoundException("0 results. No contact forms were found!");
         }
-        return collection;
+        return contactFormOutputDtoList;
     }
 
     // Relational methods

@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 
 public class IdInputDto {
 
-    @NotNull
+    @NotNull(message = "Id is required and may not be null or empty.")
     public Long id;
 }
 

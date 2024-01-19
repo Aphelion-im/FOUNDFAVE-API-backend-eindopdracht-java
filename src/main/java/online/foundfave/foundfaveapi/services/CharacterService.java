@@ -22,13 +22,13 @@ public class CharacterService {
     }
 
     // Basic CRUD methods
-    public List<CharacterOutputDto> getCharacters() {
-        List<CharacterOutputDto> collection = new ArrayList<>();
+    public List<CharacterOutputDto> getAllCharacters() {
+        List<CharacterOutputDto> characterOutputDtoList = new ArrayList<>();
         List<Character> list = characterRepository.findAll();
         for (Character character : list) {
-            collection.add(transformCharacterToCharacterOutputDto(character));
+            characterOutputDtoList.add(transformCharacterToCharacterOutputDto(character));
         }
-        return collection;
+        return characterOutputDtoList;
     }
 
     public CharacterOutputDto getCharacterById(Long characterId) {
@@ -37,8 +37,8 @@ public class CharacterService {
     }
 
     public Long createCharacter(CharacterInputDto characterInputDto) {
-        Optional<Character> character = characterRepository.findByCharacterAliasNameIgnoreCase(characterInputDto.characterAliasName);
-        if (character.isPresent()) {
+        Optional<Character> optionalCharacter = characterRepository.findByCharacterAliasNameIgnoreCase(characterInputDto.characterAliasName);
+        if (optionalCharacter.isPresent()) {
             throw new CharacterAlreadyExistsException("Character: " + "'" + characterInputDto.characterAliasName + "'" + " already exists!");
         }
         Character newCharacter = characterRepository.save(transformCharacterInputDtoToCharacter(characterInputDto));
@@ -76,65 +76,64 @@ public class CharacterService {
 
     // Repository methods
     public List<CharacterOutputDto> findCharactersByNameStartingWith(String name) {
-        List<CharacterOutputDto> collection = new ArrayList<>();
+        List<CharacterOutputDto> characterOutputDtoList = new ArrayList<>();
         List<Character> list = characterRepository.findByCharacterAliasNameStartingWithIgnoreCase(name);
         for (Character character : list) {
-            collection.add(transformCharacterToCharacterOutputDto(character));
+            characterOutputDtoList.add(transformCharacterToCharacterOutputDto(character));
         }
-        if (collection.isEmpty()) {
+        if (characterOutputDtoList.isEmpty()) {
             throw new CharacterNotFoundException("0 results. No characters were found!");
         }
-        return collection;
+        return characterOutputDtoList;
     }
 
     public List<CharacterOutputDto> findCharactersByNameContains(String name) {
-        List<CharacterOutputDto> collection = new ArrayList<>();
+        List<CharacterOutputDto> characterOutputDtoList = new ArrayList<>();
         List<Character> list = characterRepository.findByCharacterAliasNameContainsIgnoreCase(name);
         for (Character character : list) {
-            collection.add(transformCharacterToCharacterOutputDto(character));
+            characterOutputDtoList.add(transformCharacterToCharacterOutputDto(character));
         }
-        if (collection.isEmpty()) {
+        if (characterOutputDtoList.isEmpty()) {
             throw new CharacterNotFoundException("0 results. No characters were found!");
         }
-        return collection;
+        return characterOutputDtoList;
     }
 
     public List<CharacterOutputDto> findCharactersByNameSortedAsc(String name) {
-        List<CharacterOutputDto> collection = new ArrayList<>();
+        List<CharacterOutputDto> characterOutputDtoList = new ArrayList<>();
         List<Character> list = characterRepository.findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameAsc(name);
         for (Character character : list) {
-            collection.add(transformCharacterToCharacterOutputDto(character));
+            characterOutputDtoList.add(transformCharacterToCharacterOutputDto(character));
         }
-        if (collection.isEmpty()) {
+        if (characterOutputDtoList.isEmpty()) {
             throw new CharacterNotFoundException("0 results. No characters were found!");
         }
-        return collection;
+        return characterOutputDtoList;
     }
 
     public List<CharacterOutputDto> findCharactersByNameSortedDesc(String name) {
-        List<CharacterOutputDto> collection = new ArrayList<>();
+        List<CharacterOutputDto> characterOutputDtoList = new ArrayList<>();
         List<Character> list = characterRepository.findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameDesc(name);
         for (Character character : list) {
-            collection.add(transformCharacterToCharacterOutputDto(character));
+            characterOutputDtoList.add(transformCharacterToCharacterOutputDto(character));
         }
-        if (collection.isEmpty()) {
+        if (characterOutputDtoList.isEmpty()) {
             throw new CharacterNotFoundException("0 results. No characters were found!");
         }
-        return collection;
+        return characterOutputDtoList;
     }
 
     public List<CharacterOutputDto> findCharactersByActorNameContains(String name) {
-        List<CharacterOutputDto> collection = new ArrayList<>();
+        List<CharacterOutputDto> characterOutputDtoList = new ArrayList<>();
         List<Character> list = characterRepository.findByCharacterActorNameContainsIgnoreCase(name);
         for (Character character : list) {
-            collection.add(transformCharacterToCharacterOutputDto(character));
+            characterOutputDtoList.add(transformCharacterToCharacterOutputDto(character));
         }
-        if (collection.isEmpty()) {
+        if (characterOutputDtoList.isEmpty()) {
             throw new CharacterNotFoundException("0 results. No actors were found!");
         }
-        return collection;
+        return characterOutputDtoList;
     }
-
 
     // Relational methods
 

@@ -25,6 +25,6 @@ public class MovieInputDto {
     public String movieYearOfRelease;
 
     @NotNull(message = "Movie image url is required and may not be null.")
-    @NotBlank(message = "Character image url is required and must not be null.")
+    @Size(min = 2, max = 255, message = "Movie images url requires between 2 and 255 characters.")
     public String movieImageUrl;
 }

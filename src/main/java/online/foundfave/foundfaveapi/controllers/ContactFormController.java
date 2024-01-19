@@ -26,8 +26,8 @@ public class ContactFormController {
     // Basic CRUD methods
     @GetMapping("")
     public ResponseEntity<List<ContactFormOutputDto>> getAllContactForms() {
-        List<ContactFormOutputDto> contactForms = contactFormService.getContactFormSubmissions();
-        return ResponseEntity.ok(contactForms);
+        List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.getContactFormSubmissions();
+        return ResponseEntity.ok(contactFormOutputDtoList);
     }
 
     @GetMapping("/{contactFormId}")
@@ -61,20 +61,20 @@ public class ContactFormController {
     // Repository methods
     @GetMapping("/search/name")
     public ResponseEntity<List<ContactFormOutputDto>> findContactFormsByNameContains(@RequestParam("name") String name) {
-        List<ContactFormOutputDto> contactFormOutputDtos = contactFormService.findContactFormsByNameContains(name);
-        return ResponseEntity.ok(contactFormOutputDtos);
+        List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.findContactFormsByNameContains(name);
+        return ResponseEntity.ok(contactFormOutputDtoList);
     }
 
     @GetMapping("/search/email")
     public ResponseEntity<List<ContactFormOutputDto>> findContactFormsByEmailContains(@RequestParam("email") String email) {
-        List<ContactFormOutputDto> contactFormOutputDtos = contactFormService.findContactFormsByEmailContains(email);
-        return ResponseEntity.ok(contactFormOutputDtos);
+        List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.findContactFormsByEmailContains(email);
+        return ResponseEntity.ok(contactFormOutputDtoList);
     }
 
     @GetMapping("/search/comments")
     public ResponseEntity<List<ContactFormOutputDto>> findContactFormsByCommentsContains(@RequestParam("comments") String comments) {
-        List<ContactFormOutputDto> contactFormOutputDtos = contactFormService.findContactFormsByCommentsContains(comments);
-        return ResponseEntity.ok(contactFormOutputDtos);
+        List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.findContactFormsByCommentsContains(comments);
+        return ResponseEntity.ok(contactFormOutputDtoList);
     }
 
     // Relational methods

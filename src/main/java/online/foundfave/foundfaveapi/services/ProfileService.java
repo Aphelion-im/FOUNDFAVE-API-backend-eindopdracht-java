@@ -32,28 +32,28 @@ public class ProfileService {
 
     // Basic CRUD methods
     public List<ProfileOutputDto> getProfiles() {
-        List<ProfileOutputDto> collection = new ArrayList<>();
-        List<Profile> list = profileRepository.findAll();
-        for (Profile profile : list) {
-            collection.add(transformProfileToProfileOutputDto(profile));
+        List<ProfileOutputDto> profileOutputDtoList = new ArrayList<>();
+        List<Profile> profileList = profileRepository.findAll();
+        for (Profile profile : profileList) {
+            profileOutputDtoList.add(transformProfileToProfileOutputDto(profile));
         }
-        return collection;
+        return profileOutputDtoList;
     }
 
     public ProfileOutputDto getProfile(Long profileId) {
-        ProfileOutputDto outputDto;
-        Optional<Profile> profile = profileRepository.findById(profileId);
-        if (profile.isPresent()) {
-            outputDto = transformProfileToProfileOutputDto(profile.get());
+        ProfileOutputDto profileOutputDto;
+        Optional<Profile> optionalProfile = profileRepository.findById(profileId);
+        if (optionalProfile.isPresent()) {
+            profileOutputDto = transformProfileToProfileOutputDto(optionalProfile.get());
         } else {
             throw new ProfileNotFoundException("Profile with id: " + profileId + " not found!");
         }
-        return outputDto;
+        return profileOutputDto;
     }
 
     public Long createProfile(ProfileInputDto profileInputDto) {
-        Optional<Profile> user = profileRepository.findByFirstNameAndLastName(profileInputDto.firstName, profileInputDto.lastName);
-        if (user.isPresent()) {
+        Optional<Profile> optionalProfile = profileRepository.findByFirstNameAndLastName(profileInputDto.firstName, profileInputDto.lastName);
+        if (optionalProfile.isPresent()) {
             throw new ProfileAlreadyExistsException("Profile: " + "'" + profileInputDto.firstName + " " + profileInputDto.lastName + "'" + " already exists!");
         }
         Profile newProfile = profileRepository.save(transformProfileInputDtoToProfile(profileInputDto));
@@ -70,7 +70,7 @@ public class ProfileService {
         profileRepository.save(profile);
     }
 
-    // Currently, profiles assigned to users, are not allowed to be deleted. First use the detachProfileFromUser method.
+    // Currently, profiles assigned to users, are not allowed to be deleted. First use the detachProfileFromUser method and then try to assign a new profile.
     public void deleteProfile(Long profileId) {
         if (!profileRepository.existsById(profileId)) {
             throw new ProfileNotFoundException("Profile with id: " + profileId + " not found!");
@@ -84,35 +84,35 @@ public class ProfileService {
 
     // Repository methods
     public List<ProfileOutputDto> findProfileByFirstNameContains(String firstname) {
-        List<ProfileOutputDto> collection = new ArrayList<>();
-        List<Profile> list = profileRepository.findByFirstNameContainsIgnoreCase(firstname);
-        for (Profile profile : list) {
-            collection.add(transformProfileToProfileOutputDto(profile));
+        List<ProfileOutputDto> profileOutputDtoList = new ArrayList<>();
+        List<Profile> profileList = profileRepository.findByFirstNameContainsIgnoreCase(firstname);
+        for (Profile profile : profileList) {
+            profileOutputDtoList.add(transformProfileToProfileOutputDto(profile));
         }
-        if (collection.isEmpty()) {
+        if (profileOutputDtoList.isEmpty()) {
             throw new ProfileNotFoundException("0 results. No profiles were found!");
         }
-        return collection;
+        return profileOutputDtoList;
     }
 
     public List<ProfileOutputDto> findProfileByLastNameContains(String lastname) {
-        List<ProfileOutputDto> collection = new ArrayList<>();
-        List<Profile> list = profileRepository.findByLastNameContainsIgnoreCase(lastname);
-        for (Profile profile : list) {
-            collection.add(transformProfileToProfileOutputDto(profile));
+        List<ProfileOutputDto> profileOutputDtoList = new ArrayList<>();
+        List<Profile> profileList = profileRepository.findByLastNameContainsIgnoreCase(lastname);
+        for (Profile profile : profileList) {
+            profileOutputDtoList.add(transformProfileToProfileOutputDto(profile));
         }
-        if (collection.isEmpty()) {
+        if (profileOutputDtoList.isEmpty()) {
             throw new ProfileNotFoundException("0 results. No profiles were found!");
         }
-        return collection;
+        return profileOutputDtoList;
     }
 
     // Relational methods
     public ProfileOutputDto getProfileByUsername(String username) {
         UserOutputDto userOutputDto;
-        Optional<User> user = userRepository.findById(username);
-        if (user.isPresent()) {
-            userOutputDto = transformUserToUserOutputDto(user.get());
+        Optional<User> optionalUser = userRepository.findById(username);
+        if (optionalUser.isPresent()) {
+            userOutputDto = transformUserToUserOutputDto(optionalUser.get());
         } else {
             throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
         }

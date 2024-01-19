@@ -1,5 +1,7 @@
 package online.foundfave.foundfaveapi.services;
 
+import online.foundfave.foundfaveapi.dtos.input.PasswordInputDto;
+import online.foundfave.foundfaveapi.dtos.input.UpdateUserInputDto;
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.*;
@@ -28,26 +30,25 @@ public class UserService {
 
     // Basic CRUD methods
     public List<UserOutputDto> getUsers() {
-        List<UserOutputDto> collection = new ArrayList<>();
-        List<User> list = userRepository.findAll();
-        for (User user : list) {
-            collection.add(transformUserToUserOutputDto(user));
+        List<UserOutputDto> userOutputDtoList = new ArrayList<>();
+        List<User> userList = userRepository.findAll();
+        for (User user : userList) {
+            userOutputDtoList.add(transformUserToUserOutputDto(user));
         }
-        return collection;
+        return userOutputDtoList;
     }
 
     public UserOutputDto getUser(String username) {
         UserOutputDto userOutputDto;
-        Optional<User> user = userRepository.findById(username);
-        if (user.isPresent()) {
-            userOutputDto = transformUserToUserOutputDto(user.get());
+        Optional<User> optionalUser = userRepository.findById(username);
+        if (optionalUser.isPresent()) {
+            userOutputDto = transformUserToUserOutputDto(optionalUser.get());
         } else {
             throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
         }
         return userOutputDto;
     }
 
-    // TODO: Everytime a user is created, create a corresponding profile with the same id
     public String createUser(UserInputDto userInputDto) {
         Optional<User> user = userRepository.findById(userInputDto.username);
         if (user.isPresent()) {
@@ -59,18 +60,18 @@ public class UserService {
         return newUser.getUsername();
     }
 
-    public void updateUserPassword(String username, UserInputDto userInputDto) {
+    public void updateUserPasswordAdmin(String username, PasswordInputDto passwordInputDto) {
         User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
-        user.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
+        user.setPassword(passwordEncoder.encode(passwordInputDto.getPassword()));
         userRepository.save(user);
     }
 
-    // TODO: Geeft nog steeds een positief bericht na --zogenaamd-- overschrijven ander account
-    public String updateUser(String username, UserInputDto userInputDto) {
+    public String updateUser(String username, UpdateUserInputDto updateUserInputDto) {
         User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
-        if (userInputDto.password != null) user.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
-        if (userInputDto.apikey != null) user.setApikey(userInputDto.getApikey());
-        if (userInputDto.email != null) user.setEmail(userInputDto.getEmail());
+        if (updateUserInputDto.password != null)
+            user.setPassword(passwordEncoder.encode(updateUserInputDto.getPassword()));
+        if (updateUserInputDto.apikey != null) user.setApikey(updateUserInputDto.getApikey());
+        if (updateUserInputDto.email != null) user.setEmail(updateUserInputDto.getEmail());
         userRepository.save(user);
         return "User: " + "'" + username + "'" + " updated successfully!";
     }
@@ -118,27 +119,27 @@ public class UserService {
     }
 
     public List<UserOutputDto> findUserByEmailContains(String email) {
-        List<UserOutputDto> collection = new ArrayList<>();
-        List<User> list = userRepository.findByEmailContainsIgnoreCase(email);
-        for (User user : list) {
-            collection.add(transformUserToUserOutputDto(user));
+        List<UserOutputDto> userOutputDtoList = new ArrayList<>();
+        List<User> userList = userRepository.findByEmailContainsIgnoreCase(email);
+        for (User user : userList) {
+            userOutputDtoList.add(transformUserToUserOutputDto(user));
         }
-        if (collection.isEmpty()) {
+        if (userOutputDtoList.isEmpty()) {
             throw new UsernameNotFoundException("0 results. No users were found!");
         }
-        return collection;
+        return userOutputDtoList;
     }
 
     public List<UserOutputDto> findUserByUsernameContains(String username) {
-        List<UserOutputDto> collection = new ArrayList<>();
-        List<User> list = userRepository.findByUsernameContainsIgnoreCase(username);
-        for (User user : list) {
-            collection.add(transformUserToUserOutputDto(user));
+        List<UserOutputDto> userOutputDtoList = new ArrayList<>();
+        List<User> userList = userRepository.findByUsernameContainsIgnoreCase(username);
+        for (User user : userList) {
+            userOutputDtoList.add(transformUserToUserOutputDto(user));
         }
-        if (collection.isEmpty()) {
+        if (userOutputDtoList.isEmpty()) {
             throw new UsernameNotFoundException("0 results. No users were found!");
         }
-        return collection;
+        return userOutputDtoList;
     }
 
     public List<UserOutputDto> getActiveUsers() {
@@ -179,12 +180,13 @@ public class UserService {
 
     // Image methods
 
+
     // This method is used for the CustomUserDetailsService class
     public UserInputDto getUserByUsername(String username) {
         UserInputDto userInputDto;
-        Optional<User> user = userRepository.findById(username);
-        if (user.isPresent()) {
-            userInputDto = transformUserToUserInputDto(user.get());
+        Optional<User> optionalUser = userRepository.findById(username);
+        if (optionalUser.isPresent()) {
+            userInputDto = transformUserToUserInputDto(optionalUser.get());
         } else {
             throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
         }

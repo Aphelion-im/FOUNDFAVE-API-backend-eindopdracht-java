@@ -2,6 +2,8 @@ package online.foundfave.foundfaveapi.controllers;
 
 import jakarta.validation.Valid;
 import online.foundfave.foundfaveapi.dtos.input.IdInputDto;
+import online.foundfave.foundfaveapi.dtos.input.PasswordInputDto;
+import online.foundfave.foundfaveapi.dtos.input.UpdateUserInputDto;
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
@@ -31,18 +33,16 @@ public class UserController {
     // Basic CRUD methods
     @GetMapping("")
     public ResponseEntity<List<UserOutputDto>> getUsers() {
-        List<UserOutputDto> userOutputDtosCollection = userService.getUsers();
-        return ResponseEntity.ok().body(userOutputDtosCollection);
+        List<UserOutputDto> userOutputDtoList = userService.getUsers();
+        return ResponseEntity.ok().body(userOutputDtoList);
     }
 
     @GetMapping("/{username}")
     public ResponseEntity<UserOutputDto> getUser(@PathVariable("username") String username) {
-        UserOutputDto optionalUser = userService.getUser(username);
-        return ResponseEntity.ok().body(optionalUser);
+        UserOutputDto userOutputDto = userService.getUser(username);
+        return ResponseEntity.ok().body(userOutputDto);
     }
 
-    // TODO: Everytime a user is created, create a corresponding profile with the same id. Geef standaardwaarden mee zoals John doe, johndoe@email.com, etc.
-    // TODO: createAccountWithProfile, withoutProfile
     @PostMapping("")
     public ResponseEntity<Object> createUser(@Valid @RequestBody UserInputDto userInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
@@ -54,20 +54,21 @@ public class UserController {
         return ResponseEntity.created(uri).body("Username: " + "'" + newUsername + "'" + " registered successfully!");
     }
 
-    // TODO: User kan eigen password niet aanpassen
-    // Admin only. Admin is allowed to overwrite passwords from other users.
     @PutMapping("/admin/{username}")
-    public ResponseEntity<Object> updateUserPassword(@PathVariable("username") String username, @RequestBody UserInputDto userInputDto) {
-        userService.updateUserPassword(username, userInputDto);
+    public ResponseEntity<Object> updateUserPasswordAdmin(@PathVariable("username") String username, @Valid @RequestBody PasswordInputDto passwordInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        userService.updateUserPasswordAdmin(username, passwordInputDto);
         return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " password updated!");
     }
 
-    // TODO: Validatie mogelijk op een put request?
-    // TODO: Betere manier vinden om andere gebruikers te beschermen tegen het aanpassen van hun gegevens door een gebruiker
-    // User is not allowed to overwrite passwords from other users.
     @PutMapping("/user/{username}")
-    public ResponseEntity<String> updateUser(@PathVariable("username") String username, @RequestBody UserInputDto userInputDto) {
-        return ResponseEntity.ok(userService.updateUser(username, userInputDto));
+    public ResponseEntity<String> updateUser(@PathVariable("username") String username, @Valid @RequestBody UpdateUserInputDto updateUserInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        return ResponseEntity.ok(userService.updateUser(username, updateUserInputDto));
     }
 
     @DeleteMapping("/{username}")
@@ -111,14 +112,14 @@ public class UserController {
 
     @GetMapping("/search/email")
     public ResponseEntity<List<UserOutputDto>> findUserByEmailContains(@RequestParam("email") String email) {
-        List<UserOutputDto> users = userService.findUserByEmailContains(email);
-        return ResponseEntity.ok(users);
+        List<UserOutputDto> userOutputDtoList = userService.findUserByEmailContains(email);
+        return ResponseEntity.ok(userOutputDtoList);
     }
 
     @GetMapping("/search/username")
     public ResponseEntity<List<UserOutputDto>> findUserByUsernameContains(@RequestParam("username") String username) {
-        List<UserOutputDto> users = userService.findUserByUsernameContains(username);
-        return ResponseEntity.ok(users);
+        List<UserOutputDto> userOutputDtoList = userService.findUserByUsernameContains(username);
+        return ResponseEntity.ok(userOutputDtoList);
     }
 
     @GetMapping("/active")
@@ -128,7 +129,10 @@ public class UserController {
 
     // Relational methods
     @PutMapping("/assign/profile/{username}")
-    public ResponseEntity<Object> assignProfileToUser(@PathVariable("username") String username, @Valid @RequestBody IdInputDto idInputDto) {
+    public ResponseEntity<Object> assignProfileToUser(@PathVariable("username") String username, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
         userService.assignProfileToUser(username, idInputDto.id);
         return ResponseEntity.ok().body("User with username: " + "'" + username + "'" + " now assigned to profile with id: " + idInputDto.id + ".");
     }
@@ -140,9 +144,9 @@ public class UserController {
     }
 
 
-// TODO: Add character to Favorites
-// TODO: Get all favorites from username
-// TODO: Delete favorite
+    // TODO: Add character to Favorites
+    // TODO: Get all favorites from username
+    // TODO: Delete favorite
 
     // Image methods
 }
