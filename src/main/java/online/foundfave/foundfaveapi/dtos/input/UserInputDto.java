@@ -1,5 +1,6 @@
 package online.foundfave.foundfaveapi.dtos.input;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -32,5 +33,6 @@ public class UserInputDto {
     @Email(message = "E-mail address is not valid.")
     public String email;
 
+    @JsonSerialize
     public Set<Authority> authorities;
 }

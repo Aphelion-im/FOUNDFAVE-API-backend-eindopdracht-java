@@ -1,6 +1,8 @@
 package online.foundfave.foundfaveapi.dtos.input;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,8 @@ import online.foundfave.foundfaveapi.enums.Gender;
 @Setter
 public class CharacterInputDto {
 
-    @NotNull(message = "Character alias name is required.")
+    @NotNull(message = "Character alias name is required and may not be null.")
+    @Size(min=1, max=255, message="Character alias name must have a minimum of 1 character and maximum of 255 characters.")
     public String characterAliasName;
 
     @NotNull(message = "Character real name is required.")

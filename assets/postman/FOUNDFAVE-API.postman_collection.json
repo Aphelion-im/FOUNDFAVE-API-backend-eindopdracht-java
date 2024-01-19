@@ -450,6 +450,77 @@
 			"response": []
 		},
 		{
+			"name": "assignProfileToUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/assign/profile/andre4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"assign",
+						"profile",
+						"andre4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "detachProfileFromToUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/detach/profile/andre",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"detach",
+						"profile",
+						"andre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "deleteUser",
 			"request": {
 				"auth": {
@@ -1767,14 +1838,44 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/profiles/1000",
+					"raw": "localhost:8080/profiles/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"profiles",
-						"1000"
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProfileByUsername",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/profiles/profile/andre4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles",
+						"profile",
+						"andre4"
 					]
 				}
 			},
@@ -1869,7 +1970,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"André\",\r\n    \"lastName\": \"de Grootzz\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2000\",\r\n    \"profileImageUrl\": \"Image url\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"André 5\",\r\n    \"lastName\": \"de Grootzz\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2000\",\r\n    \"profileImageUrl\": \"Image url\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1906,7 +2007,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"André 2\",\r\n    \"lastName\": \"de Groot 2\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2020\",\r\n    \"profileImageUrl\": \"Image url\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"André 2222zz\",\r\n    \"lastName\": \"de Groot 2\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2020\",\r\n    \"profileImageUrl\": \"Image url\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1914,7 +2015,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/profiles/profile/1000",
+					"raw": "localhost:8080/profiles/profile/1",
 					"host": [
 						"localhost"
 					],
@@ -1922,7 +2023,7 @@
 					"path": [
 						"profiles",
 						"profile",
-						"1000"
+						"1"
 					]
 				}
 			},
@@ -1944,14 +2045,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/profiles/1000",
+					"raw": "localhost:8080/profiles/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"profiles",
-						"1000"
+						"1"
 					]
 				}
 			},
