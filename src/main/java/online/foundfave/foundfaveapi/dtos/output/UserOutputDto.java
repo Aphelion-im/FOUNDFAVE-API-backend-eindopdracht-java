@@ -1,5 +1,6 @@
 package online.foundfave.foundfaveapi.dtos.output;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,6 @@ public class UserOutputDto {
     public String email;
     public Profile profile;
 
+    @JsonSerialize
     public Set<Authority> authorities;
 }

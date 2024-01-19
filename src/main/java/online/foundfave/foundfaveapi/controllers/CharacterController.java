@@ -50,7 +50,10 @@ public class CharacterController {
 
     // TODO: Er is geen goede feedback als velden verkeerd worden ingevuld, bijvoorbeeld de enum: Malez ipv Male
     @PutMapping("/character/{characterId}")
-    public ResponseEntity<String> updateCharacter(@PathVariable("characterId") Long characterId, @RequestBody CharacterInputDto characterInputDto) {
+    public ResponseEntity<String> updateCharacter(@PathVariable("characterId") Long characterId, @Valid @RequestBody CharacterInputDto characterInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
         return ResponseEntity.ok(characterService.updateCharacter(characterId, characterInputDto));
     }
 
