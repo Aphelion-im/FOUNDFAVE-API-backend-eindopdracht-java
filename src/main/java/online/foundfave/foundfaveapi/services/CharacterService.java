@@ -154,6 +154,7 @@ public class CharacterService {
         characterOutputDto.characterSummary = character.getCharacterSummary();
         characterOutputDto.characterDescription = character.getCharacterDescription();
         characterOutputDto.characterImageUrl = character.getCharacterImageUrl();
+        characterOutputDto.moviesList = character.getMoviesList();
         return characterOutputDto;
     }
 

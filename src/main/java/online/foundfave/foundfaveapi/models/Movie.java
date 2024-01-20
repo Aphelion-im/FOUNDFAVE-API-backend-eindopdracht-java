@@ -1,10 +1,13 @@
 package online.foundfave.foundfaveapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,4 +25,9 @@ public class Movie {
     private String movieSummary;
     private String movieYearOfRelease;
     private String movieImageUrl;
+
+    // Relations
+    @ManyToMany(mappedBy = "moviesList")
+    @JsonIgnore
+    private List<Character> charactersList;
 }

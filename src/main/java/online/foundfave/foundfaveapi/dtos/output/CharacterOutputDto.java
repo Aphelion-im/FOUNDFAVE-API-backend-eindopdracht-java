@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import online.foundfave.foundfaveapi.enums.Gender;
+import online.foundfave.foundfaveapi.models.Movie;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,4 +24,5 @@ public class CharacterOutputDto {
     public String characterSummary;
     public String characterDescription;
     public String characterImageUrl;
+    public List<Movie> moviesList;
 }

@@ -46,6 +46,29 @@
 			"response": []
 		},
 		{
+			"name": "API documentation (Public)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/documentation/index.html",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"documentation",
+						"index.html"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "showAllAvailableQueries (Public)",
 			"request": {
 				"auth": {
@@ -186,7 +209,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"andre4\",\r\n    \"password\": \"password\",\r\n    \"email\": \"andre4@novi.nl\"\r\n}",
+					"raw": "{\r\n    \"username\": \"andre4\",\r\n    \"password\": \"pAssword1@\",\r\n    \"email\": \"andre4@novi.nl\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -372,7 +395,7 @@
 			"response": []
 		},
 		{
-			"name": "updateUserPassword (Admin only)",
+			"name": "updateUserPasswordAdmin (Admin only)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -388,7 +411,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"password\": \"bananen\"\r\n}",
+					"raw": "{\r\n    \"password\": \"bAn@nen1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -427,7 +450,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"password\": \"bananen\",\r\n    \"apikey\": null,\r\n    \"email\": \"andre444444@novi.nl\"\r\n}",
+					"raw": "{\r\n    \"password\": \"bAn@nen2\",\r\n    \"apikey\": \"apikey nummer\",\r\n    \"email\": \"andre222@novi.nl\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -466,7 +489,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 2\r\n}",
+					"raw": "{\r\n    \"id\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -474,7 +497,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/users/assign/profile/andre4",
+					"raw": "localhost:8080/users/assign/profile/andre",
 					"host": [
 						"localhost"
 					],
@@ -483,7 +506,7 @@
 						"users",
 						"assign",
 						"profile",
-						"andre4"
+						"andre"
 					]
 				}
 			},
@@ -1121,7 +1144,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"movieTitle\": \"The Incredible Hulk 54\",\r\n    \"movieSummary\": \"Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.\",\r\n    \"movieYearOfRelease\": 2016,\r\n    \"movieImageUrl\": \"image-url-hulk\"\r\n}",
+					"raw": "{\r\n    \"movieTitle\": \"The Incredible Hulk 55\",\r\n    \"movieSummary\": \"Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.\",\r\n    \"movieYearOfRelease\": 2010,\r\n    \"movieImageUrl\": \"image-url-hulk\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1706,7 +1729,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"characterAliasName\": \"Andre\",\r\n    \"characterRealName\": \"Andreus\",\r\n    \"characterActorName\": \"andre d g\",\r\n    \"characterTitle\": \"this is a title\",\r\n    \"characterGender\": \"Male\",\r\n    \"characterSummary\": \"This is a summary\",\r\n    \"characterDescription\": \"characterDescription\",\r\n    \"characterImageUrl\": \"image\"\r\n}",
+					"raw": "{\r\n    \"characterAliasName\": \"Hulkiiz\",\r\n    \"characterRealName\": \"Test\",\r\n    \"characterActorName\": \"andre d g\",\r\n    \"characterTitle\": \"this is a title\",\r\n    \"characterGender\": \"Male\",\r\n    \"characterSummary\": \"This is a summary\",\r\n    \"characterDescription\": \"characterDescription\",\r\n    \"characterImageUrl\": \"image\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1970,7 +1993,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"André 5\",\r\n    \"lastName\": \"de Grootzz\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2000\",\r\n    \"profileImageUrl\": \"Image url\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"André\",\r\n    \"lastName\": \"de Grootzz\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2010\",\r\n    \"profileImageUrl\": \"Image url\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -2015,7 +2038,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/profiles/profile/1",
+					"raw": "localhost:8080/profiles/profile/1000",
 					"host": [
 						"localhost"
 					],
@@ -2023,7 +2046,7 @@
 					"path": [
 						"profiles",
 						"profile",
-						"1"
+						"1000"
 					]
 				}
 			},

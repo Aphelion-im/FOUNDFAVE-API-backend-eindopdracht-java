@@ -31,8 +31,8 @@ public class ContactFormController {
     }
 
     @GetMapping("/{contactFormId}")
-    public ResponseEntity<ContactFormOutputDto> getContactForm(@PathVariable Long contactFormId) {
-        ContactFormOutputDto contactFormOutputDto = contactFormService.getContactFormSubmission(contactFormId);
+    public ResponseEntity<ContactFormOutputDto> getContactFormById(@PathVariable Long contactFormId) {
+        ContactFormOutputDto contactFormOutputDto = contactFormService.getContactFormById(contactFormId);
         return ResponseEntity.ok(contactFormOutputDto);
     }
 

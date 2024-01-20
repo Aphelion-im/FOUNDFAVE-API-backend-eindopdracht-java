@@ -33,8 +33,8 @@ public class ProfileController {
     }
 
     @GetMapping("/{profileId}")
-    public ResponseEntity<ProfileOutputDto> getProfile(@PathVariable("profileId") Long profileId) {
-        ProfileOutputDto profileOutputDto = profileService.getProfile(profileId);
+    public ResponseEntity<ProfileOutputDto> getProfileById(@PathVariable("profileId") Long profileId) {
+        ProfileOutputDto profileOutputDto = profileService.getProfileById(profileId);
         return ResponseEntity.ok().body(profileOutputDto);
     }
 

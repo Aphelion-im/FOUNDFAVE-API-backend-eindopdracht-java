@@ -32,8 +32,8 @@ public class MovieController {
     }
 
     @GetMapping("/{movieId}")
-    public ResponseEntity<MovieOutputDto> getMovie(@PathVariable("movieId") Long movieId) {
-        MovieOutputDto movieOutputDto = movieService.getMovie(movieId);
+    public ResponseEntity<MovieOutputDto> getMovieById(@PathVariable("movieId") Long movieId) {
+        MovieOutputDto movieOutputDto = movieService.getMovieById(movieId);
         return ResponseEntity.ok().body(movieOutputDto);
     }
 

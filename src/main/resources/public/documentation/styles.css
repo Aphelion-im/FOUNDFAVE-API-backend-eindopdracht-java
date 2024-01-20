@@ -166,6 +166,7 @@ nav .menu-top {
 
 .logo-header {
   width: 170.84px;
+  height: 100%;
   position: relative;
   left: 50%;
   transform: translateX(-50%);

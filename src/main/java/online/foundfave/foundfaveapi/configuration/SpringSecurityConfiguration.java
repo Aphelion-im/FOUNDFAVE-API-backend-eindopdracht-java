@@ -53,6 +53,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, "/info").permitAll()
                 .requestMatchers(HttpMethod.GET, "/test").permitAll()
                 .requestMatchers(HttpMethod.GET, "/queries").permitAll()
+                .requestMatchers(HttpMethod.GET, "/documentation/**").permitAll()
 
                 /* Authentication */
                 .requestMatchers("/login").permitAll()

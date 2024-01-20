@@ -63,12 +63,15 @@ public class AuthenticationController {
     public ResponseEntity<String> showApiInfo() {
         String info = """
                 FOUNDFAVE API Endpoints
+                
+                ***** API Documentation *****
+                http://localhost:8080/documentation/index.html
                                 
                 ***** Public *****
                 localhost:8080/ (GET, Public)
                 localhost:8080/test (GET, Public)
                 localhost:8080/queries (GET, Public)
-
+                
                 ***** Authentication *****
                 localhost:8080/login (POST, Public)
                 localhost:8080/authenticated (GET, Admin, User)

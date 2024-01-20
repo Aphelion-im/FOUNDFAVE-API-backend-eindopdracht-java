@@ -40,7 +40,7 @@ public class ProfileService {
         return profileOutputDtoList;
     }
 
-    public ProfileOutputDto getProfile(Long profileId) {
+    public ProfileOutputDto getProfileById(Long profileId) {
         ProfileOutputDto profileOutputDto;
         Optional<Profile> optionalProfile = profileRepository.findById(profileId);
         if (optionalProfile.isPresent()) {

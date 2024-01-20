@@ -31,7 +31,7 @@ public class MovieService {
         return collection;
     }
 
-    public MovieOutputDto getMovie(Long movieId) {
+    public MovieOutputDto getMovieById(Long movieId) {
         MovieOutputDto movieOutputDto;
         Optional<Movie> optionalMovie = movieRepository.findById(movieId);
         if (optionalMovie.isPresent()) {
@@ -146,6 +146,7 @@ public class MovieService {
         movieOutputDto.movieSummary = movie.getMovieSummary();
         movieOutputDto.movieYearOfRelease = movie.getMovieYearOfRelease();
         movieOutputDto.movieImageUrl = movie.getMovieImageUrl();
+        movieOutputDto.charactersList = movie.getCharactersList();
         return movieOutputDto;
     }
 

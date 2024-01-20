@@ -11,6 +11,7 @@ Datum laatste update: 20-1-2024
 - [Benodigdheden](#benodigdheden)
 - [Postman Collectie JSON Bestand](#postman-collectie-json-bestand)
 - [Opstarten Webserver en Database](#opstarten-webserver-en-database)
+- [FOUNDFAVE API Documentatie](#foundfave-api-online-documentatie)
 - [Live demo React FOUNDFAVE App](#live-demo-react-foundfave-app)
 - [Contact](#contact)
 
@@ -51,6 +52,10 @@ __Inloggen op de FOUNDFAVE API__:
 
 __Opvragen of de FOUNDFAVE API online is__:
 - Binnen Postman: `localhost:8080/test`
+
+## FOUNDFAVE API Online Documentatie
+Nadat je de server hebt opgestart, kun je hier documentatie lezen:
+`http://localhost:8080/documentation/index.html`
 
 ## Live demo React FOUNDFAVE App
 

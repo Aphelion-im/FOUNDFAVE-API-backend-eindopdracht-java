@@ -30,7 +30,7 @@ public class ContactFormService {
         return contactFormOutputDtoList;
     }
 
-    public ContactFormOutputDto getContactFormSubmission(Long contactFormId) {
+    public ContactFormOutputDto getContactFormById(Long contactFormId) {
         ContactForm contactForm = contactFormRepository.findById(contactFormId).orElseThrow(() -> new ContactFormNotFoundException("Contact Form with id: " + contactFormId + " not found!"));
         return transformContactFormToContactFormOutputDto(contactForm);
     }

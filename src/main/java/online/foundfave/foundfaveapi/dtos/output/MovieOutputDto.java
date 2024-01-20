@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import online.foundfave.foundfaveapi.models.Character;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,4 +19,5 @@ public class MovieOutputDto {
     public String movieSummary;
     public String movieYearOfRelease;
     public String movieImageUrl;
+    public List<Character> charactersList;
 }
