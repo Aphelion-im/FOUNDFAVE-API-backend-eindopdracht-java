@@ -108,6 +108,22 @@ VALUES (1000, 'André de Groot', 'andre.de.groot@novi.nl', 'Leuke site!', '2024-
        (1004, 'Anton', 'anton@hotmail.nl', 'Krijgen jullie ook QuickSilver en X-men binnenkort?',
         '2024-01-06 22:26:05.403236');
 
+UPDATE contact_forms
+SET users_username = 'admin'
+WHERE contact_form_id = 1000;
+UPDATE contact_forms
+SET users_username = 'admin'
+WHERE contact_form_id = 1001;
+UPDATE contact_forms
+SET users_username = 'andre'
+WHERE contact_form_id = 1002;
+UPDATE contact_forms
+SET users_username = 'user'
+WHERE contact_form_id = 1003;
+UPDATE contact_forms
+SET users_username = 'user'
+WHERE contact_form_id = 1004;
+
 INSERT INTO characters (character_id, character_alias_name, character_real_name, character_actor_name, character_title,
                         character_gender, character_summary, character_description, character_image_url)
 VALUES (1000, 'Hulk', 'Robert Bruce Banner', 'Mark Ruffalo', 'The incredible Hulk', 'Male',
@@ -357,7 +373,11 @@ VALUES (1000, 1000),
        (1014, 1012),
        (1014, 1004);
 
-
+INSERT INTO users_characters (username, character_id)
+VALUES ('andre', 1000),
+       ('andre', 1001),
+       ('adam78', 1000),
+       ('adam78', 1001);
 
 
 

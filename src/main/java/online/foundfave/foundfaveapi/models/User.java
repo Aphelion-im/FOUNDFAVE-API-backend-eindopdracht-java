@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -47,20 +48,20 @@ public class User {
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "users_characters",
+            joinColumns = @JoinColumn(name = "username"),
+            inverseJoinColumns = @JoinColumn(name = "character_id")
+    )
+    @JsonIgnore
+    private List<Character> favoritesList;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<ContactForm> contactFormList;
 
-
-
-
-
-//    @OneToMany(mappedBy = "user")
-//    @JsonIgnore
-//    private List<ContactForm> contactForms;
-//
-//    @OneToMany(mappedBy = "user")
-//    @JsonIgnore
-//    private List<Character> favoritesList;
-
+    // Authority
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
     }

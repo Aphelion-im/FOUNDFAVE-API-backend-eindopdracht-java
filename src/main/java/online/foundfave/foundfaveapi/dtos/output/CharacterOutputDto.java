@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import online.foundfave.foundfaveapi.enums.Gender;
 import online.foundfave.foundfaveapi.models.Movie;
+import online.foundfave.foundfaveapi.models.User;
 
 import java.util.List;
 

@@ -1,5 +1,6 @@
 package online.foundfave.foundfaveapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,9 +30,8 @@ public class ContactForm {
     public LocalDateTime timeStamp;
 
     // Relations
-//    @ManyToOne
-//    @JoinColumn(name = "user_username") // TODO: user_username of users_username?
-//    @JsonIgnore
-//    private User user;
-
+    @ManyToOne
+    @JoinColumn(name = "users_username")
+    @JsonIgnore
+    private User user;
 }

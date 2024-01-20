@@ -202,6 +202,8 @@ public class UserService {
         userOutputDto.email = user.getEmail();
         userOutputDto.authorities = user.getAuthorities();
         userOutputDto.profile = user.getProfile();
+        userOutputDto.favoritesList = user.getFavoritesList();
+        userOutputDto.contactFormList = user.getContactFormList();
         return userOutputDto;
     }
 

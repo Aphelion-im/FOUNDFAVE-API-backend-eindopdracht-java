@@ -36,21 +36,15 @@ public class Character {
 
     // Relations
     @ManyToMany
-    @JsonIgnore
     @JoinTable(
             name = "characters_movies",
             joinColumns = @JoinColumn(name = "character_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
+    @JsonIgnore
     private List<Movie> moviesList;
 
-
-
-
-
-
-//    @ManyToOne
-//    @JoinColumn(name = "users_username") // TODO: user_username of users_username?
-//    @JsonIgnore
-//    private User user;
+    @ManyToMany(mappedBy = "favoritesList")
+    @JsonIgnore
+    private List<User> usersList;
 }
