@@ -144,7 +144,7 @@ public class UserController {
     }
 
 
-    // TODO: Add character to Favorites
+    // TODO: Add character to Favorites. Geen dubbele waarden!
     // TODO: Get all favorites from username
     // TODO: Delete favorite
 
