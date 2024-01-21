@@ -5,8 +5,10 @@ import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
 import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.CharacterAlreadyExistsException;
 import online.foundfave.foundfaveapi.exceptions.CharacterNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.MovieNotFoundException;
 import online.foundfave.foundfaveapi.models.Character;
 import online.foundfave.foundfaveapi.repositories.CharacterRepository;
+import online.foundfave.foundfaveapi.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,9 +19,11 @@ import java.util.Optional;
 public class CharacterService {
 
     private final CharacterRepository characterRepository;
+    private final MovieRepository movieRepository;
 
-    public CharacterService(CharacterRepository characterRepository) {
+    public CharacterService(CharacterRepository characterRepository, MovieRepository movieRepository) {
         this.characterRepository = characterRepository;
+        this.movieRepository = movieRepository;
     }
 
     // Basic CRUD methods
@@ -141,7 +145,17 @@ public class CharacterService {
     }
 
     // Relational methods
-
+    public void addMovieToCharacter(Long characterId, Long movieId) {
+        var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
+        var optionalMovie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
+        if (optionalCharacter.getMoviesList().contains(optionalMovie)) {
+            throw new BadRequestException("This movie is already added to this character!");
+        } else {
+            optionalCharacter.getMoviesList().add(optionalMovie);
+            var updatedOptionalCharacter = characterRepository.save(optionalCharacter);
+            transformCharacterToCharacterOutputDto(updatedOptionalCharacter);
+        }
+    }
 
     // Image methods
 

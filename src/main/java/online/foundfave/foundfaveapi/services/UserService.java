@@ -99,8 +99,11 @@ public class UserService {
     }
 
     public void removeAuthority(String username, String authority) {
-        if (!Objects.equals(authority, "ROLE_USER") & !Objects.equals(authority, "ROLE_ADMIN")) {
-            throw new BadRequestException("Please, fill in one of these roles: ROLE_ADMIN or ROLE_USER!");
+        if (Objects.equals(username, "admin")) {
+            throw new BadRequestException("You are not allowed to demote this user!");
+        }
+        if (!Objects.equals(authority, "ROLE_ADMIN")) {
+            throw new BadRequestException("ROLE_USER can not be removed. Please, fill in this role: ROLE_ADMIN!");
         }
         User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().orElse(null);
@@ -183,7 +186,7 @@ public class UserService {
 
     // Add character to favorites
     public void addCharacterToUser(String username, Long characterId) {
-        var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new ProfileNotFoundException("Character not found with id: " + characterId + "!"));
+        var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         if (optionalUser.getFavoritesList().contains(optionalCharacter)) {
             throw new BadRequestException("This character is already on this list.");
@@ -196,7 +199,7 @@ public class UserService {
 
     // Remove character from favorites
     public void removeCharacterFromUser(String username, Long characterId) {
-        var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new ProfileNotFoundException("Character not found with id: " + characterId + "!"));
+        var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         if (!optionalUser.getFavoritesList().contains(optionalCharacter)) {
             throw new BadRequestException("This character is not on this list or was already removed.");

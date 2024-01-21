@@ -2,6 +2,7 @@ package online.foundfave.foundfaveapi.controllers;
 
 import jakarta.validation.Valid;
 import online.foundfave.foundfaveapi.dtos.input.CharacterInputDto;
+import online.foundfave.foundfaveapi.dtos.input.IdInputDto;
 import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
 import online.foundfave.foundfaveapi.services.CharacterService;
 import online.foundfave.foundfaveapi.utilities.FieldErrorHandling;
@@ -94,13 +95,17 @@ public class CharacterController {
     }
 
     // Relational methods
-    // TODO: Add movie to character
-
+    @PutMapping("/add/movie/{characterId}")
+    public ResponseEntity<Object> addMovieToCharacter(@PathVariable("characterId") Long characterId, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        characterService.addMovieToCharacter(characterId, idInputDto.id);
+        return ResponseEntity.ok().body("Movie with id: " + idInputDto.id + " now assigned to character with id: " + characterId + ".");
+    }
 
 
     // TODO: Remove movie from character
-
-
 
 
     // Image methods

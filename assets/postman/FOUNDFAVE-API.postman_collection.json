@@ -395,6 +395,43 @@
 			"response": []
 		},
 		{
+			"name": "getAllFavoritesFromUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/favorites/andre",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"favorites",
+						"andre"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "updateUserPasswordAdmin (Admin only)",
 			"request": {
 				"auth": {
@@ -497,7 +534,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/users/assign/profile/andre",
+					"raw": "localhost:8080/users/assign/profile/andre4",
 					"host": [
 						"localhost"
 					],
@@ -506,7 +543,7 @@
 						"users",
 						"assign",
 						"profile",
-						"andre"
+						"andre4"
 					]
 				}
 			},
@@ -544,6 +581,86 @@
 			"response": []
 		},
 		{
+			"name": "addCharacterToUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1007\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/add/character/andre",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"add",
+						"character",
+						"andre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeCharacterFromUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/delete/character/andre",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"delete",
+						"character",
+						"andre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "deleteUser",
 			"request": {
 				"auth": {
@@ -559,14 +676,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre4",
+					"raw": "localhost:8080/users/andre",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre4"
+						"andre"
 					]
 				}
 			},
@@ -588,14 +705,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre4/authorities",
+					"raw": "localhost:8080/users/andre/authorities",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre4",
+						"andre",
 						"authorities"
 					]
 				}
@@ -657,16 +774,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre4/authorities/ROLE_USER",
+					"raw": "localhost:8080/users/andre/authorities/ROLE_ADMIN",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre4",
+						"andre",
 						"authorities",
-						"ROLE_USER"
+						"ROLE_ADMIN"
 					]
 				}
 			},
@@ -739,7 +856,7 @@
 			"response": []
 		},
 		{
-			"name": "getContactForm",
+			"name": "getContactFormById",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -1057,14 +1174,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/characters/1000",
+					"raw": "localhost:8080/characters/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"characters",
-						"1000"
+						"1"
 					]
 				}
 			},
@@ -1099,7 +1216,7 @@
 			"response": []
 		},
 		{
-			"name": "getMovie",
+			"name": "getMovieById",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -1114,14 +1231,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/movies/1000",
+					"raw": "localhost:8080/movies/1001",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"movies",
-						"1000"
+						"1001"
 					]
 				}
 			},
@@ -1789,6 +1906,46 @@
 			"response": []
 		},
 		{
+			"name": "addMovieToCharacter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/add/movie/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"add",
+						"movie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "deleteCharacter",
 			"request": {
 				"auth": {
@@ -1804,14 +1961,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/characters/1000",
+					"raw": "localhost:8080/characters/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"characters",
-						"1000"
+						"1"
 					]
 				}
 			},
@@ -1846,7 +2003,7 @@
 			"response": []
 		},
 		{
-			"name": "getProfile",
+			"name": "getProfileById",
 			"request": {
 				"auth": {
 					"type": "bearer",
