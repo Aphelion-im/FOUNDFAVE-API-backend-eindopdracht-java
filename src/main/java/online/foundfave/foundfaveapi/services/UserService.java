@@ -177,6 +177,7 @@ public class UserService {
         return getUserOutputDto(username);
     }
 
+    // Add character to favorites
     public void addCharacterToUser(String username, Long characterId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new ProfileNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
@@ -184,6 +185,19 @@ public class UserService {
             throw new BadRequestException("This character is already on this list.");
         } else {
             optionalUser.getFavoritesList().add(optionalCharacter);
+            var updatedOptionalUser = userRepository.save(optionalUser);
+            transformUserToUserOutputDto(updatedOptionalUser);
+        }
+    }
+
+    // Remove character from favorites
+    public void removeCharacterFromUser(String username, Long characterId) {
+        var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new ProfileNotFoundException("Character not found with id: " + characterId + "!"));
+        var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        if (!optionalUser.getFavoritesList().contains(optionalCharacter)) {
+            throw new BadRequestException("This character is not on this list or was already removed.");
+        } else {
+            optionalUser.getFavoritesList().remove(optionalCharacter);
             var updatedOptionalUser = userRepository.save(optionalUser);
             transformUserToUserOutputDto(updatedOptionalUser);
         }

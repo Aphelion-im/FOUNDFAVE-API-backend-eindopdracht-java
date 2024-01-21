@@ -159,11 +159,14 @@ public class UserController {
         return ResponseEntity.ok().body("Character with id: " + idInputDto.id + " now assigned to user with username: " + "'" + username + "'" + ".");
     }
 
-
-
-
-
-    // TODO: Delete favorite
+    @DeleteMapping("/delete/character/{username}")
+    public ResponseEntity<Object> removeCharacterFromUser(@PathVariable("username") String username, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        userService.removeCharacterFromUser(username, idInputDto.id);
+        return ResponseEntity.ok().body("Character with id: " + idInputDto.id + " now removed from user with username: " + "'" + username + "'" + ".");
+    }
 
     // Image methods
 }
