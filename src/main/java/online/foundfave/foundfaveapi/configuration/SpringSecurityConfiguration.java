@@ -116,6 +116,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.PUT, "/users/user/{username}").hasRole("USER")
                 .requestMatchers(HttpMethod.PUT, "/users/assign/profile/{username}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/users/detach/profile/{username}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/users/add/character/{username}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/users").permitAll()
                 .requestMatchers(HttpMethod.POST, "users/{username}/authorities").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/users/{username}").hasRole("ADMIN")

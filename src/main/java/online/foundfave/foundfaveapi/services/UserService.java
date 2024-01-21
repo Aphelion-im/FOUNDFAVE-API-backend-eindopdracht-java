@@ -7,6 +7,7 @@ import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.*;
 import online.foundfave.foundfaveapi.models.Authority;
 import online.foundfave.foundfaveapi.models.User;
+import online.foundfave.foundfaveapi.repositories.CharacterRepository;
 import online.foundfave.foundfaveapi.repositories.ProfileRepository;
 import online.foundfave.foundfaveapi.repositories.UserRepository;
 import online.foundfave.foundfaveapi.utilities.RandomStringGenerator;
@@ -20,11 +21,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final ProfileRepository profileRepository;
+    private final CharacterRepository characterRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, ProfileRepository profileRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, ProfileRepository profileRepository, CharacterRepository characterRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.profileRepository = profileRepository;
+        this.characterRepository = characterRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -39,14 +42,7 @@ public class UserService {
     }
 
     public UserOutputDto getUser(String username) {
-        UserOutputDto userOutputDto;
-        Optional<User> optionalUser = userRepository.findById(username);
-        if (optionalUser.isPresent()) {
-            userOutputDto = transformUserToUserOutputDto(optionalUser.get());
-        } else {
-            throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
-        }
-        return userOutputDto;
+        return getUserOutputDto(username);
     }
 
     public String createUser(UserInputDto userInputDto) {
@@ -178,14 +174,19 @@ public class UserService {
     }
 
     public UserOutputDto getAllFavoritesFromUser(String username) {
-        UserOutputDto userOutputDto;
-        Optional<User> optionalUser = userRepository.findById(username);
-        if (optionalUser.isPresent()) {
-            userOutputDto = transformUserToUserOutputDto(optionalUser.get());
+        return getUserOutputDto(username);
+    }
+
+    public void addCharacterToUser(String username, Long characterId) {
+        var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new ProfileNotFoundException("Character not found with id: " + characterId + "!"));
+        var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        if (optionalUser.getFavoritesList().contains(optionalCharacter)) {
+            throw new BadRequestException("This character is already on this list.");
         } else {
-            throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
+            optionalUser.getFavoritesList().add(optionalCharacter);
+            var updatedOptionalUser = userRepository.save(optionalUser);
+            transformUserToUserOutputDto(updatedOptionalUser);
         }
-        return userOutputDto;
     }
 
     // Image methods
@@ -201,6 +202,17 @@ public class UserService {
             throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
         }
         return userInputDto;
+    }
+
+    private UserOutputDto getUserOutputDto(String username) {
+        UserOutputDto userOutputDto;
+        Optional<User> optionalUser = userRepository.findById(username);
+        if (optionalUser.isPresent()) {
+            userOutputDto = transformUserToUserOutputDto(optionalUser.get());
+        } else {
+            throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
+        }
+        return userOutputDto;
     }
 
     // Transformers

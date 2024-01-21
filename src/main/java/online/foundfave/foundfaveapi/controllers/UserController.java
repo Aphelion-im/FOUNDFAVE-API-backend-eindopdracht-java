@@ -150,8 +150,18 @@ public class UserController {
         return ResponseEntity.ok().body(userOutputDto.favoritesList);
     }
 
+    @PutMapping("/add/character/{username}")
+    public ResponseEntity<Object> addCharacterToUser(@PathVariable("username") String username, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        userService.addCharacterToUser(username, idInputDto.id);
+        return ResponseEntity.ok().body("Character with id: " + idInputDto.id + " now assigned to user with username: " + "'" + username + "'" + ".");
+    }
 
-    // TODO: Add character to Favorites. Geen dubbele waarden!
+
+
+
 
     // TODO: Delete favorite
 
