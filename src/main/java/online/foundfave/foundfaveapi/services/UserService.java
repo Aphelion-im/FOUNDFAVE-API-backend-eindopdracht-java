@@ -92,7 +92,14 @@ public class UserService {
         return outputDto.getAuthorities();
     }
 
+    // This method works with the createUser method and is not associated with a controller.
     public void addAuthority(String username, String authority) {
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        user.addAuthority(new Authority(username, authority));
+        userRepository.save(user);
+    }
+
+    public void addUserAuthority(String username, String authority) {
         User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         user.addAuthority(new Authority(username, authority));
         userRepository.save(user);
@@ -107,6 +114,9 @@ public class UserService {
         }
         User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().orElse(null);
+        if (!user.getAuthorities().contains(authorityToRemove)) {
+            throw new BadRequestException("This user is already (demoted to) ROLE_USER!");
+        }
         user.removeAuthority(authorityToRemove);
         userRepository.save(user);
     }

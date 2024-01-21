@@ -6,7 +6,7 @@ import online.foundfave.foundfaveapi.dtos.input.PasswordInputDto;
 import online.foundfave.foundfaveapi.dtos.input.UpdateUserInputDto;
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
-import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.models.Character;
 import online.foundfave.foundfaveapi.services.UserService;
 import online.foundfave.foundfaveapi.utilities.FieldErrorHandling;
@@ -85,19 +85,18 @@ public class UserController {
 
     @PostMapping("/{username}/authorities")
     public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
-        try {
-            String authorityName = (String) fields.get("authority");
-            userService.addAuthority(username, authorityName);
-            return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " has been promoted!");
-        } catch (Exception ex) {
-            throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
+        String authorityName = (String) fields.get("authority");
+        if (authorityName == null || !authorityName.equals("ROLE_ADMIN")) {
+            throw new BadRequestException("Please fill in: ROLE_ADMIN!");
         }
+        userService.addUserAuthority(username, authorityName);
+        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " has been promoted to ROLE_ADMIN!");
     }
 
     @DeleteMapping("/{username}/authorities/{authority}")
     public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
         userService.removeAuthority(username, authority);
-        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " has been demoted!");
+        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " has been demoted to ROLE_USER!");
     }
 
     @GetMapping("/exists/{username}")
