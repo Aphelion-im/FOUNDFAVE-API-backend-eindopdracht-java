@@ -177,6 +177,16 @@ public class UserService {
         }
     }
 
+    public UserOutputDto getAllFavoritesFromUser(String username) {
+        UserOutputDto userOutputDto;
+        Optional<User> optionalUser = userRepository.findById(username);
+        if (optionalUser.isPresent()) {
+            userOutputDto = transformUserToUserOutputDto(optionalUser.get());
+        } else {
+            throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
+        }
+        return userOutputDto;
+    }
 
     // Image methods
 

@@ -54,7 +54,7 @@ __Opvragen of de FOUNDFAVE API online is__:
 - Binnen Postman: `localhost:8080/test`
 
 ## FOUNDFAVE API Online Documentatie
-Nadat je de server hebt opgestart, kun je hier documentatie lezen:
+Nadat je de server hebt opgestart, kun je hier de API documentatie lezen:
 `http://localhost:8080/documentation/index.html`
 
 ## Live demo React FOUNDFAVE App

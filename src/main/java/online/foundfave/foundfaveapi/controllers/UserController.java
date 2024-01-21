@@ -7,6 +7,7 @@ import online.foundfave.foundfaveapi.dtos.input.UpdateUserInputDto;
 import online.foundfave.foundfaveapi.dtos.input.UserInputDto;
 import online.foundfave.foundfaveapi.dtos.output.UserOutputDto;
 import online.foundfave.foundfaveapi.exceptions.UsernameNotFoundException;
+import online.foundfave.foundfaveapi.models.Character;
 import online.foundfave.foundfaveapi.services.UserService;
 import online.foundfave.foundfaveapi.utilities.FieldErrorHandling;
 import org.springframework.http.HttpStatus;
@@ -143,9 +144,15 @@ public class UserController {
         return ResponseEntity.ok().body("User with username: " + "'" + username + "'" + " now detached from its profile!");
     }
 
+    @GetMapping("/favorites/{username}")
+    public ResponseEntity<List<Character>> getAllFavoritesFromUser(@PathVariable("username") String username) {
+        UserOutputDto userOutputDto = userService.getAllFavoritesFromUser(username);
+        return ResponseEntity.ok().body(userOutputDto.favoritesList);
+    }
+
 
     // TODO: Add character to Favorites. Geen dubbele waarden!
-    // TODO: Get all favorites from username
+
     // TODO: Delete favorite
 
     // Image methods
