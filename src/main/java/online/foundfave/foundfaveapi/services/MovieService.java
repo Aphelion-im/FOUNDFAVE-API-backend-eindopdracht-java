@@ -2,6 +2,7 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.MovieInputDto;
 import online.foundfave.foundfaveapi.dtos.output.MovieOutputDto;
+import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.MovieAlreadyExistsException;
 import online.foundfave.foundfaveapi.exceptions.MovieNotFoundException;
 import online.foundfave.foundfaveapi.models.Movie;
@@ -66,7 +67,11 @@ public class MovieService {
         if (!movieRepository.existsById(movieId)) {
             throw new MovieNotFoundException("Movie with id: " + movieId + " not found!");
         }
-        movieRepository.deleteById(movieId);
+        try {
+            movieRepository.deleteById(movieId);
+        } catch (Exception e) {
+            throw new BadRequestException("You are not allowed to delete this movie as it is still linked to a character or characters!");
+        }
     }
 
     // Repository methods

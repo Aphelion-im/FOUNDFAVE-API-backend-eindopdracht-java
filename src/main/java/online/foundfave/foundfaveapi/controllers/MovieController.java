@@ -93,7 +93,14 @@ public class MovieController {
     }
 
     // Relational methods
-    // TODO: Add movie to character or vice versa
+    // TODO: Add character to movie
+
+
+
+    // TODO: Delete character from movie
+
+
+
 
 
     // Image methods

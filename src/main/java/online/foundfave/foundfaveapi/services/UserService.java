@@ -79,7 +79,11 @@ public class UserService {
         if (!userRepository.existsById(username)) {
             throw new UsernameNotFoundException("User with id: " + "'" + username + "'" + " not found!");
         }
-        userRepository.deleteById(username);
+        try {
+            userRepository.deleteById(username);
+        } catch (Exception e) {
+            throw new BadRequestException("You are not allowed to delete this user as it still linked to a contact form!");
+        }
     }
 
     public Set<Authority> getAuthorities(String username) {

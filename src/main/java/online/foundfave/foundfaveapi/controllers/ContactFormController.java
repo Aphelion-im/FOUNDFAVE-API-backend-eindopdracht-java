@@ -78,7 +78,10 @@ public class ContactFormController {
     }
 
     // Relational methods
-    // TODO: Add form to user, Add user to form
+    // TODO: Attach user to form en delete user andre testen met foreign key constraint
+
+
+    // TODO: Detach user to form
 
 
     // Image methods
