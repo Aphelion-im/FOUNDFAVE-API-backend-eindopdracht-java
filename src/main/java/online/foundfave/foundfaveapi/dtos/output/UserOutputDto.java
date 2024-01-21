@@ -24,7 +24,7 @@ public class UserOutputDto {
     public String email;
     public Profile profile;
     public List<Character> favoritesList;
-    public List<ContactForm> contactFormList;
+    public List<ContactForm> contactFormsList;
 
     @JsonSerialize
     public Set<Authority> authorities;

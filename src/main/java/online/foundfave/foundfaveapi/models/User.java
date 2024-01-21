@@ -59,7 +59,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
-    private List<ContactForm> contactFormList;
+    private List<ContactForm> contactFormsList;
 
     // Authority
     public void addAuthority(Authority authority) {

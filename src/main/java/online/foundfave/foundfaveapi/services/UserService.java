@@ -203,7 +203,7 @@ public class UserService {
         userOutputDto.authorities = user.getAuthorities();
         userOutputDto.profile = user.getProfile();
         userOutputDto.favoritesList = user.getFavoritesList();
-        userOutputDto.contactFormList = user.getContactFormList();
+        userOutputDto.contactFormsList = user.getContactFormsList();
         return userOutputDto;
     }
 
