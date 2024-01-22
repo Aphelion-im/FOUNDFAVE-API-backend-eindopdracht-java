@@ -104,16 +104,15 @@ public class CharacterController {
         return ResponseEntity.ok().body("Movie with id: " + idInputDto.id + " now assigned to character with id: " + characterId + ".");
     }
 
-
-    // TODO: Remove movie from character
-
-
-
-
-
+    @DeleteMapping("/remove/movie/{characterId}")
+    public ResponseEntity<Object> removeMovieFromCharacter(@PathVariable("characterId") Long characterId, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        characterService.removeMovieFromCharacter(characterId, idInputDto.id);
+        return ResponseEntity.ok().body("Movie with id: " + idInputDto.id + " now removed from character with id: " + characterId + ".");
+    }
 
     // Image methods
     // TODO: Upload character photo
-
-
 }

@@ -2,10 +2,7 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.CharacterInputDto;
 import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
-import online.foundfave.foundfaveapi.exceptions.BadRequestException;
-import online.foundfave.foundfaveapi.exceptions.CharacterAlreadyExistsException;
-import online.foundfave.foundfaveapi.exceptions.CharacterNotFoundException;
-import online.foundfave.foundfaveapi.exceptions.MovieNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.*;
 import online.foundfave.foundfaveapi.models.Character;
 import online.foundfave.foundfaveapi.repositories.CharacterRepository;
 import online.foundfave.foundfaveapi.repositories.MovieRepository;
@@ -152,6 +149,18 @@ public class CharacterService {
             throw new BadRequestException("This movie is already added to this character!");
         } else {
             optionalCharacter.getMoviesList().add(optionalMovie);
+            var updatedOptionalCharacter = characterRepository.save(optionalCharacter);
+            transformCharacterToCharacterOutputDto(updatedOptionalCharacter);
+        }
+    }
+
+    public void removeMovieFromCharacter(Long characterId, Long movieId) {
+        var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
+        var optionalMovie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
+        if (!optionalCharacter.getMoviesList().contains(optionalMovie)) {
+            throw new BadRequestException("This movie is not on this list or was already removed.");
+        } else {
+            optionalCharacter.getMoviesList().remove(optionalMovie);
             var updatedOptionalCharacter = characterRepository.save(optionalCharacter);
             transformCharacterToCharacterOutputDto(updatedOptionalCharacter);
         }

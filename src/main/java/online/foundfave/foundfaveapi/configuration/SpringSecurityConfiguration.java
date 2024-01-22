@@ -71,6 +71,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.PUT, "/characters/add/movie/{characterId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/characters").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/characters/{characterId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/characters/remove/movie/{characterId}").hasRole("ADMIN")
 
                 /* ContactForms */
                 .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")

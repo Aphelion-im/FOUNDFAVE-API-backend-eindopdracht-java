@@ -705,14 +705,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre/authorities",
+					"raw": "localhost:8080/users/andre4/authorities",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre",
+						"andre4",
 						"authorities"
 					]
 				}
@@ -774,14 +774,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre/authorities/ROLE_ADMIN",
+					"raw": "localhost:8080/users/andre4/authorities/ROLE_ADMIN",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre",
+						"andre4",
 						"authorities",
 						"ROLE_ADMIN"
 					]
@@ -1938,6 +1938,46 @@
 					"path": [
 						"characters",
 						"add",
+						"movie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeMovieFromCharacter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/remove/movie/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"remove",
 						"movie",
 						"1"
 					]
