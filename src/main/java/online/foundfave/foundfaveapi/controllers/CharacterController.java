@@ -108,6 +108,10 @@ public class CharacterController {
     // TODO: Remove movie from character
 
 
+
+
+
+
     // Image methods
     // TODO: Upload character photo
 

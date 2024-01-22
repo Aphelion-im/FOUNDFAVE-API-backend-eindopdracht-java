@@ -93,12 +93,13 @@ public class UserService {
     }
 
     // This method works with the createUser method and is not associated with a controller.
-    public void addAuthority(String username, String authority) {
+    public void addAuthorityToCreatedUser(String username, String authority) {
         User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         user.addAuthority(new Authority(username, authority));
         userRepository.save(user);
     }
 
+    // This method works with the addUserAuthority method in UserController
     public void addUserAuthority(String username, String authority) {
         User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         user.addAuthority(new Authority(username, authority));

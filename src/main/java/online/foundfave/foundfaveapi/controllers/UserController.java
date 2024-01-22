@@ -50,7 +50,7 @@ public class UserController {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
         String newUsername = userService.createUser(userInputDto);
-        userService.addAuthority(newUsername, "ROLE_USER");
+        userService.addAuthorityToCreatedUser(newUsername, "ROLE_USER");
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newUsername).toUriString());
         return ResponseEntity.created(uri).body("Username: " + "'" + newUsername + "'" + " registered successfully!");
     }
