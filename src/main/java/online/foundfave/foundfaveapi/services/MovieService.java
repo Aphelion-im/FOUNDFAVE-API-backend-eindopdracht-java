@@ -135,9 +135,7 @@ public class MovieService {
         return movieOutputDtoList;
     }
 
-
     // Relational methods
-
 
     // Image methods
 

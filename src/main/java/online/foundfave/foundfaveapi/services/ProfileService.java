@@ -122,7 +122,6 @@ public class ProfileService {
         return transformProfileToProfileOutputDto(userOutputDto.getProfile());
     }
 
-
     // Image methods
 
 
