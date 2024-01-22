@@ -150,21 +150,21 @@ public class UserController {
     }
 
     @PutMapping("/add/character/{username}")
-    public ResponseEntity<Object> addCharacterToUser(@PathVariable("username") String username, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
+    public ResponseEntity<Object> addFavoriteCharacterToUser(@PathVariable("username") String username, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
-        userService.addCharacterToUser(username, idInputDto.id);
-        return ResponseEntity.ok().body("Character with id: " + idInputDto.id + " now assigned to user with username: " + "'" + username + "'" + ".");
+        userService.addFavoriteCharacterToUser(username, idInputDto.id);
+        return ResponseEntity.ok().body("Character with id: " + idInputDto.id + " now a favorite of user with username: " + "'" + username + "'" + ".");
     }
 
-    @DeleteMapping("/delete/character/{username}")
-    public ResponseEntity<Object> removeCharacterFromUser(@PathVariable("username") String username, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
+    @DeleteMapping("/remove/character/{username}")
+    public ResponseEntity<Object> removeFavoriteCharacterFromUser(@PathVariable("username") String username, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
-        userService.removeCharacterFromUser(username, idInputDto.id);
-        return ResponseEntity.ok().body("Character with id: " + idInputDto.id + " now removed from user with username: " + "'" + username + "'" + ".");
+        userService.removeFavoriteCharacterFromUser(username, idInputDto.id);
+        return ResponseEntity.ok().body("Character with id: " + idInputDto.id + " is no longer a favorite of user with username: " + "'" + username + "'" + ".");
     }
 
     // Image methods

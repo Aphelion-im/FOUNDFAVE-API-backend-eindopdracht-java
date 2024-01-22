@@ -76,9 +76,4 @@ public class ContactFormController {
         List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.findContactFormsByCommentsContains(comments);
         return ResponseEntity.ok(contactFormOutputDtoList);
     }
-
-    // Relational methods
-
-
-    // Image methods
 }

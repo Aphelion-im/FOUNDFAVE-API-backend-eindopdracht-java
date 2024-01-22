@@ -142,11 +142,11 @@ public class CharacterService {
     }
 
     // Relational methods
-    public void addMovieToCharacter(Long characterId, Long movieId) {
+    public void associateMovieAndCharacter(Long characterId, Long movieId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalMovie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
         if (optionalCharacter.getMoviesList().contains(optionalMovie)) {
-            throw new BadRequestException("This movie is already added to this character!");
+            throw new BadRequestException("This movie is already associated with this character!");
         } else {
             optionalCharacter.getMoviesList().add(optionalMovie);
             var updatedOptionalCharacter = characterRepository.save(optionalCharacter);
@@ -154,11 +154,11 @@ public class CharacterService {
         }
     }
 
-    public void removeMovieFromCharacter(Long characterId, Long movieId) {
+    public void disassociateMovieAndCharacter(Long characterId, Long movieId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalMovie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
         if (!optionalCharacter.getMoviesList().contains(optionalMovie)) {
-            throw new BadRequestException("This movie is not on this list or was already removed.");
+            throw new BadRequestException("This movie is not associated with this character.");
         } else {
             optionalCharacter.getMoviesList().remove(optionalMovie);
             var updatedOptionalCharacter = characterRepository.save(optionalCharacter);

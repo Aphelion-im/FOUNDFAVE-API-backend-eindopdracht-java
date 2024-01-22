@@ -95,22 +95,22 @@ public class CharacterController {
     }
 
     // Relational methods
-    @PutMapping("/add/movie/{characterId}")
-    public ResponseEntity<Object> addMovieToCharacter(@PathVariable("characterId") Long characterId, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
+    @PutMapping("/associate/movie/{characterId}")
+    public ResponseEntity<Object> associateMovieAndCharacter(@PathVariable("characterId") Long characterId, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
-        characterService.addMovieToCharacter(characterId, idInputDto.id);
-        return ResponseEntity.ok().body("Movie with id: " + idInputDto.id + " now assigned to character with id: " + characterId + ".");
+        characterService.associateMovieAndCharacter(characterId, idInputDto.id);
+        return ResponseEntity.ok().body("Movie with id: " + idInputDto.id + " is now associated with character with id: " + characterId + ".");
     }
 
-    @DeleteMapping("/remove/movie/{characterId}")
-    public ResponseEntity<Object> removeMovieFromCharacter(@PathVariable("characterId") Long characterId, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
+    @DeleteMapping("/disassociate/movie/{characterId}")
+    public ResponseEntity<Object> disassociateMovieAndCharacter(@PathVariable("characterId") Long characterId, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
-        characterService.removeMovieFromCharacter(characterId, idInputDto.id);
-        return ResponseEntity.ok().body("Movie with id: " + idInputDto.id + " now removed from character with id: " + characterId + ".");
+        characterService.disassociateMovieAndCharacter(characterId, idInputDto.id);
+        return ResponseEntity.ok().body("Movie with id: " + idInputDto.id + " is now disassociated from the character with id: " + characterId + ".");
     }
 
     // Image methods

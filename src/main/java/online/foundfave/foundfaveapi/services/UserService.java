@@ -196,7 +196,7 @@ public class UserService {
     }
 
     // Add character to favorites
-    public void addCharacterToUser(String username, Long characterId) {
+    public void addFavoriteCharacterToUser(String username, Long characterId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         if (optionalUser.getFavoritesList().contains(optionalCharacter)) {
@@ -209,7 +209,7 @@ public class UserService {
     }
 
     // Remove character from favorites
-    public void removeCharacterFromUser(String username, Long characterId) {
+    public void removeFavoriteCharacterFromUser(String username, Long characterId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         if (!optionalUser.getFavoritesList().contains(optionalCharacter)) {

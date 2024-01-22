@@ -92,8 +92,6 @@ public class MovieController {
         return ResponseEntity.ok(movieOutputDtoList);
     }
 
-    // Relational methods
-
     // Image methods
     // TODO: Add image to movie
     // TODO: Delete image from movie

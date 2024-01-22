@@ -245,14 +245,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre4",
+					"raw": "localhost:8080/users/andre",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre4"
+						"andre"
 					]
 				}
 			},
@@ -581,7 +581,7 @@
 			"response": []
 		},
 		{
-			"name": "addCharacterToUser",
+			"name": "addFavoriteCharacterToUser",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -621,7 +621,7 @@
 			"response": []
 		},
 		{
-			"name": "removeCharacterFromUser",
+			"name": "removeFavoriteCharacterFromUser",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -645,14 +645,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/users/delete/character/andre",
+					"raw": "localhost:8080/users/remove/character/andre",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"delete",
+						"remove",
 						"character",
 						"andre"
 					]
@@ -1174,14 +1174,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/characters/1",
+					"raw": "localhost:8080/characters/1007",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"characters",
-						"1"
+						"1007"
 					]
 				}
 			},
@@ -1231,14 +1231,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/movies/1001",
+					"raw": "localhost:8080/movies/1000",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"movies",
-						"1001"
+						"1000"
 					]
 				}
 			},
@@ -1906,7 +1906,7 @@
 			"response": []
 		},
 		{
-			"name": "addMovieToCharacter",
+			"name": "associateMovieAndCharacter",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -1930,23 +1930,23 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/characters/add/movie/1",
+					"raw": "localhost:8080/characters/associate/movie/1007",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"characters",
-						"add",
+						"associate",
 						"movie",
-						"1"
+						"1007"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "removeMovieFromCharacter",
+			"name": "disassociateMovieAndCharacter",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -1970,16 +1970,16 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/characters/remove/movie/1",
+					"raw": "localhost:8080/characters/disassociate/movie/1007",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"characters",
-						"remove",
+						"disassociate",
 						"movie",
-						"1"
+						"1007"
 					]
 				}
 			},
