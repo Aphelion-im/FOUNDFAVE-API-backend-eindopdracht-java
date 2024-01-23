@@ -191,6 +191,9 @@ public class UserService {
         }
     }
 
+    // TODO: Attach ContactForm to user
+    // TODO: Detach Contactform from user
+
     public UserOutputDto getAllFavoritesFromUser(String username) {
         return getUserOutputDto(username);
     }
@@ -220,9 +223,6 @@ public class UserService {
             transformUserToUserOutputDto(updatedOptionalUser);
         }
     }
-
-    // Image methods
-
 
     // This method is used for the CustomUserDetailsService class
     public UserInputDto getUserByUsername(String username) {

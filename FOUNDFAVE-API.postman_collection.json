@@ -245,14 +245,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre",
+					"raw": "localhost:8080/users/andre4",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre"
+						"andre4"
 					]
 				}
 			},
@@ -565,7 +565,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/detach/profile/andre",
+					"raw": "localhost:8080/users/detach/profile/andre4",
 					"host": [
 						"localhost"
 					],
@@ -574,7 +574,7 @@
 						"users",
 						"detach",
 						"profile",
-						"andre"
+						"andre4"
 					]
 				}
 			},
@@ -597,7 +597,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1007\r\n}",
+					"raw": "{\r\n    \"id\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -605,7 +605,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/users/add/character/andre",
+					"raw": "localhost:8080/users/add/character/andre4",
 					"host": [
 						"localhost"
 					],
@@ -614,7 +614,7 @@
 						"users",
 						"add",
 						"character",
-						"andre"
+						"andre4"
 					]
 				}
 			},
@@ -2190,7 +2190,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"André\",\r\n    \"lastName\": \"de Grootzz\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2010\",\r\n    \"profileImageUrl\": \"Image url\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"André 4\",\r\n    \"lastName\": \"de Grootzz\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2010\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -2272,6 +2272,134 @@
 					"port": "8080",
 					"path": [
 						"profiles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "downloadProfileImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/downloadprofileimage/shield-profile.jpg",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"downloadprofileimage",
+						"shield-profile.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uploadProfileImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Aphelion/Desktop/1-annie.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/uploadprofileimage/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"uploadprofileimage",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProfileImageByUsername",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/profiles/profile/image/andre",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles",
+						"profile",
+						"image",
+						"andre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProfileImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/deleteprofileimage/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteprofileimage",
 						"1"
 					]
 				}

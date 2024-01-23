@@ -93,6 +93,7 @@ public class MovieController {
     }
 
     // Image methods
+    // TODO: getMovieImageByMovieId
     // TODO: Add image to movie
     // TODO: Delete image from movie
 }

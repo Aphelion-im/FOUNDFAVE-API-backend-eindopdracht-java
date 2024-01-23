@@ -78,7 +78,7 @@ public class ProfileService {
         try {
             profileRepository.deleteById(profileId);
         } catch (Exception e) {
-            throw new BadRequestException("You are not allowed to delete this profile as it belongs to a user!");
+            throw new BadRequestException("You are not allowed to delete this profile as it belongs to a user!\nFirst detach the profile from the user in order to delete it.");
         }
     }
 
@@ -117,13 +117,10 @@ public class ProfileService {
             throw new UsernameNotFoundException("Username: " + "'" + username + "'" + " not found!");
         }
         if (userOutputDto.getProfile() == null) {
-            throw new BadRequestException("This user has no profile!");
+            throw new BadRequestException("This user does not have a profile!");
         }
         return transformProfileToProfileOutputDto(userOutputDto.getProfile());
     }
-
-    // Image methods
-
 
     // Transformers
     // Profile to ProfileOutputDto
@@ -135,6 +132,7 @@ public class ProfileService {
         profileOutputDto.gender = profile.getGender();
         profileOutputDto.dateOfBirth = profile.getDateOfBirth();
         profileOutputDto.profileImageUrl = profile.getProfileImageUrl();
+        profileOutputDto.fileName = profile.getFileName();
         return profileOutputDto;
     }
 
@@ -146,6 +144,7 @@ public class ProfileService {
         profile.setGender(profileInputDto.getGender());
         profile.setDateOfBirth(profileInputDto.getDateOfBirth());
         profile.setProfileImageUrl(profileInputDto.getProfileImageUrl());
+        profile.setFileName(profileInputDto.getFileName());
         return profile;
     }
 }

@@ -49,11 +49,20 @@ public class SpringSecurityConfiguration {
                 .authorizeHttpRequests()
                 // .requestMatchers("/**").permitAll()
 
+
+                // TODO: Onder de juiste categorie plaatsen:
+                // Test
+                .requestMatchers(HttpMethod.GET, "/download-profile-image/{fileName}").permitAll()
+                .requestMatchers(HttpMethod.POST, "/upload-profile-image/{profileId}").authenticated()
+                .requestMatchers(HttpMethod.DELETE, "/delete-profile-image/{profileId}").authenticated()
+
+
                 /* Public */
                 .requestMatchers(HttpMethod.GET, "/info").permitAll()
                 .requestMatchers(HttpMethod.GET, "/test").permitAll()
                 .requestMatchers(HttpMethod.GET, "/queries").permitAll()
                 .requestMatchers(HttpMethod.GET, "/documentation/**").permitAll()
+
 
                 /* Authentication */
                 .requestMatchers("/login").permitAll()
@@ -101,6 +110,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, "/profiles/search/firstname").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/profiles/search/lastname").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/profiles/profile/{username}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "profiles/profile/image/{username}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/profiles/profile/{profileId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/profiles").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/profiles/{profileId}").hasRole("ADMIN")

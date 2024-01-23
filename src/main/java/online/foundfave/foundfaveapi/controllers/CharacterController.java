@@ -114,5 +114,6 @@ public class CharacterController {
     }
 
     // Image methods
+    // TODO: getCharacterImageByCharacterId
     // TODO: Upload character photo
 }

@@ -16,22 +16,22 @@ VALUES ('user', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 
        ('kim', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'kim@xs4all.nl', TRUE),
        ('kees', '$2a$10$u.POz3wbmJd6OMuGkZkGlelUefX81Wv9qZ3mUKW.Q/4uNEZSiEHIm', 'kees@xs4all.nl', TRUE);
 
-INSERT INTO profiles (profile_id, first_name, last_name, gender, date_of_birth, profile_image_url)
-VALUES (1000, 'User', 'de Groot', 'Male', '28-07-2000', 'Image url'),
-       (1001, 'Admin', 'de Boer', 'Male', '28-01-1999', 'Image url'),
-       (1002, 'André', 'de Vries', 'Male', '21-01-1974', 'Image url'),
-       (1003, 'Adam', 'Li', 'Male', '16-01-2014', 'Image url'),
-       (1004, 'Bruce', 'Groothoek', 'Male', '07-01-1984', 'Image url'),
-       (1005, 'Priscilla', 'de Groot', 'Female', '21-01-1999', 'Image url'),
-       (1006, 'Caroline', 'Kemp', 'Female', '22-01-2011', 'Image url'),
-       (1007, 'Sandy', 'van Doorn', 'Female', '31-01-2002', 'Image url'),
-       (1008, 'Peter', 'Groot', 'Male', '14-01-1987', 'Image url'),
-       (1009, 'Pieter', 'Koning', 'Male', '01-01-1983', 'Image url'),
-       (1010, 'Ellen', 'Koning', 'Female', '01-01-1983', 'Image url'),
-       (1011, 'Mike', 'Grootfaam', 'Male', '01-01-1983', 'Image url'),
-       (1012, 'Michael', 'de Vries', 'Male', '01-01-1983', 'Image url'),
-       (1013, 'Kim', 'Poort', 'Female', '01-01-1983', 'Image url'),
-       (1014, 'Kees', 'van Haga', 'Male', '01-01-1983', 'Image url');
+INSERT INTO profiles (profile_id, first_name, last_name, gender, date_of_birth, file_name, profile_image_url)
+VALUES (1000, 'User', 'de Groot', 'Male', '28-07-2000', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1001, 'Admin', 'de Boer', 'Male', '28-01-1999', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1002, 'André', 'de Vries', 'Male', '21-01-1974', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1003, 'Adam', 'Li', 'Male', '16-01-2014', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1004, 'Bruce', 'Groothoek', 'Male', '07-01-1984', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1005, 'Priscilla', 'de Groot', 'Female', '21-01-1999', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1006, 'Caroline', 'Kemp', 'Female', '22-01-2011', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1007, 'Sandy', 'van Doorn', 'Female', '31-01-2002', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1008, 'Peter', 'Groot', 'Male', '14-01-1987', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1009, 'Pieter', 'Koning', 'Male', '01-01-1983', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1010, 'Ellen', 'Koning', 'Female', '01-01-1983', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1011, 'Mike', 'Grootfaam', 'Male', '01-01-1983', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1012, 'Michael', 'de Vries', 'Male', '01-01-1983', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1013, 'Kim', 'Poort', 'Female', '01-01-1983', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg'),
+       (1014, 'Kees', 'van Haga', 'Male', '01-01-1983', 'shield-profile.jpg', 'http://localhost:8080/download-profile-image/shield-profile.jpg');
 
 UPDATE users
 SET profile_profile_id = 1000

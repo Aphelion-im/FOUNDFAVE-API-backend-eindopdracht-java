@@ -13,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 @CrossOrigin
 @RestController
@@ -84,5 +85,10 @@ public class ProfileController {
     }
 
     // Image methods
-    // TODO: Upload profilePic
+    @GetMapping("profile/image/{username}")
+    public ResponseEntity<String> getProfileImageByUsername(@PathVariable("username") String username) {
+        ProfileOutputDto profileOutputDto = profileService.getProfileByUsername(username);
+        String output = Objects.requireNonNullElse(profileOutputDto.profileImageUrl, "This user does not have a profile image!");
+        return ResponseEntity.ok().body(output);
+    }
 }

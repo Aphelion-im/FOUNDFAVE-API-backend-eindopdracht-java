@@ -29,6 +29,7 @@ public class Profile {
 
     private LocalDate dateOfBirth;
     private String profileImageUrl;
+    private String fileName;
 
     // Relations
     @OneToOne(mappedBy = "profile")
