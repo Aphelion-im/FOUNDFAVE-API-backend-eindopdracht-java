@@ -125,7 +125,6 @@ public class UserService {
         return userRepository.existsById(username);
     }
 
-    // Repository methods
     public UserOutputDto findUserByEmail(String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new EmailNotFoundException("User not found with e-mail: " + "'" + email + "'."));
         return transformUserToUserOutputDto(user);
@@ -164,7 +163,6 @@ public class UserService {
         return activeUsersOutputDtoList;
     }
 
-    // Relational methods
     public void assignProfileToUser(String username, Long profileId) {
         var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         var optionalProfile = profileRepository.findById(profileId).orElseThrow(() -> new ProfileNotFoundException("Profile not found with id: " + profileId + "!"));

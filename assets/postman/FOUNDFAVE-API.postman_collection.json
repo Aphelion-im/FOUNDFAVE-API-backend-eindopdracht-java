@@ -1962,7 +1962,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1000\r\n}",
+					"raw": "{\r\n    \"id\": 1005\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1970,7 +1970,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/characters/disassociate/movie/1007",
+					"raw": "localhost:8080/characters/disassociate/movie/1000",
 					"host": [
 						"localhost"
 					],
@@ -1979,7 +1979,7 @@
 						"characters",
 						"disassociate",
 						"movie",
-						"1007"
+						"1000"
 					]
 				}
 			},
@@ -2001,14 +2001,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/characters/1",
+					"raw": "localhost:8080/characters/1000",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"characters",
-						"1"
+						"1000"
 					]
 				}
 			},
@@ -2087,7 +2087,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/profiles/profile/andre4",
+					"raw": "localhost:8080/profiles/profile/andre",
 					"host": [
 						"localhost"
 					],
@@ -2095,7 +2095,7 @@
 					"path": [
 						"profiles",
 						"profile",
-						"andre4"
+						"andre"
 					]
 				}
 			},
@@ -2227,7 +2227,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"André 2222zz\",\r\n    \"lastName\": \"de Groot 2\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2020\",\r\n    \"profileImageUrl\": \"Image url\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"André 2222zz\",\r\n    \"lastName\": \"de Groot 2\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2021\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -2235,7 +2235,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/profiles/profile/1000",
+					"raw": "localhost:8080/profiles/profile/1",
 					"host": [
 						"localhost"
 					],
@@ -2243,7 +2243,7 @@
 					"path": [
 						"profiles",
 						"profile",
-						"1000"
+						"1"
 					]
 				}
 			},
@@ -2294,13 +2294,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/downloadprofileimage/shield-profile.jpg",
+					"raw": "localhost:8080/download-profile-image/shield-profile.jpg",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"downloadprofileimage",
+						"download-profile-image",
 						"shield-profile.jpg"
 					]
 				}
@@ -2333,13 +2333,13 @@
 					]
 				},
 				"url": {
-					"raw": "localhost:8080/uploadprofileimage/1",
+					"raw": "localhost:8080/upload-profile-image/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"uploadprofileimage",
+						"upload-profile-image",
 						"1"
 					]
 				}
@@ -2378,7 +2378,7 @@
 			"response": []
 		},
 		{
-			"name": "deleteProfileImage",
+			"name": "deleteProfileImageById",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2393,13 +2393,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/deleteprofileimage/1",
+					"raw": "localhost:8080/delete-profile-image/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"deleteprofileimage",
+						"delete-profile-image",
 						"1"
 					]
 				}
