@@ -24,7 +24,6 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    // Basic CRUD methods
     @GetMapping("")
     public ResponseEntity<List<MovieOutputDto>> getMovies() {
         List<MovieOutputDto> movieOutputDtoList = movieService.getMovies();
@@ -61,7 +60,6 @@ public class MovieController {
         return ResponseEntity.status(HttpStatus.OK).body("Movie with id: " + movieId + " deleted!");
     }
 
-    // Repository methods
     @GetMapping("/search/starting-with")
     public ResponseEntity<List<MovieOutputDto>> findMovieByTitleStartingWith(@RequestParam("title") String title) {
         List<MovieOutputDto> movieOutputDtoList = movieService.findMoviesByTitleStartingWith(title);
@@ -92,7 +90,6 @@ public class MovieController {
         return ResponseEntity.ok(movieOutputDtoList);
     }
 
-    // Image methods
     // TODO: getMovieImageByMovieId
     // TODO: Add image to movie
     // TODO: Delete image from movie

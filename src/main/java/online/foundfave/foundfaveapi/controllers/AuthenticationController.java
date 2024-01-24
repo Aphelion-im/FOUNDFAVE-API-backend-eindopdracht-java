@@ -79,7 +79,10 @@ public class AuthenticationController {
                 ***** Characters *****
                 
                 
-                ***** ContactForms *****
+                ***** Contact Forms *****
+                
+                
+                ***** Files *****
                 
                 
                 ***** Movies *****

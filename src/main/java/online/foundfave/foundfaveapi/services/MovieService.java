@@ -22,7 +22,6 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    // Basic CRUD methods
     public List<MovieOutputDto> getMovies() {
         List<MovieOutputDto> collection = new ArrayList<>();
         List<Movie> movieList = movieRepository.findAll();
@@ -74,7 +73,6 @@ public class MovieService {
         }
     }
 
-    // Repository methods
     public List<MovieOutputDto> findMoviesByTitleStartingWith(String title) {
         List<MovieOutputDto> movieOutputDtoList = new ArrayList<>();
         List<Movie> movieList = movieRepository.findByMovieTitleStartingWithIgnoreCase(title);
@@ -135,13 +133,6 @@ public class MovieService {
         return movieOutputDtoList;
     }
 
-    // Relational methods
-
-    // Image methods
-
-
-    // Transformers
-    // Movie to MovieOutputDto
     public static MovieOutputDto transformMovieToMovieOutputDto(Movie movie) {
         var movieOutputDto = new MovieOutputDto();
         movieOutputDto.movieId = movie.getMovieId();
@@ -153,7 +144,6 @@ public class MovieService {
         return movieOutputDto;
     }
 
-    // From MovieInputDto to MovieUser
     public Movie transformMovieInputDtoToMovie(MovieInputDto movieInputDto) {
         var movie = new Movie();
         movie.setMovieTitle(movieInputDto.getMovieTitle());

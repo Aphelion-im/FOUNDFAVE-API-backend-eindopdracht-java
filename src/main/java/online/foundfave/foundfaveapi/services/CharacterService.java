@@ -23,7 +23,6 @@ public class CharacterService {
         this.movieRepository = movieRepository;
     }
 
-    // Basic CRUD methods
     public List<CharacterOutputDto> getAllCharacters() {
         List<CharacterOutputDto> characterOutputDtoList = new ArrayList<>();
         List<Character> list = characterRepository.findAll();
@@ -76,11 +75,10 @@ public class CharacterService {
         try {
             characterRepository.deleteById(characterId);
         } catch (Exception e) {
-            throw new BadRequestException("You are not allowed to delete this character as it is still linked to a movie or movies.");
+            throw new BadRequestException("You are not allowed to delete this character as it is still linked to movie or is a favorite.");
         }
     }
 
-    // Repository methods
     public List<CharacterOutputDto> findCharactersByNameStartingWith(String name) {
         List<CharacterOutputDto> characterOutputDtoList = new ArrayList<>();
         List<Character> list = characterRepository.findByCharacterAliasNameStartingWithIgnoreCase(name);
@@ -141,7 +139,6 @@ public class CharacterService {
         return characterOutputDtoList;
     }
 
-    // Relational methods
     public void associateMovieAndCharacter(Long characterId, Long movieId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalMovie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
@@ -166,11 +163,6 @@ public class CharacterService {
         }
     }
 
-    // Image methods
-
-
-    // Transformers
-    // Character to CharacterOutputDto
     public static CharacterOutputDto transformCharacterToCharacterOutputDto(Character character) {
         var characterOutputDto = new CharacterOutputDto();
         characterOutputDto.characterId = character.getCharacterId();
@@ -186,7 +178,6 @@ public class CharacterService {
         return characterOutputDto;
     }
 
-    // From CharacterInputDto to Character
     public Character transformCharacterInputDtoToCharacter(CharacterInputDto characterInputDto) {
         var character = new Character();
         character.setCharacterAliasName(characterInputDto.getCharacterAliasName());

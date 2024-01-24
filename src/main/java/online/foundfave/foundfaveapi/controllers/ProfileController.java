@@ -26,7 +26,6 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    // Basic CRUD methods
     @GetMapping("")
     public ResponseEntity<List<ProfileOutputDto>> getProfiles() {
         List<ProfileOutputDto> profileOutputDtoList = profileService.getProfiles();
@@ -58,13 +57,13 @@ public class ProfileController {
         return ResponseEntity.ok().body("Profile with id: " + profileId + " updated!");
     }
 
+    // Currently, profiles assigned to users, are not allowed to be deleted. First use the detachProfileFromUser method and then try again to delete the profile.
     @DeleteMapping("/{profileId}")
     public ResponseEntity<Object> deleteProfile(@PathVariable("profileId") Long profileId) {
         profileService.deleteProfile(profileId);
         return ResponseEntity.status(HttpStatus.OK).body("Profile with id: " + profileId + " successfully deleted!");
     }
 
-    // Repository methods
     @GetMapping("/search/firstname")
     public ResponseEntity<List<ProfileOutputDto>> findProfileByFirstNameContains(@RequestParam("firstname") String firstname) {
         List<ProfileOutputDto> profileOutputDtoList = profileService.findProfileByFirstNameContains(firstname);
@@ -77,14 +76,12 @@ public class ProfileController {
         return ResponseEntity.ok(profileOutputDtoList);
     }
 
-    // Relational methods
     @GetMapping("profile/{username}")
     public ResponseEntity<ProfileOutputDto> getProfileByUsername(@PathVariable("username") String username) {
         ProfileOutputDto profileOutputDto = profileService.getProfileByUsername(username);
         return ResponseEntity.ok().body(profileOutputDto);
     }
 
-    // Image methods
     @GetMapping("profile/image/{username}")
     public ResponseEntity<String> getProfileImageByUsername(@PathVariable("username") String username) {
         ProfileOutputDto profileOutputDto = profileService.getProfileByUsername(username);

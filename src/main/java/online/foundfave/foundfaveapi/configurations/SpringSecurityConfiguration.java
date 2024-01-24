@@ -1,4 +1,4 @@
-package online.foundfave.foundfaveapi.configuration;
+package online.foundfave.foundfaveapi.configurations;
 
 import online.foundfave.foundfaveapi.filters.JwtRequestFilter;
 import online.foundfave.foundfaveapi.services.CustomUserDetailsService;
@@ -51,24 +51,26 @@ public class SpringSecurityConfiguration {
 
 
                 // TODO: Onder de juiste categorie plaatsen:
+                // TODO: Instellen juiste rollen
+                // TODO: Testen met Admin rol
                 // Test
                 .requestMatchers(HttpMethod.GET, "/download-profile-image/{fileName}").permitAll()
-                .requestMatchers(HttpMethod.POST, "/upload-profile-image/{profileId}").authenticated()
-                .requestMatchers(HttpMethod.DELETE, "/delete-profile-image/{profileId}").authenticated()
+                .requestMatchers(HttpMethod.POST, "/upload-profile-image/{profileId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/delete-profile-image/{profileId}").hasRole("ADMIN")
 
 
-                /* Public */
+                //***** Public ******//
                 .requestMatchers(HttpMethod.GET, "/info").permitAll()
                 .requestMatchers(HttpMethod.GET, "/test").permitAll()
                 .requestMatchers(HttpMethod.GET, "/queries").permitAll()
                 .requestMatchers(HttpMethod.GET, "/documentation/**").permitAll()
 
 
-                /* Authentication */
+                //***** Authentication *****//
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/authenticated").authenticated()
 
-                /* Characters */
+                //***** Characters *****//
                 .requestMatchers(HttpMethod.GET, "/characters").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/characters/{characterId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/characters/search/starting-with").hasRole("ADMIN")
@@ -82,7 +84,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.DELETE, "/characters/{characterId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/characters/disassociate/movie/{characterId}").hasRole("ADMIN")
 
-                /* ContactForms */
+                //***** Contact Forms *****//
                 .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/contactforms/search/name").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/contactforms/search/email").hasRole("ADMIN")
@@ -92,7 +94,11 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.DELETE, "/contactforms").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasRole("ADMIN")
 
-                /* Movies */
+                //***** Files *****//
+
+
+
+                //***** Movies *****//
                 .requestMatchers(HttpMethod.GET, "/movies").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/movies/{movieId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/movies/search/starting-with").hasRole("ADMIN")
@@ -104,7 +110,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/movies").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/movies/{movieId}").hasRole("ADMIN")
 
-                /* Profiles */
+                //***** Profiles *****//
                 .requestMatchers(HttpMethod.GET, "/profiles").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/profiles/{profileId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/profiles/search/firstname").hasRole("ADMIN")
@@ -115,7 +121,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/profiles").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/profiles/{profileId}").hasRole("ADMIN")
 
-                /* Users */
+                //***** Users *****//
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/active").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/favorites/{username}").hasRole("ADMIN")
@@ -129,7 +135,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.PUT, "/users/assign/profile/{username}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/users/detach/profile/{username}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/users/add/character/{username}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                .requestMatchers(HttpMethod.POST, "/users").permitAll() // TODO: Klopt dit?
                 .requestMatchers(HttpMethod.POST, "/users/{username}/authorities").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/users/{username}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/users/{username}/authorities/{authority}").hasRole("ADMIN")

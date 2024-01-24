@@ -31,24 +31,19 @@ public class FileService {
         this.profileRepository = profileRepository;
         try {
             Files.createDirectories(fileStoragePath);
-        } catch (IOException e) {
+        } catch (IOException ioe) {
             throw new RuntimeException("There is an issue creating the file directory!");
         }
-
     }
 
-    public Resource downloadImage(String fileName) {
-        return downloadPicture(fileName);
-    }
-
-    // TODO: Authentiation check
+    // TODO: Authentication check
     public void uploadProfileImage(MultipartFile file, String url, Long profileId, String fileName) {
         Profile profile = profileRepository.findById(profileId).orElseThrow(() -> new ProfileNotFoundException("Profile with id: " + profileId + " not found!"));
         if (profile.getProfileImageUrl() != null) {
             Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(profile.getFileName());
             try {
                 Files.deleteIfExists(path);
-            } catch (IOException e) {
+            } catch (IOException ioe) {
                 throw new RuntimeException("A problem occurred while deleting: " + profile.getFileName());
             }
         }
@@ -70,8 +65,8 @@ public class FileService {
         profileRepository.save(profile);
         try {
             Files.deleteIfExists(path);
-        } catch (IOException e) {
-            throw new RuntimeException("A problem occurred with deleting: " + profile.getFileName());
+        } catch (IOException ioe) {
+            throw new RuntimeException("An error occurred while deleting: " + profile.getFileName());
         }
     }
 
@@ -79,21 +74,21 @@ public class FileService {
         Path filePath = Paths.get(fileStoragePath + File.separator + fileName);
         try {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            throw new RuntimeException("Issue in storing the file", e);
+        } catch (IOException ioe) {
+            throw new RuntimeException("There is an issue storing the file.", ioe);
         }
     }
 
-    public Resource downloadPicture(String fileName) {
+    public Resource downloadImage(String fileName) {
         Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(fileName);
         Resource resource;
         try {
             resource = new UrlResource(path.toUri());
         } catch (MalformedURLException mue) {
-            throw new RuntimeException("Issue in reading the file", mue);
+            throw new RuntimeException("There is an issue reading the file.", mue);
         }
         if (!resource.exists() || !resource.isReadable()) {
-            throw new BadRequestException("The file doesn't exist or is not readable.");
+            throw new BadRequestException("The file does not exist or is not readable.");
         }
         return resource;
     }

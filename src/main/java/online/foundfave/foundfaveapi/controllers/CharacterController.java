@@ -26,7 +26,6 @@ public class CharacterController {
         this.characterService = characterService;
     }
 
-    // Basic CRUD methods
     @GetMapping("")
     public ResponseEntity<List<CharacterOutputDto>> getAllCharacters() {
         List<CharacterOutputDto> characterOutputDtoList = characterService.getAllCharacters();
@@ -57,13 +56,13 @@ public class CharacterController {
         return ResponseEntity.ok(characterService.updateCharacter(characterId, characterInputDto));
     }
 
+    // Currently, characters assigned to users (Favorites) or movies, are not allowed to be deleted. Use the removeFavoriteCharacterFromUser and disassociateMovieAndCharacter methods before trying to remove the character.
     @DeleteMapping("/{characterId}")
     public ResponseEntity<Object> deleteCharacter(@PathVariable("characterId") Long characterId) {
         characterService.deleteCharacter(characterId);
         return ResponseEntity.status(HttpStatus.OK).body("Character with id: " + characterId + " deleted!");
     }
 
-    // Repository methods
     @GetMapping("/search/starting-with")
     public ResponseEntity<List<CharacterOutputDto>> findCharactersByNameStartingWith(@RequestParam("name") String name) {
         List<CharacterOutputDto> characterOutputDtoList = characterService.findCharactersByNameStartingWith(name);
@@ -94,7 +93,6 @@ public class CharacterController {
         return ResponseEntity.ok(characterOutputDtoList);
     }
 
-    // Relational methods
     @PutMapping("/associate/movie/{characterId}")
     public ResponseEntity<Object> associateMovieAndCharacter(@PathVariable("characterId") Long characterId, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {

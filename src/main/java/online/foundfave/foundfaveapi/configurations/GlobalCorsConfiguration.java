@@ -1,4 +1,4 @@
-package online.foundfave.foundfaveapi.configuration;
+package online.foundfave.foundfaveapi.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

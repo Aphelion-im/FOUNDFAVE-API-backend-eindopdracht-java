@@ -23,7 +23,6 @@ public class ContactFormController {
         this.contactFormService = contactFormService;
     }
 
-    // Basic CRUD methods
     @GetMapping("")
     public ResponseEntity<List<ContactFormOutputDto>> getAllContactForms() {
         List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.getContactFormSubmissions();
@@ -58,7 +57,6 @@ public class ContactFormController {
         return ResponseEntity.ok().body("All contact forms successfully deleted!");
     }
 
-    // Repository methods
     @GetMapping("/search/name")
     public ResponseEntity<List<ContactFormOutputDto>> findContactFormsByNameContains(@RequestParam("name") String name) {
         List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.findContactFormsByNameContains(name);

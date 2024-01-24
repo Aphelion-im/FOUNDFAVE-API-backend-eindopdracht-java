@@ -31,7 +31,6 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // Basic CRUD methods
     public List<UserOutputDto> getUsers() {
         List<UserOutputDto> userOutputDtoList = new ArrayList<>();
         List<User> userList = userRepository.findAll();
@@ -191,14 +190,10 @@ public class UserService {
         }
     }
 
-    // TODO: Attach ContactForm to user
-    // TODO: Detach Contactform from user
-
     public UserOutputDto getAllFavoritesFromUser(String username) {
         return getUserOutputDto(username);
     }
 
-    // Add character to favorites
     public void addFavoriteCharacterToUser(String username, Long characterId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
@@ -211,7 +206,6 @@ public class UserService {
         }
     }
 
-    // Remove character from favorites
     public void removeFavoriteCharacterFromUser(String username, Long characterId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
@@ -247,8 +241,6 @@ public class UserService {
         return userOutputDto;
     }
 
-    // Transformers
-    // User to UserOutputDto
     public static UserOutputDto transformUserToUserOutputDto(User user) {
         var userOutputDto = new UserOutputDto();
         userOutputDto.username = user.getUsername();
@@ -261,7 +253,6 @@ public class UserService {
         return userOutputDto;
     }
 
-    // From UserInputDto to User
     public User transformUserInputDtoToUser(UserInputDto userInputDto) {
         var user = new User();
         user.setUsername(userInputDto.getUsername());
@@ -271,7 +262,6 @@ public class UserService {
         return user;
     }
 
-    // From User to UserInputDto
     public static UserInputDto transformUserToUserInputDto(User user) {
         var userInputDto = new UserInputDto();
         userInputDto.username = user.getUsername();

@@ -1,6 +1,7 @@
 package online.foundfave.foundfaveapi.controllers;
 
 import online.foundfave.foundfaveapi.services.FileService;
+import online.foundfave.foundfaveapi.utilities.RandomStringGenerator;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -10,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.sql.Date;
-import java.time.Instant;
 import java.util.Objects;
 
 @CrossOrigin
@@ -38,7 +37,7 @@ public class FileController {
     // TODO: /upload movie image
     @PostMapping("/upload-profile-image/{profileId}")
     public ResponseEntity<Object> uploadProfileImage(@PathVariable Long profileId, @RequestParam("file") MultipartFile file) {
-        String fileName = StringUtils.cleanPath(Date.from(Instant.now()).getTime() + file.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(RandomStringGenerator.generateAlphaNumeric(5).toLowerCase() + file.getOriginalFilename());
         String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/download-profile-image/").path(Objects.requireNonNull(fileName)).toUriString();
         fileService.uploadProfileImage(file, url, profileId, fileName);
         return ResponseEntity.ok(url);

@@ -70,7 +70,6 @@ public class ProfileService {
         profileRepository.save(profile);
     }
 
-    // Currently, profiles assigned to users, are not allowed to be deleted. First use the detachProfileFromUser method and then try to assign a new profile.
     public void deleteProfile(Long profileId) {
         if (!profileRepository.existsById(profileId)) {
             throw new ProfileNotFoundException("Profile with id: " + profileId + " not found!");
@@ -82,7 +81,6 @@ public class ProfileService {
         }
     }
 
-    // Repository methods
     public List<ProfileOutputDto> findProfileByFirstNameContains(String firstname) {
         List<ProfileOutputDto> profileOutputDtoList = new ArrayList<>();
         List<Profile> profileList = profileRepository.findByFirstNameContainsIgnoreCase(firstname);
@@ -107,7 +105,6 @@ public class ProfileService {
         return profileOutputDtoList;
     }
 
-    // Relational methods
     public ProfileOutputDto getProfileByUsername(String username) {
         UserOutputDto userOutputDto;
         Optional<User> optionalUser = userRepository.findById(username);
@@ -122,8 +119,6 @@ public class ProfileService {
         return transformProfileToProfileOutputDto(userOutputDto.getProfile());
     }
 
-    // Transformers
-    // Profile to ProfileOutputDto
     public static ProfileOutputDto transformProfileToProfileOutputDto(Profile profile) {
         var profileOutputDto = new ProfileOutputDto();
         profileOutputDto.profileId = profile.getProfileId();
@@ -136,7 +131,6 @@ public class ProfileService {
         return profileOutputDto;
     }
 
-    // From ProfileInputDto to Profile
     public Profile transformProfileInputDtoToProfile(ProfileInputDto profileInputDto) {
         var profile = new Profile();
         profile.setFirstName(profileInputDto.getFirstName());

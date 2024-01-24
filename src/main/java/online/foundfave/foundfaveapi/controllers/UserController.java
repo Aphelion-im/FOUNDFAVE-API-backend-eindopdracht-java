@@ -31,7 +31,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Basic CRUD methods
     @GetMapping("")
     public ResponseEntity<List<UserOutputDto>> getUsers() {
         List<UserOutputDto> userOutputDtoList = userService.getUsers();
@@ -104,7 +103,6 @@ public class UserController {
         return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " exists: " + userService.userExists(username));
     }
 
-    // Repository methods
     @GetMapping("/search")
     public ResponseEntity<UserOutputDto> findUserByEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(userService.findUserByEmail(email));
@@ -127,7 +125,6 @@ public class UserController {
         return userService.getActiveUsers();
     }
 
-    // Relational methods
     @PutMapping("/assign/profile/{username}")
     public ResponseEntity<Object> assignProfileToUser(@PathVariable("username") String username, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
@@ -166,6 +163,4 @@ public class UserController {
         userService.removeFavoriteCharacterFromUser(username, idInputDto.id);
         return ResponseEntity.ok().body("Character with id: " + idInputDto.id + " is no longer a favorite of user with username: " + "'" + username + "'" + ".");
     }
-
-    // Image methods
 }
