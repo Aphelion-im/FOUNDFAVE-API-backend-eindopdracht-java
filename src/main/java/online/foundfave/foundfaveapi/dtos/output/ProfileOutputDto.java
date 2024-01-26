@@ -23,7 +23,6 @@ public class ProfileOutputDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "nl_NL", timezone = "Netherlands/Amsterdam")
     public LocalDate dateOfBirth;
 
-    // TODO: Nog niet zeker of deze er in moeten
     public String profileImageUrl;
     public String fileName;
 }

@@ -19,5 +19,6 @@ public class MovieOutputDto {
     public String movieSummary;
     public String movieYearOfRelease;
     public String movieImageUrl;
+    public String fileName;
     public List<Character> charactersList;
 }

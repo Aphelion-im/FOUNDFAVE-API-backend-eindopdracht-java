@@ -28,8 +28,7 @@ public class ContactForm {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     public LocalDateTime timeStamp;
-
-    // Relations
+    
     @ManyToOne
     @JoinColumn(name = "users_username")
     @JsonIgnore

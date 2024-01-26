@@ -24,5 +24,6 @@ public class CharacterOutputDto {
     public String characterSummary;
     public String characterDescription;
     public String characterImageUrl;
+    public String fileName;
     public List<Movie> moviesList;
 }

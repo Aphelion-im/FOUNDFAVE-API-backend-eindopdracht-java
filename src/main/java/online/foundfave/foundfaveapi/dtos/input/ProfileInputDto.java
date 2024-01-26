@@ -36,8 +36,4 @@ public class ProfileInputDto {
     @Past(message = "Date needs to be in the past.")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "nl_NL", timezone = "Netherlands/Amsterdam")
     public LocalDate dateOfBirth;
-
-    // TODO: Nog niet zeker of deze er in moeten en of er validatie op moet
-    public String profileImageUrl;
-    public String fileName;
 }

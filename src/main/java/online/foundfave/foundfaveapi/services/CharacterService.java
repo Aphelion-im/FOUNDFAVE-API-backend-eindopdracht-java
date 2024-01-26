@@ -48,22 +48,27 @@ public class CharacterService {
 
     public String updateCharacter(Long characterId, CharacterInputDto characterInputDto) {
         Character character = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
-        if (characterInputDto.characterAliasName != null)
+        if (characterInputDto.characterAliasName != null) {
             character.setCharacterAliasName(characterInputDto.getCharacterAliasName());
-        if (characterInputDto.characterRealName != null)
+        }
+        if (characterInputDto.characterRealName != null) {
             character.setCharacterRealName(characterInputDto.getCharacterRealName());
-        if (characterInputDto.characterActorName != null)
+        }
+        if (characterInputDto.characterActorName != null) {
             character.setCharacterActorName(characterInputDto.getCharacterActorName());
-        if (characterInputDto.characterTitle != null)
+        }
+        if (characterInputDto.characterTitle != null) {
             character.setCharacterTitle(characterInputDto.getCharacterTitle());
-        if (characterInputDto.characterGender != null)
+        }
+        if (characterInputDto.characterGender != null) {
             character.setCharacterGender(characterInputDto.getCharacterGender());
-        if (characterInputDto.characterSummary != null)
+        }
+        if (characterInputDto.characterSummary != null) {
             character.setCharacterSummary(characterInputDto.getCharacterSummary());
-        if (characterInputDto.characterDescription != null)
+        }
+        if (characterInputDto.characterDescription != null) {
             character.setCharacterDescription(characterInputDto.getCharacterDescription());
-        if (characterInputDto.characterImageUrl != null)
-            character.setCharacterImageUrl(characterInputDto.getCharacterImageUrl());
+        }
         characterRepository.save(character);
         return "Character with id: " + character.getCharacterId() + " updated successfully!";
     }
@@ -134,7 +139,7 @@ public class CharacterService {
             characterOutputDtoList.add(transformCharacterToCharacterOutputDto(character));
         }
         if (characterOutputDtoList.isEmpty()) {
-            throw new CharacterNotFoundException("0 results. No actors were found!");
+            throw new CharacterNotFoundException("0 results. No characters were found!");
         }
         return characterOutputDtoList;
     }
@@ -174,6 +179,7 @@ public class CharacterService {
         characterOutputDto.characterSummary = character.getCharacterSummary();
         characterOutputDto.characterDescription = character.getCharacterDescription();
         characterOutputDto.characterImageUrl = character.getCharacterImageUrl();
+        characterOutputDto.fileName = character.getFileName();
         characterOutputDto.moviesList = character.getMoviesList();
         return characterOutputDto;
     }
@@ -187,7 +193,6 @@ public class CharacterService {
         character.setCharacterGender(characterInputDto.getCharacterGender());
         character.setCharacterSummary(characterInputDto.getCharacterSummary());
         character.setCharacterDescription(characterInputDto.getCharacterDescription());
-        character.setCharacterImageUrl(characterInputDto.getCharacterImageUrl());
         return character;
     }
 }

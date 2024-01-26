@@ -1,4 +1,4 @@
-Datum laatste update: 24-1-2024
+Datum laatste update: 26-1-2024
 
 <a target="_blank" href="https://github.com/Aphelion-im/FOUNDFAVE-backend-eindopdracht-java">Github Repository FOUNDFAVE API</a>
 
@@ -19,7 +19,7 @@ Datum laatste update: 24-1-2024
 ![FOUNDFAVE API klassendiagram](./assets/class-diagram/foundfave-api-class-diagram.png)
 
 ## Uitgebreide Installatiehandleiding
-De uitgebreide installatiehandleiding (PDF) kun je hier downloaden:
+De uitgebreide installatiehandleiding (PDF)(Nederlandstalig) kun je hier downloaden:
 
 [Installatiehandleiding FOUNDFAVE API](./assets/documentation/Eindopdracht-Installatiehandleiding-v1.0.0.pdf)
 
@@ -54,8 +54,9 @@ __Opvragen of de FOUNDFAVE API online is__:
 - Binnen Postman: `localhost:8080/test`
 
 ## FOUNDFAVE API Online Documentatie
-Nadat je de server hebt opgestart, kun je hier de API documentatie lezen:
-`http://localhost:8080/documentation/index.html`
+Nadat je de server hebt opgestart, kun je hier de API-documentatie lezen (Engelstalig):
+
+<a target="_blank" href="http://localhost:8080/documentation/index.html">http://localhost:8080/documentation/index.html</a>
 
 ## Live demo React FOUNDFAVE App
 

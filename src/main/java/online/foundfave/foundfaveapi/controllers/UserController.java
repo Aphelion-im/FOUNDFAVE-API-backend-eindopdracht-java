@@ -38,8 +38,8 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<UserOutputDto> getUser(@PathVariable("username") String username) {
-        UserOutputDto userOutputDto = userService.getUser(username);
+    public ResponseEntity<UserOutputDto> getUserByUsername(@PathVariable("username") String username) {
+        UserOutputDto userOutputDto = userService.getUserByUsername(username);
         return ResponseEntity.ok().body(userOutputDto);
     }
 

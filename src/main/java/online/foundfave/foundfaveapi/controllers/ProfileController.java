@@ -57,7 +57,6 @@ public class ProfileController {
         return ResponseEntity.ok().body("Profile with id: " + profileId + " updated!");
     }
 
-    // Currently, profiles assigned to users, are not allowed to be deleted. First use the detachProfileFromUser method and then try again to delete the profile.
     @DeleteMapping("/{profileId}")
     public ResponseEntity<Object> deleteProfile(@PathVariable("profileId") Long profileId) {
         profileService.deleteProfile(profileId);
@@ -82,10 +81,17 @@ public class ProfileController {
         return ResponseEntity.ok().body(profileOutputDto);
     }
 
-    @GetMapping("profile/image/{username}")
+    @GetMapping("image/user/{username}")
     public ResponseEntity<String> getProfileImageByUsername(@PathVariable("username") String username) {
         ProfileOutputDto profileOutputDto = profileService.getProfileByUsername(username);
         String output = Objects.requireNonNullElse(profileOutputDto.profileImageUrl, "This user does not have a profile image!");
+        return ResponseEntity.ok().body(output);
+    }
+
+    @GetMapping("image/profile/{profileId}")
+    public ResponseEntity<String> getProfileImageByProfileId(@PathVariable("profileId") Long profileId) {
+        ProfileOutputDto profileOutputDto = profileService.getProfileImageByProfileId(profileId);
+        String output = Objects.requireNonNullElse(profileOutputDto.profileImageUrl, "This profile does not have a profile image!");
         return ResponseEntity.ok().body(output);
     }
 }

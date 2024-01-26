@@ -33,8 +33,8 @@ public class Character {
     private String characterSummary;
     private String characterDescription;
     private String characterImageUrl;
+    private String fileName;
 
-    // Relations
     @ManyToMany
     @JoinTable(
             name = "characters_movies",
