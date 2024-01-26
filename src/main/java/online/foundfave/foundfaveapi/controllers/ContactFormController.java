@@ -46,8 +46,8 @@ public class ContactFormController {
     }
 
     @DeleteMapping("/{contactFormId}")
-    public ResponseEntity<String> deleteContactForm(@PathVariable Long contactFormId) {
-        contactFormService.deleteContactFormSubmission(contactFormId);
+    public ResponseEntity<String> deleteContactFormById(@PathVariable Long contactFormId) {
+        contactFormService.deleteContactFormById(contactFormId);
         return ResponseEntity.ok().body("Contact Form with id: " + contactFormId + " was successfully deleted!");
     }
 

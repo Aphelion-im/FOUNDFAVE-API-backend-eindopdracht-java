@@ -149,7 +149,7 @@
                 <tr>
                     <td>/characters</td>
                     <td>GET</td>
-                    <td>Admin</td>
+                    <td>Admin, User</td>
                     <td>N/A</td>
                     <td>The /characters endpoint (Postman: <strong>getAllCharacters</strong> allows you to view all
                         Marvel characters currently in de database.
@@ -158,7 +158,7 @@
                 <tr>
                     <td>/characters/{characterId}</td>
                     <td>GET</td>
-                    <td>Admin</td>
+                    <td>Admin, User</td>
                     <td>N/A</td>
                     <td>The /characters/{characterId} endpoint (Postman: <strong>getCharacterById</strong>) allows you
                         to view a specific Marvel character with an id.
@@ -167,7 +167,7 @@
                 <tr>
                     <td>/characters/search/starting-with</td>
                     <td>GET</td>
-                    <td>Admin</td>
+                    <td>Admin, User</td>
                     <td>N/A</td>
                     <td>The /characters/search/starting-with endpoint (Postman:
                         <strong>findCharactersByNameStartingWith</strong>) allows you
@@ -178,7 +178,7 @@
                 <tr>
                     <td>/characters/search/contains</td>
                     <td>GET</td>
-                    <td>Admin</td>
+                    <td>Admin, User</td>
                     <td>N/A</td>
                     <td>The /characters/search/contains endpoint (Postman: <strong>findCharactersByNameContains</strong>)
                         allows you to search for characters with a search parameter. This method searches for characters
@@ -188,7 +188,7 @@
                 <tr>
                     <td>/characters/search/sorted-asc</td>
                     <td>GET</td>
-                    <td>Admin</td>
+                    <td>Admin, User</td>
                     <td>N/A</td>
                     <td>The /characters/search/sorted-asc endpoint (Postman:
                         <strong>findCharactersByNameSortedAsc</strong>)
@@ -199,7 +199,7 @@
                 <tr>
                     <td>/characters/search/sorted-desc</td>
                     <td>GET</td>
-                    <td>Admin</td>
+                    <td>Admin, User</td>
                     <td>N/A</td>
                     <td>The /characters/search/sorted-desc endpoint (Postman:
                         <strong>findCharactersByNameSortedAsc</strong>)
@@ -210,7 +210,7 @@
                 <tr>
                     <td>/characters/search/actor-name</td>
                     <td>GET</td>
-                    <td>Admin</td>
+                    <td>Admin, User</td>
                     <td>N/A</td>
                     <td>The /characters/search/actor-name endpoint (Postman:
                         <strong>findCharactersByActorNameContains</strong>) allows you to search for characters with a
@@ -282,8 +282,9 @@
                     </td>
                     <td>The /characters/{characterId} endpoint (Postman:
                         <strong>deleteCharacter</strong>) allows you to delete a character with a certain id. Note:
-                        Characters that are associated with a movie, or are a user's favorite, are not allowed to be
-                        deleted.
+                        Currently, characters assigned to users (Favorites) or movies, are not allowed to be deleted.
+                        Use the <strong>removeFavoriteCharacterFromUser</strong> and <strong>disassociateMovieAndCharacter</strong>
+                        methods before trying to remove the character.
                     </td>
                 </tr>
 
@@ -319,17 +320,121 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>/login</td>
+                    <td>/contactforms</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /contactforms endpoint (Postman: <strong>getAllContactForms</strong> endpoint allows you to
+                        see a list of all submitted contact forms.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/contactforms/search/name</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /contactforms/search/name endpoint (Postman: <strong>findContactFormsByNameContains</strong>
+                        endpoint allows you to ...
+                    </td>
+                </tr>
+                <tr>
+                    <td>/contactforms/search/email</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /contactforms/search/email endpoint (Postman:
+                        <strong>findContactFormsByEmailContains</strong> endpoint allows you to
+                    </td>
+                </tr>
+                <tr>
+                    <td>/contactforms/search/comments</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /contactforms/search/comments endpoint (Postman:
+                        <strong>findContactFormsByCommentsContains</strong> endpoint allows you to
+                    </td>
+                </tr>
+                <tr>
+                    <td>/contactforms/{contactFormId}</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /contactforms/{contactFormId} endpoint (Postman: <strong>getContactFormById</strong>
+                        endpoint allows you to
+                    </td>
+                </tr>
+                <tr>
+                    <td>/contactforms/post</td>
                     <td>POST</td>
-                    <td>Public</td>
+                    <td>Admin, User</td>
                     <td>
                         {<br/>
-                        "username": "admin",<br/>
-                        "password": "password"<br/>
+                        "name": "Novi",<br/>
+                        "email": "test@novi.nl",<br/>
+                        "comments": "Dit is commentaar"<br/>
                         }
                     </td>
-                    <td>The /login endpoint (Postman: <strong>Login</strong> (Public)) allows you to get a JWT-token and
-                        login to the service.
+                    <td>The /contactforms/post endpoint (Postman: <strong>createContactForm</strong> endpoint allows you
+                        to
+                    </td>
+                </tr>
+                <tr>
+                    <td>/contactforms</td>
+                    <td>DELETE</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /contactforms endpoint (Postman: <strong>deleteAllContactForms</strong> endpoint allows you
+                        to
+                    </td>
+                </tr>
+                <tr>
+                    <td>/contactforms/{contactFormId}</td>
+                    <td>DELETE</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /contactforms/{contactFormId} endpoint (Postman: <strong>deleteContactFormById</strong>
+                        endpoint allows you to
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2>File Endpoints</h2>
+            <table class="box-shadow">
+                <thead>
+                <tr>
+                    <th style="width: 10%;">Endpoint</th>
+                    <th style="width: 10%;">Method</th>
+                    <th style="width: 10%;">Accessible By</th>
+                    <th style="width: 35%;">JSON</th>
+                    <th style="width: 35%;">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>/download-profile-image/{fileName}</td>
+                    <td>GET</td>
+                    <td>Public</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /download-profile-image/{fileName} endpoint (Postman: <strong>downloadProfileImage</strong>
+                        (Public)) allows you to
                     </td>
                 </tr>
                 </tbody>

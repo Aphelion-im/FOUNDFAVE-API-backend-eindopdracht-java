@@ -40,7 +40,7 @@ public class ContactFormService {
         return transformContactFormToContactFormOutputDto(createdContactForm);
     }
 
-    public void deleteContactFormSubmission(Long contactFormId) {
+    public void deleteContactFormById(Long contactFormId) {
         if (!contactFormRepository.existsById(contactFormId)) {
             throw new ContactFormNotFoundException("Contact Form with id: " + contactFormId + " not found!");
         }

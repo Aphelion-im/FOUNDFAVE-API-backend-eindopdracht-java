@@ -49,9 +49,8 @@ public class SpringSecurityConfiguration {
                 .authorizeHttpRequests()
                 // .requestMatchers("/**").permitAll()
 
-                // TODO: Onder de juiste categorie plaatsen:
                 // TODO: Instellen juiste rollen
-                // TODO: Testen met Admin rol
+                // TODO: Testen met Admin rol en User rol
 
                 //***** Public Endpoints ******//
                 .requestMatchers(HttpMethod.GET, "/info").permitAll()
@@ -64,13 +63,13 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, "/authenticated").authenticated()
 
                 //***** Characters Endpoints *****//
-                .requestMatchers(HttpMethod.GET, "/characters").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/characters/{characterId}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/characters/search/starting-with").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/characters/search/contains").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/characters/search/sorted-asc").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/characters/search/sorted-desc").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/characters/search/actor-name").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/characters").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/characters/{characterId}").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/characters/search/starting-with").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/characters/search/contains").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/characters/search/sorted-asc").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/characters/search/sorted-desc").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/characters/search/actor-name").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.PUT, "/characters/character/{characterId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/characters/associate/movie/{characterId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/characters").hasRole("ADMIN")
@@ -79,18 +78,19 @@ public class SpringSecurityConfiguration {
 
                 //***** Contact Forms Endpoints *****//
                 .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
-
-                .requestMatchers(HttpMethod.GET, "/contactforms/search/name").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/contactforms/search/email").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/contactforms/search/comments").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/contactforms/{contactFormId}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/contactforms/post").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/contactforms").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/contactforms/search/name").hasAnyRole("ADMIN", "USER") // TODO: @ to write
+                .requestMatchers(HttpMethod.GET, "/contactforms/search/email").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/contactforms/search/comments").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/contactforms/{contactFormId}").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.POST, "/contactforms/post").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.DELETE, "/contactforms").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasAnyRole("ADMIN", "USER")
 
                 //***** File Endpoints ******//
                 .requestMatchers(HttpMethod.GET, "/download-profile-image/{fileName}").permitAll()
+
                 .requestMatchers(HttpMethod.GET, "/download-character-image/{fileName}").permitAll()
+
                 .requestMatchers(HttpMethod.GET, "/download-movie-image/{fileName}").permitAll()
                 .requestMatchers(HttpMethod.POST, "/upload-profile-image/{profileId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/upload-character-image/{characterId}").hasRole("ADMIN")
