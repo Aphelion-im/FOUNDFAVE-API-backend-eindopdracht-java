@@ -1,8 +1,14 @@
 package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.exceptions.BadRequestException;
+import online.foundfave.foundfaveapi.exceptions.CharacterNotFoundException;
+import online.foundfave.foundfaveapi.exceptions.MovieNotFoundException;
 import online.foundfave.foundfaveapi.exceptions.ProfileNotFoundException;
+import online.foundfave.foundfaveapi.models.Character;
+import online.foundfave.foundfaveapi.models.Movie;
 import online.foundfave.foundfaveapi.models.Profile;
+import online.foundfave.foundfaveapi.repositories.CharacterRepository;
+import online.foundfave.foundfaveapi.repositories.MovieRepository;
 import online.foundfave.foundfaveapi.repositories.ProfileRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -24,15 +30,19 @@ public class FileService {
     private final Path fileStoragePath;
     private final String fileStorageLocation;
     private final ProfileRepository profileRepository;
+    private final CharacterRepository characterRepository;
+    private final MovieRepository movieRepository;
 
-    public FileService(@Value("${my.upload_location}") String fileStorageLocation, ProfileRepository profileRepository) {
+    public FileService(@Value("${my.upload_location}") String fileStorageLocation, ProfileRepository profileRepository, CharacterRepository characterRepository, MovieRepository movieRepository) {
         fileStoragePath = Paths.get(fileStorageLocation).toAbsolutePath().normalize();
         this.fileStorageLocation = fileStorageLocation;
         this.profileRepository = profileRepository;
+        this.characterRepository = characterRepository;
+        this.movieRepository = movieRepository;
         try {
             Files.createDirectories(fileStoragePath);
         } catch (IOException ioe) {
-            throw new RuntimeException("There is an issue creating the file directory!");
+            throw new RuntimeException("An error occurred while creating the file directory!");
         }
     }
 
@@ -44,7 +54,7 @@ public class FileService {
             try {
                 Files.deleteIfExists(path);
             } catch (IOException ioe) {
-                throw new RuntimeException("A problem occurred while deleting: " + profile.getFileName());
+                throw new RuntimeException("An error occurred while deleting: " + profile.getFileName());
             }
         }
         storeFile(file, fileName);
@@ -70,12 +80,76 @@ public class FileService {
         }
     }
 
+    public void uploadCharacterImage(MultipartFile file, String url, Long characterId, String fileName) {
+        Character character = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character with id: " + characterId + " not found!"));
+        if (character.getCharacterImageUrl() != null) {
+            Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(character.getFileName());
+            try {
+                Files.deleteIfExists(path);
+            } catch (IOException ioe) {
+                throw new RuntimeException("An error occurred while deleting: " + character.getFileName());
+            }
+        }
+        storeFile(file, fileName);
+        character.setCharacterImageUrl(url);
+        character.setFileName(fileName);
+        characterRepository.save(character);
+    }
+
+    public void deleteCharacterImage(Long characterId) {
+        Character character = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character with id: " + characterId + " not found!"));
+        if (character.getCharacterImageUrl() == null) {
+            throw new BadRequestException("This character does not have an image!");
+        }
+        Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(character.getFileName());
+        character.setCharacterImageUrl(null);
+        character.setFileName(null);
+        characterRepository.save(character);
+        try {
+            Files.deleteIfExists(path);
+        } catch (IOException ioe) {
+            throw new RuntimeException("An error occurred while deleting: " + character.getFileName());
+        }
+    }
+
+    public void uploadMovieImage(MultipartFile file, String url, Long movieId, String fileName) {
+        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie with id: " + movieId + " not found!"));
+        if (movie.getMovieImageUrl() != null) {
+            Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(movie.getFileName());
+            try {
+                Files.deleteIfExists(path);
+            } catch (IOException ioe) {
+                throw new RuntimeException("An error occurred while deleting: " + movie.getFileName());
+            }
+        }
+        storeFile(file, fileName);
+        movie.setMovieImageUrl(url);
+        movie.setFileName(fileName);
+        movieRepository.save(movie);
+    }
+
+    public void deleteMovieImage(Long movieId) {
+        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie with id: " + movieId + " not found!"));
+        if (movie.getMovieImageUrl() == null) {
+            throw new BadRequestException("This movie does not have an image!");
+        }
+        Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(movie.getFileName());
+        movie.setMovieImageUrl(null);
+        movie.setFileName(null);
+        movieRepository.save(movie);
+        try {
+            Files.deleteIfExists(path);
+        } catch (IOException ioe) {
+            throw new RuntimeException("An error occurred while deleting: " + movie.getFileName());
+        }
+    }
+
     public void storeFile(MultipartFile file, String fileName) {
         Path filePath = Paths.get(fileStoragePath + File.separator + fileName);
         try {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ioe) {
-            throw new RuntimeException("There is an issue storing the file.", ioe);
+            throw new RuntimeException("There is an error storing the file.", ioe);
         }
     }
 
@@ -85,7 +159,7 @@ public class FileService {
         try {
             resource = new UrlResource(path.toUri());
         } catch (MalformedURLException mue) {
-            throw new RuntimeException("There is an issue reading the file.", mue);
+            throw new RuntimeException("There is an error reading the file.", mue);
         }
         if (!resource.exists() || !resource.isReadable()) {
             throw new BadRequestException("The file does not exist or is not readable.");

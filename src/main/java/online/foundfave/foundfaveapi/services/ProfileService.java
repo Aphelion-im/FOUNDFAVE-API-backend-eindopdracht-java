@@ -30,7 +30,6 @@ public class ProfileService {
         this.userRepository = userRepository;
     }
 
-    // Basic CRUD methods
     public List<ProfileOutputDto> getProfiles() {
         List<ProfileOutputDto> profileOutputDtoList = new ArrayList<>();
         List<Profile> profileList = profileRepository.findAll();
@@ -62,11 +61,18 @@ public class ProfileService {
 
     public void updateProfile(Long profileId, ProfileInputDto profileInputDto) {
         Profile profile = profileRepository.findById(profileId).orElseThrow(() -> new ProfileNotFoundException("Profile not found with id: " + profileId + "!"));
-        if (profileInputDto.firstName != null) profile.setFirstName(profileInputDto.getFirstName());
-        if (profileInputDto.lastName != null) profile.setLastName(profileInputDto.getLastName());
-        if (profileInputDto.gender != null) profile.setGender(profileInputDto.getGender());
-        if (profileInputDto.dateOfBirth != null) profile.setDateOfBirth(profileInputDto.getDateOfBirth());
-        if (profileInputDto.profileImageUrl != null) profile.setProfileImageUrl(profileInputDto.getProfileImageUrl());
+        if (profileInputDto.firstName != null) {
+            profile.setFirstName(profileInputDto.getFirstName());
+        }
+        if (profileInputDto.lastName != null) {
+            profile.setLastName(profileInputDto.getLastName());
+        }
+        if (profileInputDto.gender != null) {
+            profile.setGender(profileInputDto.getGender());
+        }
+        if (profileInputDto.dateOfBirth != null) {
+            profile.setDateOfBirth(profileInputDto.getDateOfBirth());
+        }
         profileRepository.save(profile);
     }
 
@@ -119,6 +125,17 @@ public class ProfileService {
         return transformProfileToProfileOutputDto(userOutputDto.getProfile());
     }
 
+    public ProfileOutputDto getProfileImageByProfileId(Long profileId) {
+        ProfileOutputDto profileOutputDto;
+        Optional<Profile> optionalProfile = profileRepository.findById(profileId);
+        if (optionalProfile.isPresent()) {
+            profileOutputDto = transformProfileToProfileOutputDto(optionalProfile.get());
+        } else {
+            throw new ProfileNotFoundException("Profile with id: " + profileId + " not found!");
+        }
+        return profileOutputDto;
+    }
+
     public static ProfileOutputDto transformProfileToProfileOutputDto(Profile profile) {
         var profileOutputDto = new ProfileOutputDto();
         profileOutputDto.profileId = profile.getProfileId();
@@ -137,8 +154,6 @@ public class ProfileService {
         profile.setLastName(profileInputDto.getLastName());
         profile.setGender(profileInputDto.getGender());
         profile.setDateOfBirth(profileInputDto.getDateOfBirth());
-        profile.setProfileImageUrl(profileInputDto.getProfileImageUrl());
-        profile.setFileName(profileInputDto.getFileName());
         return profile;
     }
 }

@@ -49,28 +49,21 @@ public class SpringSecurityConfiguration {
                 .authorizeHttpRequests()
                 // .requestMatchers("/**").permitAll()
 
-
                 // TODO: Onder de juiste categorie plaatsen:
                 // TODO: Instellen juiste rollen
                 // TODO: Testen met Admin rol
-                // Test
-                .requestMatchers(HttpMethod.GET, "/download-profile-image/{fileName}").permitAll()
-                .requestMatchers(HttpMethod.POST, "/upload-profile-image/{profileId}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/delete-profile-image/{profileId}").hasRole("ADMIN")
 
-
-                //***** Public ******//
+                //***** Public Endpoints ******//
                 .requestMatchers(HttpMethod.GET, "/info").permitAll()
                 .requestMatchers(HttpMethod.GET, "/test").permitAll()
                 .requestMatchers(HttpMethod.GET, "/queries").permitAll()
                 .requestMatchers(HttpMethod.GET, "/documentation/**").permitAll()
 
+                //***** Authentication Endpoints *****//
+                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers(HttpMethod.GET, "/authenticated").authenticated()
 
-                //***** Authentication *****//
-                .requestMatchers("/login").permitAll()
-                .requestMatchers("/authenticated").authenticated()
-
-                //***** Characters *****//
+                //***** Characters Endpoints *****//
                 .requestMatchers(HttpMethod.GET, "/characters").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/characters/{characterId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/characters/search/starting-with").hasRole("ADMIN")
@@ -84,8 +77,9 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.DELETE, "/characters/{characterId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/characters/disassociate/movie/{characterId}").hasRole("ADMIN")
 
-                //***** Contact Forms *****//
+                //***** Contact Forms Endpoints *****//
                 .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
+
                 .requestMatchers(HttpMethod.GET, "/contactforms/search/name").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/contactforms/search/email").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/contactforms/search/comments").hasRole("ADMIN")
@@ -94,11 +88,18 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.DELETE, "/contactforms").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasRole("ADMIN")
 
-                //***** Files *****//
+                //***** File Endpoints ******//
+                .requestMatchers(HttpMethod.GET, "/download-profile-image/{fileName}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/download-character-image/{fileName}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/download-movie-image/{fileName}").permitAll()
+                .requestMatchers(HttpMethod.POST, "/upload-profile-image/{profileId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/upload-character-image/{characterId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/upload-movie-image/{movieId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/delete-profile-image/{profileId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/delete-character-image/{characterId}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/delete-movie-image/{movieId}").hasRole("ADMIN")
 
-
-
-                //***** Movies *****//
+                //***** Movies Endpoints *****//
                 .requestMatchers(HttpMethod.GET, "/movies").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/movies/{movieId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/movies/search/starting-with").hasRole("ADMIN")
@@ -110,18 +111,19 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/movies").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/movies/{movieId}").hasRole("ADMIN")
 
-                //***** Profiles *****//
+                //***** Profiles Endpoints *****//
                 .requestMatchers(HttpMethod.GET, "/profiles").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/profiles/{profileId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/profiles/search/firstname").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/profiles/search/lastname").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/profiles/profile/{username}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "profiles/profile/image/{username}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "profiles/image/user/{username}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "profiles/image/profile/{profileId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/profiles/profile/{profileId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/profiles").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/profiles/{profileId}").hasRole("ADMIN")
 
-                //***** Users *****//
+                //***** Users Endpoints *****//
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/active").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/favorites/{username}").hasRole("ADMIN")
@@ -140,7 +142,6 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.DELETE, "/users/{username}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/users/{username}/authorities/{authority}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/users/remove/character/{username}").hasRole("ADMIN")
-
 
                 .anyRequest().denyAll()
                 .and()

@@ -31,7 +31,6 @@ public class Profile {
     private String profileImageUrl;
     private String fileName;
 
-    // Relations
     @OneToOne(mappedBy = "profile")
     @JsonIgnore
     private User user;

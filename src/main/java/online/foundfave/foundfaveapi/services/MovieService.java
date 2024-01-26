@@ -53,11 +53,15 @@ public class MovieService {
 
     public String updateMovie(long movieId, MovieInputDto movieInputDto) {
         Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
-        if (movieInputDto.movieTitle != null) movie.setMovieTitle(movieInputDto.getMovieTitle());
-        if (movieInputDto.movieSummary != null) movie.setMovieSummary(movieInputDto.getMovieSummary());
-        if (movieInputDto.movieYearOfRelease != null)
+        if (movieInputDto.movieTitle != null) {
+            movie.setMovieTitle(movieInputDto.getMovieTitle());
+        }
+        if (movieInputDto.movieSummary != null) {
+            movie.setMovieSummary(movieInputDto.getMovieSummary());
+        }
+        if (movieInputDto.movieYearOfRelease != null) {
             movie.setMovieYearOfRelease(movieInputDto.getMovieYearOfRelease());
-        if (movieInputDto.movieSummary != null) movie.setMovieImageUrl(movieInputDto.getMovieImageUrl());
+        }
         movieRepository.save(movie);
         return "Movie with id: " + movieId + " updated successfully!";
     }
@@ -140,6 +144,7 @@ public class MovieService {
         movieOutputDto.movieSummary = movie.getMovieSummary();
         movieOutputDto.movieYearOfRelease = movie.getMovieYearOfRelease();
         movieOutputDto.movieImageUrl = movie.getMovieImageUrl();
+        movieOutputDto.fileName = movie.getFileName();
         movieOutputDto.charactersList = movie.getCharactersList();
         return movieOutputDto;
     }
@@ -149,7 +154,6 @@ public class MovieService {
         movie.setMovieTitle(movieInputDto.getMovieTitle());
         movie.setMovieSummary(movieInputDto.getMovieSummary());
         movie.setMovieYearOfRelease(movieInputDto.getMovieYearOfRelease());
-        movie.setMovieImageUrl(movieInputDto.getMovieImageUrl());
         return movie;
     }
 }

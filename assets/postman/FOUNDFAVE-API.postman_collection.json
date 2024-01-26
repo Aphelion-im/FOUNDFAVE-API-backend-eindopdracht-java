@@ -230,7 +230,7 @@
 			"response": []
 		},
 		{
-			"name": "getUser",
+			"name": "getUserByUsername",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -1174,14 +1174,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/characters/1007",
+					"raw": "localhost:8080/characters/1000",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"characters",
-						"1007"
+						"1000"
 					]
 				}
 			},
@@ -1231,14 +1231,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/movies/1000",
+					"raw": "localhost:8080/movies/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"movies",
-						"1000"
+						"1"
 					]
 				}
 			},
@@ -1261,7 +1261,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"movieTitle\": \"The Incredible Hulk 55\",\r\n    \"movieSummary\": \"Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.\",\r\n    \"movieYearOfRelease\": 2010,\r\n    \"movieImageUrl\": \"image-url-hulk\"\r\n}",
+					"raw": "{\r\n    \"movieTitle\": \"The Incredible Hulk 55\",\r\n    \"movieSummary\": \"Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.\",\r\n    \"movieYearOfRelease\": \"2010\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1298,7 +1298,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"movieTitle\": \"The Incredible Hulkster\",\r\n    \"movieSummary\": \"Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.\",\r\n    \"movieYearOfRelease\": \"2008\",\r\n    \"movieImageUrl\": \"image-url-hulk\"\r\n}",
+					"raw": "{\r\n    \"movieTitle\": \"The Incredible Hulkster\",\r\n    \"movieSummary\": \"Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.\",\r\n    \"movieYearOfRelease\": \"2008\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1846,7 +1846,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"characterAliasName\": \"Hulkiiz\",\r\n    \"characterRealName\": \"Test\",\r\n    \"characterActorName\": \"andre d g\",\r\n    \"characterTitle\": \"this is a title\",\r\n    \"characterGender\": \"Male\",\r\n    \"characterSummary\": \"This is a summary\",\r\n    \"characterDescription\": \"characterDescription\",\r\n    \"characterImageUrl\": \"image\"\r\n}",
+					"raw": "{\r\n    \"characterAliasName\": \"Hulkiiz\",\r\n    \"characterRealName\": \"Test\",\r\n    \"characterActorName\": \"andre d g\",\r\n    \"characterTitle\": \"this is a title\",\r\n    \"characterGender\": \"Male\",\r\n    \"characterSummary\": \"This is a summary\",\r\n    \"characterDescription\": \"characterDescription\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1883,7 +1883,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"characterAliasName\": \"Hulkie\",\r\n    \"characterRealName\": \"Robert Bruce Bannerz\",\r\n    \"characterActorName\": \"Mark Ruffaloz\",\r\n    \"characterTitle\": \"The incredible Hulkz\",\r\n    \"characterGender\": \"Male\",\r\n    \"characterSummary\": \"Exposed to heavy doses of gamma radiation, scientist Bruce Banner transforms into the mean, green rage machine called the Hulkz.\",\r\n    \"characterDescription\": \"Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green monster powered by his rage.z\",\r\n    \"characterImageUrl\": \"hulk.jpgz\"\r\n}",
+					"raw": "{\r\n    \"characterAliasName\": \"Hulkie\",\r\n    \"characterRealName\": \"Robert Bruce Bannerz\",\r\n    \"characterActorName\": \"Mark Ruffaloz\",\r\n    \"characterTitle\": \"The incredible Hulkz\",\r\n    \"characterGender\": \"Male\",\r\n    \"characterSummary\": \"Exposed to heavy doses of gamma radiation, scientist Bruce Banner transforms into the mean, green rage machine called the Hulkz.\",\r\n    \"characterDescription\": \"Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green monster powered by his rage.z\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -2102,6 +2102,37 @@
 			"response": []
 		},
 		{
+			"name": "getProfileImageByProfileId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/profiles/image/profile/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles",
+						"image",
+						"profile",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "findProfileByFirstnameContains",
 			"request": {
 				"auth": {
@@ -2190,7 +2221,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"André 4\",\r\n    \"lastName\": \"de Grootzz\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2010\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"André 4\",\r\n    \"lastName\": \"de Groot\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2010\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -2235,7 +2266,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/profiles/profile/1",
+					"raw": "localhost:8080/profiles/profile/1000",
 					"host": [
 						"localhost"
 					],
@@ -2243,7 +2274,7 @@
 					"path": [
 						"profiles",
 						"profile",
-						"1"
+						"1000"
 					]
 				}
 			},
@@ -2308,6 +2339,64 @@
 			"response": []
 		},
 		{
+			"name": "downloadCharacterImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/download-character-image/hulk-character.jpg",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"download-character-image",
+						"hulk-character.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "downloadMovieImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/download-movie-image/thor-movie.jpg",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"download-movie-image",
+						"thor-movie.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "uploadProfileImage",
 			"request": {
 				"auth": {
@@ -2328,7 +2417,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/C:/Users/Aphelion/Desktop/1-annie.jpg"
+							"src": "/C:/Users/Aphelion/Desktop/1-annie-profile-test-image.jpg"
 						}
 					]
 				},
@@ -2341,6 +2430,84 @@
 					"path": [
 						"upload-profile-image",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uploadCharacterImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Aphelion/Desktop/1-annie-character-test-image.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/upload-character-image/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"upload-character-image",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uploadMovieImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Aphelion/Desktop/1-annie-movie-test-image.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/upload-movie-image/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"upload-movie-image",
+						"1000"
 					]
 				}
 			},
@@ -2362,16 +2529,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/profiles/profile/image/andre",
+					"raw": "localhost:8080/profiles/image/user/andre4",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"profiles",
-						"profile",
 						"image",
-						"andre"
+						"user",
+						"andre4"
 					]
 				}
 			},
@@ -2401,6 +2568,64 @@
 					"path": [
 						"delete-profile-image",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCharacterImageById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/delete-character-image/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"delete-character-image",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMovieImageById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/delete-movie-image/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"delete-movie-image",
+						"1000"
 					]
 				}
 			},

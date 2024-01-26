@@ -40,7 +40,7 @@ public class UserService {
         return userOutputDtoList;
     }
 
-    public UserOutputDto getUser(String username) {
+    public UserOutputDto getUserByUsername(String username) {
         return getUserOutputDto(username);
     }
 
@@ -63,10 +63,15 @@ public class UserService {
 
     public String updateUser(String username, UpdateUserInputDto updateUserInputDto) {
         User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
-        if (updateUserInputDto.password != null)
+        if (updateUserInputDto.password != null) {
             user.setPassword(passwordEncoder.encode(updateUserInputDto.getPassword()));
-        if (updateUserInputDto.apikey != null) user.setApikey(updateUserInputDto.getApikey());
-        if (updateUserInputDto.email != null) user.setEmail(updateUserInputDto.getEmail());
+        }
+        if (updateUserInputDto.apikey != null) {
+            user.setApikey(updateUserInputDto.getApikey());
+        }
+        if (updateUserInputDto.email != null) {
+            user.setEmail(updateUserInputDto.getEmail());
+        }
         userRepository.save(user);
         return "User: " + "'" + username + "'" + " updated successfully!";
     }
@@ -217,7 +222,7 @@ public class UserService {
     }
 
     // This method is used for the CustomUserDetailsService class
-    public UserInputDto getUserByUsername(String username) {
+    public UserInputDto loadUserByUsername(String username) {
         UserInputDto userInputDto;
         Optional<User> optionalUser = userRepository.findById(username);
         if (optionalUser.isPresent()) {

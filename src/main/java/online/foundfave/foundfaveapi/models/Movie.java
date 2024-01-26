@@ -25,8 +25,8 @@ public class Movie {
     private String movieSummary;
     private String movieYearOfRelease;
     private String movieImageUrl;
+    private String fileName;
 
-    // Relations
     @ManyToMany(mappedBy = "moviesList")
     @JsonIgnore
     private List<Character> charactersList;

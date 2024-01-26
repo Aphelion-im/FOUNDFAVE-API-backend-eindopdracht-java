@@ -43,8 +43,4 @@ public class CharacterInputDto {
     @NotNull(message = "Character description is required and may not be null.")
     @Size(min = 1, max = 255, message = "Character description requires between 1 and 255 characters.")
     public String characterDescription;
-
-    @NotNull(message = "Character image url is required and may not be null.")
-    @Size(min = 2, max = 255, message = "Character images URL requires between 2 and 255 characters.")
-    public String characterImageUrl;
 }

@@ -35,7 +35,6 @@ public class User {
     @Column
     private String email;
 
-    // Relations
     @OneToOne
     @JsonIgnore
     private Profile profile;
@@ -61,7 +60,6 @@ public class User {
     @JsonIgnore
     private List<ContactForm> contactFormsList;
 
-    // Authority
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
     }

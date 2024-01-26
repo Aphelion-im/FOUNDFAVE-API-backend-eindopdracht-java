@@ -34,55 +34,308 @@
         <article class="inner-container article-padding">
             <h1>FOUNDFAVE API Documentation</h1>
             <a class="hyperlink" target="_blank" href="https://foundfave.online">FOUNDFAVE Live demo</a>
-            <h2>Name Controller:</h2>
-            <table>
+            <p><a class="hyperlink" target="_blank"
+                  href="https://github.com/Aphelion-im/FOUNDFAVE-API-backend-eindopdracht-java?tab=readme-ov-file#uitgebreide-installatiehandleiding">Download
+                the installation manual (PDF)(Dutch)</a></p>
+            <p><a class="hyperlink" target="_blank"
+                  href="https://github.com/Aphelion-im/FOUNDFAVE-API-backend-eindopdracht-java?tab=readme-ov-file#postman-collectie-json-bestand">Download
+                the latest Postman JSON collection</a></p>
+            <p><strong>Tip</strong>: You can select and copy-paste the text in the tables below and use it in Postman if
+            <p><strong>Tip</strong>: The endpoints in the manual, documentation, etc. are in the same order as in
+                Postman.</p>
+
+            <h2>Public Endpoints</h2>
+            <table class="box-shadow">
                 <thead>
                 <tr>
-                    <th>Head 1</th>
-                    <th>Head 2</th>
-                    <th>Head 3</th>
-                    <th>Head 4</th>
+                    <th style="width: 10%;">Endpoint</th>
+                    <th style="width: 10%;">Method</th>
+                    <th style="width: 10%;">Accessible By</th>
+                    <th style="width: 35%;">JSON</th>
+                    <th style="width: 35%;">Description</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>Cell1</td>
-                    <td>Cell2</td>
-                    <td>Cell3</td>
-                    <td>Cell4</td>
+                    <td>/info</td>
+                    <td>GET</td>
+                    <td>Public</td>
+                    <td>N/A</td>
+                    <td>The /info endpoint (Postman: <strong>showApiInfo</strong> (Public)) gives you a list of all
+                        available endpoints.
+                    </td>
                 </tr>
                 <tr>
-                    <td>Cell1</td>
-                    <td>Cell2</td>
-                    <td>Cell3</td>
-                    <td>Cell4</td>
+                    <td>/test</td>
+                    <td>GET</td>
+                    <td>Public</td>
+                    <td>N/A</td>
+                    <td>The /test endpoint (Postman: <strong>checkIfApiOnline</strong> (Public)) shows if the FOUNDFAVE
+                        API is online.
+                    </td>
                 </tr>
                 <tr>
-                    <td>Cell1</td>
-                    <td>Cell2</td>
-                    <td>Cell3</td>
-                    <td>Cell4</td>
+                    <td>/queries</td>
+                    <td>GET</td>
+                    <td>Public</td>
+                    <td>N/A</td>
+                    <td>The /queries endpoint (Postman: <strong>showAllAvailableQueries</strong> (Public) shows a list
+                        of all available
+                        queries: Characters and movies.)
+                    </td>
                 </tr>
                 <tr>
-                    <td>Cell1</td>
-                    <td>Cell2</td>
-                    <td>Cell3</td>
-                    <td>Cell4</td>
-                </tr>
-                <tr>
-                    <td>Cell1</td>
-                    <td>Cell2</td>
-                    <td>Cell3</td>
-                    <td>Cell4</td>
-                </tr>
-                <tr>
-                    <td>Cell1</td>
-                    <td>Cell2</td>
-                    <td>Cell3</td>
-                    <td>Cell4</td>
+                    <td>/documentation/index.html</td>
+                    <td>GET</td>
+                    <td>Public</td>
+                    <td>N/A</td>
+                    <td>The /documentation/index.html endpoint (Postman: <strong>API documentation</strong> (Public))
+                        shows a list of all available endpoints in detail. <a class="hyperlink" href="#">This page</a>.
+                    </td>
                 </tr>
                 </tbody>
             </table>
+
+            <h2>Authentication Endpoints</h2>
+            <table class="box-shadow">
+                <thead>
+                <tr>
+                    <th style="width: 10%;">Endpoint</th>
+                    <th style="width: 10%;">Method</th>
+                    <th style="width: 10%;">Accessible By</th>
+                    <th style="width: 35%;">JSON</th>
+                    <th style="width: 35%;">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>/login</td>
+                    <td>POST</td>
+                    <td>Public</td>
+                    <td>
+                        {<br/>
+                        "username": "admin",<br/>
+                        "password": "password"<br/>
+                        }
+                    </td>
+                    <td>The /login endpoint (Postman: <strong>Login</strong> (Public)) allows you to get a JWT-token and
+                        login to the service.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/authenticated</td>
+                    <td>GET</td>
+                    <td>Authenticated</td>
+                    <td>N/A</td>
+                    <td>The /authenticated endpoint (Postman: <strong>authenticated</strong>) shows the authorities you
+                        have, if you are authenticated, your username, etc.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2>Characters Endpoints</h2>
+            <table class="box-shadow">
+                <thead>
+                <tr>
+                    <th style="width: 10%;">Endpoint</th>
+                    <th style="width: 10%;">Method</th>
+                    <th style="width: 10%;">Accessible By</th>
+                    <th style="width: 35%;">JSON</th>
+                    <th style="width: 35%;">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>/characters</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>N/A</td>
+                    <td>The /characters endpoint (Postman: <strong>getAllCharacters</strong> allows you to view all
+                        Marvel characters currently in de database.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/characters/{characterId}</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>N/A</td>
+                    <td>The /characters/{characterId} endpoint (Postman: <strong>getCharacterById</strong>) allows you
+                        to view a specific Marvel character with an id.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/characters/search/starting-with</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>N/A</td>
+                    <td>The /characters/search/starting-with endpoint (Postman:
+                        <strong>findCharactersByNameStartingWith</strong>) allows you
+                        to search for characters with a search parameter. This method searches for characters starting
+                        their name as filled in by the search parameter.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/characters/search/contains</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>N/A</td>
+                    <td>The /characters/search/contains endpoint (Postman: <strong>findCharactersByNameContains</strong>)
+                        allows you to search for characters with a search parameter. This method searches for characters
+                        whose name contains that which was filled in as search parameter.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/characters/search/sorted-asc</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>N/A</td>
+                    <td>The /characters/search/sorted-asc endpoint (Postman:
+                        <strong>findCharactersByNameSortedAsc</strong>)
+                        allows you to search for characters with a search parameter. This method returns the search
+                        results in ascending order.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/characters/search/sorted-desc</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>N/A</td>
+                    <td>The /characters/search/sorted-desc endpoint (Postman:
+                        <strong>findCharactersByNameSortedAsc</strong>)
+                        allows you to search for characters with a search parameter. This method returns the search
+                        results in descending order.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/characters/search/actor-name</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>N/A</td>
+                    <td>The /characters/search/actor-name endpoint (Postman:
+                        <strong>findCharactersByActorNameContains</strong>) allows you to search for characters with a
+                        search parameter. This method searches for characters that are played by certain actors and
+                        whose name contains that which was filled in as search parameter.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/characters/character/{characterId}</td>
+                    <td>PUT</td>
+                    <td>Admin</td>
+                    <td>{<br/>
+                        "characterAliasName": "Hulk",<br/>
+                        "characterRealName": "Robert Bruce Bannerz",<br/>
+                        "characterActorName": "Mark Ruffalo",<br/>
+                        "characterTitle": "The incredible Hulk",<br/>
+                        "characterGender": "Male",<br/>
+                        "characterSummary": "Exposed to heavy doses of gamma radiation, scientist Bruce Banner
+                        transforms into the mean, green rage machine called the Hulkz.",<br/>
+                        "characterDescription": "Dr. Bruce Banner lives a life caught between the soft-spoken scientist
+                        he’s always been and the uncontrollable green monster powered by his rage."<br/>
+                        }
+                    </td>
+                    <td>The /characters/character/{characterId} endpoint (Postman:
+                        <strong>updateCharacter</strong>) allows you to update a character with a specific id.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/characters/associate/movie/{characterId}</td>
+                    <td>PUT</td>
+                    <td>Admin</td>
+                    <td>{<br/>
+                        "id": 1000<br/>
+                        }
+                    </td>
+                    <td>The /characters/associate/movie/{characterId} endpoint (Postman:
+                        <strong>associateMovieAndCharacter</strong>) allows you to combine a character and a movie. The
+                        character will then be added to that movie and that movie will be added to that character. The
+                        id in the JSON body is the id of the movie.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/characters</td>
+                    <td>POST</td>
+                    <td>Admin</td>
+                    <td>{<br/>
+                        "characterAliasName": "She-Hulk",<br/>
+                        "characterRealName": "Jennifer Walters",<br/>
+                        "characterActorName": "Tatiana Maslany",<br/>
+                        "characterTitle": "Savage She-Hulk",<br/>
+                        "characterGender": "Female",<br/>
+                        "characterSummary": "Jennifer Walters is a talented lawyer and the cousin of Bruce Banner, the
+                        Hulk",<br/>
+                        "characterDescription": " After being shot by a mobster and seriously injured, she was saved by
+                        a blood transfusion from Bruce, and his gamma-irradiated blood mutated Jennifer into the
+                        She-Hulk, kicking off her adventuring career."<br/>
+                        }
+                    </td>
+                    <td>The /characters endpoint (Postman:
+                        <strong>createCharacter</strong>) allows you to create a character with the specified values and
+                        attributes.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/characters/{characterId}</td>
+                    <td>DELETE</td>
+                    <td>Admin</td>
+                    <td>N/A
+                    </td>
+                    <td>The /characters/{characterId} endpoint (Postman:
+                        <strong>deleteCharacter</strong>) allows you to delete a character with a certain id. Note:
+                        Characters that are associated with a movie, or are a user's favorite, are not allowed to be
+                        deleted.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>/characters/disassociate/movie/{characterId}</td>
+                    <td>DELETE</td>
+                    <td>Admin</td>
+                    <td>
+                        {<br/>
+                        "id": 1005<br/>
+                        }
+                    </td>
+                    <td>The /characters/disassociate/movie/{characterId} endpoint (Postman:
+                        <strong>disassociateMovieAndCharacter</strong>) allows you to disassociate a character and a
+                        movie. The
+                        character will then be removed from that movie and that movie will be removed from that
+                        character. The id in the JSON body is the id of the movie.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2>Contact Forms Endpoints</h2>
+            <table class="box-shadow">
+                <thead>
+                <tr>
+                    <th style="width: 10%;">Endpoint</th>
+                    <th style="width: 10%;">Method</th>
+                    <th style="width: 10%;">Accessible By</th>
+                    <th style="width: 35%;">JSON</th>
+                    <th style="width: 35%;">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>/login</td>
+                    <td>POST</td>
+                    <td>Public</td>
+                    <td>
+                        {<br/>
+                        "username": "admin",<br/>
+                        "password": "password"<br/>
+                        }
+                    </td>
+                    <td>The /login endpoint (Postman: <strong>Login</strong> (Public)) allows you to get a JWT-token and
+                        login to the service.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
         </article>
     </section>
 </main>

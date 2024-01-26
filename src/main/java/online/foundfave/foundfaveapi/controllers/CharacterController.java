@@ -56,7 +56,6 @@ public class CharacterController {
         return ResponseEntity.ok(characterService.updateCharacter(characterId, characterInputDto));
     }
 
-    // Currently, characters assigned to users (Favorites) or movies, are not allowed to be deleted. Use the removeFavoriteCharacterFromUser and disassociateMovieAndCharacter methods before trying to remove the character.
     @DeleteMapping("/{characterId}")
     public ResponseEntity<Object> deleteCharacter(@PathVariable("characterId") Long characterId) {
         characterService.deleteCharacter(characterId);
