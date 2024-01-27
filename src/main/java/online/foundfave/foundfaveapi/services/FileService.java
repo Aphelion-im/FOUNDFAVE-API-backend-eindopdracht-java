@@ -46,8 +46,7 @@ public class FileService {
         }
     }
 
-    // TODO: Authentication check
-    public void uploadProfileImage(MultipartFile file, String url, Long profileId, String fileName) {
+    public void uploadProfileImageById(MultipartFile file, String url, Long profileId, String fileName) {
         Profile profile = profileRepository.findById(profileId).orElseThrow(() -> new ProfileNotFoundException("Profile with id: " + profileId + " not found!"));
         if (profile.getProfileImageUrl() != null) {
             Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(profile.getFileName());
@@ -63,8 +62,7 @@ public class FileService {
         profileRepository.save(profile);
     }
 
-    // TODO: Authentication check
-    public void deleteProfileImage(Long profileId) {
+    public void deleteProfileImageById(Long profileId) {
         Profile profile = profileRepository.findById(profileId).orElseThrow(() -> new ProfileNotFoundException("Profile with id: " + profileId + " not found!"));
         if (profile.getProfileImageUrl() == null) {
             throw new BadRequestException("This profile does not have a profile image!");
@@ -80,7 +78,7 @@ public class FileService {
         }
     }
 
-    public void uploadCharacterImage(MultipartFile file, String url, Long characterId, String fileName) {
+    public void uploadCharacterImageById(MultipartFile file, String url, Long characterId, String fileName) {
         Character character = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character with id: " + characterId + " not found!"));
         if (character.getCharacterImageUrl() != null) {
             Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(character.getFileName());
@@ -96,7 +94,7 @@ public class FileService {
         characterRepository.save(character);
     }
 
-    public void deleteCharacterImage(Long characterId) {
+    public void deleteCharacterImageById(Long characterId) {
         Character character = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character with id: " + characterId + " not found!"));
         if (character.getCharacterImageUrl() == null) {
             throw new BadRequestException("This character does not have an image!");
@@ -112,7 +110,7 @@ public class FileService {
         }
     }
 
-    public void uploadMovieImage(MultipartFile file, String url, Long movieId, String fileName) {
+    public void uploadMovieImageById(MultipartFile file, String url, Long movieId, String fileName) {
         Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie with id: " + movieId + " not found!"));
         if (movie.getMovieImageUrl() != null) {
             Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(movie.getFileName());
@@ -128,7 +126,7 @@ public class FileService {
         movieRepository.save(movie);
     }
 
-    public void deleteMovieImage(Long movieId) {
+    public void deleteMovieImageById(Long movieId) {
         Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie with id: " + movieId + " not found!"));
         if (movie.getMovieImageUrl() == null) {
             throw new BadRequestException("This movie does not have an image!");

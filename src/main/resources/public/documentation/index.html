@@ -40,7 +40,8 @@
             <p><a class="hyperlink" target="_blank"
                   href="https://github.com/Aphelion-im/FOUNDFAVE-API-backend-eindopdracht-java?tab=readme-ov-file#postman-collectie-json-bestand">Download
                 the latest Postman JSON collection</a></p>
-            <p><strong>Tip</strong>: You can select and copy-paste the text in the tables below and use it in Postman if required.</p>
+            <p><strong>Tip</strong>: You can select and copy-paste the text in the tables below and use it in Postman if
+                required.</p>
             <p><strong>Tip</strong>: The endpoints in the manual, documentation, etc. are in the same order as in
                 Postman.</p>
 
@@ -57,15 +58,6 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>/info</td>
-                    <td>GET</td>
-                    <td>Public</td>
-                    <td>N/A</td>
-                    <td>The /info endpoint (Postman: <strong>showApiInfo</strong> (Public)) gives you a list of all
-                        available endpoints.
-                    </td>
-                </tr>
-                <tr>
                     <td>/test</td>
                     <td>GET</td>
                     <td>Public</td>
@@ -75,13 +67,22 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>/info</td>
+                    <td>GET</td>
+                    <td>Public</td>
+                    <td>N/A</td>
+                    <td>The /info endpoint (Postman: <strong>showApiInfo</strong> (Public)) gives you a list of all
+                        available endpoints.
+                    </td>
+                </tr>
+                <tr>
                     <td>/queries</td>
                     <td>GET</td>
                     <td>Public</td>
                     <td>N/A</td>
-                    <td>The /queries endpoint (Postman: <strong>showAllAvailableQueries</strong> (Public) shows a list
+                    <td>The /queries endpoint (Postman: <strong>showAllAvailableQueries</strong> (Public)) shows a list
                         of all available
-                        queries: Characters and movies.)
+                        queries: Characters and movies.
                     </td>
                 </tr>
                 <tr>
@@ -90,7 +91,8 @@
                     <td>Public</td>
                     <td>N/A</td>
                     <td>The /documentation/index.html endpoint (Postman: <strong>API documentation</strong> (Public))
-                        shows a list of all available endpoints in detail. <a class="hyperlink" href="#">This page</a>.
+                        shows a list of all available endpoints in detail. E.g. <a class="hyperlink" href="#">This
+                            page</a>.
                     </td>
                 </tr>
                 </tbody>
@@ -151,7 +153,7 @@
                     <td>GET</td>
                     <td>Admin, User</td>
                     <td>N/A</td>
-                    <td>The /characters endpoint (Postman: <strong>getAllCharacters</strong> allows you to view all
+                    <td>The /characters endpoint (Postman: <strong>getAllCharacters</strong>) allows you to view all
                         Marvel characters currently in de database.
                     </td>
                 </tr>
@@ -171,8 +173,8 @@
                     <td>N/A</td>
                     <td>The /characters/search/starting-with endpoint (Postman:
                         <strong>findCharactersByNameStartingWith</strong>) allows you
-                        to search for characters with a search parameter. This method searches for characters starting
-                        their name as filled in by the search parameter.
+                        to search for characters with a query parameter. This method searches for characters starting
+                        their name as filled in as query parameter.
                     </td>
                 </tr>
                 <tr>
@@ -181,8 +183,8 @@
                     <td>Admin, User</td>
                     <td>N/A</td>
                     <td>The /characters/search/contains endpoint (Postman: <strong>findCharactersByNameContains</strong>)
-                        allows you to search for characters with a search parameter. This method searches for characters
-                        whose name contains that which was filled in as search parameter.
+                        allows you to search for characters with a query parameter. This method searches for characters
+                        whose name contains that which was filled in as query parameter.
                     </td>
                 </tr>
                 <tr>
@@ -192,7 +194,7 @@
                     <td>N/A</td>
                     <td>The /characters/search/sorted-asc endpoint (Postman:
                         <strong>findCharactersByNameSortedAsc</strong>)
-                        allows you to search for characters with a search parameter. This method returns the search
+                        allows you to search for characters with a query parameter. This method returns the search
                         results in ascending order.
                     </td>
                 </tr>
@@ -203,7 +205,7 @@
                     <td>N/A</td>
                     <td>The /characters/search/sorted-desc endpoint (Postman:
                         <strong>findCharactersByNameSortedAsc</strong>)
-                        allows you to search for characters with a search parameter. This method returns the search
+                        allows you to search for characters with a query parameter. This method returns the search
                         results in descending order.
                     </td>
                 </tr>
@@ -214,8 +216,8 @@
                     <td>N/A</td>
                     <td>The /characters/search/actor-name endpoint (Postman:
                         <strong>findCharactersByActorNameContains</strong>) allows you to search for characters with a
-                        search parameter. This method searches for characters that are played by certain actors and
-                        whose name contains that which was filled in as search parameter.
+                        query parameter. This method searches for characters that are played by certain actors and
+                        whose name contains that which was filled in as query parameter.
                     </td>
                 </tr>
                 <tr>
@@ -299,9 +301,8 @@
                     </td>
                     <td>The /characters/disassociate/movie/{characterId} endpoint (Postman:
                         <strong>disassociateMovieAndCharacter</strong>) allows you to disassociate a character and a
-                        movie. The
-                        character will then be removed from that movie and that movie will be removed from that
-                        character. The id in the JSON body is the id of the movie.
+                        movie. The character will then be removed from that movie and that movie will be removed from
+                        that character. The id in the JSON body is the id of the movie.
                     </td>
                 </tr>
                 </tbody>
@@ -326,7 +327,7 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /contactforms endpoint (Postman: <strong>getAllContactForms</strong> endpoint allows you to
+                    <td>The /contactforms endpoint (Postman: <strong>getAllContactForms</strong>) allows you to
                         see a list of all submitted contact forms.
                     </td>
                 </tr>
@@ -337,8 +338,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /contactforms/search/name endpoint (Postman: <strong>findContactFormsByNameContains</strong>
-                        endpoint allows you to ...
+                    <td>The /contactforms/search/name endpoint (Postman: <strong>findContactFormsByNameContains</strong>)
+                        allows you to find a contact form by entering a name as a query parameter or part of a name.
                     </td>
                 </tr>
                 <tr>
@@ -349,7 +350,8 @@
                         N/A
                     </td>
                     <td>The /contactforms/search/email endpoint (Postman:
-                        <strong>findContactFormsByEmailContains</strong> endpoint allows you to
+                        <strong>findContactFormsByEmailContains</strong>) allows you to find a contact form by
+                        entering an e-mail address or part of an e-mail address as a query parameter.
                     </td>
                 </tr>
                 <tr>
@@ -360,7 +362,9 @@
                         N/A
                     </td>
                     <td>The /contactforms/search/comments endpoint (Postman:
-                        <strong>findContactFormsByCommentsContains</strong> endpoint allows you to
+                        <strong>findContactFormsByCommentsContains</strong>) allows you to find a contact form
+                        by entering a keyword, or part of a keyword, as a query parameter, that may exist in a comment
+                        field within a contact form.
                     </td>
                 </tr>
                 <tr>
@@ -370,8 +374,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /contactforms/{contactFormId} endpoint (Postman: <strong>getContactFormById</strong>
-                        endpoint allows you to
+                    <td>The /contactforms/{contactFormId} endpoint (Postman: <strong>getContactFormById</strong>) allows
+                        you to find a contact form by entering its id.
                     </td>
                 </tr>
                 <tr>
@@ -385,8 +389,8 @@
                         "comments": "Dit is commentaar"<br/>
                         }
                     </td>
-                    <td>The /contactforms/post endpoint (Postman: <strong>createContactForm</strong> endpoint allows you
-                        to
+                    <td>The /contactforms/post endpoint (Postman: <strong>createContactForm</strong>) allows you
+                        to create and post a contact form using the predefined JSON body.
                     </td>
                 </tr>
                 <tr>
@@ -396,8 +400,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /contactforms endpoint (Postman: <strong>deleteAllContactForms</strong> endpoint allows you
-                        to
+                    <td>The /contactforms endpoint (Postman: <strong>deleteAllContactForms</strong>) allows you
+                        to delete all submitted contact forms. Admin only as this is a very powerful feature!
                     </td>
                 </tr>
                 <tr>
@@ -407,8 +411,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /contactforms/{contactFormId} endpoint (Postman: <strong>deleteContactFormById</strong>
-                        endpoint allows you to
+                    <td>The /contactforms/{contactFormId} endpoint (Postman: <strong>deleteContactFormById</strong>)
+                        allows you to delete a contact form with a certain id.
                     </td>
                 </tr>
                 </tbody>
@@ -434,9 +438,72 @@
                         N/A
                     </td>
                     <td>The /download-profile-image/{fileName} endpoint (Postman: <strong>downloadProfileImage</strong>
-                        (Public)) allows you to
+                        (Public)) allows you to download a desired file, a profile image.
                     </td>
                 </tr>
+                <tr>
+                    <td>/download-character-image/{fileName}</td>
+                    <td>GET</td>
+                    <td>Public</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /download-character-image/{fileName} endpoint (Postman:
+                        <strong>downloadCharacterImage</strong> (Public)) allows you to download a desired file, a
+                        character image.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/download-movie-image/{fileName}</td>
+                    <td>GET</td>
+                    <td>Public</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /download-movie-image/{fileName} endpoint (Postman: <strong>downloadMovieImage</strong>
+                        (Public)) allows you to download a desired file, a movie image.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/upload-profile-image/{profileId}</td>
+                    <td>POST</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /upload-profile-image/{profileId} endpoint (Postman: <strong>uploadProfileImageById</strong>)
+                        allows you to upload a desired image to a certain profile with an id. For best results upload a
+                        file with the .jpg or .png file format.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/upload-character-image/{characterId}</td>
+                    <td>POST</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /upload-character-image/{characterId} endpoint (Postman:
+                        <strong>uploadCharacterImageById</strong>)
+                        allows you to upload a desired image to a certain character with an id. For best results upload
+                        a file with the .jpg or .png file format.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/upload-movie-image/{movieId}</td>
+                    <td>POST</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /upload-movie-image/{movieId} endpoint (Postman:
+                        <strong>uploadMovieImageById</strong>)
+                        allows you to upload a desired image to a certain movie with an id. For best results upload a
+                        file with the .jpg or .png file format.
+                    </td>
+                </tr>
+
+
                 </tbody>
             </table>
 
