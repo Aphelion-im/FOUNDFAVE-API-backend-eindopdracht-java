@@ -42,7 +42,7 @@
                 the latest Postman JSON collection</a></p>
             <p><strong>Tip</strong>: You can select and copy-paste the text in the tables below and use it in Postman if
                 required.</p>
-            <p><strong>Tip</strong>: The endpoints in the manual, documentation, etc. are in the same order as in
+            <p><strong>Tip</strong>: The endpoints in the manual, documentation, code, etc. are in the same order as in
                 Postman.</p>
 
             <h2>Public Endpoints</h2>
@@ -237,7 +237,7 @@
                         }
                     </td>
                     <td>The /characters/character/{characterId} endpoint (Postman:
-                        <strong>updateCharacter</strong>) allows you to update a character with a specific id.
+                        <strong>updateCharacterById</strong>) allows you to update a character with a specific id.
                     </td>
                 </tr>
                 <tr>
@@ -283,13 +283,12 @@
                     <td>N/A
                     </td>
                     <td>The /characters/{characterId} endpoint (Postman:
-                        <strong>deleteCharacter</strong>) allows you to delete a character with a certain id. Note:
+                        <strong>deleteCharacterById</strong>) allows you to delete a character with a certain id. Note:
                         Currently, characters assigned to users (Favorites) or movies, are not allowed to be deleted.
                         Use the <strong>removeFavoriteCharacterFromUser</strong> and <strong>disassociateMovieAndCharacter</strong>
                         methods before trying to remove the character.
                     </td>
                 </tr>
-
                 <tr>
                     <td>/characters/disassociate/movie/{characterId}</td>
                     <td>DELETE</td>
@@ -502,8 +501,207 @@
                         file with the .jpg or .png file format.
                     </td>
                 </tr>
+                <tr>
+                    <td>/delete-profile-image/{profileId}</td>
+                    <td>DELETE</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /delete-profile-image/{profileId} endpoint (Postman:
+                        <strong>deleteProfileImageById</strong>) allows you to delete a profile with a certain
+                        id.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/delete-character-image/{characterId}</td>
+                    <td>DELETE</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /delete-character-image/{characterId} endpoint (Postman:
+                        <strong>deleteCharacterImageById</strong>) allows you to delete a character with a certain
+                        id.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/delete-movie-image/{movieId}</td>
+                    <td>DELETE</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /delete-movie-image/{movieId} endpoint (Postman:
+                        <strong>deleteMovieImageById</strong>) allows you to delete a movie with a certain
+                        id.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
+            <h2>Movies Endpoints</h2>
+            <table class="box-shadow">
+                <thead>
+                <tr>
+                    <th style="width: 10%;">Endpoint</th>
+                    <th style="width: 10%;">Method</th>
+                    <th style="width: 10%;">Accessible By</th>
+                    <th style="width: 35%;">JSON</th>
+                    <th style="width: 35%;">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>/movies</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /movies endpoint (Postman: <strong>getAllMovies</strong> allows you to view all movies
+                        currently in de database.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/movies/{movieId}</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /movies/{movieId} endpoint (Postman: <strong>getMovieById</strong> allows you to a certain
+                        movie with an id.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/movies/search/starting-with</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /movies/search/starting-with endpoint (Postman:
+                        <strong>findMoviesByTitleStartingWith</strong> allows you to search for a movie by filling in a
+                        title as query parameter.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/movies/search/contains</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /movies/search/contains endpoint (Postman: <strong>findMoviesByTitleContains</strong> allows
+                        you to search for a movie by filling in a title as query parameter.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/movies/search/sorted-asc</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /movies/search/sorted-asc endpoint (Postman: <strong>findMoviesByTitleSortedAsc</strong>
+                        allows
+                        you to search for a movie by filling in a title as a query parameter. The results will return in
+                        ascending order.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/movies/search/sorted-desc</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /movies/search/sorted-desc endpoint (Postman: <strong>findMoviesByTitleSortedAsc</strong>
+                        allows
+                        you to search for a movie by filling in a title as a query parameter. The results will return in
+                        descending order.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/movies/search/year</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /movies/search/year endpoint (Postman: <strong>findMovieByYearOfRelease</strong> allows
+                        you to search for a movie by filling in the year the movie was released as a query parameter.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/movies/movie/{movieId}</td>
+                    <td>PUT</td>
+                    <td>Admin</td>
+                    <td>
+                        {<br/>
+                        "movieTitle": "The Incredible Hulk",<br/>
+                        "movieSummary": "Bruce Banner, a scientist on the run from the U.S. Government, must find a cure
+                        for the monster he turns into whenever he loses his temper.",<br/>
+                        "movieYearOfRelease": "2008"<br/>
+                        }
+                    </td>
+                    <td>The /movies/movie/{movieId} endpoint (Postman: <strong>updateMovieById</strong> allows
+                        you to update a movie with a certain id and filling in the required JSON body.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/movies</td>
+                    <td>POST</td>
+                    <td>Admin</td>
+                    <td>
+                        {<br/>
+                        "movieTitle": "The Incredible Hulk",<br/>
+                        "movieSummary": "Bruce Banner, a scientist on the run from the U.S. Government, must find a cure
+                        for the monster he turns into whenever he loses his temper.",<br/>
+                        "m
+                    </td>
+                    <td>The /movies endpoint (Postman: <strong>createMovie</strong> allows you to create a movie by
+                        filling in the required JSON body.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/movies/{movieId}</td>
+                    <td>DELETE</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /movies/{movieId} endpoint (Postman: <strong>deleteMovieById</strong> allows you to delete a
+                        movie by filling the required id.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
+            <h2>Profiles Endpoints</h2>
+            <table class="box-shadow">
+                <thead>
+                <tr>
+                    <th style="width: 10%;">Endpoint</th>
+                    <th style="width: 10%;">Method</th>
+                    <th style="width: 10%;">Accessible By</th>
+                    <th style="width: 35%;">JSON</th>
+                    <th style="width: 35%;">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>/profiles</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td>The /profiles endpoint (Postman: <strong>getAllProfiles</strong> allows you to view all profiles
+                        in the database.
+                    </td>
+                </tr>
                 </tbody>
             </table>
 

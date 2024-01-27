@@ -22,7 +22,7 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public List<MovieOutputDto> getMovies() {
+    public List<MovieOutputDto> getAllMovies() {
         List<MovieOutputDto> collection = new ArrayList<>();
         List<Movie> movieList = movieRepository.findAll();
         for (Movie movie : movieList) {
@@ -51,7 +51,7 @@ public class MovieService {
         return newMovie.getMovieId();
     }
 
-    public String updateMovie(long movieId, MovieInputDto movieInputDto) {
+    public String updateMovieById(long movieId, MovieInputDto movieInputDto) {
         Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
         if (movieInputDto.movieTitle != null) {
             movie.setMovieTitle(movieInputDto.getMovieTitle());
@@ -66,7 +66,7 @@ public class MovieService {
         return "Movie with id: " + movieId + " updated successfully!";
     }
 
-    public void deleteMovie(Long movieId) {
+    public void deleteMovieById(Long movieId) {
         if (!movieRepository.existsById(movieId)) {
             throw new MovieNotFoundException("Movie with id: " + movieId + " not found!");
         }

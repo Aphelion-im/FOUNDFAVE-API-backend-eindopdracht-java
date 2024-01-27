@@ -7,6 +7,14 @@
 	},
 	"item": [
 		{
+			"name": "***** Public Endpoints *****",
+			"request": {
+				"method": "OPTIONS",
+				"header": []
+			},
+			"response": []
+		},
+		{
 			"name": "checkIfApiOnline (Public)",
 			"request": {
 				"method": "GET",
@@ -46,6 +54,27 @@
 			"response": []
 		},
 		{
+			"name": "showAllAvailableQueries (Public)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/queries",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"queries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "API documentation (Public)",
 			"request": {
 				"auth": {
@@ -69,23 +98,10 @@
 			"response": []
 		},
 		{
-			"name": "showAllAvailableQueries (Public)",
+			"name": "***** Authentication Endpoints *****",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/queries",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"queries"
-					]
-				}
+				"method": "OPTIONS",
+				"header": []
 			},
 			"response": []
 		},
@@ -145,718 +161,15 @@
 			"response": []
 		},
 		{
-			"name": "doesUserExist",
+			"name": "***** Characters Endpoints *****",
 			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/exists/andre",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"exists",
-						"andre"
-					]
-				}
+				"method": "OPTIONS",
+				"header": []
 			},
 			"response": []
 		},
 		{
-			"name": "getUsers",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "createUser",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"andre4\",\r\n    \"password\": \"pAssword1@\",\r\n    \"email\": \"andre4@novi.nl\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/users",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getUserByUsername",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/andre4",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"andre4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getActiveUsers",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/active",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"active"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "findUserByEmail",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/search?email=admin@foundfave.online",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"search"
-					],
-					"query": [
-						{
-							"key": "email",
-							"value": "admin@foundfave.online"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "findUserByEmailContains",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/search/email?email=admin",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"search",
-						"email"
-					],
-					"query": [
-						{
-							"key": "email",
-							"value": "admin"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "findUserByUsernameContains",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/search/username?username=admin",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"search",
-						"username"
-					],
-					"query": [
-						{
-							"key": "username",
-							"value": "admin"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getAllFavoritesFromUser",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/favorites/andre",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"favorites",
-						"andre"
-					],
-					"query": [
-						{
-							"key": "",
-							"value": "",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "updateUserPasswordAdmin (Admin only)",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"password\": \"bAn@nen1\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/users/admin/andre",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"admin",
-						"andre"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "updateUser (User only)",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"password\": \"bAn@nen2\",\r\n    \"apikey\": \"apikey nummer\",\r\n    \"email\": \"andre222@novi.nl\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/users/user/andre",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"user",
-						"andre"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "assignProfileToUser",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/users/assign/profile/andre4",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"assign",
-						"profile",
-						"andre4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "detachProfileFromToUser",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/detach/profile/andre4",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"detach",
-						"profile",
-						"andre4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "addFavoriteCharacterToUser",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/users/add/character/andre4",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"add",
-						"character",
-						"andre4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "removeFavoriteCharacterFromUser",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1000\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/users/remove/character/andre",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"remove",
-						"character",
-						"andre"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "deleteUser",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/andre",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"andre"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getUserAuthorities",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/andre4/authorities",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"andre4",
-						"authorities"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "addUserAuthority",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"authority\": \"ROLE_ADMIN\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/users/andre4/authorities",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"andre4",
-						"authorities"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "removeAuthority",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/andre4/authorities/ROLE_ADMIN",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"andre4",
-						"authorities",
-						"ROLE_ADMIN"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getAllContactForms",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/contactforms",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"contactforms"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "createContactForm",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Novi\",\r\n    \"email\": \"test@novi.nl\",\r\n    \"comments\": \"Dit is commentaar\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/contactforms/post",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"contactforms",
-						"post"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getContactFormById",
+			"name": "getAllCharacters",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -883,14 +196,515 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/contactforms/1",
+					"raw": "localhost:8080/characters",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"contactforms",
-						"1"
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCharacterById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findCharactersByNameStartingWith",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/search/starting-with?name=vision",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"search",
+						"starting-with"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "vision"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findCharactersByNameContains",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/search/contains?name=vision",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"search",
+						"contains"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "vision"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findCharactersByNameSortedAsc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/search/sorted-asc?name=vision",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"search",
+						"sorted-asc"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "vision"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findCharactersByNameSortedDesc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/search/sorted-desc?name=vision",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"search",
+						"sorted-desc"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "vision"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findCharactersByActorNameContains",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/search/actor-name?name=robert",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"search",
+						"actor-name"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "robert"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCharacterById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"characterAliasName\": \"Hulkie\",\r\n    \"characterRealName\": \"Robert Bruce Bannerz\",\r\n    \"characterActorName\": \"Mark Ruffaloz\",\r\n    \"characterTitle\": \"The incredible Hulkz\",\r\n    \"characterGender\": \"Male\",\r\n    \"characterSummary\": \"Exposed to heavy doses of gamma radiation, scientist Bruce Banner transforms into the mean, green rage machine called the Hulkz.\",\r\n    \"characterDescription\": \"Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green monster powered by his rage.z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/character/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"character",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "associateMovieAndCharacter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/associate/movie/1007",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"associate",
+						"movie",
+						"1007"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createCharacter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"characterAliasName\": \"She-Hulk\",\r\n    \"characterRealName\": \"Jennifer Walters\",\r\n    \"characterActorName\": \"Tatiana Maslany\",\r\n    \"characterTitle\": \"Savage She-Hulk\",\r\n    \"characterGender\": \"Female\",\r\n    \"characterSummary\": \"Jennifer Walters is a talented lawyer and the cousin of Bruce Banner, the Hulk\",\r\n    \"characterDescription\": \" After being shot by a mobster and seriously injured, she was saved by a blood transfusion from Bruce, and his gamma-irradiated blood mutated Jennifer into the She-Hulk, kicking off her adventuring career.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCharacterById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/characters/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "disassociateMovieAndCharacter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1005\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/characters/disassociate/movie/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"characters",
+						"disassociate",
+						"movie",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "***** Contact Forms Endpoints *****",
+			"request": {
+				"method": "OPTIONS",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "getAllContactForms",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/contactforms",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contactforms"
 					]
 				}
 			},
@@ -1041,6 +855,113 @@
 			"response": []
 		},
 		{
+			"name": "getContactFormById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/contactforms/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contactforms",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createContactForm",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Novi\",\r\n    \"email\": \"test@novi.nl\",\r\n    \"comments\": \"Dit is commentaar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/contactforms/post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contactforms",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteAllContactForms",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/contactforms",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contactforms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "deleteContactFormById",
 			"request": {
 				"auth": {
@@ -1079,7 +1000,219 @@
 			"response": []
 		},
 		{
-			"name": "deleteAllContactForms",
+			"name": "***** File Endpoints ******",
+			"request": {
+				"method": "OPTIONS",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "downloadProfileImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/download-profile-image/shield-profile.jpg",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"download-profile-image",
+						"shield-profile.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "downloadCharacterImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/download-character-image/hulk-character.jpg",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"download-character-image",
+						"hulk-character.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "downloadMovieImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/download-movie-image/thor-movie.jpg",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"download-movie-image",
+						"thor-movie.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uploadProfileImageById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Aphelion/Desktop/1-annie-profile-test-image.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/upload-profile-image/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"upload-profile-image",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uploadCharacterImageById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Aphelion/Desktop/1-annie-character-test-image.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/upload-character-image/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"upload-character-image",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uploadMovieImageById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Aphelion/Desktop/1-annie-movie-test-image.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/upload-movie-image/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"upload-movie-image",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProfileImageById",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -1094,23 +1227,21 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/contactforms",
+					"raw": "localhost:8080/delete-profile-image/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"contactforms"
+						"delete-profile-image",
+						"1"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "getAllCharacters",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "deleteCharacterImageById",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -1122,65 +1253,16 @@
 						}
 					]
 				},
-				"method": "GET",
+				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "localhost:8080/characters",
+					"raw": "localhost:8080/delete-character-image/1000",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"characters"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getCharacterById",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/characters/1000",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"characters",
+						"delete-character-image",
 						"1000"
 					]
 				}
@@ -1188,7 +1270,44 @@
 			"response": []
 		},
 		{
-			"name": "getMovies",
+			"name": "deleteMovieImageById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/delete-movie-image/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"delete-movie-image",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "***** Movies Endpoints *****",
+			"request": {
+				"method": "OPTIONS",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "getAllMovies",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -1239,111 +1358,6 @@
 					"path": [
 						"movies",
 						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "createMovie",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"movieTitle\": \"The Incredible Hulk 55\",\r\n    \"movieSummary\": \"Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.\",\r\n    \"movieYearOfRelease\": \"2010\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/movies",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"movies"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "updateMovie",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"movieTitle\": \"The Incredible Hulkster\",\r\n    \"movieSummary\": \"Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.\",\r\n    \"movieYearOfRelease\": \"2008\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/movies/movie/1000",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"movies",
-						"movie",
-						"1000"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "deleteMovie",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/movies/1000",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"movies",
-						"1000"
 					]
 				}
 			},
@@ -1590,10 +1604,7 @@
 			"response": []
 		},
 		{
-			"name": "findCharactersByNameStartingWith",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "updateMovieById",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -1605,11 +1616,11 @@
 						}
 					]
 				},
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\r\n    \"movieTitle\": \"The Incredible Hulk\",\r\n    \"movieSummary\": \"Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.\",\r\n    \"movieYearOfRelease\": \"2008\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1617,220 +1628,22 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/characters/search/starting-with?name=vision",
+					"raw": "localhost:8080/movies/movie/1000",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"characters",
-						"search",
-						"starting-with"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "vision"
-						}
+						"movies",
+						"movie",
+						"1000"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "findCharactersByNameContains",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/characters/search/contains?name=vision",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"characters",
-						"search",
-						"contains"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "vision"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "findCharactersByNameSortedDesc",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/characters/search/sorted-desc?name=vision",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"characters",
-						"search",
-						"sorted-desc"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "vision"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "findCharactersByNameSortedAsc",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/characters/search/sorted-asc?name=vision",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"characters",
-						"search",
-						"sorted-asc"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "vision"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "findCharactersByActorNameContains",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/characters/search/actor-name?name=robert",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"characters",
-						"search",
-						"actor-name"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "robert"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "createCharacter",
+			"name": "createMovie",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -1846,7 +1659,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"characterAliasName\": \"She-Hulk\",\r\n    \"characterRealName\": \"Jennifer Walters\",\r\n    \"characterActorName\": \"Tatiana Maslany\",\r\n    \"characterTitle\": \"Savage She-Hulk\",\r\n    \"characterGender\": \"Female\",\r\n    \"characterSummary\": \"Jennifer Walters is a talented lawyer and the cousin of Bruce Banner, the Hulk\",\r\n    \"characterDescription\": \" After being shot by a mobster and seriously injured, she was saved by a blood transfusion from Bruce, and his gamma-irradiated blood mutated Jennifer into the She-Hulk, kicking off her adventuring career.\"\r\n}",
+					"raw": "{\r\n    \"movieTitle\": \"The Incredible Hulk\",\r\n    \"movieSummary\": \"Bruce Banner, a scientist on the run from the U.S. Government, must find a cure for the monster he turns into whenever he loses his temper.\",\r\n    \"movieYearOfRelease\": \"2010\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1854,139 +1667,20 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/characters",
+					"raw": "localhost:8080/movies",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"characters"
+						"movies"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "updateCharacter",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"characterAliasName\": \"Hulkie\",\r\n    \"characterRealName\": \"Robert Bruce Bannerz\",\r\n    \"characterActorName\": \"Mark Ruffaloz\",\r\n    \"characterTitle\": \"The incredible Hulkz\",\r\n    \"characterGender\": \"Male\",\r\n    \"characterSummary\": \"Exposed to heavy doses of gamma radiation, scientist Bruce Banner transforms into the mean, green rage machine called the Hulkz.\",\r\n    \"characterDescription\": \"Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green monster powered by his rage.z\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/characters/character/1000",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"characters",
-						"character",
-						"1000"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "associateMovieAndCharacter",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1000\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/characters/associate/movie/1007",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"characters",
-						"associate",
-						"movie",
-						"1007"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "disassociateMovieAndCharacter",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1005\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/characters/disassociate/movie/1000",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"characters",
-						"disassociate",
-						"movie",
-						"1000"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "deleteCharacter",
+			"name": "deleteMovieById",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2001,13 +1695,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/characters/1000",
+					"raw": "localhost:8080/movies/1000",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"characters",
+						"movies",
 						"1000"
 					]
 				}
@@ -2015,7 +1709,15 @@
 			"response": []
 		},
 		{
-			"name": "getProfiles",
+			"name": "***** Profiles Endpoints *****",
+			"request": {
+				"method": "OPTIONS",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "getAllProfiles",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2065,67 +1767,6 @@
 					"port": "8080",
 					"path": [
 						"profiles",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getProfileByUsername",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/profiles/profile/andre",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"profiles",
-						"profile",
-						"andre"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getProfileImageByProfileId",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/profiles/image/profile/1",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"profiles",
-						"image",
-						"profile",
 						"1"
 					]
 				}
@@ -2205,7 +1846,7 @@
 			"response": []
 		},
 		{
-			"name": "createProfile",
+			"name": "getProfileByUsername",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2217,32 +1858,87 @@
 						}
 					]
 				},
-				"method": "POST",
+				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"André 4\",\r\n    \"lastName\": \"de Groot\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2010\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "localhost:8080/profiles",
+					"raw": "localhost:8080/profiles/profile/andre",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"profiles"
+						"profiles",
+						"profile",
+						"andre"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "updateProfile",
+			"name": "getProfileImageByUsername",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/profiles/image/user/andre4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles",
+						"image",
+						"user",
+						"andre4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProfileImageByProfileId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/profiles/image/profile/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles",
+						"image",
+						"profile",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProfileById",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2281,7 +1977,44 @@
 			"response": []
 		},
 		{
-			"name": "deleteProfile",
+			"name": "createProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"André 4\",\r\n    \"lastName\": \"de Groot\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2010\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/profiles",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProfileById",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2310,7 +2043,15 @@
 			"response": []
 		},
 		{
-			"name": "downloadProfileImage",
+			"name": "***** Users Endpoints *****",
+			"request": {
+				"method": "OPTIONS",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUsers",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2325,21 +2066,20 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/download-profile-image/shield-profile.jpg",
+					"raw": "localhost:8080/users",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"download-profile-image",
-						"shield-profile.jpg"
+						"users"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "downloadCharacterImage",
+			"name": "getUserByUsername",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2354,21 +2094,21 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/download-character-image/hulk-character.jpg",
+					"raw": "localhost:8080/users/andre",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"download-character-image",
-						"hulk-character.jpg"
+						"users",
+						"andre"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "downloadMovieImage",
+			"name": "getActiveUsers",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2383,21 +2123,21 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/download-movie-image/thor-movie.jpg",
+					"raw": "localhost:8080/users/active",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"download-movie-image",
-						"thor-movie.jpg"
+						"users",
+						"active"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "uploadProfileImage",
+			"name": "getAllFavoritesFromUser",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2409,34 +2149,238 @@
 						}
 					]
 				},
-				"method": "POST",
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/favorites/andre",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"favorites",
+						"andre"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findUserByEmail",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/search?email=admin@foundfave.online",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "admin@foundfave.online"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findUserByEmailContains",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/search/email?email=admin",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"search",
+						"email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findUserByUsernameContains",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/search/username?username=admin",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"search",
+						"username"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "doesUserExist",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/exists/andre",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"exists",
+						"andre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserAuthorities",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/andre4/authorities",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"andre4",
+						"authorities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateUserPasswordAdmin (Admin only)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
 				"header": [],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "/C:/Users/Aphelion/Desktop/1-annie-profile-test-image.jpg"
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"bAn@nen1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
-					"raw": "localhost:8080/upload-profile-image/1",
+					"raw": "localhost:8080/users/admin/andre",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"upload-profile-image",
-						"1"
+						"users",
+						"admin",
+						"andre"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "uploadCharacterImage",
+			"name": "updateUser (User only)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2448,96 +2392,66 @@
 						}
 					]
 				},
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "/C:/Users/Aphelion/Desktop/1-annie-character-test-image.jpg"
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"bAn@nen2\",\r\n    \"apikey\": \"apikey nummer\",\r\n    \"email\": \"andre222@novi.nl\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
-					"raw": "localhost:8080/upload-character-image/1000",
+					"raw": "localhost:8080/users/user/andre",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"upload-character-image",
-						"1000"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "uploadMovieImage",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "/C:/Users/Aphelion/Desktop/1-annie-movie-test-image.jpg"
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost:8080/upload-movie-image/1000",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"upload-movie-image",
-						"1000"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getProfileImageByUsername",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{NoviToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/profiles/image/user/andre4",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"profiles",
-						"image",
+						"users",
 						"user",
+						"andre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "assignProfileToUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/assign/profile/andre4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"assign",
+						"profile",
 						"andre4"
 					]
 				}
@@ -2545,7 +2459,7 @@
 			"response": []
 		},
 		{
-			"name": "deleteProfileImageById",
+			"name": "detachProfileFromToUser",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2557,24 +2471,26 @@
 						}
 					]
 				},
-				"method": "DELETE",
+				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/delete-profile-image/1",
+					"raw": "localhost:8080/users/detach/profile/andre4",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"delete-profile-image",
-						"1"
+						"users",
+						"detach",
+						"profile",
+						"andre4"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "deleteCharacterImageById",
+			"name": "addFavoriteCharacterToUser",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2586,24 +2502,101 @@
 						}
 					]
 				},
-				"method": "DELETE",
+				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:8080/delete-character-image/1000",
+					"raw": "localhost:8080/users/add/character/andre4",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"delete-character-image",
-						"1000"
+						"users",
+						"add",
+						"character",
+						"andre4"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "deleteMovieImageById",
+			"name": "createUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"andre4\",\r\n    \"password\": \"pAssword1@\",\r\n    \"email\": \"andre4@novi.nl\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addUserAuthority",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"authority\": \"ROLE_ADMIN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/andre4/authorities",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"andre4",
+						"authorities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUser",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2618,14 +2611,85 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/delete-movie-image/1000",
+					"raw": "localhost:8080/users/andre",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"delete-movie-image",
-						"1000"
+						"users",
+						"andre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeAuthority",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/andre4/authorities/ROLE_ADMIN",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"andre4",
+						"authorities",
+						"ROLE_ADMIN"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeFavoriteCharacterFromUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{NoviToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/remove/character/andre",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"remove",
+						"character",
+						"andre"
 					]
 				}
 			},

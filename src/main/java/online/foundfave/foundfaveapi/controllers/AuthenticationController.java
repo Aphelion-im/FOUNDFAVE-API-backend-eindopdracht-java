@@ -30,28 +30,6 @@ public class AuthenticationController {
         this.jwtUtl = jwtUtl;
     }
 
-    @GetMapping("/authenticated")
-    public ResponseEntity<Object> authenticated(Principal principal) {
-        return ResponseEntity.ok().body(principal);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<?> logIn(@RequestBody AuthenticationRequest authenticationRequest) {
-        String username = authenticationRequest.getUsername();
-        String password = authenticationRequest.getPassword();
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password)
-            );
-        } catch (BadCredentialsException bce) {
-            throw new BadCredentialsException("Username: " + "'" + username + "'" + " not found!", bce);
-        }
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(username);
-        final String jwt = jwtUtl.generateToken(userDetails);
-        return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt).body(new AuthenticationResponse(username, userDetails.getAuthorities().toString(), jwt));
-    }
-
     @GetMapping("/test")
     public String checkIfApiOnline() {
         return "The FOUNDFAVE API is online.";
@@ -98,7 +76,6 @@ public class AuthenticationController {
                                 
                                 
                 """;
-
         return ResponseEntity.ok().body(info);
     }
 
@@ -163,5 +140,25 @@ public class AuthenticationController {
         return ResponseEntity.ok().body(info);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> logIn(@RequestBody AuthenticationRequest authenticationRequest) {
+        String username = authenticationRequest.getUsername();
+        String password = authenticationRequest.getPassword();
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(username, password)
+            );
+        } catch (BadCredentialsException bce) {
+            throw new BadCredentialsException("Username: " + "'" + username + "'" + " not found!", bce);
+        }
+        final UserDetails userDetails = userDetailsService
+                .loadUserByUsername(username);
+        final String jwt = jwtUtl.generateToken(userDetails);
+        return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt).body(new AuthenticationResponse(username, userDetails.getAuthorities().toString(), jwt));
+    }
 
+    @GetMapping("/authenticated")
+    public ResponseEntity<Object> authenticated(Principal principal) {
+        return ResponseEntity.ok().body(principal);
+    }
 }

@@ -37,53 +37,6 @@ public class CharacterService {
         return transformCharacterToCharacterOutputDto(character);
     }
 
-    public Long createCharacter(CharacterInputDto characterInputDto) {
-        Optional<Character> optionalCharacter = characterRepository.findByCharacterAliasNameIgnoreCase(characterInputDto.characterAliasName);
-        if (optionalCharacter.isPresent()) {
-            throw new CharacterAlreadyExistsException("Character: " + "'" + characterInputDto.characterAliasName + "'" + " already exists!");
-        }
-        Character newCharacter = characterRepository.save(transformCharacterInputDtoToCharacter(characterInputDto));
-        return newCharacter.getCharacterId();
-    }
-
-    public String updateCharacter(Long characterId, CharacterInputDto characterInputDto) {
-        Character character = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
-        if (characterInputDto.characterAliasName != null) {
-            character.setCharacterAliasName(characterInputDto.getCharacterAliasName());
-        }
-        if (characterInputDto.characterRealName != null) {
-            character.setCharacterRealName(characterInputDto.getCharacterRealName());
-        }
-        if (characterInputDto.characterActorName != null) {
-            character.setCharacterActorName(characterInputDto.getCharacterActorName());
-        }
-        if (characterInputDto.characterTitle != null) {
-            character.setCharacterTitle(characterInputDto.getCharacterTitle());
-        }
-        if (characterInputDto.characterGender != null) {
-            character.setCharacterGender(characterInputDto.getCharacterGender());
-        }
-        if (characterInputDto.characterSummary != null) {
-            character.setCharacterSummary(characterInputDto.getCharacterSummary());
-        }
-        if (characterInputDto.characterDescription != null) {
-            character.setCharacterDescription(characterInputDto.getCharacterDescription());
-        }
-        characterRepository.save(character);
-        return "Character with id: " + character.getCharacterId() + " updated successfully!";
-    }
-
-    public void deleteCharacter(Long characterId) {
-        if (!characterRepository.existsById(characterId)) {
-            throw new CharacterNotFoundException("Character with id: " + characterId + " not found!");
-        }
-        try {
-            characterRepository.deleteById(characterId);
-        } catch (Exception e) {
-            throw new BadRequestException("You are not allowed to delete this character as it is still linked to movie or is a favorite.");
-        }
-    }
-
     public List<CharacterOutputDto> findCharactersByNameStartingWith(String name) {
         List<CharacterOutputDto> characterOutputDtoList = new ArrayList<>();
         List<Character> list = characterRepository.findByCharacterAliasNameStartingWithIgnoreCase(name);
@@ -144,6 +97,33 @@ public class CharacterService {
         return characterOutputDtoList;
     }
 
+    public String updateCharacterById(Long characterId, CharacterInputDto characterInputDto) {
+        Character character = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
+        if (characterInputDto.characterAliasName != null) {
+            character.setCharacterAliasName(characterInputDto.getCharacterAliasName());
+        }
+        if (characterInputDto.characterRealName != null) {
+            character.setCharacterRealName(characterInputDto.getCharacterRealName());
+        }
+        if (characterInputDto.characterActorName != null) {
+            character.setCharacterActorName(characterInputDto.getCharacterActorName());
+        }
+        if (characterInputDto.characterTitle != null) {
+            character.setCharacterTitle(characterInputDto.getCharacterTitle());
+        }
+        if (characterInputDto.characterGender != null) {
+            character.setCharacterGender(characterInputDto.getCharacterGender());
+        }
+        if (characterInputDto.characterSummary != null) {
+            character.setCharacterSummary(characterInputDto.getCharacterSummary());
+        }
+        if (characterInputDto.characterDescription != null) {
+            character.setCharacterDescription(characterInputDto.getCharacterDescription());
+        }
+        characterRepository.save(character);
+        return "Character with id: " + character.getCharacterId() + " updated successfully!";
+    }
+
     public void associateMovieAndCharacter(Long characterId, Long movieId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalMovie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
@@ -153,6 +133,26 @@ public class CharacterService {
             optionalCharacter.getMoviesList().add(optionalMovie);
             var updatedOptionalCharacter = characterRepository.save(optionalCharacter);
             transformCharacterToCharacterOutputDto(updatedOptionalCharacter);
+        }
+    }
+
+    public Long createCharacter(CharacterInputDto characterInputDto) {
+        Optional<Character> optionalCharacter = characterRepository.findByCharacterAliasNameIgnoreCase(characterInputDto.characterAliasName);
+        if (optionalCharacter.isPresent()) {
+            throw new CharacterAlreadyExistsException("Character: " + "'" + characterInputDto.characterAliasName + "'" + " already exists!");
+        }
+        Character newCharacter = characterRepository.save(transformCharacterInputDtoToCharacter(characterInputDto));
+        return newCharacter.getCharacterId();
+    }
+
+    public void deleteCharacterById(Long characterId) {
+        if (!characterRepository.existsById(characterId)) {
+            throw new CharacterNotFoundException("Character with id: " + characterId + " not found!");
+        }
+        try {
+            characterRepository.deleteById(characterId);
+        } catch (Exception e) {
+            throw new BadRequestException("You are not allowed to delete this character as it is still linked to movie or is a favorite.");
         }
     }
 

@@ -31,7 +31,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public List<UserOutputDto> getUsers() {
+    public List<UserOutputDto> getAllUsers() {
         List<UserOutputDto> userOutputDtoList = new ArrayList<>();
         List<User> userList = userRepository.findAll();
         for (User user : userList) {

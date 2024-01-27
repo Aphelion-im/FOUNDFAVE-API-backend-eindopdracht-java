@@ -27,8 +27,8 @@ public class ProfileController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<ProfileOutputDto>> getProfiles() {
-        List<ProfileOutputDto> profileOutputDtoList = profileService.getProfiles();
+    public ResponseEntity<List<ProfileOutputDto>> getAllProfiles() {
+        List<ProfileOutputDto> profileOutputDtoList = profileService.getAllProfiles();
         return ResponseEntity.ok().body(profileOutputDtoList);
     }
 
@@ -49,17 +49,17 @@ public class ProfileController {
     }
 
     @PutMapping("/profile/{profileId}")
-    public ResponseEntity<Object> updateProfile(@Valid @PathVariable("profileId") Long profileId, @Valid @RequestBody ProfileInputDto profileInputDto, BindingResult bindingResult) {
+    public ResponseEntity<Object> updateProfileById(@Valid @PathVariable("profileId") Long profileId, @Valid @RequestBody ProfileInputDto profileInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
-        profileService.updateProfile(profileId, profileInputDto);
+        profileService.updateProfileById(profileId, profileInputDto);
         return ResponseEntity.ok().body("Profile with id: " + profileId + " updated!");
     }
 
     @DeleteMapping("/{profileId}")
-    public ResponseEntity<Object> deleteProfile(@PathVariable("profileId") Long profileId) {
-        profileService.deleteProfile(profileId);
+    public ResponseEntity<Object> deleteProfileById(@PathVariable("profileId") Long profileId) {
+        profileService.deleteProfileById(profileId);
         return ResponseEntity.status(HttpStatus.OK).body("Profile with id: " + profileId + " successfully deleted!");
     }
 

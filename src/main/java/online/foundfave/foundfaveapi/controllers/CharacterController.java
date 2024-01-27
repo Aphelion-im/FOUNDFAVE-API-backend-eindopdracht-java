@@ -38,30 +38,6 @@ public class CharacterController {
         return ResponseEntity.ok(characterOutputDto);
     }
 
-    @PostMapping("")
-    public ResponseEntity<Object> createCharacter(@Valid @RequestBody CharacterInputDto characterInputDto, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
-            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
-        }
-        Long newCharacterId = characterService.createCharacter(characterInputDto);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newCharacterId).toUriString());
-        return ResponseEntity.created(uri).body("New character added with id: " + newCharacterId + ".");
-    }
-
-    @PutMapping("/character/{characterId}")
-    public ResponseEntity<String> updateCharacter(@PathVariable("characterId") Long characterId, @Valid @RequestBody CharacterInputDto characterInputDto, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
-            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
-        }
-        return ResponseEntity.ok(characterService.updateCharacter(characterId, characterInputDto));
-    }
-
-    @DeleteMapping("/{characterId}")
-    public ResponseEntity<Object> deleteCharacter(@PathVariable("characterId") Long characterId) {
-        characterService.deleteCharacter(characterId);
-        return ResponseEntity.status(HttpStatus.OK).body("Character with id: " + characterId + " deleted!");
-    }
-
     @GetMapping("/search/starting-with")
     public ResponseEntity<List<CharacterOutputDto>> findCharactersByNameStartingWith(@RequestParam("name") String name) {
         List<CharacterOutputDto> characterOutputDtoList = characterService.findCharactersByNameStartingWith(name);
@@ -92,6 +68,14 @@ public class CharacterController {
         return ResponseEntity.ok(characterOutputDtoList);
     }
 
+    @PutMapping("/character/{characterId}")
+    public ResponseEntity<String> updateCharacterById(@PathVariable("characterId") Long characterId, @Valid @RequestBody CharacterInputDto characterInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        return ResponseEntity.ok(characterService.updateCharacterById(characterId, characterInputDto));
+    }
+
     @PutMapping("/associate/movie/{characterId}")
     public ResponseEntity<Object> associateMovieAndCharacter(@PathVariable("characterId") Long characterId, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
@@ -99,6 +83,22 @@ public class CharacterController {
         }
         characterService.associateMovieAndCharacter(characterId, idInputDto.id);
         return ResponseEntity.ok().body("Movie with id: " + idInputDto.id + " is now associated with character with id: " + characterId + ".");
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Object> createCharacter(@Valid @RequestBody CharacterInputDto characterInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        Long newCharacterId = characterService.createCharacter(characterInputDto);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newCharacterId).toUriString());
+        return ResponseEntity.created(uri).body("New character added with id: " + newCharacterId + ".");
+    }
+
+    @DeleteMapping("/{characterId}")
+    public ResponseEntity<Object> deleteCharacterById(@PathVariable("characterId") Long characterId) {
+        characterService.deleteCharacterById(characterId);
+        return ResponseEntity.status(HttpStatus.OK).body("Character with id: " + characterId + " deleted!");
     }
 
     @DeleteMapping("/disassociate/movie/{characterId}")
@@ -109,8 +109,4 @@ public class CharacterController {
         characterService.disassociateMovieAndCharacter(characterId, idInputDto.id);
         return ResponseEntity.ok().body("Movie with id: " + idInputDto.id + " is now disassociated from the character with id: " + characterId + ".");
     }
-
-    // Image methods
-    // TODO: getCharacterImageByCharacterId
-    // TODO: Upload character photo
 }

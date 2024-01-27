@@ -30,7 +30,7 @@ public class ProfileService {
         this.userRepository = userRepository;
     }
 
-    public List<ProfileOutputDto> getProfiles() {
+    public List<ProfileOutputDto> getAllProfiles() {
         List<ProfileOutputDto> profileOutputDtoList = new ArrayList<>();
         List<Profile> profileList = profileRepository.findAll();
         for (Profile profile : profileList) {
@@ -59,7 +59,7 @@ public class ProfileService {
         return newProfile.getProfileId();
     }
 
-    public void updateProfile(Long profileId, ProfileInputDto profileInputDto) {
+    public void updateProfileById(Long profileId, ProfileInputDto profileInputDto) {
         Profile profile = profileRepository.findById(profileId).orElseThrow(() -> new ProfileNotFoundException("Profile not found with id: " + profileId + "!"));
         if (profileInputDto.firstName != null) {
             profile.setFirstName(profileInputDto.getFirstName());
@@ -76,7 +76,7 @@ public class ProfileService {
         profileRepository.save(profile);
     }
 
-    public void deleteProfile(Long profileId) {
+    public void deleteProfileById(Long profileId) {
         if (!profileRepository.existsById(profileId)) {
             throw new ProfileNotFoundException("Profile with id: " + profileId + " not found!");
         }

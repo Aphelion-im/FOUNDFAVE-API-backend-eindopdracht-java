@@ -25,8 +25,8 @@ public class MovieController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<MovieOutputDto>> getMovies() {
-        List<MovieOutputDto> movieOutputDtoList = movieService.getMovies();
+    public ResponseEntity<List<MovieOutputDto>> getAllMovies() {
+        List<MovieOutputDto> movieOutputDtoList = movieService.getAllMovies();
         return ResponseEntity.ok().body(movieOutputDtoList);
     }
 
@@ -47,16 +47,16 @@ public class MovieController {
     }
 
     @PutMapping("/movie/{movieId}")
-    public ResponseEntity<String> updateMovie(@PathVariable("movieId") Long movieId, @Valid @RequestBody MovieInputDto movieInputDto, BindingResult bindingResult) {
+    public ResponseEntity<String> updateMovieById(@PathVariable("movieId") Long movieId, @Valid @RequestBody MovieInputDto movieInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
-        return ResponseEntity.ok(movieService.updateMovie(movieId, movieInputDto));
+        return ResponseEntity.ok(movieService.updateMovieById(movieId, movieInputDto));
     }
 
     @DeleteMapping("/{movieId}")
-    public ResponseEntity<Object> deleteMovie(@PathVariable("movieId") Long movieId) {
-        movieService.deleteMovie(movieId);
+    public ResponseEntity<Object> deleteMovieById(@PathVariable("movieId") Long movieId) {
+        movieService.deleteMovieById(movieId);
         return ResponseEntity.status(HttpStatus.OK).body("Movie with id: " + movieId + " deleted!");
     }
 
@@ -89,8 +89,4 @@ public class MovieController {
         List<MovieOutputDto> movieOutputDtoList = movieService.findMovieByYearOfRelease(year);
         return ResponseEntity.ok(movieOutputDtoList);
     }
-
-    // TODO: getMovieImageByMovieId
-    // TODO: Add image to movie
-    // TODO: Delete image from movie
 }
