@@ -35,46 +35,99 @@ public class AuthenticationController {
         return "The FOUNDFAVE API is online.";
     }
 
-    // TODO: Controleren of de lijst wel klopt
-    // TODO: Alle endpoints invoeren
     @GetMapping("/info")
     public ResponseEntity<String> showApiInfo() {
         String info = """
-                FOUNDFAVE API Endpoints
+               FOUNDFAVE API Endpoints Quick Reference
                                 
-                                
-                ***** Public *****
-                localhost:8080/ (GET, Public)
-                localhost:8080/test (GET, Public)
-                localhost:8080/queries (GET, Public)
-                http://localhost:8080/documentation/index.html (GET, Public)
-                                
-                ***** Authentication *****
-                localhost:8080/login (POST, Public)
-                localhost:8080/authenticated (GET, Admin, User)
-                                
-                ***** Characters *****
-                                
-                                
-                ***** Contact Forms *****
-                                
-                                
-                ***** Files *****
-                                
-                                
-                ***** Movies *****
-                                
-                                
-                                
-                ***** Profiles *****
-                                
-                    
-                ***** Users *****
-                            
-                                
-                                
-                                
-                                
+               ***** Public Endpoints ******
+               GET, "/test", Postman: checkIfApiOnline (Public)
+               GET, "/info", Postman: showApiInfo (Public)
+               GET, "/queries", Postman: showAllAvailableQueries (Public)
+               GET, "/documentation/index.html", Postman: API documentation (Public)
+                
+               ***** Authentication Endpoints *****
+               POST, "/login", Postman: Login (Public)
+               GET, "/authenticated", Postman: authenticated (Authenticated)
+                
+               ***** Characters Endpoints *****
+               GET, "/characters", Postman: getAllCharacters (Admin, User)
+               GET, "/characters/{characterId}", Postman: getCharacterById (Admin, User)
+               GET, "/characters/search/starting-with", Postman: findCharactersByNameStartingWith (Admin, User)
+               GET, "/characters/search/contains", Postman: findCharactersByNameContains (Admin, User)
+               GET, "/characters/search/sorted-asc", Postman: findCharactersByNameSortedAsc (Admin, User)
+               GET, "/characters/search/sorted-desc", Postman: findCharactersByNameSortedDesc (Admin, User)
+               GET, "/characters/search/actor-name", Postman: findCharactersByActorNameContains (Admin, User)
+               PUT, "/characters/character/{characterId}", Postman: updateCharacterById (Admin)
+               PUT, "/characters/associate/movie/{characterId}", Postman: associateMovieAndCharacter (Admin)
+               POST, "/characters", Postman: createCharacter (Admin)
+               DELETE, "/characters/{characterId}", Postman: deleteCharacterById (Admin)
+               DELETE, "/characters/disassociate/movie/{characterId}", Postman: disassociateMovieAndCharacter (Admin)
+                
+               ***** Contact Forms Endpoints *****
+               GET, "/contactforms", Postman: getAllContactForms (Admin)
+               GET, "/contactforms/search/name", Postman: findContactFormsByNameContains (Admin, User)
+               GET, "/contactforms/search/email", Postman: findContactFormsByEmailContains (Admin, User)
+               GET, "/contactforms/search/comments", Postman: findContactFormsByCommentsContains (Admin, User)
+               GET, "/contactforms/{contactFormId}", Postman: getContactFormById (Admin, User)
+               POST, "/contactforms/post", Postman: createContactForm (Admin, User)
+               DELETE, "/contactforms", Postman: deleteAllContactForms (Admin)
+               DELETE, "/contactforms/{contactFormId}", Postman: deleteContactFormById (Admin, User)
+               
+               ***** File Endpoints ******
+               GET, "/download-profile-image/{fileName}", Postman: downloadProfileImage (Public)
+               GET, "/download-character-image/{fileName}", Postman: downloadCharacterImage (Public)
+               GET, "/download-movie-image/{fileName}", Postman: downloadMovieImage (Public)
+               POST, "/upload-profile-image/{profileId}", Postman: uploadProfileImageById (Admin, User)
+               POST, "/upload-character-image/{characterId}", Postman: uploadCharacterImageById (Admin)
+               POST, "/upload-movie-image/{movieId}", Postman: uploadMovieImageById (Admin)
+               DELETE, "/delete-profile-image/{profileId}", Postman: deleteProfileImageById (Admin, User)
+               DELETE, "/delete-character-image/{characterId}", Postman: deleteCharacterImageById (Admin)
+               DELETE, "/delete-movie-image/{movieId}", Postman: deleteMovieImageById (Admin)
+                
+               ***** Movies Endpoints *****
+               GET, "/movies", Postman: getAllMovies (Admin, User)
+               GET, "/movies/{movieId}", Postman: getMovieById (Admin, User)
+               GET, "/movies/search/starting-with", Postman: findMoviesByTitleStartingWith (Admin, User)
+               GET, "/movies/search/contains", Postman: findMoviesByTitleContains (Admin, User)
+               GET, "/movies/search/sorted-asc", Postman: findMoviesByTitleSortedAsc (Admin, User)
+               GET, "/movies/search/sorted-desc", Postman: findMoviesByTitleSortedDesc (Admin, User)
+               GET, "/movies/search/year", Postman: findMovieByYearOfRelease (Admin, User)
+               PUT, "/movies/movie/{movieId}", Postman: updateMovieById (Admin)
+               POST, "/movies", Postman: createMovie (Admin)
+               DELETE, "/movies/{movieId}", Postman: deleteMovieById (Admin)
+                
+               ***** Profiles Endpoints *****
+               GET, "/profiles", Postman: getAllProfiles (Admin)
+               GET, "/profiles/{profileId}", Postman: getProfileById (Admin)
+               GET, "/profiles/search/firstname", Postman: findProfileByFirstnameContains (Admin)
+               GET, "/profiles/search/lastname", Postman: findProfileByLastNameContains (Admin)
+               GET, "/profiles/profile/{username}", Postman: getProfileByUsername (Admin, User)
+               GET, "/profiles/image/user/{username}", Postman: getProfileImageByUsername (Admin)
+               GET, "/profiles/image/profile/{profileId}", Postman: getProfileImageByProfileId (Admin)
+               PUT, "/profiles/profile/{profileId}", Postman: updateProfileById (Admin, User)
+               POST, "/profiles", Postman: createProfile (Admin, User)
+               DELETE, "/profiles/{profileId}", Postman: deleteProfileById (Admin)
+                
+               ***** Users Endpoints *****
+               GET, "/users", Postman: getAllUsers (Admin)
+               GET, "/users/{username}", Postman: getUserByUsername (Admin, User)
+               GET, "/users/active", Postman: getActiveUsers (Admin)
+               GET, "/users/favorites/{username}", Postman: getAllFavoritesFromUser (Admin)
+               GET, "/users/search/email", Postman: findUserByEmail (Specific) & findUserByEmailContains (Returns a list) (Admin)
+               GET, "/users/search/username", Postman: findUserByUsernameContains (Admin)
+               GET, "/users/exists/{username}", Postman: doesUserExist (Admin)
+               GET, "/users/{username}/authorities", Postman: getUserAuthorities (Admin)
+               PUT, "/users/admin/{username}", Postman: updateUserPasswordAdmin (Admin only) (Admin)
+               PUT, "/users/user/{username}", Postman: updateUserDetails (User only) (USER)
+               PUT, "/users/assign/profile/{username}", Postman: assignProfileToUser (Admin)
+               PUT, "/users/detach/profile/{username}", Postman: detachProfileFromToUser (Admin)
+               PUT, "/users/add/character/{username}", Postman: addFavoriteCharacterToUser (Admin, User)
+               POST, "/users", Postman: createUser (Public)
+               POST, "/users/{username}/authorities", Postman: addUserAuthority (Admin)
+               DELETE, "/users/{username}", Postman: deleteUser (Admin)
+               DELETE, "/users/{username}/authorities/{authority}", Postman: removeAuthority (Admin)
+               DELETE, "/users/remove/character/{username}", Postman: removeFavoriteCharacterFromUser (Admin, User)
                 """;
         return ResponseEntity.ok().body(info);
     }

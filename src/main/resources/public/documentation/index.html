@@ -62,8 +62,8 @@
                     <td>GET</td>
                     <td>Public</td>
                     <td>N/A</td>
-                    <td>The /test endpoint (Postman: <strong>checkIfApiOnline</strong> (Public)) shows if the FOUNDFAVE
-                        API is online.
+                    <td><p>Postman: <strong>checkIfApiOnline</strong> (Public)</p><br/>
+                        This endpoint shows if the FOUNDFAVE API is online.
                     </td>
                 </tr>
                 <tr>
@@ -71,8 +71,8 @@
                     <td>GET</td>
                     <td>Public</td>
                     <td>N/A</td>
-                    <td>The /info endpoint (Postman: <strong>showApiInfo</strong> (Public)) gives you a list of all
-                        available endpoints.
+                    <td><p>Postman: <strong>showApiInfo</strong> (Public)</p><br/>
+                        This endpoint gives you a list of all available endpoints.
                     </td>
                 </tr>
                 <tr>
@@ -80,9 +80,8 @@
                     <td>GET</td>
                     <td>Public</td>
                     <td>N/A</td>
-                    <td>The /queries endpoint (Postman: <strong>showAllAvailableQueries</strong> (Public)) shows a list
-                        of all available
-                        queries: Characters and movies.
+                    <td><p>Postman: <strong>showAllAvailableQueries</strong> (Public)</p><br/>
+                        This endpoint gives you a list of all available queries: Characters and movies.
                     </td>
                 </tr>
                 <tr>
@@ -90,8 +89,9 @@
                     <td>GET</td>
                     <td>Public</td>
                     <td>N/A</td>
-                    <td>The /documentation/index.html endpoint (Postman: <strong>API documentation</strong> (Public))
-                        shows a list of all available endpoints in detail. E.g. <a class="hyperlink" href="#">This
+                    <td><p>Postman: <strong>API documentation</strong> (Public)</p><br/>
+                        This endpoint shows a list of all available endpoints in detail. E.g. <a class="hyperlink"
+                                                                                                 href="#">This
                             page</a>.
                     </td>
                 </tr>
@@ -120,8 +120,8 @@
                         "password": "password"<br/>
                         }
                     </td>
-                    <td>The /login endpoint (Postman: <strong>Login</strong> (Public)) allows you to get a JWT-token and
-                        login to the service.
+                    <td><p>Postman: <strong>Login</strong> (Public)</p><br/>
+                        This endpoint allows you to get a JWT-token and login to the service.
                     </td>
                 </tr>
                 <tr>
@@ -129,8 +129,9 @@
                     <td>GET</td>
                     <td>Authenticated</td>
                     <td>N/A</td>
-                    <td>The /authenticated endpoint (Postman: <strong>authenticated</strong>) shows the authorities you
-                        have, if you are authenticated, your username, etc.
+                    <td><p>Postman: <strong>authenticated</strong></p><br/>
+                        This endpoint shows the authorities you have, if you are authenticated, your username and other
+                        information.
                     </td>
                 </tr>
                 </tbody>
@@ -153,8 +154,8 @@
                     <td>GET</td>
                     <td>Admin, User</td>
                     <td>N/A</td>
-                    <td>The /characters endpoint (Postman: <strong>getAllCharacters</strong>) allows you to view all
-                        Marvel characters currently in de database.
+                    <td><p>Postman: <strong>getAllCharacters</strong></p><br/>
+                        This endpoint allows you to view all Marvel characters currently in de database.
                     </td>
                 </tr>
                 <tr>
@@ -162,8 +163,8 @@
                     <td>GET</td>
                     <td>Admin, User</td>
                     <td>N/A</td>
-                    <td>The /characters/{characterId} endpoint (Postman: <strong>getCharacterById</strong>) allows you
-                        to view a specific Marvel character with an id.
+                    <td><p>Postman: <strong>getCharacterById</strong></p><br/>
+                        This endpoint allows you to view a specific Marvel character with an id.
                     </td>
                 </tr>
                 <tr>
@@ -171,10 +172,9 @@
                     <td>GET</td>
                     <td>Admin, User</td>
                     <td>N/A</td>
-                    <td>The /characters/search/starting-with endpoint (Postman:
-                        <strong>findCharactersByNameStartingWith</strong>) allows you
-                        to search for characters with a query parameter. This method searches for characters starting
-                        their name as filled in as query parameter.
+                    <td><p>Postman: <strong>findCharactersByNameStartingWith</strong></p><br/>
+                        This endpoint allows you to search for characters with a query parameter. This method searches
+                        for characters starting their name as filled in as query parameter.
                     </td>
                 </tr>
                 <tr>
@@ -182,8 +182,10 @@
                     <td>GET</td>
                     <td>Admin, User</td>
                     <td>N/A</td>
-                    <td>The /characters/search/contains endpoint (Postman: <strong>findCharactersByNameContains</strong>)
-                        allows you to search for characters with a query parameter. This method searches for characters
+                    <td><p>Postman:
+                        <strong>findCharactersByNameContains</strong></p><br/>
+                        This endpoint allows you to search for characters with a query parameter. This method searches
+                        for characters
                         whose name contains that which was filled in as query parameter.
                     </td>
                 </tr>
@@ -192,9 +194,10 @@
                     <td>GET</td>
                     <td>Admin, User</td>
                     <td>N/A</td>
-                    <td>The /characters/search/sorted-asc endpoint (Postman:
-                        <strong>findCharactersByNameSortedAsc</strong>)
-                        allows you to search for characters with a query parameter. This method returns the search
+                    <td><p>Postman:
+                        <strong>findCharactersByNameSortedAsc</strong></p><br/>
+                        This endpoint allows you to search for characters with a query parameter. This method returns
+                        the search
                         results in ascending order.
                     </td>
                 </tr>
@@ -203,9 +206,10 @@
                     <td>GET</td>
                     <td>Admin, User</td>
                     <td>N/A</td>
-                    <td>The /characters/search/sorted-desc endpoint (Postman:
-                        <strong>findCharactersByNameSortedAsc</strong>)
-                        allows you to search for characters with a query parameter. This method returns the search
+                    <td><p>Postman:
+                        <strong>findCharactersByNameSortedAsc</strong></p><br/>
+                        This endpoint allows you to search for characters with a query parameter. This method returns
+                        the search
                         results in descending order.
                     </td>
                 </tr>
@@ -214,8 +218,9 @@
                     <td>GET</td>
                     <td>Admin, User</td>
                     <td>N/A</td>
-                    <td>The /characters/search/actor-name endpoint (Postman:
-                        <strong>findCharactersByActorNameContains</strong>) allows you to search for characters with a
+                    <td><p>Postman:
+                        <strong>findCharactersByActorNameContains</strong></p><br/>
+                        This endpoint allows you to search for characters with a
                         query parameter. This method searches for characters that are played by certain actors and
                         whose name contains that which was filled in as query parameter.
                     </td>
@@ -236,8 +241,9 @@
                         he’s always been and the uncontrollable green monster powered by his rage."<br/>
                         }
                     </td>
-                    <td>The /characters/character/{characterId} endpoint (Postman:
-                        <strong>updateCharacterById</strong>) allows you to update a character with a specific id.
+                    <td><p>Postman: <strong>updateCharacterById</strong></p><br/>
+                        Ths endpoint allows you to update a character with a specific id and providing the required
+                        information to the JSON body. The gender value has 3 possible options: Male, Female and X.
                     </td>
                 </tr>
                 <tr>
@@ -248,8 +254,8 @@
                         "id": 1000<br/>
                         }
                     </td>
-                    <td>The /characters/associate/movie/{characterId} endpoint (Postman:
-                        <strong>associateMovieAndCharacter</strong>) allows you to combine a character and a movie. The
+                    <td><p>Postman: <strong>associateMovieAndCharacter</strong></p><br/>
+                        This endpoint allows you to combine a character and a movie. The
                         character will then be added to that movie and that movie will be added to that character. The
                         id in the JSON body is the id of the movie.
                     </td>
@@ -271,9 +277,10 @@
                         She-Hulk, kicking off her adventuring career."<br/>
                         }
                     </td>
-                    <td>The /characters endpoint (Postman:
-                        <strong>createCharacter</strong>) allows you to create a character with the specified values and
-                        attributes.
+                    <td><p>Postman:
+                        <strong>createCharacter</strong></p><br/>
+                        This endpoint allows you to create a character with the specified values and
+                        attributes. The gender value has 3 possible options: Male, Female and X.
                     </td>
                 </tr>
                 <tr>
@@ -282,8 +289,9 @@
                     <td>Admin</td>
                     <td>N/A
                     </td>
-                    <td>The /characters/{characterId} endpoint (Postman:
-                        <strong>deleteCharacterById</strong>) allows you to delete a character with a certain id. Note:
+                    <td><p>Postman:
+                        <strong>deleteCharacterById</strong></p><br/>
+                        This endpoint allows you to delete a character with a certain id. Note:
                         Currently, characters assigned to users (Favorites) or movies, are not allowed to be deleted.
                         Use the <strong>removeFavoriteCharacterFromUser</strong> and <strong>disassociateMovieAndCharacter</strong>
                         methods before trying to remove the character.
@@ -298,8 +306,9 @@
                         "id": 1005<br/>
                         }
                     </td>
-                    <td>The /characters/disassociate/movie/{characterId} endpoint (Postman:
-                        <strong>disassociateMovieAndCharacter</strong>) allows you to disassociate a character and a
+                    <td><p>Postman:
+                        <strong>disassociateMovieAndCharacter</strong></p><br/>
+                        This endpoint allows you to disassociate a character and a
                         movie. The character will then be removed from that movie and that movie will be removed from
                         that character. The id in the JSON body is the id of the movie.
                     </td>
@@ -326,8 +335,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /contactforms endpoint (Postman: <strong>getAllContactForms</strong>) allows you to
-                        see a list of all submitted contact forms.
+                    <td><p>Postman: <strong>getAllContactForms</strong></p><br/>
+                        This endpoint allows you to see a list of all submitted contact forms.
                     </td>
                 </tr>
                 <tr>
@@ -337,8 +346,10 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /contactforms/search/name endpoint (Postman: <strong>findContactFormsByNameContains</strong>)
-                        allows you to find a contact form by entering a name as a query parameter or part of a name.
+                    <td><p>Postman:
+                        <strong>findContactFormsByNameContains</strong></p><br/>
+                        This endpoint allows you to find a contact form by entering a name as a query parameter or part
+                        of a name.
                     </td>
                 </tr>
                 <tr>
@@ -348,8 +359,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /contactforms/search/email endpoint (Postman:
-                        <strong>findContactFormsByEmailContains</strong>) allows you to find a contact form by
+                    <td><p>Postman: <strong>findContactFormsByEmailContains</strong></p><br/>
+                        This endpoint allows you to find a contact form by
                         entering an e-mail address or part of an e-mail address as a query parameter.
                     </td>
                 </tr>
@@ -360,8 +371,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /contactforms/search/comments endpoint (Postman:
-                        <strong>findContactFormsByCommentsContains</strong>) allows you to find a contact form
+                    <td><p>Postman: <strong>findContactFormsByCommentsContains</strong></p><br/>
+                        This endpoint allows you to find a contact form
                         by entering a keyword, or part of a keyword, as a query parameter, that may exist in a comment
                         field within a contact form.
                     </td>
@@ -373,8 +384,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /contactforms/{contactFormId} endpoint (Postman: <strong>getContactFormById</strong>) allows
-                        you to find a contact form by entering its id.
+                    <td><p>Postman: <strong>getContactFormById</strong></p><br/>
+                        This endpoint allows you to find a contact form by entering its id.
                     </td>
                 </tr>
                 <tr>
@@ -388,8 +399,8 @@
                         "comments": "Dit is commentaar"<br/>
                         }
                     </td>
-                    <td>The /contactforms/post endpoint (Postman: <strong>createContactForm</strong>) allows you
-                        to create and post a contact form using the predefined JSON body.
+                    <td><p>Postman: <strong>createContactForm</strong></p><br/>
+                        This endpoint allows you to create and post a contact form using the predefined JSON body.
                     </td>
                 </tr>
                 <tr>
@@ -399,8 +410,9 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /contactforms endpoint (Postman: <strong>deleteAllContactForms</strong>) allows you
-                        to delete all submitted contact forms. Admin only as this is a very powerful feature!
+                    <td><p>Postman: <strong>deleteAllContactForms</strong></p><br/>
+                        This endpoint allows you to delete all submitted contact forms. Admin only as this is a very
+                        powerful feature!
                     </td>
                 </tr>
                 <tr>
@@ -410,8 +422,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /contactforms/{contactFormId} endpoint (Postman: <strong>deleteContactFormById</strong>)
-                        allows you to delete a contact form with a certain id.
+                    <td><p>Postman: <strong>deleteContactFormById</strong></p><br/>
+                        This endpoint allows you to delete a contact form with a certain id.
                     </td>
                 </tr>
                 </tbody>
@@ -436,8 +448,9 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /download-profile-image/{fileName} endpoint (Postman: <strong>downloadProfileImage</strong>
-                        (Public)) allows you to download a desired file, a profile image.
+                    <td><p>Postman:
+                        <strong>downloadProfileImage</strong> (Public)</p><br/>
+                        This endpoint allows you to download a desired file, a profile image.
                     </td>
                 </tr>
                 <tr>
@@ -447,9 +460,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /download-character-image/{fileName} endpoint (Postman:
-                        <strong>downloadCharacterImage</strong> (Public)) allows you to download a desired file, a
-                        character image.
+                    <td><p>Postman: <strong>downloadCharacterImage</strong> (Public)</p><br/>
+                        This endpoint allows you to download a desired file, a character image.
                     </td>
                 </tr>
                 <tr>
@@ -459,8 +471,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /download-movie-image/{fileName} endpoint (Postman: <strong>downloadMovieImage</strong>
-                        (Public)) allows you to download a desired file, a movie image.
+                    <td><p>Postman: <strong>downloadMovieImage</strong> (Public)</p><br/>
+                        This endpoint allows you to download a desired file, a movie image.
                     </td>
                 </tr>
                 <tr>
@@ -470,8 +482,9 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /upload-profile-image/{profileId} endpoint (Postman: <strong>uploadProfileImageById</strong>)
-                        allows you to upload a desired image to a certain profile with an id. For best results upload a
+                    <td><p>Postman: <strong>uploadProfileImageById</strong></p><br/>
+                        This endpoint allows you to upload a desired image to a certain profile with an id. For best
+                        results upload a
                         file with the .jpg or .png file format.
                     </td>
                 </tr>
@@ -482,9 +495,9 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /upload-character-image/{characterId} endpoint (Postman:
-                        <strong>uploadCharacterImageById</strong>)
-                        allows you to upload a desired image to a certain character with an id. For best results upload
+                    <td><p>Postman: <strong>uploadCharacterImageById</strong></p><br/>
+                        This endpoint allows you to upload a desired image to a certain character with an id. For best
+                        results upload
                         a file with the .jpg or .png file format.
                     </td>
                 </tr>
@@ -495,9 +508,9 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /upload-movie-image/{movieId} endpoint (Postman:
-                        <strong>uploadMovieImageById</strong>)
-                        allows you to upload a desired image to a certain movie with an id. For best results upload a
+                    <td><p>Postman: <strong>uploadMovieImageById</strong></p><br/>
+                        This endpoint allows you to upload a desired image to a certain movie with an id. For best
+                        results upload a
                         file with the .jpg or .png file format.
                     </td>
                 </tr>
@@ -508,9 +521,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /delete-profile-image/{profileId} endpoint (Postman:
-                        <strong>deleteProfileImageById</strong>) allows you to delete a profile with a certain
-                        id.
+                    <td><p>Postman: <strong>deleteProfileImageById</strong></p><br/>
+                        This endpoint allows you to delete a profile with a certain id.
                     </td>
                 </tr>
                 <tr>
@@ -520,9 +532,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /delete-character-image/{characterId} endpoint (Postman:
-                        <strong>deleteCharacterImageById</strong>) allows you to delete a character with a certain
-                        id.
+                    <td><p>Postman: <strong>deleteCharacterImageById</strong></p><br/>
+                        This endpoint allows you to delete a character with a certain id.
                     </td>
                 </tr>
                 <tr>
@@ -532,9 +543,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /delete-movie-image/{movieId} endpoint (Postman:
-                        <strong>deleteMovieImageById</strong>) allows you to delete a movie with a certain
-                        id.
+                    <td><p>Postman: <strong>deleteMovieImageById</strong></p><br/>
+                        This endpoint allows you to delete a movie with a certain id.
                     </td>
                 </tr>
                 </tbody>
@@ -559,8 +569,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /movies endpoint (Postman: <strong>getAllMovies</strong> allows you to view all movies
-                        currently in de database.
+                    <td><p>Postman: <strong>getAllMovies</strong></p><br/>
+                        This endpoint allows you to view all movies currently in de database.
                     </td>
                 </tr>
                 <tr>
@@ -570,8 +580,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /movies/{movieId} endpoint (Postman: <strong>getMovieById</strong> allows you to a certain
-                        movie with an id.
+                    <td><p>Postman: <strong>getMovieById</strong></p><br/>
+                        This endpoint allows you to view a certain movie with an id.
                     </td>
                 </tr>
                 <tr>
@@ -581,9 +591,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /movies/search/starting-with endpoint (Postman:
-                        <strong>findMoviesByTitleStartingWith</strong> allows you to search for a movie by filling in a
-                        title as query parameter.
+                    <td><p>Postman: <strong>findMoviesByTitleStartingWith</strong></p><br/>
+                        This endpoint allows you to search for a movie by filling in a title as query parameter.
                     </td>
                 </tr>
                 <tr>
@@ -593,7 +602,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /movies/search/contains endpoint (Postman: <strong>findMoviesByTitleContains</strong> allows
+                    <td><p>Postman: <strong>findMoviesByTitleContains</strong></p><br/>
+                        This endpoint allows
                         you to search for a movie by filling in a title as query parameter.
                     </td>
                 </tr>
@@ -604,8 +614,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /movies/search/sorted-asc endpoint (Postman: <strong>findMoviesByTitleSortedAsc</strong>
-                        allows
+                    <td><p>Postman: <strong>findMoviesByTitleSortedAsc</strong></p><br/>
+                        This endpoint allows
                         you to search for a movie by filling in a title as a query parameter. The results will return in
                         ascending order.
                     </td>
@@ -617,8 +627,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /movies/search/sorted-desc endpoint (Postman: <strong>findMoviesByTitleSortedAsc</strong>
-                        allows
+                    <td><p>Postman: <strong>findMoviesByTitleSortedAsc</strong></p><br/>
+                        This endpoint allows
                         you to search for a movie by filling in a title as a query parameter. The results will return in
                         descending order.
                     </td>
@@ -630,7 +640,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /movies/search/year endpoint (Postman: <strong>findMovieByYearOfRelease</strong> allows
+                    <td><p>Postman: <strong>findMovieByYearOfRelease</strong></p><br/>
+                        This endpoint allows
                         you to search for a movie by filling in the year the movie was released as a query parameter.
                     </td>
                 </tr>
@@ -646,7 +657,8 @@
                         "movieYearOfRelease": "2008"<br/>
                         }
                     </td>
-                    <td>The /movies/movie/{movieId} endpoint (Postman: <strong>updateMovieById</strong> allows
+                    <td><p>Postman: <strong>updateMovieById</strong></p><br/>
+                        This endpoint allows
                         you to update a movie with a certain id and filling in the required JSON body.
                     </td>
                 </tr>
@@ -659,10 +671,11 @@
                         "movieTitle": "The Incredible Hulk",<br/>
                         "movieSummary": "Bruce Banner, a scientist on the run from the U.S. Government, must find a cure
                         for the monster he turns into whenever he loses his temper.",<br/>
-                        "m
+                        "movieYearOfRelease": "2010"<br/>
+                        }
                     </td>
-                    <td>The /movies endpoint (Postman: <strong>createMovie</strong> allows you to create a movie by
-                        filling in the required JSON body.
+                    <td><p>Postman: <strong>createMovie</strong></p><br/>
+                        This endpoint allows you to create a movie by filling in the required JSON body.
                     </td>
                 </tr>
                 <tr>
@@ -672,8 +685,8 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /movies/{movieId} endpoint (Postman: <strong>deleteMovieById</strong> allows you to delete a
-                        movie by filling the required id.
+                    <td><p>Postman: <strong>deleteMovieById</strong></p><br/>
+                        This endpoint allows you to delete a movie by filling the required id.
                     </td>
                 </tr>
                 </tbody>
@@ -698,13 +711,378 @@
                     <td>
                         N/A
                     </td>
-                    <td>The /profiles endpoint (Postman: <strong>getAllProfiles</strong> allows you to view all profiles
-                        in the database.
+                    <td><p>Postman: <strong>getAllProfiles</strong></p><br/>
+                        This endpoint allows you to view all profiles currently in the database.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/profiles/{profileId}</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>getProfileById</strong></p><br/>
+                        This endpoint allows you to view a specific profile with an id.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/profiles/search/firstname</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>findProfileByFirstnameContains</strong></p><br/>
+                        This endpoint allows you to search a profile by entering a user's firstname as a query
+                        parameter.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/profiles/search/lastname</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>findProfileByLastNameContains</strong></p><br/>
+                        This endpoint allows you to search a profile by entering a user's lastname as a query parameter.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/profiles/profile/{username}</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>getProfileByUsername</strong></p><br/>
+                        This endpoint allows you to search a profile by entering a user's username.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/profiles/image/profile/{profileId}</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>getProfileImageByProfileId</strong></p><br/>
+                        This endpoint allows you to view a specific profile image by entering an id.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/profiles/profile/{profileId}</td>
+                    <td>PUT</td>
+                    <td>Admin, User</td>
+                    <td>
+                        {<br/>
+                        "firstName": "André",<br/>
+                        "lastName": "de Groot",<br/>
+                        "gender": "Male",<br/>
+                        "dateOfBirth": "01-01-2000"<br/>
+                        }
+                    </td>
+                    <td><p>Postman: <strong>updateProfileById</strong></p><br/>
+                        This endpoint allows
+                        you to update a specific profile by entering an id and the required JSON body. The gender value
+                        has 3 possible options: Male, Female and X.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/profiles</td>
+                    <td>POST</td>
+                    <td>Admin, User</td>
+                    <td>
+                        {<br/>
+                        "firstName": "André",<br/>
+                        "lastName": "de Groot",<br/>
+                        "gender": "Male",<br/>
+                        "dateOfBirth": "01-01-2000"<br/>
+                        }
+                    </td>
+                    <td><p>Postman: <strong>createProfile</strong></p><br/>
+                        This endpoint allows you to create a profile by entering the required information into the JSON
+                        body. The gender value has 3 possible options: Male, Female and X.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/profiles/{profileId}</td>
+                    <td>DELETE</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>deleteProfileById</strong></p><br/>
+                        This endpoint allows you to delete a profile by providing an id.
                     </td>
                 </tr>
                 </tbody>
             </table>
 
+            <h2>Users Endpoints</h2>
+            <table class="box-shadow">
+                <thead>
+                <tr>
+                    <th style="width: 10%;">Endpoint</th>
+                    <th style="width: 10%;">Method</th>
+                    <th style="width: 10%;">Accessible By</th>
+                    <th style="width: 35%;">JSON</th>
+                    <th style="width: 35%;">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>/users</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>getAllUsers</strong></p><br/>
+                        This endpoint allows you to view all user accounts.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/{username}</td>
+                    <td>GET</td>
+                    <td>Admin, User</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>getUserByUsername</strong></p><br/>
+                        This endpoint allows you to view a specific user account by providing a username.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/active</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>getActiveUsers</strong></p><br/>
+                        This endpoint allows you to view all active users, whose account is enabled.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/favorites/{username}</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>getAllFavoritesFromUser</strong></p><br/>
+                        This endpoint allows you to view all favorites (Characters) from a specific user by providing
+                        the username of that account.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/search/email</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>findUserByEmail (Specific) &
+                        findUserByEmailContains (Returns a list)</strong></p><br/>
+                        This endpoint allows you to search for a user by providing an e-mail address or a part of an
+                        e-mail address.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/search/username</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>findUserByUsernameContains</strong></p><br/>
+                        This endpoint allows you to search for a user by providing a username or a part of a username.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/exists/{username}</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>doesUserExist</strong></p><br/>
+                        This endpoint allows you to if a user exists by providing the username. The result is either a
+                        true or a false.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/{username}/authorities</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>getUserAuthorities</strong></p><br/>
+                        This endpoint allows you to see which roles (Admin or User) a user has by providing the
+                        username.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/admin/{username}</td>
+                    <td>PUT</td>
+                    <td>Admin</td>
+                    <td>
+                        {<br/>
+                        "password": "bAn@nen1"<br/>
+                        }
+                    </td>
+                    <td><p>Postman: <strong>updateUserPasswordAdmin (Admin only)</strong></p><br/>
+                        This endpoint allows you to overrule a user's password by providing a new password in the JSON
+                        Body.<br/>
+                        <br/>
+                        <strong>Password needs to contain the following</strong>:<br/>
+                        1. Minimum of 1 lowercase letter.<br/>
+                        2. Minimum of 1 uppercase letter.<br/>
+                        3. Minimum of 1 number.<br/>
+                        4. Minimum of 1 symbol.<br/>
+                        5. It should be between 8 and 20 characters long.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/user/{username}</td>
+                    <td>PUT</td>
+                    <td>User</td>
+                    <td>
+                        {<br/>
+                        "password": "bAn@nen2",<br/>
+                        "apikey": "12345678",<br/>
+                        "email": "andre@novi.nl"<br/>
+                        }
+                    </td>
+                    <td><p>Postman: <strong>updateUserDetails (User only)</strong></p><br/>
+                        This endpoint allows the user to update his or her user details, including password, by
+                        providing the required details in the JSON body.<br/>
+                        <br/>
+                        <strong>Password needs to contain the following</strong>:<br/>
+                        1. Minimum of 1 lowercase letter.<br/>
+                        2. Minimum of 1 uppercase letter.<br/>
+                        3. Minimum of 1 number.<br/>
+                        4. Minimum of 1 symbol.<br/>
+                        5. It should be between 8 and 20 characters long.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/assign/profile/{username}</td>
+                    <td>PUT</td>
+                    <td>Admin</td>
+                    <td>
+                        {<br/>
+                        "id": 1<br/>
+                        }
+                    </td>
+                    <td><p>Postman: <strong>assignProfileToUser</strong></p><br/>
+                        This endpoint allows the admin to assign a new profile to a user by providing the required
+                        profile id in the JSON body.<br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/detach/profile/{username}</td>
+                    <td>PUT</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>detachProfileFromToUser</strong></p><br/>
+                        This endpoint allows the admin to detach a profile from a user's account. Only detached profiles
+                        can be deleted.<br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/add/character/{username}</td>
+                    <td>PUT</td>
+                    <td>Admin, User</td>
+                    <td>
+                        {<br/>
+                        "id": 1<br/>
+                        }
+                    </td>
+                    <td><p>Postman: <strong>addFavoriteCharacterToUser</strong></p><br/>
+                        This endpoint allows the user to a Marvel character to his or her favorites list by entering the
+                        character's id into the JSON body.<br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users</td>
+                    <td>POST</td>
+                    <td>Public</td>
+                    <td>
+                        {<br/>
+                        "username": "andre",<br/>
+                        "password": "pAssword1@",<br/>
+                        "email": "andre4@novi.nl"<br/>
+                        }
+                    </td>
+                    <td><p>Postman: <strong>createUser</strong></p><br/>
+                        This endpoint allows the user to create a new user account by entering the required information
+                        into the JSON body.<br/>
+                        <br/>
+                        <strong>Password needs to contain the following</strong>:<br/>
+                        1. Minimum of 1 lowercase letter.<br/>
+                        2. Minimum of 1 uppercase letter.<br/>
+                        3. Minimum of 1 number.<br/>
+                        4. Minimum of 1 symbol.<br/>
+                        5. It should be between 8 and 20 characters long.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/{username}/authorities</td>
+                    <td>POST</td>
+                    <td>Admin</td>
+                    <td>
+                        {<br/>
+                        "authority": "ROLE_ADMIN"<br/>
+                        }
+                    </td>
+                    <td><p>Postman: <strong>addUserAuthority</strong></p><br/>
+                        This endpoint allows the admin to promote a user to admin by entering the required information
+                        into the JSON body.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/{username}</td>
+                    <td>DELETE</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>deleteUser</strong></p><br/>
+                        This endpoint allows the admin to delete a user by entering the desired username.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/{username}/authorities/{authority}</td>
+                    <td>DELETE</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>removeAuthority</strong></p><br/>
+                        This endpoint allows the admin to demote an admin to user by entering the desired username and
+                        ROLE_ADMIN.
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/remove/character/{username}</td>
+                    <td>DELETE</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>removeFavoriteCharacterFromUser</strong></p><br/>
+                        This endpoint allows the admin or user to remove a Marvel character from his or her favorites
+                        list.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
         </article>
     </section>

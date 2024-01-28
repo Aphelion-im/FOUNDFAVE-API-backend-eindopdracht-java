@@ -64,11 +64,11 @@ public class UserController {
     }
 
     @PutMapping("/user/{username}")
-    public ResponseEntity<String> updateUser(@PathVariable("username") String username, @Valid @RequestBody UpdateUserInputDto updateUserInputDto, BindingResult bindingResult) {
+    public ResponseEntity<String> updateUserDetails(@PathVariable("username") String username, @Valid @RequestBody UpdateUserInputDto updateUserInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
         }
-        return ResponseEntity.ok(userService.updateUser(username, updateUserInputDto));
+        return ResponseEntity.ok(userService.updateUserDetails(username, updateUserInputDto));
     }
 
     @DeleteMapping("/{username}")

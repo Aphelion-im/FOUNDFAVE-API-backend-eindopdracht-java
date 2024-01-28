@@ -61,7 +61,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public String updateUser(String username, UpdateUserInputDto updateUserInputDto) {
+    public String updateUserDetails(String username, UpdateUserInputDto updateUserInputDto) {
         User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
         if (updateUserInputDto.password != null) {
             user.setPassword(passwordEncoder.encode(updateUserInputDto.getPassword()));
