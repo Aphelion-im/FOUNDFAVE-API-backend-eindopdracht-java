@@ -1891,7 +1891,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/profiles/image/user/andre4",
+					"raw": "localhost:8080/profiles/image/user/andre",
 					"host": [
 						"localhost"
 					],
@@ -1900,7 +1900,7 @@
 						"profiles",
 						"image",
 						"user",
-						"andre4"
+						"andre"
 					]
 				}
 			},
@@ -1922,7 +1922,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/profiles/image/profile/1",
+					"raw": "localhost:8080/profiles/image/profile/1000",
 					"host": [
 						"localhost"
 					],
@@ -1931,7 +1931,7 @@
 						"profiles",
 						"image",
 						"profile",
-						"1"
+						"1000"
 					]
 				}
 			},
@@ -1954,7 +1954,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"André 2222zz\",\r\n    \"lastName\": \"de Groot 2\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2021\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"André\",\r\n    \"lastName\": \"de Groot\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"01-01-2000\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1993,7 +1993,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"André 4\",\r\n    \"lastName\": \"de Groot\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"28-07-2010\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"André\",\r\n    \"lastName\": \"de Groot\",\r\n    \"gender\": \"Male\",\r\n    \"dateOfBirth\": \"01-01-2000\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -2326,14 +2326,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/andre4/authorities",
+					"raw": "localhost:8080/users/andre/authorities",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"andre4",
+						"andre",
 						"authorities"
 					]
 				}
@@ -2380,7 +2380,7 @@
 			"response": []
 		},
 		{
-			"name": "updateUser (User only)",
+			"name": "updateUserDetails (User only)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2396,7 +2396,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"password\": \"bAn@nen2\",\r\n    \"apikey\": \"apikey nummer\",\r\n    \"email\": \"andre222@novi.nl\"\r\n}",
+					"raw": "{\r\n    \"password\": \"bAn@nen2\",\r\n    \"apikey\": \"12345678\",\r\n    \"email\": \"andre@novi.nl\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -2443,7 +2443,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/users/assign/profile/andre4",
+					"raw": "localhost:8080/users/assign/profile/andre",
 					"host": [
 						"localhost"
 					],
@@ -2452,7 +2452,7 @@
 						"users",
 						"assign",
 						"profile",
-						"andre4"
+						"andre"
 					]
 				}
 			},
@@ -2474,7 +2474,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/detach/profile/andre4",
+					"raw": "localhost:8080/users/detach/profile/andre",
 					"host": [
 						"localhost"
 					],
@@ -2483,7 +2483,7 @@
 						"users",
 						"detach",
 						"profile",
-						"andre4"
+						"andre"
 					]
 				}
 			},
@@ -2514,7 +2514,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/users/add/character/andre4",
+					"raw": "localhost:8080/users/add/character/andre",
 					"host": [
 						"localhost"
 					],
@@ -2523,7 +2523,7 @@
 						"users",
 						"add",
 						"character",
-						"andre4"
+						"andre"
 					]
 				}
 			},
@@ -2536,7 +2536,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"andre4\",\r\n    \"password\": \"pAssword1@\",\r\n    \"email\": \"andre4@novi.nl\"\r\n}",
+					"raw": "{\r\n    \"username\": \"andre\",\r\n    \"password\": \"pAssword1@\",\r\n    \"email\": \"andre4@novi.nl\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

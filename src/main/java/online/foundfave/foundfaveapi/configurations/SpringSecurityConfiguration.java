@@ -73,7 +73,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.DELETE, "/characters/{characterId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/characters/disassociate/movie/{characterId}").hasRole("ADMIN")
 
-                //***** Contact Forms Endpoints *****// TODO: Volgorde Controller en Service
+                //***** Contact Forms Endpoints *****//
                 .requestMatchers(HttpMethod.GET, "/contactforms").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/contactforms/search/name").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.GET, "/contactforms/search/email").hasAnyRole("ADMIN", "USER")

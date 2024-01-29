@@ -25,7 +25,25 @@ public class ContactFormController {
 
     @GetMapping("")
     public ResponseEntity<List<ContactFormOutputDto>> getAllContactForms() {
-        List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.getContactFormSubmissions();
+        List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.getAllContactForms();
+        return ResponseEntity.ok(contactFormOutputDtoList);
+    }
+
+    @GetMapping("/search/name")
+    public ResponseEntity<List<ContactFormOutputDto>> findContactFormsByNameContains(@RequestParam("name") String name) {
+        List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.findContactFormsByNameContains(name);
+        return ResponseEntity.ok(contactFormOutputDtoList);
+    }
+
+    @GetMapping("/search/email")
+    public ResponseEntity<List<ContactFormOutputDto>> findContactFormsByEmailContains(@RequestParam("email") String email) {
+        List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.findContactFormsByEmailContains(email);
+        return ResponseEntity.ok(contactFormOutputDtoList);
+    }
+
+    @GetMapping("/search/comments")
+    public ResponseEntity<List<ContactFormOutputDto>> findContactFormsByCommentsContains(@RequestParam("comments") String comments) {
+        List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.findContactFormsByCommentsContains(comments);
         return ResponseEntity.ok(contactFormOutputDtoList);
     }
 
@@ -45,33 +63,15 @@ public class ContactFormController {
         return ResponseEntity.created(uri).body(createdContactForm);
     }
 
-    @DeleteMapping("/{contactFormId}")
-    public ResponseEntity<String> deleteContactFormById(@PathVariable Long contactFormId) {
-        contactFormService.deleteContactFormById(contactFormId);
-        return ResponseEntity.ok().body("Contact Form with id: " + contactFormId + " was successfully deleted!");
-    }
-
     @DeleteMapping("")
     public ResponseEntity<String> deleteAllContactForms() {
         contactFormService.deleteAllContactForms();
         return ResponseEntity.ok().body("All contact forms successfully deleted!");
     }
 
-    @GetMapping("/search/name")
-    public ResponseEntity<List<ContactFormOutputDto>> findContactFormsByNameContains(@RequestParam("name") String name) {
-        List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.findContactFormsByNameContains(name);
-        return ResponseEntity.ok(contactFormOutputDtoList);
-    }
-
-    @GetMapping("/search/email")
-    public ResponseEntity<List<ContactFormOutputDto>> findContactFormsByEmailContains(@RequestParam("email") String email) {
-        List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.findContactFormsByEmailContains(email);
-        return ResponseEntity.ok(contactFormOutputDtoList);
-    }
-
-    @GetMapping("/search/comments")
-    public ResponseEntity<List<ContactFormOutputDto>> findContactFormsByCommentsContains(@RequestParam("comments") String comments) {
-        List<ContactFormOutputDto> contactFormOutputDtoList = contactFormService.findContactFormsByCommentsContains(comments);
-        return ResponseEntity.ok(contactFormOutputDtoList);
+    @DeleteMapping("/{contactFormId}")
+    public ResponseEntity<String> deleteContactFormById(@PathVariable Long contactFormId) {
+        contactFormService.deleteContactFormById(contactFormId);
+        return ResponseEntity.ok().body("Contact Form with id: " + contactFormId + " was successfully deleted!");
     }
 }

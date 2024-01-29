@@ -91,8 +91,7 @@
                     <td>N/A</td>
                     <td><p>Postman: <strong>API documentation</strong> (Public)</p><br/>
                         This endpoint shows a list of all available endpoints in detail. E.g. <a class="hyperlink"
-                                                                                                 href="#">This
-                            page</a>.
+                                                                                                 href="#">This page</a>.
                     </td>
                 </tr>
                 </tbody>
@@ -164,7 +163,9 @@
                     <td>Admin, User</td>
                     <td>N/A</td>
                     <td><p>Postman: <strong>getCharacterById</strong></p><br/>
-                        This endpoint allows you to view a specific Marvel character with an id.
+                        This endpoint allows you to view a specific Marvel character by providing its id in the location
+                        of the {characterId} path variable.
+                        <br/><br/> <strong>Example</strong>: /characters/1000
                     </td>
                 </tr>
                 <tr>
@@ -175,6 +176,7 @@
                     <td><p>Postman: <strong>findCharactersByNameStartingWith</strong></p><br/>
                         This endpoint allows you to search for characters with a query parameter. This method searches
                         for characters starting their name as filled in as query parameter.
+                        <br/><br/><strong>Example</strong>: /characters/search/starting-with?name=vision
                     </td>
                 </tr>
                 <tr>
@@ -185,8 +187,8 @@
                     <td><p>Postman:
                         <strong>findCharactersByNameContains</strong></p><br/>
                         This endpoint allows you to search for characters with a query parameter. This method searches
-                        for characters
-                        whose name contains that which was filled in as query parameter.
+                        for characters whose name contains that which was filled in as query parameter.
+                        <br/><br/><strong>Example</strong>: /characters/search/contains?name=vision
                     </td>
                 </tr>
                 <tr>
@@ -197,8 +199,8 @@
                     <td><p>Postman:
                         <strong>findCharactersByNameSortedAsc</strong></p><br/>
                         This endpoint allows you to search for characters with a query parameter. This method returns
-                        the search
-                        results in ascending order.
+                        the search results in ascending order.
+                        <br/><br/><strong>Example</strong>: /characters/search/sorted-asc?name=vision
                     </td>
                 </tr>
                 <tr>
@@ -209,8 +211,8 @@
                     <td><p>Postman:
                         <strong>findCharactersByNameSortedAsc</strong></p><br/>
                         This endpoint allows you to search for characters with a query parameter. This method returns
-                        the search
-                        results in descending order.
+                        the search results in descending order.
+                        <br/><br/><strong>Example</strong>: /characters/search/sorted-desc?name=vision
                     </td>
                 </tr>
                 <tr>
@@ -220,9 +222,10 @@
                     <td>N/A</td>
                     <td><p>Postman:
                         <strong>findCharactersByActorNameContains</strong></p><br/>
-                        This endpoint allows you to search for characters with a
-                        query parameter. This method searches for characters that are played by certain actors and
-                        whose name contains that which was filled in as query parameter.
+                        This endpoint allows you to search for characters with a given query parameter. This method
+                        searches for characters that are played by certain actors and whose name contains that which was
+                        filled in as query parameter.
+                        <br/><br/><strong>Example</strong>: /characters/search/actor-name?name=robert
                     </td>
                 </tr>
                 <tr>
@@ -242,8 +245,10 @@
                         }
                     </td>
                     <td><p>Postman: <strong>updateCharacterById</strong></p><br/>
-                        Ths endpoint allows you to update a character with a specific id and providing the required
-                        information to the JSON body. The gender value has 3 possible options: Male, Female and X.
+                        Ths endpoint allows you to update a character. The character id should be
+                        entered in the location of the {characterId} path variable. Enter the required character
+                        information into the JSON body. The gender value has 3 possible options: Male, Female and X.
+                        <br/><br/><strong>Example</strong>: /characters/character/1000
                     </td>
                 </tr>
                 <tr>
@@ -257,7 +262,9 @@
                     <td><p>Postman: <strong>associateMovieAndCharacter</strong></p><br/>
                         This endpoint allows you to combine a character and a movie. The
                         character will then be added to that movie and that movie will be added to that character. The
-                        id in the JSON body is the id of the movie.
+                        id in the JSON body is the id of the movie. The character id should be entered in the location
+                        of the {characterId} path variable.
+                        <br/><br/><strong>Example</strong>: /characters/associate/movie/1007
                     </td>
                 </tr>
                 <tr>
@@ -291,10 +298,14 @@
                     </td>
                     <td><p>Postman:
                         <strong>deleteCharacterById</strong></p><br/>
-                        This endpoint allows you to delete a character with a certain id. Note:
-                        Currently, characters assigned to users (Favorites) or movies, are not allowed to be deleted.
+                        This endpoint allows you to delete a character with a certain id. The character id should be
+                        entered in the location of the {characterId} path variable.<br/><br/> <strong>Note</strong>:
+                        Currently,
+                        characters assigned to users (Favorites) or movies, are not allowed to be deleted.<br/>
+                        <br/>
                         Use the <strong>removeFavoriteCharacterFromUser</strong> and <strong>disassociateMovieAndCharacter</strong>
                         methods before trying to remove the character.
+                        <br/><br/><strong>Example</strong>: /characters/1000
                     </td>
                 </tr>
                 <tr>
@@ -310,7 +321,9 @@
                         <strong>disassociateMovieAndCharacter</strong></p><br/>
                         This endpoint allows you to disassociate a character and a
                         movie. The character will then be removed from that movie and that movie will be removed from
-                        that character. The id in the JSON body is the id of the movie.
+                        that character. The id in the JSON body is the id of the movie. The character id should be
+                        entered in the location of the {characterId} path variable.
+                        <br/><br/><strong>Example</strong>: /characters/disassociate/movie/1000
                     </td>
                 </tr>
                 </tbody>
@@ -348,8 +361,9 @@
                     </td>
                     <td><p>Postman:
                         <strong>findContactFormsByNameContains</strong></p><br/>
-                        This endpoint allows you to find a contact form by entering a name as a query parameter or part
+                        This endpoint allows you to find a contact form by entering a name as a query parameter, or part
                         of a name.
+                        <br/><br/><strong>Example</strong>: /contactforms/search/name?name=an
                     </td>
                 </tr>
                 <tr>
@@ -361,7 +375,8 @@
                     </td>
                     <td><p>Postman: <strong>findContactFormsByEmailContains</strong></p><br/>
                         This endpoint allows you to find a contact form by
-                        entering an e-mail address or part of an e-mail address as a query parameter.
+                        entering an e-mail address, or part of an e-mail address, as a query parameter.
+                        <br/><br/><strong>Example</strong>: /contactforms/search/email?email=novi
                     </td>
                 </tr>
                 <tr>
@@ -375,6 +390,7 @@
                         This endpoint allows you to find a contact form
                         by entering a keyword, or part of a keyword, as a query parameter, that may exist in a comment
                         field within a contact form.
+                        <br/><br/><strong>Example</strong>: /contactforms/search/comments?comments=jul
                     </td>
                 </tr>
                 <tr>
@@ -385,7 +401,9 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>getContactFormById</strong></p><br/>
-                        This endpoint allows you to find a contact form by entering its id.
+                        This endpoint allows you to find a contact form by entering its id. The contact form id should
+                        be entered in the location of the {contactFormId} path variable.
+                        <br/><br/><strong>Example</strong>: /contactforms/1
                     </td>
                 </tr>
                 <tr>
@@ -400,7 +418,7 @@
                         }
                     </td>
                     <td><p>Postman: <strong>createContactForm</strong></p><br/>
-                        This endpoint allows you to create and post a contact form using the predefined JSON body.
+                        This endpoint allows you to create and post a contact form by filling in the JSON body.
                     </td>
                 </tr>
                 <tr>
@@ -423,7 +441,9 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>deleteContactFormById</strong></p><br/>
-                        This endpoint allows you to delete a contact form with a certain id.
+                        This endpoint allows you to delete a contact form with a certain id. The contact form id should
+                        be entered in the location of the {contactFormId} path variable.
+                        <br/><br/><strong>Example</strong>: /contactforms/1
                     </td>
                 </tr>
                 </tbody>
@@ -450,7 +470,9 @@
                     </td>
                     <td><p>Postman:
                         <strong>downloadProfileImage</strong> (Public)</p><br/>
-                        This endpoint allows you to download a desired file, a profile image.
+                        This endpoint allows you to download a desired file, a profile image. The name of the file
+                        should be entered in the location of the {fileName} path variable.
+                        <br/><br/><strong>Example</strong>: /download-profile-image/shield-profile.jpg
                     </td>
                 </tr>
                 <tr>
@@ -461,7 +483,9 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>downloadCharacterImage</strong> (Public)</p><br/>
-                        This endpoint allows you to download a desired file, a character image.
+                        This endpoint allows you to download a desired file, a character image. The name of the file
+                        should be entered in the location of the {fileName} path variable.
+                        <br/><br/><strong>Example</strong>: /download-character-image/hulk-character.jpg
                     </td>
                 </tr>
                 <tr>
@@ -472,7 +496,9 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>downloadMovieImage</strong> (Public)</p><br/>
-                        This endpoint allows you to download a desired file, a movie image.
+                        This endpoint allows you to download a desired file, a movie image. The name of the file should
+                        be entered in the location of the {fileName} path variable. For example: name-of-image.jpg.
+                        <br/><br/><strong>Example</strong>: /download-movie-image/thor-movie.jpg
                     </td>
                 </tr>
                 <tr>
@@ -483,9 +509,10 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>uploadProfileImageById</strong></p><br/>
-                        This endpoint allows you to upload a desired image to a certain profile with an id. For best
-                        results upload a
-                        file with the .jpg or .png file format.
+                        This endpoint allows you to upload a desired image to a certain profile with an id. The profile
+                        id should be entered in the location of the {profileId} path variable. For best
+                        results upload a .jpg or .png file.
+                        <br/><br/><strong>Example</strong>: /upload-profile-image/1
                     </td>
                 </tr>
                 <tr>
@@ -496,9 +523,10 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>uploadCharacterImageById</strong></p><br/>
-                        This endpoint allows you to upload a desired image to a certain character with an id. For best
-                        results upload
-                        a file with the .jpg or .png file format.
+                        This endpoint allows you to upload a desired image to a certain character with an id. The
+                        character id should be entered in the location of the {characterId} path variable. For best
+                        results upload a .jpg or .png.
+                        <br/><br/><strong>Example</strong>: /upload-character-image/1000
                     </td>
                 </tr>
                 <tr>
@@ -509,9 +537,10 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>uploadMovieImageById</strong></p><br/>
-                        This endpoint allows you to upload a desired image to a certain movie with an id. For best
-                        results upload a
-                        file with the .jpg or .png file format.
+                        This endpoint allows you to upload a desired image to a certain movie with an id. The movie id
+                        should be entered in the location of the {movieId} path variable. For best results upload a .jpg
+                        or .png file.
+                        <br/><br/><strong>Example</strong>: /upload-movie-image/1000
                     </td>
                 </tr>
                 <tr>
@@ -522,7 +551,9 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>deleteProfileImageById</strong></p><br/>
-                        This endpoint allows you to delete a profile with a certain id.
+                        This endpoint allows you to delete an image on a profile with a certain id. The profile id
+                        should be entered in the location of the {profileId} path variable.
+                        <br/><br/><strong>Example</strong>: /delete-profile-image/1
                     </td>
                 </tr>
                 <tr>
@@ -533,7 +564,9 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>deleteCharacterImageById</strong></p><br/>
-                        This endpoint allows you to delete a character with a certain id.
+                        This endpoint allows you to delete an image associated with a character with a certain id. The
+                        character id should be entered in the location of the {characterId} path variable.
+                        <br/><br/><strong>Example</strong>: /delete-character-image/1000
                     </td>
                 </tr>
                 <tr>
@@ -544,7 +577,9 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>deleteMovieImageById</strong></p><br/>
-                        This endpoint allows you to delete a movie with a certain id.
+                        This endpoint allows you to delete an image associated with a movie with a certain id. The movie
+                        id should be entered in the location of the {movieId} path variable.
+                        <br/><br/><strong>Example</strong>: /delete-movie-image/1000
                     </td>
                 </tr>
                 </tbody>
@@ -581,7 +616,9 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>getMovieById</strong></p><br/>
-                        This endpoint allows you to view a certain movie with an id.
+                        This endpoint allows you to view a certain movie with an id. The movie id should
+                        be entered in the location of the {movieId} path variable.
+                        <br/><br/><strong>Example</strong>: /movies/1
                     </td>
                 </tr>
                 <tr>
@@ -593,6 +630,7 @@
                     </td>
                     <td><p>Postman: <strong>findMoviesByTitleStartingWith</strong></p><br/>
                         This endpoint allows you to search for a movie by filling in a title as query parameter.
+                        <br/><br/><strong>Example</strong>: /movies/search/starting-with?title=cap
                     </td>
                 </tr>
                 <tr>
@@ -603,8 +641,8 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>findMoviesByTitleContains</strong></p><br/>
-                        This endpoint allows
-                        you to search for a movie by filling in a title as query parameter.
+                        This endpoint allows you to search for a movie by filling in a title as query parameter.
+                        <br/><br/><strong>Example</strong>: /movies/search/contains?title=amer
                     </td>
                 </tr>
                 <tr>
@@ -615,9 +653,9 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>findMoviesByTitleSortedAsc</strong></p><br/>
-                        This endpoint allows
-                        you to search for a movie by filling in a title as a query parameter. The results will return in
-                        ascending order.
+                        This endpoint allows you to search for a movie by filling in a title as a query parameter. The
+                        results will return in ascending order.
+                        <br/><br/><strong>Example</strong>: /movies/search/sorted-asc?title=avengers
                     </td>
                 </tr>
                 <tr>
@@ -627,10 +665,10 @@
                     <td>
                         N/A
                     </td>
-                    <td><p>Postman: <strong>findMoviesByTitleSortedAsc</strong></p><br/>
-                        This endpoint allows
-                        you to search for a movie by filling in a title as a query parameter. The results will return in
-                        descending order.
+                    <td><p>Postman: <strong>findMoviesByTitleSortedDesc</strong></p><br/>
+                        This endpoint allows you to search for a movie by filling in a title as a query parameter. The
+                        results will return in descending order.
+                        <br/><br/><strong>Example</strong>: /movies/search/sorted-desc?title=Avengers
                     </td>
                 </tr>
                 <tr>
@@ -641,8 +679,10 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>findMovieByYearOfRelease</strong></p><br/>
-                        This endpoint allows
-                        you to search for a movie by filling in the year the movie was released as a query parameter.
+                        This endpoint allows you to search for a movie by filling in the year the movie was released as
+                        a query parameter.
+                        <br/><br/>
+                        <strong>Example</strong>: /movies/search/year?year=2008
                     </td>
                 </tr>
                 <tr>
@@ -658,8 +698,9 @@
                         }
                     </td>
                     <td><p>Postman: <strong>updateMovieById</strong></p><br/>
-                        This endpoint allows
-                        you to update a movie with a certain id and filling in the required JSON body.
+                        This endpoint allows you to update a movie with a certain id and filling in the required JSON
+                        body. The movie id should be entered in the location of the {movieId} path variable.
+                        <br/><br/><strong>Example</strong>: /movies/movie/1000
                     </td>
                 </tr>
                 <tr>
@@ -686,7 +727,13 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>deleteMovieById</strong></p><br/>
-                        This endpoint allows you to delete a movie by filling the required id.
+                        This endpoint allows you to delete a movie by filling the required id. The movie id should
+                        be entered in the location of the {movieId} path variable.<br/>
+                        <br/>
+                        Currently, movies linked to a character or characters are not allowed to be deleted. First use
+                        the <strong>disassociateMovieAndCharacter</strong> method and then try again to delete the
+                        movie.
+                        <br/><br/><strong>Example</strong>: /movies/1000
                     </td>
                 </tr>
                 </tbody>
@@ -723,7 +770,9 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>getProfileById</strong></p><br/>
-                        This endpoint allows you to view a specific profile with an id.
+                        This endpoint allows you to view a specific profile with an id. The profile id should
+                        be entered in the location of the {profileId} path variable.
+                        <br/><br/><strong>Example</strong>: /profiles/1
                     </td>
                 </tr>
                 <tr>
@@ -736,6 +785,7 @@
                     <td><p>Postman: <strong>findProfileByFirstnameContains</strong></p><br/>
                         This endpoint allows you to search a profile by entering a user's firstname as a query
                         parameter.
+                        <br/><br/><strong>Example</strong>: /profiles/search/firstname?firstname=p
                     </td>
                 </tr>
                 <tr>
@@ -747,6 +797,7 @@
                     </td>
                     <td><p>Postman: <strong>findProfileByLastNameContains</strong></p><br/>
                         This endpoint allows you to search a profile by entering a user's lastname as a query parameter.
+                        <br/><br/><strong>Example</strong>: /profiles/search/lastname?lastname=groot
                     </td>
                 </tr>
                 <tr>
@@ -757,7 +808,22 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>getProfileByUsername</strong></p><br/>
-                        This endpoint allows you to search a profile by entering a user's username.
+                        This endpoint allows you to search a profile by entering a user's username. The username of the
+                        user should be entered in the location of the {username} path variable.
+                        <br/><br/><strong>Example</strong>: /profiles/profile/andre
+                    </td>
+                </tr>
+                <tr>
+                    <td>/profiles/image/user/{username}</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>getProfileImageByUsername</strong></p><br/>
+                        This endpoint allows you to view a specific profile image by entering a username. The username
+                        of the user should be entered in the location of the {username} path variable.
+                        <br/><br/><strong>Example</strong>: /profiles/profile/andre
                     </td>
                 </tr>
                 <tr>
@@ -768,7 +834,9 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>getProfileImageByProfileId</strong></p><br/>
-                        This endpoint allows you to view a specific profile image by entering an id.
+                        This endpoint allows you to view a specific profile image by entering an id. The profile id
+                        should be entered in the location of the {profileId} path variable.
+                        <br/><br/><strong>Example</strong>: /profiles/image/profile/1000
                     </td>
                 </tr>
                 <tr>
@@ -785,8 +853,10 @@
                     </td>
                     <td><p>Postman: <strong>updateProfileById</strong></p><br/>
                         This endpoint allows
-                        you to update a specific profile by entering an id and the required JSON body. The gender value
+                        you to update a specific profile by entering an id and the required JSON body. The profile id
+                        should be entered in the location of the {profileId} path variable. The gender value
                         has 3 possible options: Male, Female and X.
+                        <br/><br/><strong>Example</strong>: /profiles/profile/1000
                     </td>
                 </tr>
                 <tr>
@@ -814,7 +884,12 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>deleteProfileById</strong></p><br/>
-                        This endpoint allows you to delete a profile by providing an id.
+                        This endpoint allows you to delete a profile by providing an id. The profile id should
+                        be entered in the location of the {profileId} path variable.<br/>
+                        <br/>
+                        Currently, profiles assigned to users, are not allowed to be deleted. First use the <strong>detachProfileFromUser</strong>
+                        method and then try again to delete the profile.
+                        <br/><br/><strong>Example</strong>: /profiles/1
                     </td>
                 </tr>
                 </tbody>
@@ -851,7 +926,9 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>getUserByUsername</strong></p><br/>
-                        This endpoint allows you to view a specific user account by providing a username.
+                        This endpoint allows you to view a specific user account by providing a username. The username
+                        of the user should be entered in the location of the {username} path variable.
+                        <br/><br/><strong>Example</strong>: /users/andre
                     </td>
                 </tr>
                 <tr>
@@ -862,7 +939,7 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>getActiveUsers</strong></p><br/>
-                        This endpoint allows you to view all active users, whose account is enabled.
+                        This endpoint allows you to view all active users whose account is, or has been, enabled.
                     </td>
                 </tr>
                 <tr>
@@ -874,7 +951,9 @@
                     </td>
                     <td><p>Postman: <strong>getAllFavoritesFromUser</strong></p><br/>
                         This endpoint allows you to view all favorites (Characters) from a specific user by providing
-                        the username of that account.
+                        the username of that account. The username of the user should be entered in the location of the
+                        {username} path variable.
+                        <br/><br/><strong>Example</strong>: /users/favorites/andre
                     </td>
                 </tr>
                 <tr>
@@ -884,10 +963,22 @@
                     <td>
                         N/A
                     </td>
-                    <td><p>Postman: <strong>findUserByEmail (Specific) &
-                        findUserByEmailContains (Returns a list)</strong></p><br/>
-                        This endpoint allows you to search for a user by providing an e-mail address or a part of an
-                        e-mail address.
+                    <td><p>Postman: <strong>findUserByEmail</strong></p><br/>
+                        This endpoint allows you to search for a user by providing an e-mail address.
+                        <br/><br/><strong>Example</strong>: /users/search?email=admin@foundfave.online
+                    </td>
+                </tr>
+                <tr>
+                    <td>/users/search/email</td>
+                    <td>GET</td>
+                    <td>Admin</td>
+                    <td>
+                        N/A
+                    </td>
+                    <td><p>Postman: <strong>findUserByEmailContains</strong></p><br/>
+                        This endpoint allows you to search for a user or users by providing an e-mail address or a part
+                        of an e-mail address.
+                        <br/><br/><strong>Example</strong>: /users/search/email?email=admin
                     </td>
                 </tr>
                 <tr>
@@ -899,6 +990,7 @@
                     </td>
                     <td><p>Postman: <strong>findUserByUsernameContains</strong></p><br/>
                         This endpoint allows you to search for a user by providing a username or a part of a username.
+                        <br/><br/><strong>Example</strong>: /users/search/username?username=admin
                     </td>
                 </tr>
                 <tr>
@@ -909,8 +1001,10 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>doesUserExist</strong></p><br/>
-                        This endpoint allows you to if a user exists by providing the username. The result is either a
-                        true or a false.
+                        This endpoint allows you to see if a user exists by providing the username. The result is either
+                        a true or a false. The username of the user should be entered in the location of the {username} path
+                        variable.
+                        <br/><br/><strong>Example</strong>: /users/exists/andre
                     </td>
                 </tr>
                 <tr>
@@ -922,7 +1016,8 @@
                     </td>
                     <td><p>Postman: <strong>getUserAuthorities</strong></p><br/>
                         This endpoint allows you to see which roles (Admin or User) a user has by providing the
-                        username.
+                        username. The username of the user should be entered in the location of the {username} path variable.
+                        <br/><br/><strong>Example</strong>: /users/andre/authorities
                     </td>
                 </tr>
                 <tr>
@@ -935,8 +1030,10 @@
                         }
                     </td>
                     <td><p>Postman: <strong>updateUserPasswordAdmin (Admin only)</strong></p><br/>
-                        This endpoint allows you to overrule a user's password by providing a new password in the JSON
-                        Body.<br/>
+                        This endpoint allows the admin to overrule a user's password by providing a new password in the
+                        JSON
+                        Body. The username of the user should be entered in the location of the {username} path
+                        variable.<br/>
                         <br/>
                         <strong>Password needs to contain the following</strong>:<br/>
                         1. Minimum of 1 lowercase letter.<br/>
@@ -944,6 +1041,7 @@
                         3. Minimum of 1 number.<br/>
                         4. Minimum of 1 symbol.<br/>
                         5. It should be between 8 and 20 characters long.
+                        <br/><br/><strong>Example</strong>: /users/admin/andre
                     </td>
                 </tr>
                 <tr>
@@ -958,8 +1056,10 @@
                         }
                     </td>
                     <td><p>Postman: <strong>updateUserDetails (User only)</strong></p><br/>
-                        This endpoint allows the user to update his or her user details, including password, by
-                        providing the required details in the JSON body.<br/>
+                        This endpoint allows the user to update his or her account. Update its user details, including
+                        password, by
+                        providing the required details in the JSON body. The username of the user should be entered in
+                        the location of the {username} path variable.<br/>
                         <br/>
                         <strong>Password needs to contain the following</strong>:<br/>
                         1. Minimum of 1 lowercase letter.<br/>
@@ -967,6 +1067,7 @@
                         3. Minimum of 1 number.<br/>
                         4. Minimum of 1 symbol.<br/>
                         5. It should be between 8 and 20 characters long.
+                        <br/><br/><strong>Example</strong>: /users/user/andre
                     </td>
                 </tr>
                 <tr>
@@ -980,7 +1081,9 @@
                     </td>
                     <td><p>Postman: <strong>assignProfileToUser</strong></p><br/>
                         This endpoint allows the admin to assign a new profile to a user by providing the required
-                        profile id in the JSON body.<br/>
+                        profile id in the JSON body. The username of the user should be entered in the location of the
+                        {username} path variable.
+                        <br/><br/><strong>Example</strong>: /users/assign/profile/andre
                     </td>
                 </tr>
                 <tr>
@@ -992,7 +1095,9 @@
                     </td>
                     <td><p>Postman: <strong>detachProfileFromToUser</strong></p><br/>
                         This endpoint allows the admin to detach a profile from a user's account. Only detached profiles
-                        can be deleted.<br/>
+                        can be deleted. The username of the user should be entered in the location of the {username}
+                        path variable.
+                        <br/><br/><strong>Example</strong>: /users/detach/profile/andre
                     </td>
                 </tr>
                 <tr>
@@ -1005,8 +1110,10 @@
                         }
                     </td>
                     <td><p>Postman: <strong>addFavoriteCharacterToUser</strong></p><br/>
-                        This endpoint allows the user to a Marvel character to his or her favorites list by entering the
-                        character's id into the JSON body.<br/>
+                        This endpoint allows the user to add a Marvel character to his or her favorites list by entering
+                        the character's id into the JSON body. The username of the user should be entered in the
+                        location of the {username} path variable.
+                        <br/><br/><strong>Example</strong>: /users/add/character/andre
                     </td>
                 </tr>
                 <tr>
@@ -1043,7 +1150,9 @@
                     </td>
                     <td><p>Postman: <strong>addUserAuthority</strong></p><br/>
                         This endpoint allows the admin to promote a user to admin by entering the required information
-                        into the JSON body.
+                        into the JSON body. The username of the user should be entered in the location of the {username}
+                        path variable.
+                        <br/><br/><strong>Example</strong>: /users/andre4/authorities
                     </td>
                 </tr>
                 <tr>
@@ -1054,7 +1163,14 @@
                         N/A
                     </td>
                     <td><p>Postman: <strong>deleteUser</strong></p><br/>
-                        This endpoint allows the admin to delete a user by entering the desired username.
+                        This endpoint allows the admin to delete a user by entering the desired username. The username
+                        of the user should be entered in the location of the {username} path variable.<br/>
+                        <br/>
+                        Currently, users that have profiles or contact forms assigned to them are not allowed to be
+                        deleted. First use the <strong>detachProfileFromUser</strong>
+                        method or try the <strong>deleteContactFormById</strong> method and then try again to delete the
+                        user.
+                        <br/><br/><strong>Example</strong>: /users/andre
                     </td>
                 </tr>
                 <tr>
@@ -1066,7 +1182,9 @@
                     </td>
                     <td><p>Postman: <strong>removeAuthority</strong></p><br/>
                         This endpoint allows the admin to demote an admin to user by entering the desired username and
-                        ROLE_ADMIN.
+                        ROLE_ADMIN. The username and authority (ROLE_ADMIN) of the user should be entered in the
+                        locations of the {username} and {authority} path variables.
+                        <br/><br/><strong>Example</strong>: /users/andre4/authorities/ROLE_ADMIN
                     </td>
                 </tr>
                 <tr>
@@ -1078,7 +1196,9 @@
                     </td>
                     <td><p>Postman: <strong>removeFavoriteCharacterFromUser</strong></p><br/>
                         This endpoint allows the admin or user to remove a Marvel character from his or her favorites
-                        list.
+                        list. The username of the user should be entered in the location of the {username} path
+                        variable.
+                        <br/><br/><strong>Example</strong>: /users/remove/character/andre
                     </td>
                 </tr>
                 </tbody>

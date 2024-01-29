@@ -20,35 +20,13 @@ public class ContactFormService {
         this.contactFormRepository = contactFormRepository;
     }
 
-    public List<ContactFormOutputDto> getContactFormSubmissions() {
+    public List<ContactFormOutputDto> getAllContactForms() {
         List<ContactFormOutputDto> contactFormOutputDtoList = new ArrayList<>();
         List<ContactForm> list = contactFormRepository.findAll();
         for (ContactForm contactForm : list) {
             contactFormOutputDtoList.add(transformContactFormToContactFormOutputDto(contactForm));
         }
         return contactFormOutputDtoList;
-    }
-
-    public ContactFormOutputDto getContactFormById(Long contactFormId) {
-        ContactForm contactForm = contactFormRepository.findById(contactFormId).orElseThrow(() -> new ContactFormNotFoundException("Contact Form with id: " + contactFormId + " not found!"));
-        return transformContactFormToContactFormOutputDto(contactForm);
-    }
-
-    public ContactFormOutputDto createContactForm(ContactFormInputDto contactFormInputDto) {
-        ContactForm contactForm = transformContactFormInputDtoToContactForm(contactFormInputDto);
-        ContactForm createdContactForm = contactFormRepository.save(contactForm);
-        return transformContactFormToContactFormOutputDto(createdContactForm);
-    }
-
-    public void deleteContactFormById(Long contactFormId) {
-        if (!contactFormRepository.existsById(contactFormId)) {
-            throw new ContactFormNotFoundException("Contact Form with id: " + contactFormId + " not found!");
-        }
-        contactFormRepository.deleteById(contactFormId);
-    }
-
-    public void deleteAllContactForms() {
-        contactFormRepository.deleteAll();
     }
 
     public List<ContactFormOutputDto> findContactFormsByNameContains(String name) {
@@ -85,6 +63,28 @@ public class ContactFormService {
             throw new ContactFormNotFoundException("0 results. No contact forms were found!");
         }
         return contactFormOutputDtoList;
+    }
+
+    public ContactFormOutputDto getContactFormById(Long contactFormId) {
+        ContactForm contactForm = contactFormRepository.findById(contactFormId).orElseThrow(() -> new ContactFormNotFoundException("Contact Form with id: " + contactFormId + " not found!"));
+        return transformContactFormToContactFormOutputDto(contactForm);
+    }
+
+    public ContactFormOutputDto createContactForm(ContactFormInputDto contactFormInputDto) {
+        ContactForm contactForm = transformContactFormInputDtoToContactForm(contactFormInputDto);
+        ContactForm createdContactForm = contactFormRepository.save(contactForm);
+        return transformContactFormToContactFormOutputDto(createdContactForm);
+    }
+
+    public void deleteAllContactForms() {
+        contactFormRepository.deleteAll();
+    }
+
+    public void deleteContactFormById(Long contactFormId) {
+        if (!contactFormRepository.existsById(contactFormId)) {
+            throw new ContactFormNotFoundException("Contact Form with id: " + contactFormId + " not found!");
+        }
+        contactFormRepository.deleteById(contactFormId);
     }
 
     public static ContactFormOutputDto transformContactFormToContactFormOutputDto(ContactForm contactForm) {
