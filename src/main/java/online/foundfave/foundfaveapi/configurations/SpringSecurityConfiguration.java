@@ -83,7 +83,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.DELETE, "/contactforms").hasAnyRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/contactforms/{contactFormId}").hasAnyRole("ADMIN", "USER")
 
-                //***** File Endpoints ******// TODO: Volgorde Controller en Service
+                //***** File Endpoints ******//
                 .requestMatchers(HttpMethod.GET, "/download-profile-image/{fileName}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/download-character-image/{fileName}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/download-movie-image/{fileName}").permitAll()
@@ -94,7 +94,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.DELETE, "/delete-character-image/{characterId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/delete-movie-image/{movieId}").hasRole("ADMIN")
 
-                //***** Movies Endpoints *****// TODO: Volgorde Controller en Service
+                //***** Movies Endpoints *****//
                 .requestMatchers(HttpMethod.GET, "/movies").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.GET, "/movies/{movieId}").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.GET, "/movies/search/starting-with").hasAnyRole("ADMIN", "USER")
@@ -106,7 +106,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/movies").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/movies/{movieId}").hasRole("ADMIN")
 
-                //***** Profiles Endpoints *****// TODO: Volgorde Controller en Service
+                //***** Profiles Endpoints *****//
                 .requestMatchers(HttpMethod.GET, "/profiles").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/profiles/{profileId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/profiles/search/firstname").hasRole("ADMIN")
@@ -118,7 +118,7 @@ public class SpringSecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/profiles").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.DELETE, "/profiles/{profileId}").hasRole("ADMIN")
 
-                //***** Users Endpoints *****// TODO: Volgorde Controller en Service
+                //***** Users Endpoints *****//
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users/{username}").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.GET, "/users/active").hasRole("ADMIN")

@@ -44,90 +44,17 @@ public class UserService {
         return getUserOutputDto(username);
     }
 
-    public String createUser(UserInputDto userInputDto) {
-        Optional<User> user = userRepository.findById(userInputDto.username);
-        if (user.isPresent()) {
-            throw new UserAlreadyExistsException("Username: " + "'" + userInputDto.username + "'" + " already exists!");
+    public List<UserOutputDto> getActiveUsers() {
+        List<User> activeUsersList = userRepository.findByEnabled(true);
+        List<UserOutputDto> activeUsersOutputDtoList = new ArrayList<>();
+        for (User user : activeUsersList) {
+            activeUsersOutputDtoList.add(transformUserToUserOutputDto(user));
         }
-        String randomString = RandomStringGenerator.generateAlphaNumeric(20);
-        userInputDto.setApikey(randomString);
-        User newUser = userRepository.save(transformUserInputDtoToUser(userInputDto));
-        return newUser.getUsername();
+        return activeUsersOutputDtoList;
     }
 
-    public void updateUserPasswordAdmin(String username, PasswordInputDto passwordInputDto) {
-        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
-        user.setPassword(passwordEncoder.encode(passwordInputDto.getPassword()));
-        userRepository.save(user);
-    }
-
-    public String updateUserDetails(String username, UpdateUserInputDto updateUserInputDto) {
-        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
-        if (updateUserInputDto.password != null) {
-            user.setPassword(passwordEncoder.encode(updateUserInputDto.getPassword()));
-        }
-        if (updateUserInputDto.apikey != null) {
-            user.setApikey(updateUserInputDto.getApikey());
-        }
-        if (updateUserInputDto.email != null) {
-            user.setEmail(updateUserInputDto.getEmail());
-        }
-        userRepository.save(user);
-        return "User: " + "'" + username + "'" + " updated successfully!";
-    }
-
-    public void deleteUser(String username) {
-        if (Objects.equals(username, "admin")) {
-            throw new BadRequestException("You are not allowed to delete the 'admin' account!");
-        }
-        if (!userRepository.existsById(username)) {
-            throw new UsernameNotFoundException("User with id: " + "'" + username + "'" + " not found!");
-        }
-        try {
-            userRepository.deleteById(username);
-        } catch (Exception e) {
-            throw new BadRequestException("You are not allowed to delete this user as it still linked to a contact form!");
-        }
-    }
-
-    public Set<Authority> getAuthorities(String username) {
-        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
-        UserOutputDto outputDto = transformUserToUserOutputDto(user);
-        return outputDto.getAuthorities();
-    }
-
-    // This method works with the createUser method and is not associated with a controller.
-    public void addAuthorityToCreatedUser(String username, String authority) {
-        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
-        user.addAuthority(new Authority(username, authority));
-        userRepository.save(user);
-    }
-
-    // This method works with the addUserAuthority method in UserController
-    public void addUserAuthority(String username, String authority) {
-        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
-        user.addAuthority(new Authority(username, authority));
-        userRepository.save(user);
-    }
-
-    public void removeAuthority(String username, String authority) {
-        if (Objects.equals(username, "admin")) {
-            throw new BadRequestException("You are not allowed to demote this user!");
-        }
-        if (!Objects.equals(authority, "ROLE_ADMIN")) {
-            throw new BadRequestException("ROLE_USER can not be removed. Please, fill in this role: ROLE_ADMIN!");
-        }
-        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
-        Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().orElse(null);
-        if (!user.getAuthorities().contains(authorityToRemove)) {
-            throw new BadRequestException("This user is already (demoted to) ROLE_USER!");
-        }
-        user.removeAuthority(authorityToRemove);
-        userRepository.save(user);
-    }
-
-    public boolean userExists(String username) {
-        return userRepository.existsById(username);
+    public UserOutputDto getAllFavoritesFromUser(String username) {
+        return getUserOutputDto(username);
     }
 
     public UserOutputDto findUserByEmail(String email) {
@@ -159,13 +86,35 @@ public class UserService {
         return userOutputDtoList;
     }
 
-    public List<UserOutputDto> getActiveUsers() {
-        List<User> activeUsersList = userRepository.findByEnabled(true);
-        List<UserOutputDto> activeUsersOutputDtoList = new ArrayList<>();
-        for (User user : activeUsersList) {
-            activeUsersOutputDtoList.add(transformUserToUserOutputDto(user));
+    public boolean doesUserExist(String username) {
+        return userRepository.existsById(username);
+    }
+
+    public Set<Authority> getUserAuthorities(String username) {
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        UserOutputDto outputDto = transformUserToUserOutputDto(user);
+        return outputDto.getAuthorities();
+    }
+
+    public void updateUserPasswordAdmin(String username, PasswordInputDto passwordInputDto) {
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        user.setPassword(passwordEncoder.encode(passwordInputDto.getPassword()));
+        userRepository.save(user);
+    }
+
+    public String updateUserDetails(String username, UpdateUserInputDto updateUserInputDto) {
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        if (updateUserInputDto.password != null) {
+            user.setPassword(passwordEncoder.encode(updateUserInputDto.getPassword()));
         }
-        return activeUsersOutputDtoList;
+        if (updateUserInputDto.apikey != null) {
+            user.setApikey(updateUserInputDto.getApikey());
+        }
+        if (updateUserInputDto.email != null) {
+            user.setEmail(updateUserInputDto.getEmail());
+        }
+        userRepository.save(user);
+        return "User: " + "'" + username + "'" + " updated successfully!";
     }
 
     public void assignProfileToUser(String username, Long profileId) {
@@ -193,10 +142,6 @@ public class UserService {
         }
     }
 
-    public UserOutputDto getAllFavoritesFromUser(String username) {
-        return getUserOutputDto(username);
-    }
-
     public void addFavoriteCharacterToUser(String username, Long characterId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
@@ -209,6 +154,53 @@ public class UserService {
         }
     }
 
+    public String createUser(UserInputDto userInputDto) {
+        Optional<User> user = userRepository.findById(userInputDto.username);
+        if (user.isPresent()) {
+            throw new UserAlreadyExistsException("Username: " + "'" + userInputDto.username + "'" + " already exists!");
+        }
+        String randomString = RandomStringGenerator.generateAlphaNumeric(20);
+        userInputDto.setApikey(randomString);
+        User newUser = userRepository.save(transformUserInputDtoToUser(userInputDto));
+        return newUser.getUsername();
+    }
+
+    public void addUserAuthority(String username, String authority) {
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        user.addAuthority(new Authority(username, authority));
+        userRepository.save(user);
+    }
+
+    public void deleteUser(String username) {
+        if (Objects.equals(username, "admin")) {
+            throw new BadRequestException("You are not allowed to delete the 'admin' account!");
+        }
+        if (!userRepository.existsById(username)) {
+            throw new UsernameNotFoundException("User with id: " + "'" + username + "'" + " not found!");
+        }
+        try {
+            userRepository.deleteById(username);
+        } catch (Exception e) {
+            throw new BadRequestException("You are not allowed to delete this user as it still linked to a contact form!");
+        }
+    }
+
+    public void removeUserAuthority(String username, String authority) {
+        if (Objects.equals(username, "admin")) {
+            throw new BadRequestException("You are not allowed to demote this user!");
+        }
+        if (!Objects.equals(authority, "ROLE_ADMIN")) {
+            throw new BadRequestException("ROLE_USER can not be removed. Please, fill in this role: ROLE_ADMIN!");
+        }
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().orElse(null);
+        if (!user.getAuthorities().contains(authorityToRemove)) {
+            throw new BadRequestException("This user is already (demoted to) ROLE_USER!");
+        }
+        user.removeAuthority(authorityToRemove);
+        userRepository.save(user);
+    }
+
     public void removeFavoriteCharacterFromUser(String username, Long characterId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalUser = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
@@ -219,6 +211,13 @@ public class UserService {
             var updatedOptionalUser = userRepository.save(optionalUser);
             transformUserToUserOutputDto(updatedOptionalUser);
         }
+    }
+
+    // This method works with the createUser method and is not associated with a controller.
+    public void addAuthorityToCreatedUser(String username, String authority) {
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + "'" + username + "'!"));
+        user.addAuthority(new Authority(username, authority));
+        userRepository.save(user);
     }
 
     // This method is used for the CustomUserDetailsService class

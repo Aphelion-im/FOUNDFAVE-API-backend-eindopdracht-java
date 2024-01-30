@@ -42,41 +42,6 @@ public class MovieService {
         return movieOutputDto;
     }
 
-    public Long createMovie(MovieInputDto movieInputDto) {
-        Optional<Movie> optionalMovie = movieRepository.findByMovieTitleIgnoreCase(movieInputDto.movieTitle);
-        if (optionalMovie.isPresent()) {
-            throw new MovieAlreadyExistsException("Movie: " + "'" + movieInputDto.movieTitle + "'" + " already exists!");
-        }
-        Movie newMovie = movieRepository.save(transformMovieInputDtoToMovie(movieInputDto));
-        return newMovie.getMovieId();
-    }
-
-    public String updateMovieById(long movieId, MovieInputDto movieInputDto) {
-        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
-        if (movieInputDto.movieTitle != null) {
-            movie.setMovieTitle(movieInputDto.getMovieTitle());
-        }
-        if (movieInputDto.movieSummary != null) {
-            movie.setMovieSummary(movieInputDto.getMovieSummary());
-        }
-        if (movieInputDto.movieYearOfRelease != null) {
-            movie.setMovieYearOfRelease(movieInputDto.getMovieYearOfRelease());
-        }
-        movieRepository.save(movie);
-        return "Movie with id: " + movieId + " updated successfully!";
-    }
-
-    public void deleteMovieById(Long movieId) {
-        if (!movieRepository.existsById(movieId)) {
-            throw new MovieNotFoundException("Movie with id: " + movieId + " not found!");
-        }
-        try {
-            movieRepository.deleteById(movieId);
-        } catch (Exception e) {
-            throw new BadRequestException("You are not allowed to delete this movie as it is still linked to a character or characters!");
-        }
-    }
-
     public List<MovieOutputDto> findMoviesByTitleStartingWith(String title) {
         List<MovieOutputDto> movieOutputDtoList = new ArrayList<>();
         List<Movie> movieList = movieRepository.findByMovieTitleStartingWithIgnoreCase(title);
@@ -101,9 +66,9 @@ public class MovieService {
         return movieOutputDtoList;
     }
 
-    public List<MovieOutputDto> findMovieByTitleSortedDesc(String title) {
+    public List<MovieOutputDto> findMovieByTitleSortedAsc(String title) {
         List<MovieOutputDto> movieOutputDtoList = new ArrayList<>();
-        List<Movie> movieList = movieRepository.findByMovieTitleStartingWithIgnoreCaseOrderByMovieTitleDesc(title);
+        List<Movie> movieList = movieRepository.findByMovieTitleStartingWithIgnoreCaseOrderByMovieTitleAsc(title);
         for (Movie movie : movieList) {
             movieOutputDtoList.add(transformMovieToMovieOutputDto(movie));
         }
@@ -113,9 +78,9 @@ public class MovieService {
         return movieOutputDtoList;
     }
 
-    public List<MovieOutputDto> findMovieByTitleSortedAsc(String title) {
+    public List<MovieOutputDto> findMovieByTitleSortedDesc(String title) {
         List<MovieOutputDto> movieOutputDtoList = new ArrayList<>();
-        List<Movie> movieList = movieRepository.findByMovieTitleStartingWithIgnoreCaseOrderByMovieTitleAsc(title);
+        List<Movie> movieList = movieRepository.findByMovieTitleStartingWithIgnoreCaseOrderByMovieTitleDesc(title);
         for (Movie movie : movieList) {
             movieOutputDtoList.add(transformMovieToMovieOutputDto(movie));
         }
@@ -135,6 +100,41 @@ public class MovieService {
             throw new MovieNotFoundException("0 results. No movies were found!");
         }
         return movieOutputDtoList;
+    }
+
+    public String updateMovieById(long movieId, MovieInputDto movieInputDto) {
+        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
+        if (movieInputDto.movieTitle != null) {
+            movie.setMovieTitle(movieInputDto.getMovieTitle());
+        }
+        if (movieInputDto.movieSummary != null) {
+            movie.setMovieSummary(movieInputDto.getMovieSummary());
+        }
+        if (movieInputDto.movieYearOfRelease != null) {
+            movie.setMovieYearOfRelease(movieInputDto.getMovieYearOfRelease());
+        }
+        movieRepository.save(movie);
+        return "Movie with id: " + movieId + " updated successfully!";
+    }
+
+    public Long createMovie(MovieInputDto movieInputDto) {
+        Optional<Movie> optionalMovie = movieRepository.findByMovieTitleIgnoreCase(movieInputDto.movieTitle);
+        if (optionalMovie.isPresent()) {
+            throw new MovieAlreadyExistsException("Movie: " + "'" + movieInputDto.movieTitle + "'" + " already exists!");
+        }
+        Movie newMovie = movieRepository.save(transformMovieInputDtoToMovie(movieInputDto));
+        return newMovie.getMovieId();
+    }
+
+    public void deleteMovieById(Long movieId) {
+        if (!movieRepository.existsById(movieId)) {
+            throw new MovieNotFoundException("Movie with id: " + movieId + " not found!");
+        }
+        try {
+            movieRepository.deleteById(movieId);
+        } catch (Exception e) {
+            throw new BadRequestException("You are not allowed to delete this movie as it is still linked to a character or characters!");
+        }
     }
 
     public static MovieOutputDto transformMovieToMovieOutputDto(Movie movie) {
