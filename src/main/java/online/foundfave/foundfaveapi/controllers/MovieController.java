@@ -36,30 +36,6 @@ public class MovieController {
         return ResponseEntity.ok().body(movieOutputDto);
     }
 
-    @PostMapping("")
-    public ResponseEntity<Object> createMovie(@Valid @RequestBody MovieInputDto movieInputDto, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
-            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
-        }
-        Long newMovieId = movieService.createMovie(movieInputDto);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newMovieId).toUriString());
-        return ResponseEntity.created(uri).body("New movie added with id: " + newMovieId + ".");
-    }
-
-    @PutMapping("/movie/{movieId}")
-    public ResponseEntity<String> updateMovieById(@PathVariable("movieId") Long movieId, @Valid @RequestBody MovieInputDto movieInputDto, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
-            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
-        }
-        return ResponseEntity.ok(movieService.updateMovieById(movieId, movieInputDto));
-    }
-
-    @DeleteMapping("/{movieId}")
-    public ResponseEntity<Object> deleteMovieById(@PathVariable("movieId") Long movieId) {
-        movieService.deleteMovieById(movieId);
-        return ResponseEntity.status(HttpStatus.OK).body("Movie with id: " + movieId + " deleted!");
-    }
-
     @GetMapping("/search/starting-with")
     public ResponseEntity<List<MovieOutputDto>> findMovieByTitleStartingWith(@RequestParam("title") String title) {
         List<MovieOutputDto> movieOutputDtoList = movieService.findMoviesByTitleStartingWith(title);
@@ -88,5 +64,29 @@ public class MovieController {
     public ResponseEntity<List<MovieOutputDto>> findMovieByYearOfRelease(@RequestParam("year") String year) {
         List<MovieOutputDto> movieOutputDtoList = movieService.findMovieByYearOfRelease(year);
         return ResponseEntity.ok(movieOutputDtoList);
+    }
+
+    @PutMapping("/movie/{movieId}")
+    public ResponseEntity<String> updateMovieById(@PathVariable("movieId") Long movieId, @Valid @RequestBody MovieInputDto movieInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        return ResponseEntity.ok(movieService.updateMovieById(movieId, movieInputDto));
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Object> createMovie(@Valid @RequestBody MovieInputDto movieInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        Long newMovieId = movieService.createMovie(movieInputDto);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newMovieId).toUriString());
+        return ResponseEntity.created(uri).body("New movie added with id: " + newMovieId + ".");
+    }
+
+    @DeleteMapping("/{movieId}")
+    public ResponseEntity<Object> deleteMovieById(@PathVariable("movieId") Long movieId) {
+        movieService.deleteMovieById(movieId);
+        return ResponseEntity.status(HttpStatus.OK).body("Movie with id: " + movieId + " deleted!");
     }
 }

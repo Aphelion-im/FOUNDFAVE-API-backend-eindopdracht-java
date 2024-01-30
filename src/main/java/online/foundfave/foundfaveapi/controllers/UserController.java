@@ -43,64 +43,15 @@ public class UserController {
         return ResponseEntity.ok().body(userOutputDto);
     }
 
-    @PostMapping("")
-    public ResponseEntity<Object> createUser(@Valid @RequestBody UserInputDto userInputDto, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
-            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
-        }
-        String newUsername = userService.createUser(userInputDto);
-        userService.addAuthorityToCreatedUser(newUsername, "ROLE_USER");
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newUsername).toUriString());
-        return ResponseEntity.created(uri).body("Username: " + "'" + newUsername + "'" + " registered successfully!");
+    @GetMapping("/active")
+    public List<UserOutputDto> getActiveUsers() {
+        return userService.getActiveUsers();
     }
 
-    @PutMapping("/admin/{username}")
-    public ResponseEntity<Object> updateUserPasswordAdmin(@PathVariable("username") String username, @Valid @RequestBody PasswordInputDto passwordInputDto, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
-            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
-        }
-        userService.updateUserPasswordAdmin(username, passwordInputDto);
-        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " password updated!");
-    }
-
-    @PutMapping("/user/{username}")
-    public ResponseEntity<String> updateUserDetails(@PathVariable("username") String username, @Valid @RequestBody UpdateUserInputDto updateUserInputDto, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
-            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
-        }
-        return ResponseEntity.ok(userService.updateUserDetails(username, updateUserInputDto));
-    }
-
-    @DeleteMapping("/{username}")
-    public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
-        userService.deleteUser(username);
-        return ResponseEntity.status(HttpStatus.OK).body("Username: " + "'" + username + "'" + " deleted!");
-    }
-
-    @GetMapping("/{username}/authorities")
-    public ResponseEntity<Object> getUserAuthorities(@PathVariable("username") String username) {
-        return ResponseEntity.ok().body(userService.getAuthorities(username));
-    }
-
-    @PostMapping("/{username}/authorities")
-    public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
-        String authorityName = (String) fields.get("authority");
-        if (authorityName == null || !authorityName.equals("ROLE_ADMIN")) {
-            throw new BadRequestException("Please fill in: ROLE_ADMIN!");
-        }
-        userService.addUserAuthority(username, authorityName);
-        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " has been promoted to ROLE_ADMIN!");
-    }
-
-    @DeleteMapping("/{username}/authorities/{authority}")
-    public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
-        userService.removeAuthority(username, authority);
-        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " has been demoted to ROLE_USER!");
-    }
-
-    @GetMapping("/exists/{username}")
-    public ResponseEntity<Object> doesUserExist(@PathVariable("username") String username) {
-        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " exists: " + userService.userExists(username));
+    @GetMapping("/favorites/{username}")
+    public ResponseEntity<List<Character>> getAllFavoritesFromUser(@PathVariable("username") String username) {
+        UserOutputDto userOutputDto = userService.getAllFavoritesFromUser(username);
+        return ResponseEntity.ok().body(userOutputDto.favoritesList);
     }
 
     @GetMapping("/search")
@@ -120,9 +71,31 @@ public class UserController {
         return ResponseEntity.ok(userOutputDtoList);
     }
 
-    @GetMapping("/active")
-    public List<UserOutputDto> getActiveUsers() {
-        return userService.getActiveUsers();
+    @GetMapping("/exists/{username}")
+    public ResponseEntity<Object> doesUserExist(@PathVariable("username") String username) {
+        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " exists: " + userService.doesUserExist(username));
+    }
+
+    @GetMapping("/{username}/authorities")
+    public ResponseEntity<Object> getUserAuthorities(@PathVariable("username") String username) {
+        return ResponseEntity.ok().body(userService.getUserAuthorities(username));
+    }
+
+    @PutMapping("/admin/{username}")
+    public ResponseEntity<Object> updateUserPasswordAdmin(@PathVariable("username") String username, @Valid @RequestBody PasswordInputDto passwordInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        userService.updateUserPasswordAdmin(username, passwordInputDto);
+        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " password updated!");
+    }
+
+    @PutMapping("/user/{username}")
+    public ResponseEntity<String> updateUserDetails(@PathVariable("username") String username, @Valid @RequestBody UpdateUserInputDto updateUserInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        return ResponseEntity.ok(userService.updateUserDetails(username, updateUserInputDto));
     }
 
     @PutMapping("/assign/profile/{username}")
@@ -140,12 +113,6 @@ public class UserController {
         return ResponseEntity.ok().body("User with username: " + "'" + username + "'" + " now detached from its profile!");
     }
 
-    @GetMapping("/favorites/{username}")
-    public ResponseEntity<List<Character>> getAllFavoritesFromUser(@PathVariable("username") String username) {
-        UserOutputDto userOutputDto = userService.getAllFavoritesFromUser(username);
-        return ResponseEntity.ok().body(userOutputDto.favoritesList);
-    }
-
     @PutMapping("/add/character/{username}")
     public ResponseEntity<Object> addFavoriteCharacterToUser(@PathVariable("username") String username, @Valid @RequestBody IdInputDto idInputDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
@@ -153,6 +120,39 @@ public class UserController {
         }
         userService.addFavoriteCharacterToUser(username, idInputDto.id);
         return ResponseEntity.ok().body("Character with id: " + idInputDto.id + " now a favorite of user with username: " + "'" + username + "'" + ".");
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Object> createUser(@Valid @RequestBody UserInputDto userInputDto, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(FieldErrorHandling.showFieldErrors(bindingResult));
+        }
+        String newUsername = userService.createUser(userInputDto);
+        userService.addAuthorityToCreatedUser(newUsername, "ROLE_USER");
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newUsername).toUriString());
+        return ResponseEntity.created(uri).body("Username: " + "'" + newUsername + "'" + " registered successfully!");
+    }
+
+    @PostMapping("/{username}/authorities")
+    public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
+        String authorityName = (String) fields.get("authority");
+        if (authorityName == null || !authorityName.equals("ROLE_ADMIN")) {
+            throw new BadRequestException("Please fill in: ROLE_ADMIN!");
+        }
+        userService.addUserAuthority(username, authorityName);
+        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " has been promoted to ROLE_ADMIN!");
+    }
+
+    @DeleteMapping("/{username}")
+    public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
+        userService.deleteUser(username);
+        return ResponseEntity.status(HttpStatus.OK).body("Username: " + "'" + username + "'" + " deleted!");
+    }
+
+    @DeleteMapping("/{username}/authorities/{authority}")
+    public ResponseEntity<Object> removeUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
+        userService.removeUserAuthority(username, authority);
+        return ResponseEntity.ok().body("Username: " + "'" + username + "'" + " has been demoted to ROLE_USER!");
     }
 
     @DeleteMapping("/remove/character/{username}")
