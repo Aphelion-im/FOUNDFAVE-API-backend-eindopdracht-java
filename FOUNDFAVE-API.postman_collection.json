@@ -506,7 +506,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"characterAliasName\": \"Hulkie\",\r\n    \"characterRealName\": \"Robert Bruce Bannerz\",\r\n    \"characterActorName\": \"Mark Ruffaloz\",\r\n    \"characterTitle\": \"The incredible Hulkz\",\r\n    \"characterGender\": \"Male\",\r\n    \"characterSummary\": \"Exposed to heavy doses of gamma radiation, scientist Bruce Banner transforms into the mean, green rage machine called the Hulkz.\",\r\n    \"characterDescription\": \"Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green monster powered by his rage.z\"\r\n}",
+					"raw": "{\r\n    \"characterAliasName\": \"Hulkie\",\r\n    \"characterRealName\": \"Robert Bruce Banner\",\r\n    \"characterActorName\": \"Mark Ruffalo\",\r\n    \"characterTitle\": \"The incredible Hulk\",\r\n    \"characterGender\": \"Male\",\r\n    \"characterSummary\": \"Exposed to heavy doses of gamma radiation, scientist Bruce Banner transforms into the mean, green rage machine called the Hulk.\",\r\n    \"characterDescription\": \"Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green monster powered by his rage.\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -2625,7 +2625,7 @@
 			"response": []
 		},
 		{
-			"name": "removeAuthority",
+			"name": "removeUserAuthority",
 			"request": {
 				"auth": {
 					"type": "bearer",
