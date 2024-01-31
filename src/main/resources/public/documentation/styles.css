@@ -110,7 +110,7 @@ h2 {
     width: 100%;
     display: flex;
     flex-direction: row; /* Row = width */
-    justify-content: center;
+    justify-content: normal;
 }
 
 .inner-container {
@@ -209,6 +209,7 @@ nav .favorites {
 table {
     width: 100%;
     margin-bottom: 24px;
+    overflow-x: auto;
 }
 
 table,
@@ -342,5 +343,9 @@ footer .icon:active {
 
     footer .data-provided > span {
         margin-left: 16px;
+    }
+
+    .outer-container {
+        justify-content: center
     }
 }
