@@ -209,7 +209,7 @@
                     <td>Admin, User</td>
                     <td>N/A</td>
                     <td><p>Postman:
-                        <strong>findCharactersByNameSortedAsc</strong></p><br/>
+                        <strong>findCharactersByNameSortedDesc</strong></p><br/>
                         This endpoint allows you to search for characters with a query parameter. This method returns
                         the search results in descending order.
                         <br/><br/><strong>Example</strong>: /characters/search/sorted-desc?name=vision
@@ -247,7 +247,9 @@
                     <td><p>Postman: <strong>updateCharacterById</strong></p><br/>
                         Ths endpoint allows you to update a character. The character id should be
                         entered in the location of the {characterId} path variable. Enter the required character
-                        information into the JSON body. The gender value has 3 possible options: Male, Female and X.
+                        information into the JSON body.<br/>
+                        <br/>
+                        The gender value has 3 possible options: Male, Female and X.
                         <br/><br/><strong>Example</strong>: /characters/character/1000
                     </td>
                 </tr>
@@ -287,7 +289,9 @@
                     <td><p>Postman:
                         <strong>createCharacter</strong></p><br/>
                         This endpoint allows you to create a character with the specified values and
-                        attributes. The gender value has 3 possible options: Male, Female and X.
+                        attributes.<br/>
+                        <br/>
+                        The gender value has 3 possible options: Male, Female and X.
                     </td>
                 </tr>
                 <tr>
@@ -854,8 +858,9 @@
                     <td><p>Postman: <strong>updateProfileById</strong></p><br/>
                         This endpoint allows
                         you to update a specific profile by entering an id and the required JSON body. The profile id
-                        should be entered in the location of the {profileId} path variable. The gender value
-                        has 3 possible options: Male, Female and X.
+                        should be entered in the location of the {profileId} path variable.<br/>
+                        <br/>
+                        The gender value has 3 possible options: Male, Female and X.
                         <br/><br/><strong>Example</strong>: /profiles/profile/1000
                     </td>
                 </tr>
@@ -873,7 +878,9 @@
                     </td>
                     <td><p>Postman: <strong>createProfile</strong></p><br/>
                         This endpoint allows you to create a profile by entering the required information into the JSON
-                        body. The gender value has 3 possible options: Male, Female and X.
+                        body.<br/>
+                        <br/>
+                        The gender value has 3 possible options: Male, Female and X.
                     </td>
                 </tr>
                 <tr>
