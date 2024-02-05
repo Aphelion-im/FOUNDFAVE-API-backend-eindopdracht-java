@@ -1,4 +1,4 @@
-Datum laatste update: 4-2-2024
+Datum laatste update: 5-2-2024
 
 <a target="_blank" href="https://github.com/Aphelion-im/FOUNDFAVE-backend-eindopdracht-java">Github Repository FOUNDFAVE API</a>
 
@@ -11,7 +11,7 @@ Datum laatste update: 4-2-2024
 - [Benodigdheden](#benodigdheden)
 - [Postman Collectie JSON Bestand](#postman-collectie-json-bestand)
 - [Opstarten Webserver en Database](#opstarten-webserver-en-database)
-- [FOUNDFAVE API Documentatie](#foundfave-api-online-documentatie)
+- [FOUNDFAVE API Online Documentatie](#foundfave-api-online-documentatie)
 - [Live demo React FOUNDFAVE App](#live-demo-react-foundfave-app)
 - [Contact](#contact)
 
