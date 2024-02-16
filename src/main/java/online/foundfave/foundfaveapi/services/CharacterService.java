@@ -136,24 +136,24 @@ public class CharacterService {
         }
     }
 
-    public Long createCharacter(CharacterInputDto characterInputDto) {
+    public Character createCharacter(CharacterInputDto characterInputDto) {
         Optional<Character> optionalCharacter = characterRepository.findByCharacterAliasNameIgnoreCase(characterInputDto.characterAliasName);
         if (optionalCharacter.isPresent()) {
             throw new CharacterAlreadyExistsException("Character: " + "'" + characterInputDto.characterAliasName + "'" + " already exists!");
         }
-        Character newCharacter = characterRepository.save(transformCharacterInputDtoToCharacter(characterInputDto));
-        return newCharacter.getCharacterId();
+        return characterRepository.save(transformCharacterInputDtoToCharacter(characterInputDto));
     }
 
     public void deleteCharacterById(Long characterId) {
         if (!characterRepository.existsById(characterId)) {
             throw new CharacterNotFoundException("Character with id: " + characterId + " not found!");
         }
-        try {
-            characterRepository.deleteById(characterId);
-        } catch (Exception e) {
-            throw new BadRequestException("You are not allowed to delete this character as it is still linked to movie or is a favorite.");
-        }
+//        try {
+//            characterRepository.deleteById(characterId);
+//        } catch (Exception e) {
+//            throw new BadRequestException("You are not allowed to delete this character as it is still linked to movie or is a favorite.");
+//        }
+        characterRepository.deleteById(characterId);
     }
 
     public void disassociateMovieAndCharacter(Long characterId, Long movieId) {
