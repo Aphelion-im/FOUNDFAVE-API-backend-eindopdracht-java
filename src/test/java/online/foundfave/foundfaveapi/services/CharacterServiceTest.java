@@ -2,6 +2,7 @@ package online.foundfave.foundfaveapi.services;
 
 import online.foundfave.foundfaveapi.dtos.input.CharacterInputDto;
 import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
+import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.exceptions.CharacterAlreadyExistsException;
 import online.foundfave.foundfaveapi.exceptions.CharacterNotFoundException;
 import online.foundfave.foundfaveapi.models.Character;
@@ -25,8 +26,7 @@ import java.util.Optional;
 
 import static online.foundfave.foundfaveapi.enums.Gender.Female;
 import static online.foundfave.foundfaveapi.enums.Gender.Male;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -119,7 +119,7 @@ class CharacterServiceTest {
 
     @Test
     @DisplayName("Find characters by name starting with: Should throw character not found exception")
-    void shouldFindCharactersByNameStartingWithException() {
+    void shouldFindCharactersByNameStartingWithThrowsException() {
         String characterName = "Hulk";
         List<Character> noCharactersOnThisList = new ArrayList<>();
         when(characterRepository.findByCharacterAliasNameStartingWithIgnoreCase(characterName)).thenReturn(noCharactersOnThisList);
@@ -137,7 +137,7 @@ class CharacterServiceTest {
 
     @Test
     @DisplayName("Find characters by name contains: Should throw character not found exception")
-    void shouldFindCharactersByNameContainsException() {
+    void shouldFindCharactersByNameContainsThrowsException() {
         String characterName = "Hulk";
         List<Character> noCharactersOnThisList = new ArrayList<>();
         when(characterRepository.findByCharacterAliasNameContainsIgnoreCase(characterName)).thenReturn(noCharactersOnThisList);
@@ -155,7 +155,7 @@ class CharacterServiceTest {
 
     @Test
     @DisplayName("Find characters by name Sorted Ascending: Should throw character not found exception")
-    void shouldFindCharactersByNameSortedAscException() {
+    void shouldFindCharactersByNameSortedAscThrowsException() {
         String characterName = "Hulk";
         List<Character> noCharactersOnThisList = new ArrayList<>();
         when(characterRepository.findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameAsc(characterName)).thenReturn(noCharactersOnThisList);
@@ -173,7 +173,7 @@ class CharacterServiceTest {
 
     @Test
     @DisplayName("Should find characters by name Sorted Descending: Should throw character not found exception")
-    void shouldFindCharactersByNameSortedDescException() {
+    void shouldFindCharactersByNameSortedDescThrowsException() {
         String characterName = "Hulk";
         List<Character> noCharactersOnThisList = new ArrayList<>();
         when(characterRepository.findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameDesc(characterName)).thenReturn(noCharactersOnThisList);
@@ -191,7 +191,7 @@ class CharacterServiceTest {
 
     @Test
     @DisplayName("Should find characters by actors name contains: Should throw character not found exception")
-    void shouldFindCharactersByActorNameContainsException() {
+    void shouldFindCharactersByActorNameContainsThrowsException() {
         String characterName = "Hulk";
         List<Character> noCharactersOnThisList = new ArrayList<>();
         when(characterRepository.findByCharacterActorNameContainsIgnoreCase(characterName)).thenReturn(noCharactersOnThisList);
@@ -229,6 +229,19 @@ class CharacterServiceTest {
     }
 
     @Test
+    @DisplayName("Associate movie and character: Should throw BadRequestException")
+    void associateMovieAndCharacterShouldThrowException() {
+        Long characterId = 1L;
+        Long movieId = 1L;
+        when(characterRepository.findById(anyLong())).thenReturn(Optional.of(character1));
+        when(movieRepository.findById(movieId)).thenReturn(Optional.of(movie1));
+        when(characterRepository.save(character1)).thenReturn(character1);
+        when(movieRepository.save(movie1)).thenReturn(movie1);
+        characterService.associateMovieAndCharacter(characterId, movieId);
+        assertThrows(BadRequestException.class, () -> characterService.associateMovieAndCharacter(characterId, movieId));
+    }
+
+    @Test
     @DisplayName("Should create a character")
     void shouldCreateCharacter() {
         when(characterRepository.save(any(Character.class))).thenReturn(character1);
@@ -244,8 +257,8 @@ class CharacterServiceTest {
     }
 
     @Test
-    @DisplayName("Should not create Character If Character is already present")
-    void shouldNotCreateCharacterIfCharacterIsAlreadyPresent() {
+    @DisplayName("Should not create Character If Character is already present: Should throw CharacterAlreadyExistsException")
+    void shouldNotCreateCharacterIfCharacterIsAlreadyPresentThrowsException() {
         when(characterRepository.findByCharacterAliasNameIgnoreCase(any())).thenReturn(Optional.of(character1));
         assertThrows(CharacterAlreadyExistsException.class, () -> characterService.createCharacter(characterInputDto));
     }
@@ -269,14 +282,29 @@ class CharacterServiceTest {
 
     @Test
     @DisplayName("Should disassociate Movie and Character")
-    @Disabled
     void shouldDisassociateMovieAndCharacter() {
-        // Arrange
+        Long characterId = 1L;
+        Long movieId = 1L;
+        when(characterRepository.findById(anyLong())).thenReturn(Optional.of(character1));
+        when(movieRepository.findById(movieId)).thenReturn(Optional.of(movie1));
+        when(characterRepository.save(character1)).thenReturn(character1);
+        when(movieRepository.save(movie1)).thenReturn(movie1);
+        characterService.associateMovieAndCharacter(characterId, movieId);
+        CharacterOutputDto characterOutputDtoResult = characterService.disassociateMovieAndCharacter(characterId, movieId);
+        assertEquals(characterId, characterOutputDtoResult.getCharacterId());
+    }
 
-
-        // Act
-
-
-        // Assert
+    @Test
+    @DisplayName("Disassociate movie and character: Should throw BadRequestException")
+    void disassociateMovieAndCharacterShouldThrowException() {
+        Long characterId = 1L;
+        Long movieId = 1L;
+        when(characterRepository.findById(anyLong())).thenReturn(Optional.of(character1));
+        when(movieRepository.findById(movieId)).thenReturn(Optional.of(movie1));
+        when(characterRepository.save(character1)).thenReturn(character1);
+        when(movieRepository.save(movie1)).thenReturn(movie1);
+        characterService.associateMovieAndCharacter(characterId, movieId);
+        characterService.disassociateMovieAndCharacter(characterId, movieId);
+        assertThrows(BadRequestException.class, () -> characterService.disassociateMovieAndCharacter(characterId, movieId));
     }
 }

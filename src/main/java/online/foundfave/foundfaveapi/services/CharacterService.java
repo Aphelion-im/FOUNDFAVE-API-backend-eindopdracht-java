@@ -134,9 +134,6 @@ public class CharacterService {
             var updatedOptionalCharacter = characterRepository.save(optionalCharacter);
             return transformCharacterToCharacterOutputDto(updatedOptionalCharacter);
         }
-//        optionalCharacter.getMoviesList().add(optionalMovie);
-//        var updatedOptionalCharacter = characterRepository.save(optionalCharacter);
-//        return transformCharacterToCharacterOutputDto(updatedOptionalCharacter);
     }
 
     public Character createCharacter(CharacterInputDto characterInputDto) {
@@ -154,7 +151,7 @@ public class CharacterService {
         characterRepository.deleteById(characterId);
     }
 
-    public void disassociateMovieAndCharacter(Long characterId, Long movieId) {
+    public CharacterOutputDto disassociateMovieAndCharacter(Long characterId, Long movieId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalMovie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
         if (!optionalCharacter.getMoviesList().contains(optionalMovie)) {
@@ -162,7 +159,7 @@ public class CharacterService {
         } else {
             optionalCharacter.getMoviesList().remove(optionalMovie);
             var updatedOptionalCharacter = characterRepository.save(optionalCharacter);
-            transformCharacterToCharacterOutputDto(updatedOptionalCharacter);
+            return transformCharacterToCharacterOutputDto(updatedOptionalCharacter);
         }
     }
 
