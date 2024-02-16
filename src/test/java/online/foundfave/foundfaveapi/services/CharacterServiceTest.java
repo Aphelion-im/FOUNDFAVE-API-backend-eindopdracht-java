@@ -19,7 +19,6 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,8 +27,7 @@ import static online.foundfave.foundfaveapi.enums.Gender.Male;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -46,8 +44,7 @@ class CharacterServiceTest {
 
     Character character1;
     Character character2;
-    Character createdCharacter;
-    Character character4;
+    Character character3;
     CharacterInputDto characterInputDto;
     Movie movie1;
     Movie movie2;
@@ -63,18 +60,15 @@ class CharacterServiceTest {
 
         character1 = new Character(1L, "Alias name 1", "Real name 1", "Actor name 1", "Title 1", Male, "Summary 1", "Description 1", "Image url 1", "File name 1", moviesList, usersList);
         character2 = new Character(2L, "Alias name 2", "Real name 2", "Actor name 2", "Title 2", Male, "Summary 2", "Description 2", "Image url 2", "File name 2", moviesList, usersList);
-        createdCharacter = new Character(3L, "Alias name 3", "Real name 3", "Actor name 3", "Title 3", Female, "Summary 3", "Description 3", "Image url 3", "File name 3", moviesList, usersList);
+        character3 = new Character(3L, "Alias name 3", "Real name 3", "Actor name 3", "Title 3", Female, "Summary 3", "Description 3", "Image url 3", "File name 3", moviesList, usersList);
         characterInputDto = new CharacterInputDto("Alias name 4", "Real name 4", "Actor name 4", "Title 4", Female, "Summary 4", "Description 4");
-
-        character4 = new Character();
-        character4.setCharacterId(4L);
 
         charactersList.add(character1);
         charactersList.add(character2);
-        charactersList.add(createdCharacter);
+        charactersList.add(character3);
 
-        movie1 = new Movie(1L, "Movie Title", "Movie summary", "01-01-2022", "Image url", "File name", charactersList);
-        movie2 = new Movie(2L, "Movie Title", "Movie summary", "01-01-2022", "Image url", "File name", charactersList);
+        movie1 = new Movie(1L, "Movie Title 1", "Movie summary 1", "01-01-2022", "Image url 1", "File name 1", charactersList);
+        movie2 = new Movie(2L, "Movie Title 2", "Movie summary 2", "01-01-2022", "Image url 2", "File name 2", charactersList);
     }
 
     @AfterEach
@@ -84,37 +78,28 @@ class CharacterServiceTest {
     @Test
     @DisplayName("Should get all characters")
     void shouldGetAllCharacters() {
-        // Arrange
-        List<Character> charactersList = Arrays.asList(character1, character2);
-
         when(characterRepository.findAll()).thenReturn(charactersList);
-
-        // Act
         List<CharacterOutputDto> result = characterService.getAllCharacters();
-
-        // Assert
         assertEquals(charactersList.size(), result.size());
-        assertEquals(character1.getCharacterId(), result.get(0).getCharacterId());
+        assertEquals(1L, result.get(0).getCharacterId());
         assertEquals(character2.getCharacterId(), result.get(1).getCharacterId());
+        assertEquals(character3.getCharacterId(), result.get(2).getCharacterId());
     }
-
 
     @Test
     @DisplayName("Should get a character by ID")
     void shouldGetCharacterById() {
         Long characterId = 2L;
         when(characterRepository.findById(characterId)).thenReturn(Optional.of(character2));
-
-        Character character = characterRepository.findById(characterId).get();
         CharacterOutputDto characterOutputDto = characterService.getCharacterById(characterId);
-
-        assertEquals(character.getCharacterAliasName(), characterOutputDto.characterAliasName);
-        assertEquals(character.getCharacterActorName(), characterOutputDto.characterActorName);
-        assertEquals(character.getCharacterDescription(), characterOutputDto.characterDescription);
-        assertEquals(character.getCharacterSummary(), characterOutputDto.characterSummary);
-        assertEquals(character.getCharacterRealName(), characterOutputDto.characterRealName);
-        assertEquals(character.getCharacterTitle(), characterOutputDto.characterTitle);
-        assertEquals(character.getCharacterGender(), characterOutputDto.characterGender);
+        assertEquals(characterId, characterOutputDto.characterId);
+        assertEquals("Alias name 2", characterOutputDto.characterAliasName);
+        assertEquals("Real name 2", characterOutputDto.characterRealName);
+        assertEquals("Actor name 2", characterOutputDto.characterActorName);
+        assertEquals("Title 2", characterOutputDto.characterTitle);
+        assertEquals(Male, characterOutputDto.characterGender);
+        assertEquals("Summary 2", characterOutputDto.characterSummary);
+        assertEquals("Description 2", characterOutputDto.characterDescription);
     }
 
     @Test
@@ -127,82 +112,101 @@ class CharacterServiceTest {
     }
 
     @Test
-    @DisplayName("Should Throw Character not found exception")
+    @DisplayName("Find characters by name starting with: Should throw character not found exception")
     void shouldFindCharactersByNameStartingWithException() {
         String characterName = "Hulk";
-        List<Character> characterList = new ArrayList<>();
-        when(characterRepository.findByCharacterAliasNameStartingWithIgnoreCase(characterName)).thenReturn(characterList);
+        List<Character> noCharactersOnThisList = new ArrayList<>();
+        when(characterRepository.findByCharacterAliasNameStartingWithIgnoreCase(characterName)).thenReturn(noCharactersOnThisList);
         assertThrows(CharacterNotFoundException.class, () -> characterService.findCharactersByNameStartingWith(characterName));
     }
-
 
     @Test
     @DisplayName("Find characters by name contains")
     void shouldFindCharactersByNameContains() {
-        // Arrange
         String characterName = "Hulk";
         when(characterRepository.findByCharacterAliasNameContainsIgnoreCase(characterName)).thenReturn(charactersList);
-
-        // Act
         List<CharacterOutputDto> characters = characterService.findCharactersByNameContains(characterName);
-
-        // Assert
         assertEquals(charactersList.size(), characters.size());
+    }
+
+    @Test
+    @DisplayName("Find characters by name contains: Should throw character not found exception")
+    void shouldFindCharactersByNameContainsException() {
+        String characterName = "Hulk";
+        List<Character> noCharactersOnThisList = new ArrayList<>();
+        when(characterRepository.findByCharacterAliasNameContainsIgnoreCase(characterName)).thenReturn(noCharactersOnThisList);
+        assertThrows(CharacterNotFoundException.class, () -> characterService.findCharactersByNameContains(characterName));
     }
 
     @Test
     @DisplayName("Find characters by name Sorted Ascending")
     void shouldFindCharactersByNameSortedAsc() {
-        // Arrange
         String characterName = "Hulk";
         when(characterRepository.findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameAsc(characterName)).thenReturn(charactersList);
-
-        // Act
         List<CharacterOutputDto> characters = characterService.findCharactersByNameSortedAsc(characterName);
-
-        // Assert
         assertEquals(charactersList.size(), characters.size());
+    }
+
+    @Test
+    @DisplayName("Find characters by name Sorted Ascending: Should throw character not found exception")
+    void shouldFindCharactersByNameSortedAscException() {
+        String characterName = "Hulk";
+        List<Character> noCharactersOnThisList = new ArrayList<>();
+        when(characterRepository.findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameAsc(characterName)).thenReturn(noCharactersOnThisList);
+        assertThrows(CharacterNotFoundException.class, () -> characterService.findCharactersByNameSortedAsc(characterName));
     }
 
     @Test
     @DisplayName("Should find characters by name Sorted Descending")
     void shouldFindCharactersByNameSortedDesc() {
-        // Arrange
         String characterName = "Hulk";
         when(characterRepository.findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameDesc(characterName)).thenReturn(charactersList);
-
-        // Act
         List<CharacterOutputDto> characters = characterService.findCharactersByNameSortedDesc(characterName);
-
-        // Assert
         assertEquals(charactersList.size(), characters.size());
+    }
+
+    @Test
+    @DisplayName("Should find characters by name Sorted Descending: Should throw character not found exception")
+    void shouldFindCharactersByNameSortedDescException() {
+        String characterName = "Hulk";
+        List<Character> noCharactersOnThisList = new ArrayList<>();
+        when(characterRepository.findByCharacterAliasNameStartingWithIgnoreCaseOrderByCharacterAliasNameDesc(characterName)).thenReturn(noCharactersOnThisList);
+        assertThrows(CharacterNotFoundException.class, () -> characterService.findCharactersByNameSortedDesc(characterName));
     }
 
     @Test
     @DisplayName("Should find characters by actors name contains")
     void shouldFindCharactersByActorNameContains() {
-        // Arrange
         String characterName = "Hulk";
         when(characterRepository.findByCharacterActorNameContainsIgnoreCase(characterName)).thenReturn(charactersList);
-
-        // Act
         List<CharacterOutputDto> characters = characterService.findCharactersByActorNameContains(characterName);
-
-        // Assert
         assertEquals(charactersList.size(), characters.size());
     }
 
     @Test
+    @DisplayName("Should find characters by actors name contains: Should throw character not found exception")
+    void shouldFindCharactersByActorNameContainsException() {
+        String characterName = "Hulk";
+        List<Character> noCharactersOnThisList = new ArrayList<>();
+        when(characterRepository.findByCharacterActorNameContainsIgnoreCase(characterName)).thenReturn(noCharactersOnThisList);
+        assertThrows(CharacterNotFoundException.class, () -> characterService.findCharactersByActorNameContains(characterName));
+    }
+
+    @Test
     @DisplayName("Should update character by ID")
-    @Disabled
     void shouldUpdateCharacterById() {
-        // Arrange
-
-
-        // Act
-
-
-        // Assert
+        when(characterRepository.findById(1L)).thenReturn(Optional.of(character1));
+        when(characterRepository.save(characterService.transformCharacterInputDtoToCharacter(characterInputDto))).thenReturn(character1);
+        characterService.updateCharacterById(1L, characterInputDto);
+        verify(characterRepository, times(1)).save(characterArgumentCaptor.capture());
+        Character capturedCharacter = characterArgumentCaptor.getValue();
+        assertEquals(characterInputDto.characterAliasName, capturedCharacter.getCharacterAliasName());
+        assertEquals(characterInputDto.characterRealName, capturedCharacter.getCharacterRealName());
+        assertEquals(characterInputDto.characterActorName, capturedCharacter.getCharacterActorName());
+        assertEquals(characterInputDto.characterTitle, capturedCharacter.getCharacterTitle());
+        assertEquals(characterInputDto.characterGender, capturedCharacter.getCharacterGender());
+        assertEquals(characterInputDto.characterSummary, capturedCharacter.getCharacterSummary());
+        assertEquals(characterInputDto.characterDescription, capturedCharacter.getCharacterDescription());
     }
 
     @Test
@@ -221,21 +225,16 @@ class CharacterServiceTest {
     @Test
     @DisplayName("Should create a character")
     void shouldCreateCharacter() {
-        // Arrange
-        when(characterRepository.save(any(Character.class))).thenReturn(createdCharacter);
-
-        // Act
+        when(characterRepository.save(any(Character.class))).thenReturn(character1);
         Character testCharacter = characterService.createCharacter(characterInputDto);
-
-        // Assert
-        assertEquals(createdCharacter.getCharacterId(), testCharacter.getCharacterId());
-        assertEquals(createdCharacter.getCharacterAliasName(), testCharacter.getCharacterAliasName());
-        assertEquals(createdCharacter.getCharacterRealName(), testCharacter.getCharacterRealName());
-        assertEquals(createdCharacter.getCharacterActorName(), testCharacter.getCharacterActorName());
-        assertEquals(createdCharacter.getCharacterTitle(), testCharacter.getCharacterTitle());
-        assertEquals(createdCharacter.getCharacterGender(), testCharacter.getCharacterGender());
-        assertEquals(createdCharacter.getCharacterSummary(), testCharacter.getCharacterSummary());
-        assertEquals(createdCharacter.getCharacterDescription(), testCharacter.getCharacterDescription());
+        assertEquals(character1.getCharacterId(), testCharacter.getCharacterId());
+        assertEquals(character1.getCharacterAliasName(), testCharacter.getCharacterAliasName());
+        assertEquals(character1.getCharacterRealName(), testCharacter.getCharacterRealName());
+        assertEquals(character1.getCharacterActorName(), testCharacter.getCharacterActorName());
+        assertEquals(character1.getCharacterTitle(), testCharacter.getCharacterTitle());
+        assertEquals(character1.getCharacterGender(), testCharacter.getCharacterGender());
+        assertEquals(character1.getCharacterSummary(), testCharacter.getCharacterSummary());
+        assertEquals(character1.getCharacterDescription(), testCharacter.getCharacterDescription());
     }
 
     @Test
@@ -248,24 +247,19 @@ class CharacterServiceTest {
     @Test
     @DisplayName("Should throw CharacterNotFoundException")
     void shouldThrowCharacterNotFoundException() {
-        Long characterId = 4L;
+        Long characterId = 1L;
         when(characterRepository.findById(characterId)).thenReturn(Optional.empty());
         assertThrows(CharacterNotFoundException.class, () -> characterService.deleteCharacterById(characterId));
     }
 
     @Test
-    void deleteCharacter() {
-        // Arrange
+    @DisplayName("Should delete character by ID")
+    void shouldDeleteCharacterById() {
         Long characterId = 1L;
         when(characterRepository.existsById(characterId)).thenReturn(true);
-
-        // Act
         characterService.deleteCharacterById(characterId);
-
-        // Assert
-        verify(characterRepository).deleteById(characterId);
+        verify(characterRepository, times(1)).deleteById(characterId);
     }
-
 
     @Test
     @DisplayName("Should disassociate Movie and Character")

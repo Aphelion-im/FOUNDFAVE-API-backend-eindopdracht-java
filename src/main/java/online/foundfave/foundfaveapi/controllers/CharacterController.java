@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import online.foundfave.foundfaveapi.dtos.input.CharacterInputDto;
 import online.foundfave.foundfaveapi.dtos.input.IdInputDto;
 import online.foundfave.foundfaveapi.dtos.output.CharacterOutputDto;
+import online.foundfave.foundfaveapi.exceptions.BadRequestException;
 import online.foundfave.foundfaveapi.services.CharacterService;
 import online.foundfave.foundfaveapi.utilities.FieldErrorHandling;
 import org.springframework.http.HttpStatus;
@@ -97,7 +98,11 @@ public class CharacterController {
 
     @DeleteMapping("/{characterId}")
     public ResponseEntity<Object> deleteCharacterById(@PathVariable("characterId") Long characterId) {
-        characterService.deleteCharacterById(characterId);
+        try {
+            characterService.deleteCharacterById(characterId);
+        } catch (Exception e) {
+            throw new BadRequestException("You are not allowed to delete this character as it is still linked to movie or is a favorite.");
+        }
         return ResponseEntity.status(HttpStatus.OK).body("Character with id: " + characterId + " deleted!");
     }
 

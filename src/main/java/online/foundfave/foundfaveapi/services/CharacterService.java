@@ -148,11 +148,6 @@ public class CharacterService {
         if (!characterRepository.existsById(characterId)) {
             throw new CharacterNotFoundException("Character with id: " + characterId + " not found!");
         }
-//        try {
-//            characterRepository.deleteById(characterId);
-//        } catch (Exception e) {
-//            throw new BadRequestException("You are not allowed to delete this character as it is still linked to movie or is a favorite.");
-//        }
         characterRepository.deleteById(characterId);
     }
 
