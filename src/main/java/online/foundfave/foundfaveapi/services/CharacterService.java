@@ -124,7 +124,7 @@ public class CharacterService {
         return "Character with id: " + character.getCharacterId() + " updated successfully!";
     }
 
-    public void associateMovieAndCharacter(Long characterId, Long movieId) {
+    public CharacterOutputDto associateMovieAndCharacter(Long characterId, Long movieId) {
         var optionalCharacter = characterRepository.findById(characterId).orElseThrow(() -> new CharacterNotFoundException("Character not found with id: " + characterId + "!"));
         var optionalMovie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with id: " + movieId + "!"));
         if (optionalCharacter.getMoviesList().contains(optionalMovie)) {
@@ -132,8 +132,11 @@ public class CharacterService {
         } else {
             optionalCharacter.getMoviesList().add(optionalMovie);
             var updatedOptionalCharacter = characterRepository.save(optionalCharacter);
-            transformCharacterToCharacterOutputDto(updatedOptionalCharacter);
+            return transformCharacterToCharacterOutputDto(updatedOptionalCharacter);
         }
+//        optionalCharacter.getMoviesList().add(optionalMovie);
+//        var updatedOptionalCharacter = characterRepository.save(optionalCharacter);
+//        return transformCharacterToCharacterOutputDto(updatedOptionalCharacter);
     }
 
     public Character createCharacter(CharacterInputDto characterInputDto) {

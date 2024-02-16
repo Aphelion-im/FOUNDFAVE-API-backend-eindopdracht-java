@@ -8,6 +8,7 @@ import online.foundfave.foundfaveapi.models.Character;
 import online.foundfave.foundfaveapi.models.Movie;
 import online.foundfave.foundfaveapi.models.User;
 import online.foundfave.foundfaveapi.repositories.CharacterRepository;
+import online.foundfave.foundfaveapi.repositories.MovieRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -35,6 +36,9 @@ class CharacterServiceTest {
 
     @Mock
     CharacterRepository characterRepository;
+
+    @Mock
+    MovieRepository movieRepository;
 
     @InjectMocks
     CharacterService characterService;
@@ -66,6 +70,8 @@ class CharacterServiceTest {
         charactersList.add(character1);
         charactersList.add(character2);
         charactersList.add(character3);
+
+        character1.setMoviesList(moviesList);
 
         movie1 = new Movie(1L, "Movie Title 1", "Movie summary 1", "01-01-2022", "Image url 1", "File name 1", charactersList);
         movie2 = new Movie(2L, "Movie Title 2", "Movie summary 2", "01-01-2022", "Image url 2", "File name 2", charactersList);
@@ -211,15 +217,15 @@ class CharacterServiceTest {
 
     @Test
     @DisplayName("Should associate movie and character")
-    @Disabled
     void shouldAssociateMovieAndCharacter() {
-        // Arrange
-
-
-        // Act
-
-
-        // Assert
+        Long characterId = 1L;
+        Long movieId = 1L;
+        when(characterRepository.findById(anyLong())).thenReturn(Optional.of(character1));
+        when(movieRepository.findById(movieId)).thenReturn(Optional.of(movie1));
+        when(characterRepository.save(character1)).thenReturn(character1);
+        when(movieRepository.save(movie1)).thenReturn(movie1);
+        CharacterOutputDto characterOutputDtoResult = characterService.associateMovieAndCharacter(characterId, movieId);
+        assertEquals(characterId, characterOutputDtoResult.getCharacterId());
     }
 
     @Test
