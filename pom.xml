@@ -10,7 +10,7 @@
     </parent>
     <groupId>online.foundfave</groupId>
     <artifactId>foundfaveapi</artifactId>
-    <version>0.9.9</version>
+    <version>1.0.0</version>
     <name>foundfaveapi</name>
     <description>Foundfave API</description>
     <properties>
