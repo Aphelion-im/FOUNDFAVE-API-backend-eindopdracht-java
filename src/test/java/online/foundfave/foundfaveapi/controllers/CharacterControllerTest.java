@@ -78,6 +78,19 @@ class CharacterControllerTest {
     }
 
     @Test
-    void getCharacterById() {
+    void getCharacterById() throws Exception {
+        mockMvc.perform(get("/characters/{characterId}", character1.getCharacterId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("characterId").value(1L))
+                .andExpect(jsonPath("characterAliasName").value("Alias name 1"))
+                .andExpect(jsonPath("characterRealName").value("Real name 1"))
+                .andExpect(jsonPath("characterActorName").value("Actor name 1"))
+                .andExpect(jsonPath("characterTitle").value("Title 1"))
+                .andExpect(jsonPath("characterGender").value(character1.getCharacterGender().toString()))
+                .andExpect(jsonPath("characterSummary").value("Summary 1"))
+                .andExpect(jsonPath("characterDescription").value("Description 1"))
+                .andExpect(jsonPath("characterImageUrl").value("Image url 1"))
+                .andExpect(jsonPath("characterImageUrl").value("Image url 1"))
+                .andExpect(jsonPath("fileName").value("File name 1"));
     }
 }
