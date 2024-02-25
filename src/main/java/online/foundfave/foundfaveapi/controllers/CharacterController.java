@@ -101,7 +101,7 @@ public class CharacterController {
         try {
             characterService.deleteCharacterById(characterId);
         } catch (Exception e) {
-            throw new BadRequestException("You are not allowed to delete this character as it is still linked to movie or is a favorite.");
+            throw new BadRequestException("You are not allowed to delete this character as it is still linked to a movie or is a favorite.");
         }
         return ResponseEntity.status(HttpStatus.OK).body("Character with id: " + characterId + " deleted!");
     }

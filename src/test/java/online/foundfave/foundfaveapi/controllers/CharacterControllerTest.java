@@ -20,7 +20,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
 @ActiveProfiles("test")
@@ -44,13 +43,13 @@ class CharacterControllerTest {
 
         character1 = new Character(1L, "Alias name 1", "Real name 1", "Actor name 1", "Title 1", Male, "Summary 1", "Description 1", "Image url 1", "File name 1", moviesList, usersList);
         character2 = new Character(2L, "Alias name 2", "Real name 2", "Actor name 2", "Title 2", Male, "Summary 2", "Description 2", "Image url 2", "File name 2", moviesList, usersList);
-
+        
         characterRepository.save(character1);
         characterRepository.save(character2);
     }
 
     @Test
-    void getAllCharacters() throws Exception {
+    void shouldGetAllCharacters() throws Exception {
         mockMvc.perform(get("/characters"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].characterId").value(character1.getCharacterId().toString()))
@@ -78,7 +77,7 @@ class CharacterControllerTest {
     }
 
     @Test
-    void getCharacterById() throws Exception {
+    void shouldGetCharacterById() throws Exception {
         mockMvc.perform(get("/characters/{characterId}", character1.getCharacterId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("characterId").value(1L))
